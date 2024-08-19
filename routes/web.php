@@ -31,5 +31,3 @@ Route::get('/vendor', [VendorController::class, 'index'])->name('vendor');
 
 // Route ke halaman Login
 Route::get('/loginpage', [LoginController::class, 'index'])->name('loginpage');
-
-
