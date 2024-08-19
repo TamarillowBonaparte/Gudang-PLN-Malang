@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPermintaanMaterialController;
 use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\LoginController;
 
 
 // Route::get('/', [HomeController::class, 'index']);
@@ -23,3 +25,11 @@ Route::get('/surat-jalan', [SuratJalanController::class, 'index'])->name('surat.
 
 // Route ke halaman Material
 Route::get('/material', [MaterialController::class, 'index'])->name('material');
+
+// Route ke halaman Vendor
+Route::get('/vendor', [VendorController::class, 'index'])->name('vendor');
+
+// Route ke halaman Login
+Route::get('/loginpage', [LoginController::class, 'index'])->name('loginpage');
+
+
