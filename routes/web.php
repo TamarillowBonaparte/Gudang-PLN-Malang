@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DaftarAkun;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPermintaanMaterialController;
@@ -32,4 +33,5 @@ Route::get('/vendor', [VendorController::class, 'index'])->name('vendor');
 // Route ke halaman Login
 Route::get('/loginpage', [LoginController::class, 'index'])->name('loginpage');
 
-
+// Route ke halaman Login
+Route::get('/daftar-akun', [DaftarAkun::class, 'index'])->name('daftar.akun');
