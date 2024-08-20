@@ -108,7 +108,7 @@
                             </form>
                             <nav class="login-card-footer-nav">
                                 <a> <i class="fa fa-copyright" aria-hidden="true"></i>.</a>
-                                <a>PLN UP3N MALANG</a>
+                                <a>PLN UP3 MALANG</a>
                             </nav>
                         </div>
                     </div>

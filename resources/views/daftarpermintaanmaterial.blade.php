@@ -56,31 +56,31 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Tabel Material</h5>
+              <h5 class="card-title">Tabel Permintaan Material / DPB</h5>
 
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
                   <tr>
                     <th>
-                      <b>Nama Material</b>
+                      <b>Tanggal Diminta</b>
                     </th>
                     <th>
-                      <b>Deskripsi Material</b>
+                      <b>Nomer DPM/DPB</b>
                     </th>
-                    <th>Normalisasi</th>
-                    <th>Satuan</th>
-                    <th>Bagian</th>
+                    <th>Vendor</th>
+                    <th>ULP</th>
+                    <th>Pelanggan</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>POLE TOP SWITCH;24kV;630A;50kA;LBS 3WAYS</td>
-                    <td>POLE TOP SWITCH;24kV;630A;50kA;LBS 3WAYS</td>
-                    <td>3210017</td>
-                    <td>SET</td>
-                    <td>NON SAR</td>
+                    <td>12/08/2024</td>
+                    <td>TUG 5 NS.MLG23-0077</td>
+                    <td>PT.AYODYA JAYA</td>
+                    <td>ULP Batu</td>
+                    <td>Ruko 3</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-outline-secondary me-1">
                         <i class="bi bi-download"></i> Download
@@ -91,11 +91,11 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>POLE TOP SWITCH;24kV;630A;50kA;LBS 3WAYS</td>
-                    <td>POLE TOP SWITCH;24kV;630A;50kA;LBS 3WAYS</td>
-                    <td>3210017</td>
-                    <td>SET</td>
-                    <td>NON SAR</td>
+                    <td>12/08/2024</td>
+                    <td>TUG 5 NS.MLG23-0077</td>
+                    <td>PT.AYODYA JAYA</td>
+                    <td>ULP Batu</td>
+                    <td>Ruko 3</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-outline-secondary me-1">
                         <i class="bi bi-download"></i> Download
@@ -106,11 +106,11 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>POLE TOP SWITCH;24kV;630A;50kA;LBS 3WAYS</td>
-                    <td>POLE TOP SWITCH;24kV;630A;50kA;LBS 3WAYS</td>
-                    <td>3210017</td>
-                    <td>SET</td>
-                    <td>NON SAR</td>
+                    <td>12/08/2024</td>
+                    <td>TUG 5 NS.MLG23-0077</td>
+                    <td>PT.AYODYA JAYA</td>
+                    <td>ULP Batu</td>
+                    <td>Ruko 3</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-outline-secondary me-1">
                         <i class="bi bi-download"></i> Download
@@ -121,11 +121,11 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>POLE TOP SWITCH;24kV;630A;50kA;LBS 3WAYS</td>
-                    <td>POLE TOP SWITCH;24kV;630A;50kA;LBS 3WAYS</td>
-                    <td>3210017</td>
-                    <td>SET</td>
-                    <td>NON SAR</td>
+                    <td>12/08/2024</td>
+                    <td>TUG 5 NS.MLG23-0077</td>
+                    <td>PT.AYODYA JAYA</td>
+                    <td>ULP Batu</td>
+                    <td>Ruko 3</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-outline-secondary me-1">
                         <i class="bi bi-download"></i> Download
@@ -136,11 +136,11 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>POLE TOP SWITCH;24kV;630A;50kA;LBS 3WAYS</td>
-                    <td>POLE TOP SWITCH;24kV;630A;50kA;LBS 3WAYS</td>
-                    <td>3210017</td>
-                    <td>SET</td>
-                    <td>NON SAR</td>
+                    <td>12/08/2024</td>
+                    <td>TUG 5 NS.MLG23-0077</td>
+                    <td>PT.AYODYA JAYA</td>
+                    <td>ULP Batu</td>
+                    <td>Ruko 3</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-outline-secondary me-1">
                         <i class="bi bi-download"></i> Download
