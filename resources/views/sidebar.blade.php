@@ -45,6 +45,14 @@
         </a>
       </li><!-- End Material Nav -->
 
+      <!-- Material Nav -->
+      <li class="nav-item">
+        <a class="nav-link {{ Request::routeIs('daftar.akun') ? 'active' : '' }}" href="{{ route('daftar.akun') }}">
+          <i class="bi bi-box"></i>
+          <span>Daftar Akun</span>
+        </a>
+      </li><!-- End Material Nav -->
+
       <!-- ... (rest of the sidebar content) ... -->
     </ul>
   </aside><!-- End Sidebar-->
