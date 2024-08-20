@@ -57,7 +57,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Tabel Material</h5>
-              
+
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
@@ -175,6 +175,6 @@
   <script src="{{ asset ('admin/assets/vendor/tinymce/tinymce.min.js')}}"></script>
   <script src="{{ asset ('admin/assets/vendor/php-email-form/validate.js')}}"></script>
   <!-- Template Main JS File -->
-  <script src="{{ asset ('admin/assets/js/main.js"></script>
+  <script src="{{ asset ('admin/assets/js/main.js')}}"></script>
 </body>
 </html>
