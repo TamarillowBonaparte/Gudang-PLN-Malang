@@ -29,6 +29,20 @@
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
 
+    <style>
+        .container {
+            position: relative;
+            top: 20%;
+            margin: auto;
+            padding-bottom: 1%;
+            border-radius: 0.35em;
+            text-align: center;
+        }
+
+        #perinput {
+            padding: 1%;
+        }
+    </style>
 
 </head>
 
@@ -53,7 +67,7 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Launch demo modal
+                    <i class="bi bi-plus"></i>
                 </button>
             </form>
         </nav>
@@ -65,21 +79,41 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                     
+                        <h5 class="modal-title" id="exampleModalLabel">Register Akun</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+
                     </div>
+
                     <div class="modal-body">
-                        ...
+                        <div class="container">
+                            <div class="form-group row" id="perinput">
+                                <label class="col-sm-3 col-form-label">Username:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="username" name="username" class="form-control" placeholder="Enter Username">
+                                </div>
+                            </div>
+
+                            <div class="form-group row" id="perinput">
+                                <label class="col-sm-3 col-form-label">Password:</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control input-focus" placeholder="Input Password" aria-label="Input Password" aria-describedby="button-addon2">
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="bi bi-eye"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary">Daftar</button>
                     </div>
+
+
                 </div>
             </div>
         </div>
-
         <!-- @if(session('show_modal'))
     <script>
         $(document).ready(function() {
