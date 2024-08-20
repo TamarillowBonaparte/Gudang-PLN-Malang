@@ -10,7 +10,7 @@ class MaterialController extends Controller
     public function index()
     {
         $materials = Material::all();
-
+        
         return view ('material', ['materials' => $materials]);
     }
 }
