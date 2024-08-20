@@ -48,7 +48,7 @@
       <!-- Material Nav -->
       <li class="nav-item">
         <a class="nav-link {{ Request::routeIs('daftar.akun') ? 'active' : '' }}" href="{{ route('daftar.akun') }}">
-          <i class="bi bi-box"></i>
+          <i class="bi bi-person"></i>
           <span>Daftar Akun</span>
         </a>
       </li><!-- End Material Nav -->
