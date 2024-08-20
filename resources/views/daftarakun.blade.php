@@ -106,7 +106,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <button type="button" class="btn btn-primary">Daftar</button>
                     </div>
 
@@ -127,7 +127,7 @@
 
 
 
-
+        @include('editakun')
 
         <!-- Recent Sales -->
         <div class="col-12">
@@ -149,7 +149,9 @@
                                 <td>mboh</td>
                                 <td>vendor</td>
                                 <td>
-                                    <div class="btn"><i class="bi bi-brush"></i></div>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
+                                        <i class="bi bi-brush"></i>
+                                    </button>
                                     <div class="btn"><i class="bi bi-trash2"></i></div>
                                 </td>
                             </tr>
