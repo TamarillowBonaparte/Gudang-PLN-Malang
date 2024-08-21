@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('Login/assets/css/login.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css">
     <style>
-
         .large-text {
             font-size: 24px;
         }
@@ -24,7 +24,7 @@
             z-index: -1;
         }
         .login-card {
-            background-color: rgba(255, 255, 255, 0.8); /* Transparansi untuk melihat video di belakang */
+            background-color: rgba(255, 255, 255, 0.8);
             position: relative;
             z-index: 1;
         }
@@ -54,15 +54,11 @@
             position: absolute;
             top: 15%;
             right: 10px;
-
             cursor: pointer;
             font-size: 1.2rem;
             color: #6c757d;
             z-index: 2;
         }
-        /* .toggle-password:hover {
-            color: #007bff;
-        } */
         .warning {
             color: red;
             font-size: 0.875rem;
@@ -102,7 +98,7 @@
                                     id="username"
                                     class="form-control input-focus"
                                     placeholder="Username">
-                                    <div class="warning" id="emailWarning">Email wajib diisi!</div>
+                                    <div class="warning" id="usernameWarning">Username wajib diisi!</div>
                                 </div>
                                 <div class="form-group mb-4 password-wrapper">
                                     <label for="password" class="sr-only">Password</label>
@@ -110,12 +106,12 @@
                                     type="password"
                                     name="password"
                                     id="password"
-                                    class="form-control input-focus" 
+                                    class="form-control input-focus"
                                     placeholder="Password">
                                     <i class="mdi mdi-eye-off toggle-password" id="togglePassword"></i>
                                     <div class="warning" id="passwordWarning">Password wajib diisi!</div>
                                 </div>
-                                <button type="submit" name="login" id="login" class="btn btn-block login-btn mb-4" type="button">Login</button>
+                                <button type="submit" name="login" id="login" class="btn btn-block login-btn mb-4">Login</button>
                             </form>
                             <nav class="login-card-footer-nav">
                                 <a> <i class="fa fa-copyright" aria-hidden="true"></i></a>
@@ -131,9 +127,10 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             // Animasi fade-in untuk logo
             $('.logo').css({'opacity': '1', 'transform': 'translateY(0)'});
 
@@ -142,22 +139,20 @@
                 const passwordField = $('#password');
                 const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
                 passwordField.attr('type', type);
-
-                // Toggle icon
-                $(this).toggleClass('mdi-eye');
-                $(this).toggleClass('mdi-eye-off');
+                $(this).toggleClass('mdi-eye mdi-eye-off');
             });
 
-            // Validasi Form
-            $('#login').on('click', function() {
+            // Validasi Form dan Proses Login
+            $('#login').on('click', function(event) {
+                event.preventDefault();
                 let isValid = true;
 
-                // Cek email
-                if ($('#email').val().trim() === '') {
-                    $('#emailWarning').show();
+                // Cek username
+                if ($('#username').val().trim() === '') {
+                    $('#usernameWarning').show();
                     isValid = false;
                 } else {
-                    $('#emailWarning').hide();
+                    $('#usernameWarning').hide();
                 }
 
                 // Cek password
@@ -169,8 +164,37 @@
                 }
 
                 if (isValid) {
-                    // Submit form jika valid
-                    $('#loginForm').submit();
+                    // Kirim data login ke server
+                    $.ajax({
+                        url: "{{ url('proses_login') }}",
+                        method: 'POST',
+                        data: $('#loginForm').serialize(),
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Login Berhasil!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    window.location.href = response.redirect;
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Login Gagal',
+                                    text: response.message,
+                                });
+                            }
+                        },
+                        error: function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Login Gagal',
+                                text: 'Terjadi kesalahan, silakan coba lagi.',
+                            });
+                        }
+                    });
                 }
             });
         });
