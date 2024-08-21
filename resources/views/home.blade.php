@@ -130,19 +130,19 @@
                         <tbody>
                         <tr>
                             <th scope="row">3457</a></th>
-                            <td>12 Agustus 2024</td>
+                            <td>12/08/2024</td>
                             <td>PT.Kabel Sejahtera</td>
                             <td><span class="badge bg-warning">Belum dicetak</span></td>
                         </tr>
                         <tr>
-                            <th scope="row"><a href="#">3062</a></th>
-                            <td>14 Agustus 2024</td>
+                            <th scope="row">3062</a></th>
+                            <td>14/08/2024</td>
                             <td>PT.Malindo</td>
                             <td><span class="badge bg-warning">Belum dicetak</span></td>
                         </tr>
                         <tr>
-                            <th scope="row"><a href="#">3025</a></th>
-                            <td>19 Agustus 2024</td>
+                            <th scope="row">3025</a></th>
+                            <td>19/08/2024</td>
                             <td>PT.Malindo</td>
                             <td><span class="badge bg-warning">Belum dicetak</span></td>
                         </tr>
@@ -211,14 +211,10 @@
             </div>
             </div><!-- End Left side columns -->
 
-            <!-- Right side columns -->
             <div class="col-lg-4">
-
             <!-- Recent Activity -->
             <div class="card">
-                <!-- Header dan struktur card tetap sama -->
-
-                <div class="card-body">
+                <div class="card-body" style="padding-top: 20px;">
                 <div id="calendar-container">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                     <button class="btn btn-outline-secondary" id="prevMonth">&lt;</button>
@@ -380,15 +376,6 @@
                 });
             });
             </script>
-
-
-            <!-- Website Traffic -->
-
-            <!-- End Website Traffic -->
-
-            <!-- News & Updates Traffic -->
-
-            <!-- End News & Updates -->
 
             </div><!-- End Right side columns -->
 
