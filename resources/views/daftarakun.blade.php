@@ -81,11 +81,11 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Register Akun</h5>
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-
                     </div>
 
                     <div class="modal-body">
                         <div class="container">
+
                             <div class="form-group row" id="perinput">
                                 <label class="col-sm-3 col-form-label">Username:</label>
                                 <div class="col-sm-9">
@@ -97,11 +97,25 @@
                                 <label class="col-sm-3 col-form-label">Password:</label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="password" class="form-control input-focus" placeholder="Input Password" aria-label="Input Password" aria-describedby="button-addon2">
+                                        <input type="password" class="form-control input-focus" placeholder="Input Password" aria-label="Input Password" aria-describedby="button-addon2" id="passwordInput">
                                         <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="bi bi-eye"></i></button>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-group row" id="perinput">
+                                <label class="col-sm-3 col-form-label">User Level:</label>
+                                <div class="dropdown col-sm-9">
+                                    <div class="form-group">
+                                        <select class="form-control" id="jenis_user" name="jenis_user">
+                                            <option value="1">Admin</option>
+                                            <option value="2">Vendor</option>
+                                            <option value="3">Gudang</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -152,7 +166,9 @@
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
                                         <i class="bi bi-brush"></i>
                                     </button>
-                                    <div class="btn"><i class="bi bi-trash2"></i></div>
+                                    <button type="button" class="btn btn-danger btn-delete" data-id="3">
+                                        <i class="bi bi-trash2"></i>
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
@@ -160,8 +176,12 @@
                                 <td>predator</td>
                                 <td>vendor</td>
                                 <td>
-                                    <div class="btn"><i class="bi bi-brush"></i></div>
-                                    <div class="btn"><i class="bi bi-trash2"></i></div>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
+                                        <i class="bi bi-brush"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-delete" data-id="3">
+                                        <i class="bi bi-trash2"></i>
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
@@ -169,8 +189,12 @@
                                 <td>baik</td>
                                 <td>vendor</td>
                                 <td>
-                                    <div class="btn"><i class="bi bi-brush"></i></div>
-                                    <div class="btn"><i class="bi bi-trash2"></i></div>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
+                                        <i class="bi bi-brush"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-delete" data-id="3">
+                                        <i class="bi bi-trash2"></i>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -179,9 +203,68 @@
             </div>
         </div><!-- End Recent Sales -->
 
+        <!-- Modal Konfirmasi Hapus -->
+        <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteLabel">Konfirmasi Hapus</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Apakah Anda yakin ingin menghapus data ini?
+                    </div>
+                    <div class="modal-footer">
+                        <form id="deleteForm" method="POST" action="">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Include Bootstrap JS and Popper.js -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const togglePassword = document.querySelector('#button-addon2');
+                const passwordInput = document.querySelector('#passwordInput');
+                const eyeIcon = document.querySelector('#eyeIcon');
+
+                togglePassword.addEventListener('click', function() {
+                    // Toggle the type attribute
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+
+                    // Toggle the eye icon
+                    eyeIcon.classList.toggle('bi-eye');
+                    eyeIcon.classList.toggle('bi-eye-slash');
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const deleteButtons = document.querySelectorAll('.btn-delete');
+                const deleteForm = document.querySelector('#deleteForm');
+                const modal = document.querySelector('#confirmDelete');
+                let deleteUrl = '';
+
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        deleteUrl = `/your-delete-route/${id}`; // Update with your route
+                        deleteForm.action = deleteUrl;
+                        $(modal).modal('show');
+                    });
+                });
+            });
+        </script>
 
 </body>
