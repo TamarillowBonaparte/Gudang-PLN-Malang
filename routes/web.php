@@ -31,7 +31,24 @@ Route::get('/material', [MaterialController::class, 'index'])->name('material');
 Route::get('/vendor', [VendorController::class, 'index'])->name('vendor');
 
 // Route ke halaman Login
-Route::get('/loginpage', [LoginController::class, 'index'])->name('loginpage');
+Route::get('loginpage', [LoginController::class, 'index'])->name('loginpage');
+// proses login
+Route::post('proses_login', [LoginController::class, 'proses_login'])->name('proses_login');
+// proses logout
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route ke halaman Login
 Route::get('/daftar-akun', [DaftarAkun::class, 'index'])->name('daftar.akun');
+
+//middleware untuk cek kondisi login
+Route::group(['middleware' => ['auth']], function(){
+    Route::group(['middleware' => ['cek_login:101']], function() {
+        Route::resource('home', HomeController::class);
+    });
+    Route::group(['middleware' => ['cek_login:103']], function() {
+        Route::resource('home', HomeController::class);
+    });
+    Route::group(['middleware' => ['cek_login:102']], function() {
+        Route::resource('vendor', HomeController::class);
+    });
+});

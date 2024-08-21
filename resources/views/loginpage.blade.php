@@ -92,22 +92,33 @@
                                 <strong class="logo-text large-text">PLN UP3 MALANG</strong>
                             </div>
                             <p class="login-card-description">Selamat Datang, login untuk masuk.</p>
-                            <form id="loginForm">
+                            <form action="{{ url('proses_login') }}" method="POST" id="loginForm">
+                                {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label for="email" class="sr-only">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control input-focus" placeholder="Email address">
+                                    <label for="username" class="sr-only">Username</label>
+                                    <input
+                                    type="text"
+                                    name="username"
+                                    id="username"
+                                    class="form-control input-focus"
+                                    placeholder="Username">
                                     <div class="warning" id="emailWarning">Email wajib diisi!</div>
                                 </div>
                                 <div class="form-group mb-4 password-wrapper">
                                     <label for="password" class="sr-only">Password</label>
-                                    <input type="password" name="password" id="password" class="form-control input-focus" placeholder="***********">
+                                    <input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    class="form-control input-focus" 
+                                    placeholder="Password">
                                     <i class="mdi mdi-eye-off toggle-password" id="togglePassword"></i>
                                     <div class="warning" id="passwordWarning">Password wajib diisi!</div>
                                 </div>
-                                <input name="login" id="login" class="btn btn-block login-btn mb-4" type="button" value="Login">
+                                <button type="submit" name="login" id="login" class="btn btn-block login-btn mb-4" type="button">Login</button>
                             </form>
                             <nav class="login-card-footer-nav">
-                                <a> <i class="fa fa-copyright" aria-hidden="true"></i>.</a>
+                                <a> <i class="fa fa-copyright" aria-hidden="true"></i></a>
                                 <a>PLN UP3 MALANG</a>
                             </nav>
                         </div>

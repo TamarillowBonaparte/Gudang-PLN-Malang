@@ -4,31 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
-class LoginController extends Controller
+class SessionController extends Controller
 {
-    public function index ()
-    {
+
+    function index(): View {
 
         $user = Auth::user();
-
-        if($user){
-            if($user->id_jenis_user == 101) {
-
-                return redirect('home');
-            } elseif($user->id_jenis_user == 103) {
-
-                return redirect('home');
-            } elseif($user->id_jenis_user == 102) {
-
-                return redirect('vendor');
+        
+        if($user) {
+            if($user->level=='admin') {
+                return redirect()->intended('home');
+            }
+            // jika user nya memiliki level gudangbawah
+            else if($user->level =='gudangbawah') {
+                // arahkan ke halaman gudangbawah
+                return redirect()->intended('home');
+            }
+            // jika user nya memiliki level vendor
+            else if($user->level =='vendor') {
+                // arahkan ke halaman vendor
+                return redirect()->intended('vendor');
             }
         }
-
+        
         return view('loginpage');
     }
 
-    public function proses_login(Request $request) {
+    function proses_login(Request $request) {
 
         $request->validate([
             'username'=>'required',
@@ -43,13 +47,13 @@ class LoginController extends Controller
             $user =  Auth::user();
             
             // cek lagi jika level user
-            if($user->id_jenis_user == 101){
+            if($user->level == 'admin'){
                 // jika true sebagai admin maka diarahkan ke dashboard
                 return redirect()->intended('home');
-            } else if($user->id_jenis_user == 103) {
+            } else if($user->level == 'gudangbawah'){
                 
                 return redirect()->intended('home');
-            } else if($user->id_jenis_user == 102) {
+            } else if($user->level == 'vendor'){
 
                 return redirect()->intended('vendor');
             }
@@ -57,7 +61,7 @@ class LoginController extends Controller
             return redirect()->intended('/loginpage');
         }
 
-        return redirect('/loginpage')
+        return redirect('loginpage')
             ->withInput()
             ->withErrors(['login_gagal'=>'These credentials does not match our records']);
     }
@@ -68,6 +72,6 @@ class LoginController extends Controller
         // jalan kan juga fungsi logout pada auth 
         Auth::logout();
         // kembali kan ke halaman login
-        return Redirect('loginpage');
+        return Redirect('login');
     }
 }
