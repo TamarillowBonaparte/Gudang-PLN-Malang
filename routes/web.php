@@ -4,6 +4,7 @@ use App\Http\Controllers\DaftarAkun;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPermintaanMaterialController;
+use App\Http\Controllers\EditAkun;
 use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\VendorController;
@@ -35,3 +36,6 @@ Route::get('/loginpage', [LoginController::class, 'index'])->name('loginpage');
 
 // Route ke halaman Login
 Route::get('/daftar-akun', [DaftarAkun::class, 'index'])->name('daftar.akun');
+
+// Route ke edit akun
+Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');
