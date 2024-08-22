@@ -18,7 +18,7 @@ class LoginController extends Controller
                 return redirect('home');
             } elseif($user->id_jenis_user == 103) {
 
-                return redirect('home');
+                return redirect('gudangbawah');
             } elseif($user->id_jenis_user == 102) {
 
                 return redirect('vendor');
@@ -43,18 +43,15 @@ class LoginController extends Controller
             $user =  Auth::user();
             
             // cek lagi jika level user
-            if($user->id_jenis_user == 101){
+            if($user->id_jenis_user == 101 || $user->id_jenis_user == 103){
                 // jika true sebagai admin maka diarahkan ke dashboard
-                return redirect()->intended('home');
-            } else if($user->id_jenis_user == 103) {
-                
-                return redirect()->intended('home');
+                return redirect('home');
             } else if($user->id_jenis_user == 102) {
 
-                return redirect()->intended('vendor');
-            }
+                return redirect('/vendor');
+            }                        
             // kembali ke login jika tidak ada role
-            return redirect()->intended('/loginpage');
+            return redirect('/loginpage');
         }
 
         return redirect('/loginpage')

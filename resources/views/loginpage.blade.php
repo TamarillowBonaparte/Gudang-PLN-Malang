@@ -103,6 +103,9 @@
                                     class="form-control input-focus"
                                     placeholder="Username">
                                     <div class="warning" id="emailWarning">Email wajib diisi!</div>
+                                    @if($errors->has('username'))
+                                        <span class="error">{{ $errors->first('username') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-group mb-4 password-wrapper">
                                     <label for="password" class="sr-only">Password</label>
@@ -114,8 +117,11 @@
                                     placeholder="Password">
                                     <i class="mdi mdi-eye-off toggle-password" id="togglePassword"></i>
                                     <div class="warning" id="passwordWarning">Password wajib diisi!</div>
+                                    @if($errors->has('password'))
+                                        <span class="error">{{ $errors->first('password') }}</span>
+                                    @endif
                                 </div>
-                                <button type="submit" name="login" id="login" class="btn btn-block login-btn mb-4" type="button">Login</button>
+                                <button type="submit" name="login" id="login" class="btn btn-block login-btn mb-4">Login</button>
                             </form>
                             <nav class="login-card-footer-nav">
                                 <a> <i class="fa fa-copyright" aria-hidden="true"></i></a>
