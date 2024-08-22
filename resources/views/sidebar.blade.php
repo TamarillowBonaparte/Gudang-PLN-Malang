@@ -15,7 +15,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
       <!-- Dashboard Nav -->
       <li class="nav-item">
-        <a class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+        <a class="nav-link " href="{{ url('home') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -23,7 +23,7 @@
 
       <!-- Daftar Permintaan Material Nav -->
       <li class="nav-item">
-        <a class="nav-link {{ Request::routeIs('daftar.permintaan.material') ? 'active' : '' }}" href="{{ route('daftar.permintaan.material') }}">
+        <a class="nav-link " href="{{ url('daftar-permintaan-material') }}">
           <i class="bi bi-layout-text-sidebar"></i>
           <span>Daftar Permintaan Material</span>
         </a>
@@ -31,7 +31,7 @@
 
       <!-- Surat Jalan Nav -->
       <li class="nav-item">
-        <a class="nav-link {{ Request::routeIs('surat.jalan') ? 'active' : '' }}" href="{{ route('surat.jalan') }}">
+        <a class="nav-link " href="{{ url('surat-jalan') }}">
           <i class="bi bi-truck"></i>
           <span>Surat Jalan</span>
         </a>
@@ -39,7 +39,7 @@
 
       <!-- Material Nav -->
       <li class="nav-item">
-        <a class="nav-link {{ Request::routeIs('material') ? 'active' : '' }}" href="{{ route('material') }}">
+        <a class="nav-link " href="{{ url('material') }}">
           <i class="bi bi-box"></i>
           <span>Material</span>
         </a>
@@ -47,7 +47,7 @@
 
       <!-- Material Nav -->
       <li class="nav-item">
-        <a class="nav-link {{ Request::routeIs('daftar.akun') ? 'active' : '' }}" href="{{ route('daftar.akun') }}">
+        <a class="nav-link " href="{{ url('daftar-akun') }}">
           <i class="bi bi-person"></i>
           <span>Daftar Akun</span>
         </a>

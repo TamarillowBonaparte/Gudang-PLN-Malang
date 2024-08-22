@@ -28,11 +28,6 @@
             position: relative;
             z-index: 1;
         }
-        .logo {
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-        }
         .input-focus {
             transition: all 0.3s ease;
         }
@@ -98,7 +93,10 @@
                                     id="username"
                                     class="form-control input-focus"
                                     placeholder="Username">
-                                    <div class="warning" id="usernameWarning">Username wajib diisi!</div>
+                                    <div class="warning" id="emailWarning">Email wajib diisi!</div>
+                                    @if($errors->has('username'))
+                                        <span class="error">{{ $errors->first('username') }}</span>
+                                    @endif
                                 </div>
                                 <div class="form-group mb-4 password-wrapper">
                                     <label for="password" class="sr-only">Password</label>
@@ -110,7 +108,11 @@
                                     placeholder="Password">
                                     <i class="mdi mdi-eye-off toggle-password" id="togglePassword"></i>
                                     <div class="warning" id="passwordWarning">Password wajib diisi!</div>
+                                    @if($errors->has('password'))
+                                        <span class="error">{{ $errors->first('password') }}</span>
+                                    @endif
                                 </div>
+                                {{-- button submit --}}
                                 <button type="submit" name="login" id="login" class="btn btn-block login-btn mb-4">Login</button>
                             </form>
                             <nav class="login-card-footer-nav">
@@ -131,8 +133,6 @@
 
     <script>
         $(document).ready(function() {
-            // Animasi fade-in untuk logo
-            $('.logo').css({'opacity': '1', 'transform': 'translateY(0)'});
 
             // Toggle Show/Hide Password
             $('#togglePassword').on('click', function() {
@@ -142,61 +142,7 @@
                 $(this).toggleClass('mdi-eye mdi-eye-off');
             });
 
-            // Validasi Form dan Proses Login
-            $('#login').on('click', function(event) {
-                event.preventDefault();
-                let isValid = true;
 
-                // Cek username
-                if ($('#username').val().trim() === '') {
-                    $('#usernameWarning').show();
-                    isValid = false;
-                } else {
-                    $('#usernameWarning').hide();
-                }
-
-                // Cek password
-                if ($('#password').val().trim() === '') {
-                    $('#passwordWarning').show();
-                    isValid = false;
-                } else {
-                    $('#passwordWarning').hide();
-                }
-
-                if (isValid) {
-                    // Kirim data login ke server
-                    $.ajax({
-                        url: "{{ url('proses_login') }}",
-                        method: 'POST',
-                        data: $('#loginForm').serialize(),
-                        success: function(response) {
-                            if (response.success) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Login Berhasil!',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).then(() => {
-                                    window.location.href = response.redirect;
-                                });
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Login Gagal',
-                                    text: response.message,
-                                });
-                            }
-                        },
-                        error: function() {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Login Gagal',
-                                text: 'Terjadi kesalahan, silakan coba lagi.',
-                            });
-                        }
-                    });
-                }
-            });
         });
     </script>
 </body>

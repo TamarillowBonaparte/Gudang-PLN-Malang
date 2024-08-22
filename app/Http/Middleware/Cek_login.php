@@ -17,7 +17,7 @@ class Cek_login     {
     {
         if(!Auth::check()) {
 
-            return redirect('loginpage');
+            return redirect('/');
         }
 
         $user = Auth::user();
@@ -27,6 +27,6 @@ class Cek_login     {
             return $next($request);
         }
 
-        return redirect('loginpage')->with('error', 'Anda tidak memiliki akses');
+        return redirect('/')->with('error', 'Anda tidak memiliki akses');
     }
 }
