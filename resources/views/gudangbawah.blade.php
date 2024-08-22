@@ -37,9 +37,6 @@
     @include('sidebar')
 
 <main id="main" class="main">
-    
-    <h1>Gudang bawah</h1>
-    <a href="{{ url('logout')}}">Logout</a>
 
 </main><!-- End #main -->
 
