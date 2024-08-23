@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GudangBawahController;
 use App\Http\Controllers\DaftarPermintaanMaterialController;
+use App\Http\Controllers\DpmController;
+use App\Http\Controllers\K3Controller;
+use App\Http\Controllers\K7Controller;
 use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\LoginController;
@@ -28,12 +31,14 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('surat-jalan', SuratJalanController::class);
         Route::resource('material', MaterialController::class);
         Route::resource('daftar-akun', DaftarAkun::class);
-
     });
     Route::group(['middleware' => ['cek_login:103']], function() {
         Route::resource('gudangbawah', GudangBawahController::class);
     });
     Route::group(['middleware' => ['cek_login:102']], function() {
         Route::resource('vendor', VendorController::class);
+        Route::resource('dpm', DpmController::class);
+        Route::resource('k7', K7Controller::class);
+        Route::resource('k3', K3Controller::class);
     });
 });
