@@ -50,99 +50,43 @@
     </nav>
     </div><!-- End Page Title -->
 
-
-    <section class="section dashboard">
-    <div class="row">
-        <!-- Left side columns -->
-        <div class="col-lg-12">
-        <div class="row">
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
-                <div class="card-body">
-                <h5 class="card-title">DAFTAR PERMINTAAN MATERIAL/DPB</span></h5>
-
-                <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-archive-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                    <h6>145</h6>
-                    <span >Jumlah</span>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div><!-- End Sales Card -->
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-            <div class="card info-card revenue-card">
-                <div class="card-body">
-                <h5 class="card-title">BON PENGEMBALIAN MATERIAL </span></h5>
-                <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-dropbox"></i>
-                    </div>
-                    <div class="ps-3">
-                    <h6>87</h6>
-                    <span>Jumlah</span>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-            <div class="card info-card customers-card">
-                <div class="card-body">
-                <h5 class="card-title">BON PEMAKAIAN MATERIAL</h5>
-                <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-box-seam-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                    <h6>1244</h6>
-                    <span>Jumlah</span>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    </section>
-
     <section class="section mt-2 ">
         <div class="row">
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">History Terakhir</h5>
+                <h5 class="card-title">Belum Memiliki Surat Jalan</h5>
                 <!-- Table with stripped rows -->
                 <table class="table datatable">
                   <thead>
                     <tr>
                       <th><b>Tanggal</b></th>
-                      <th><b>Nomer  Surat</b></th>
-                      <th><b>Jenis Surat</b></th>
-                      <th>Nama Pelanggan</th>
+                      <th><b>Nomer  DPM/DPB</b></th>
+                      <th><b>Nomer Surat Jalan</b></th>
+                      <th><b>ULP</b></th>
+                      <th><b>Pelanggan</b></th>
+                      <th><b>Action</b></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>12/08/2024</td>
-                      <td>DPM</td>
-                      <td>3008</td>
-                      <td>Slamet Dunia</td>
+                      <td>TUG 5 NS.MLG23-0077</td>
+                      <td>......./LOG.00.02/GD. ARIES/VI/2024</td>
+                      <td>ULP DAMPIT</td>
+                      <td>Joko Anwar</td>
+                      <td>
+                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">
+                        <i class="bi bi-pen"></i> 
+                      </a>
+                      </td>
                     </tr>
                     <tr>
-                      <td>12/08/2024</td>
-                      <td>DPM</td>
-                      <td>3008</td>
-                      <td>Habib Soleh Tanggul</td>
+                      <td>13/08/2024</td>
+                      <td>TUG 5 NS.MLG23-0078</td>
+                      <td>......./LOG.00.02/GD. ARIES/VI/2024</td>
+                      <td>ULP BATU</td>
+                      <td>Gracia</td>
                     </tr>
                   </tbody>
                 </table>
@@ -152,6 +96,54 @@
           </div>
         </div>
       </section>
+      
+      <section class="section mt-2 ">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Sudah Memiliki Surat Jalan</h5>
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th><b>Tanggal</b></th>
+                      <th><b>Nomer  DPM/DPB</b></th>
+                      <th><b>Nomer Surat Jalan</b></th>
+                      <th><b>ULP</b></th>
+                      <th><b>Pelanggan</b></th>
+                      <th><b>Action</b></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>12/08/2024</td>
+                      <td>TUG 5 NS.MLG23-0077</td>
+                      <td>......./LOG.00.02/GD. ARIES/VI/2024</td>
+                      <td>ULP DAMPIT</td>
+                      <td>Joko Anwar</td>
+                      <td>
+                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">
+                        <i class="bi bi-eye"></i> 
+                      </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>13/08/2024</td>
+                      <td>TUG 5 NS.MLG23-0078</td>
+                      <td>......./LOG.00.02/GD. ARIES/VI/2024</td>
+                      <td>ULP BATU</td>
+                      <td>Gracia</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>  <!-- End #main -->
 
 </main><!-- End #main -->

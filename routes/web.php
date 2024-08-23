@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPermintaanMaterialController;
 use App\Http\Controllers\EditAkun;
 use App\Http\Controllers\GudangController;
+use App\Http\Controllers\GudangDPMController;
 use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\VendorController;
@@ -43,3 +44,6 @@ Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');
 
 // Route ke gudang
 Route::get('/gudang', [GudangController::class, 'index'])->name('gudang');
+
+// Route ke gudang DPM
+Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dpm');
