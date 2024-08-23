@@ -48,7 +48,7 @@
 
         <nav class="navbar">
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('home') }}">Dashboard</a></li>
                 <li class="breadcrumb-item active">Daftar Akun</li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -67,7 +67,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                     
+
                     </div>
                     <div class="modal-body">
                         ...
@@ -112,7 +112,7 @@
                         <tbody>
                             <tr>
                                 <td>wisnu</td>
-                                <td>mboh</td>
+                                <td>pedo</td>
                                 <td>vendor</td>
                                 <td>
                                     <div class="btn"><i class="bi bi-brush"></i></div>
@@ -121,7 +121,7 @@
                             </tr>
                             <tr>
                                 <td>dani</td>
-                                <td>predator</td>
+                                <td>admin123</td>
                                 <td>vendor</td>
                                 <td>
                                     <div class="btn"><i class="bi bi-brush"></i></div>
@@ -130,7 +130,7 @@
                             </tr>
                             <tr>
                                 <td>faiz</td>
-                                <td>baik</td>
+                                <td>cabul</td>
                                 <td>vendor</td>
                                 <td>
                                     <div class="btn"><i class="bi bi-brush"></i></div>
