@@ -93,10 +93,7 @@
                                     id="username"
                                     class="form-control input-focus"
                                     placeholder="Username">
-                                    <div class="warning" id="emailWarning">Email wajib diisi!</div>
-                                    @if($errors->has('username'))
-                                        <span class="error">{{ $errors->first('username') }}</span>
-                                    @endif
+                                    <div class="warning" id="usernameWarning">Username wajib diisi!</div>
                                 </div>
                                 <div class="form-group mb-4 password-wrapper">
                                     <label for="password" class="sr-only">Password</label>
@@ -108,11 +105,7 @@
                                     placeholder="Password">
                                     <i class="mdi mdi-eye-off toggle-password" id="togglePassword"></i>
                                     <div class="warning" id="passwordWarning">Password wajib diisi!</div>
-                                    @if($errors->has('password'))
-                                        <span class="error">{{ $errors->first('password') }}</span>
-                                    @endif
                                 </div>
-                                {{-- button submit --}}
                                 <button type="submit" name="login" id="login" class="btn btn-block login-btn mb-4">Login</button>
                             </form>
                             <nav class="login-card-footer-nav">
@@ -133,7 +126,6 @@
 
     <script>
         $(document).ready(function() {
-
             // Toggle Show/Hide Password
             $('#togglePassword').on('click', function() {
                 const passwordField = $('#password');
@@ -142,7 +134,37 @@
                 $(this).toggleClass('mdi-eye mdi-eye-off');
             });
 
+            // SweetAlert Notifications
+            @if(session('status') && session('message'))
+                Swal.fire({
+                    icon: '{{ session('status') }}',
+                    title: '{{ session('message') }}',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            @endif
 
+            // Show warnings if fields are empty
+            $('#loginForm').on('submit', function(event) {
+                let isValid = true;
+                if ($('#username').val() === '') {
+                    $('#usernameWarning').show();
+                    isValid = false;
+                } else {
+                    $('#usernameWarning').hide();
+                }
+
+                if ($('#password').val() === '') {
+                    $('#passwordWarning').show();
+                    isValid = false;
+                } else {
+                    $('#passwordWarning').hide();
+                }
+
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
         });
     </script>
 </body>
