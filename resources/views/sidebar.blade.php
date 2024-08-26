@@ -10,7 +10,7 @@
 </style>
 
 <!--Side Bar-->
-<aside id="sidebar" class="sidebar">
+<aside id="sidebar2" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <!-- Dashboard Nav -->
       <li class="nav-item">
