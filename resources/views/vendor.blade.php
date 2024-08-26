@@ -42,7 +42,8 @@
   <main id="main" class="main">
     <div class="pagetitle">
       <h1>Dashboard</h1>
-    </div><!-- End Page Title -->
+    </div>
+    <!-- End Page Title -->
 
     <!--Card Atas Untuk Vendro-->
     <section class="section">
