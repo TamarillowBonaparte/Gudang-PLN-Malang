@@ -4,6 +4,9 @@ use App\Http\Controllers\DaftarAkun;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPermintaanMaterialController;
+use App\Http\Controllers\EditAkun;
+use App\Http\Controllers\GudangController;
+use App\Http\Controllers\GudangDPMController;
 use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\VendorController;
@@ -31,7 +34,16 @@ Route::get('/material', [MaterialController::class, 'index'])->name('material');
 Route::get('/vendor', [VendorController::class, 'index'])->name('vendor');
 
 // Route ke halaman Login
-Route::get('/loginpage', [LoginController::class, 'index'])->name('loginpage');
+Route::get('/loginpage', [LoginController::class, 'index'])->name('login.page');
 
 // Route ke halaman Login
 Route::get('/daftar-akun', [DaftarAkun::class, 'index'])->name('daftar.akun');
+
+// Route ke edit akun
+Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');
+
+// Route ke gudang
+Route::get('/gudang', [GudangController::class, 'index'])->name('gudang');
+
+// Route ke gudang DPM
+Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dpm');

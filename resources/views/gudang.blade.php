@@ -34,7 +34,7 @@
     @include('header')
 
 <!-- ======= Sidebar ======= -->
-    @include('sidebarvendor')
+    @include('sidebargudang')
 
 
 
