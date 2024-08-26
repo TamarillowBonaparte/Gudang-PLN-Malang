@@ -36,26 +36,21 @@
   @include('header')
   <!-- End Header -->
 
-  <!-- ======= Sidebar ======= -->
-
+  <!-- ======= Vendor Sidebar ======= -->
+  @include('sidebarvendor')
 
   <main id="main" class="main">
     <div class="pagetitle">
-      <h1>Vendor</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Vendor</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+      <h1>Dashboard</h1>
+    </div>
+    <!-- End Page Title -->
 
     <!--Card Atas Untuk Vendro-->
     <section class="section">
       <div class="row">
         <div class="col-lg-4">
-          <a href="https://example.com/link1" target="_blank" class="text-decoration-none">
-            <div class="card text-white bg-primary mb-3 h-100">
+          <a href="{{ url('dpm') }}" class="text-decoration-none">
+            <div class="card text-white bg-primary mb-3 h-100 surat">
               <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
                 <img src="{{asset ('admin/assets/img/delivered 1.png')}}" alt="Gambar 1" class="img-fluid mb-3">
                 <h5 class="card-title">DPM/DPB</h5>
@@ -64,8 +59,8 @@
           </a>
         </div>
         <div class="col-lg-4">
-          <a href="https://example.com/link2" target="_blank" class="text-decoration-none">
-            <div class="card text-dark bg-warning mb-3 h-100">
+          <a href="{{ url('k7') }}" class="text-decoration-none">
+            <div class="card text-dark bg-warning mb-3 h-100 surat">
               <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
                 <img src="{{asset ('admin/assets/img/tools 2.png')}}" alt="Gambar 2" class="img-fluid mb-3">
                 <h5 class="card-title">K7</h5>
@@ -74,8 +69,8 @@
           </a>
         </div>
         <div class="col-lg-4">
-          <a href="https://example.com/link3" target="_blank" class="text-decoration-none">
-            <div class="card text-white bg-success mb-3 h-100">
+          <a href="{{ url('k3') }}" class="text-decoration-none">
+            <div class="card text-white bg-success mb-3 h-100 surat">
               <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
                 <img src="{{asset ('admin/assets/img/exchange 1.png')}}" alt="Gambar 3" class="img-fluid mb-3">
                 <h5 class="card-title">K3</h5>
@@ -126,7 +121,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-  const cards = document.querySelectorAll('.card');
+  const cards = document.querySelectorAll('.surat');
 
   cards.forEach(card => {
     card.addEventListener('mouseenter', function() {
