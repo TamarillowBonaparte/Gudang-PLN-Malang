@@ -15,7 +15,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
         <!-- Dashboard Nav -->
         <li class="nav-item">
-            <a class="nav-link " href="{{ url('vendor') }}">
+            <a class="nav-link {{ Request::is('daftar-akun') ? 'active' : '' }}" href="{{ url('vendor') }}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -23,7 +23,7 @@
 
         <!-- Daftar Permintaan Material Nav -->
         <li class="nav-item">
-            <a class="nav-link " href="{{ url('dpm') }}">
+            <a class="nav-link {{ Request::is('daftar-akun') ? 'active' : '' }}" href="{{ url('dpm') }}">
                 <i class="bi bi-box-seam"></i>
                 <span>DPM/DPB</span>
             </a>
@@ -31,7 +31,7 @@
 
         <!-- Surat Jalan Nav -->
         <li class="nav-item">
-            <a class="nav-link " href="{{ url('k7') }}">
+            <a class="nav-link {{ Request::is('daftar-akun') ? 'active' : '' }}" href="{{ url('k7') }}">
                 <i class="bi bi-tools"></i>
                 <span>K7</span>
             </a>
@@ -39,7 +39,7 @@
 
         <!-- Material Nav -->
         <li class="nav-item">
-            <a class="nav-link " href="{{ url('k3') }}">            
+            <a class="nav-link {{ Request::is('daftar-akun') ? 'active' : '' }}" href="{{ url('k3') }}">
                 <i class="bi bi-box-arrow-left"></i>
                 <span>K3</span>
             </a>
@@ -49,3 +49,19 @@
         <!-- ... (rest of the sidebar content) ... -->
     </ul>
   </aside><!-- End Sidebar-->
+
+  <script>
+    // Ambil URL saat ini
+    var currentUrl = window.location.href;
+
+    // Ambil semua link di sidebar
+    var navLinks = document.querySelectorAll('.sidebar .nav-link');
+
+    navLinks.forEach(function(link) {
+        // Periksa apakah href link sama dengan URL saat ini
+        if (link.href === currentUrl) {
+            link.classList.add('active');
+        }
+    });
+</script>
+

@@ -24,6 +24,8 @@
     <link href="{{asset ('admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
@@ -41,6 +43,7 @@
         <div class="pagetitle">
             <h1>Daftar Permintaan Material</h1>
         </div><!-- End Page Title -->
+
 
         <div class="card">
             <div class="card-body">
@@ -65,13 +68,13 @@
 
                             <label for="idpel" class="form-label">IDPEL</label>
                             <input type="text" name="idpel" id="idpel" class="form-control input-focus mb-2">
-                            
+
                             <label for="nama_pel" class="form-label">Nama Pelanggan</label>
                             <input type="text" name="nama_pel" id="nama_pel" class="form-control input-focus mb-2">
 
                             <label for="alamat_pel" class="form-label">Alamat Pelanggan</label>
                             <input type="text" name="alamat_pel" id="alamat_pel" class="form-control input-focus mb-2">
-                            
+
                             <div class="row">
                                 <div class="col-3">
                                     <label for="pbpd" class="form-label">PB/PD</label>
@@ -109,12 +112,48 @@
                                     <input type="number" class="form-control input-focus mb-2">
                                 </div>
                             </div>
+                            <div class="col text-end">
+                                <button type="button" class="btn btn-primary">Tambah</button>
+                            </div>
+
+          <!-- Tabel Bootstrap di bawah form alamat -->
+            <div class="table-responsive mt-3">
+            <table class="table table-sm table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">no</th>
+                <th scope="col">Nama Material</th>
+                <th scope="col">Satuan</th>
+                <th scope="col">Banyak Diminta</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Material 1</td>
+                <td>Pcs</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Material 2</td>
+                <td>Kg</td>
+                <td>5</td>
+            </tr>
+            <!-- Tambahkan baris sesuai kebutuhan -->
+        </tbody>
+    </table>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </main>
-    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
