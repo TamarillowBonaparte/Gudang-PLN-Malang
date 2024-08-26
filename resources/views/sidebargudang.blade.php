@@ -31,19 +31,19 @@
     <ul class="sidebar-nav" id="sidebar-nav">
         <!-- Dashboard Nav -->
         <li class="nav-item">
-            <a class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}" href="#" onclick="toggleSubmenu(this)">
+            <a class="nav-link {{ Request::routeIs('gudang') ? 'active' : '' }}" href="#" onclick="toggleSubmenu(this)">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
                 <span class="toggle-btn">▼</span>
             </a>
             <ul class="submenu">
-                <li><a href="{{ route('dashboard') }}">Overview</a></li>
+                <li><a href="{{ route('gudang') }}">Overview</a></li>
             </ul>
         </li>
 
         <!-- Daftar Permintaan Material Nav -->
         <li class="nav-item">
-            <a class="nav-link {{ Request::routeIs('gudang') ? 'active' : '' }}" href="#" onclick="toggleSubmenu(this)">
+            <a class="nav-link {{ Request::routeIs('gudang.dpm') ? 'active' : '' }}" href="#" onclick="toggleSubmenu(this)">
                 <i class="bi bi-layout-text-sidebar"></i>
                 <span>Surat Jalan DPM</span>
                 <span class="toggle-btn">▼</span>
