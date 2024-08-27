@@ -107,15 +107,27 @@
                                 <label class="col-sm-3 col-form-label">User Level:</label>
                                 <div class="dropdown col-sm-9">
                                     <div class="form-group">
-                                        <select class="form-control" id="jenis_user" name="jenis_user">
-                                            <option value="1">Admin</option>
-                                            <option value="2">Vendor</option>
-                                            <option value="3">Gudang</option>
-                                        </select>
+                                        <div class="input-group">
+                                            <select class="form-control" id="jenis_user" name="jenis_user">
+                                                <option value="1">Admin</option>
+                                                <option value="2">Vendor</option>
+                                                <option value="3">Gudang</option>
+                                            </select>
+                                            <!-- Ikon dropdown menggunakan Bootstrap Icons -->
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="dropdown-icon"><i class="bi bi-caret-down-fill"></i></span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <div class="form-group row" id="alamat_container">
+                                <label class="col-sm-3 col-form-label">Alamat:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Masukkan Alamat Vendor">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -263,6 +275,38 @@
                 });
             });
         </script>
+
+<script>
+    //buat vendor
+    document.addEventListener('DOMContentLoaded', function() {
+        var userSelect = document.getElementById('jenis_user');
+        var alamatContainer = document.getElementById('alamat_container');
+        var dropdownIcon = document.getElementById('dropdown-icon');
+
+        function toggleAlamatField() {
+            if (userSelect.value === "2") {
+                alamatContainer.style.display = 'flex';
+            } else {
+                alamatContainer.style.display = 'none';
+            }
+        }
+
+        // Panggil fungsi pertama kali untuk set default state
+        toggleAlamatField();
+
+        // Event listener untuk dropdown user level
+        userSelect.addEventListener('change', toggleAlamatField);
+
+        // Event listener untuk ikon dropdown
+        dropdownIcon.addEventListener('click', function() {
+            userSelect.focus();  // Membuat dropdown fokus
+            userSelect.click();  // Membuka dropdown
+        });
+    });
+</script>
+
+
+
 
     <!-- Include Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
