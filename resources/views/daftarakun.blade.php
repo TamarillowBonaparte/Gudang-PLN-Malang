@@ -20,11 +20,11 @@
     <!-- Vendor CSS Files -->
     <link href="{{asset ('admin/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-    <!-- <link href="{{asset ('admin/assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet"> -->
-    <!-- <link href="{{asset ('admin/assets/vendor/quill/quill.snow.css')}}" rel="stylesheet"> -->
-    <!-- <link href="{{asset ('admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet"> -->
-    <!-- <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet"> -->
-    <!-- <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet"> -->
+    <link href="{{asset ('admin/assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{asset ('admin/assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
+    <link href="{{asset ('admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+    <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+    <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
@@ -62,7 +62,7 @@
 
         <nav class="navbar">
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('home') }}">Dashboard</a></li>
                 <li class="breadcrumb-item active">Daftar Akun</li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -129,20 +129,16 @@
             </div>
         </div>
         <!-- @if(session('show_modal'))
-    <script>
-        $(document).ready(function() {
+        <script>
+            $(document).ready(function() {
             $('#exampleModal').modal('show');
         });
-    </script> -->
+        </script> -->
 
         @endif
 
         <!-- end popup register -->
-
-
-
         @include('editakun')
-
         <!-- Recent Sales -->
         <div class="col-12">
             <div class="card recent-sales overflow-auto">
@@ -160,7 +156,7 @@
                         <tbody>
                             <tr>
                                 <td>wisnu</td>
-                                <td>mboh</td>
+                                <td>123</td>
                                 <td>vendor</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
@@ -173,7 +169,7 @@
                             </tr>
                             <tr>
                                 <td>dani</td>
-                                <td>predator</td>
+                                <td>admin123</td>
                                 <td>vendor</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
@@ -186,7 +182,7 @@
                             </tr>
                             <tr>
                                 <td>faiz</td>
-                                <td>baik</td>
+                                <td>cabul</td>
                                 <td>vendor</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
@@ -202,6 +198,7 @@
                 </div>
             </div>
         </div><!-- End Recent Sales -->
+      </main>
 
         <!-- Modal Konfirmasi Hapus -->
         <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
@@ -267,4 +264,19 @@
             });
         </script>
 
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{asset ('admin/assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/chart.js/chart.umd.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/echarts/echarts.min.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/quill/quill.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/tinymce/tinymce.min.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/php-email-form/validate.js')}}"></script>
+    <!-- Template Main JS File -->
+    <script src="{{asset ('admin/assets/js/main.js')}}"></script>
 </body>
+</html>
