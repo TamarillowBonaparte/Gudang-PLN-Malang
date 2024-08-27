@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GudangBawahController;
 use App\Http\Controllers\DaftarPermintaanMaterialController;
+use App\Http\Controllers\EditAkun;
 use App\Http\Controllers\DpmController;
 use App\Http\Controllers\K3Controller;
 use App\Http\Controllers\K7Controller;
@@ -23,6 +24,8 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 // Route ke halaman Login
 Route::get('/daftar-akun', [DaftarAkun::class, 'index'])->name('daftar.akun');
 
+// Route ke edit akun
+Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');
 //middleware untuk cek kondisi login
 Route::group(['middleware' => ['auth']], function() {
     Route::group(['middleware' => ['cek_login:101']], function() {
