@@ -22,15 +22,9 @@
     <link href="{{asset ('admin/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
-<<<<<<< HEAD
-    <link href="{{asset ('admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet"> -->
-    <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet"> -->
-    <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet"> -->
-=======
     <link href="{{asset ('admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
->>>>>>> 8e2ac386d60865a2336312001aeb672eb3d13f65
 
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
@@ -114,11 +108,7 @@
                         <tbody>
                             <tr>
                                 <td>wisnu</td>
-<<<<<<< HEAD
-                                <td>123</td>
-=======
                                 <td></td>
->>>>>>> 8e2ac386d60865a2336312001aeb672eb3d13f65
                                 <td>vendor</td>
                                 <td>
                                     <div class="btn"><i class="bi bi-brush"></i></div>
