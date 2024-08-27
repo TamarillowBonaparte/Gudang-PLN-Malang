@@ -98,10 +98,13 @@
                                 <div class="col-sm-9">
                                     <div class="input-group">
                                         <input type="password" class="form-control input-focus" placeholder="Input Password" aria-label="Input Password" aria-describedby="button-addon2" id="passwordInput">
-                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                                            <i class="bi bi-eye" id="toggleIcon"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
+
 
                             <div class="form-group row" id="perinput">
                                 <label class="col-sm-3 col-form-label">User Level:</label>
@@ -240,7 +243,27 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
         <script>
+            //untuk show password pada tambah akun
+            document.getElementById('button-addon2').addEventListener('click', function() {
+                var passwordInput = document.getElementById('passwordInput');
+                var toggleIcon = document.getElementById('toggleIcon');
+
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    toggleIcon.classList.remove('bi-eye');
+                    toggleIcon.classList.add('bi-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    toggleIcon.classList.remove('bi-eye-slash');
+                    toggleIcon.classList.add('bi-eye');
+                }
+            });
+        </script>
+
+
+        {{-- <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const togglePassword = document.querySelector('#button-addon2');
                 const passwordInput = document.querySelector('#passwordInput');
@@ -256,7 +279,7 @@
                     eyeIcon.classList.toggle('bi-eye-slash');
                 });
             });
-        </script>
+        </script> --}}
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
