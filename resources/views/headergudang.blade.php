@@ -2,8 +2,8 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="{{asset('admin/assets/img/logo pln.png')}}" alt="">
+      <a href="http://127.0.0.1:8000/gudangdpm" class="logo d-flex align-items-center">
+        <img src="{{asset('admin/assets/img/logo pln.png')}}" alt="" >
         <span class="d-none d-lg-block">PLN ARM MALANG</span>
       </a>
     </div><!-- End Logo -->
