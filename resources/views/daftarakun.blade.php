@@ -67,7 +67,7 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    <i class="bi bi-plus"></i>
+                    Tambah akun
                 </button>
             </form>
         </nav>

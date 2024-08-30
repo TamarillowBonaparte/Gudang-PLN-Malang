@@ -24,6 +24,8 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 // Route ke halaman Login
 Route::get('/daftar-akun', [DaftarAkun::class, 'index'])->name('daftar.akun');
 
+Route::get('/search', [DpmController::class, 'search']);
+
 // Route ke edit akun
 Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');
 //middleware untuk cek kondisi login

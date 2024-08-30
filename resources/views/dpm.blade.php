@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="_token" content="{{ csrf_token() }}">
 
     <title>PLN ARM MALANG</title>
     <meta content="" name="description">
@@ -25,7 +26,7 @@
     <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
@@ -59,11 +60,16 @@
 
                             <label for="jenispkrjn" class="form-label">Jenis Pekerjaan</label>
                             <select class="form-select mb-2 nospk" aria-label="Default select example">
-                                <option selected>Pilih</option>
+                                <option selected></option>
                                 <option value="1">SUTR</option>
                                 <option value="2">GKS</option>
                                 <option value="3">GKU</option>
-                                <option value="4">Dll...</option>
+                                <option value="4">GKL</option>
+                                <option value="5">PTM</option>
+                                <option value="6">ESTETIKA</option>
+                                <option value="7">PFK</option>
+                                <option value="8">KEANDALAN</option>
+                                <option value="9">PEMELIHARAAN</option>
                             </select>
 
                             <label for="idpel" class="form-label">IDPEL</label>
@@ -79,7 +85,7 @@
                                 <div class="col-3">
                                     <label for="pbpd" class="form-label">PB/PD</label>
                                     <select class="form-select mb-2 nospk" aria-label="Default select example">
-                                        <<option selected>Pilih</option>
+                                        <<option selected></option>
                                         <option value="1">PB</option>
                                         <option value="2">PD</option>
                                     </select>
@@ -96,53 +102,48 @@
                         </div>
                         <div class="col">
                             <label for="nospk" class="form-label">Nama Material</label>
-                            <input type="text" class="form-control input-focus mb-2" id="search-barang" placeholder="Cari..." autocomplete="off">
+                            <input type="text" class="form-control input-focus mb-2" list="materialdl" id="search" name="search" placeholder="Cari...">
+                            <datalist id="materialdl">
+                                
+                            </datalist>
 
                             <div class="row">
                                 <div class="col">
                                     <label for="normalisasi" class="form-label">Normalisasi</label>
-                                    <input type="text" class="form-control input-focus mb-2" aria-label="Disabled input example" disabled readonly>
+                                    <input type="text" class="form-control input-focus mb-2" id="normalisasi" aria-label="Disabled input example" disabled readonly>
                                 </div>
                                 <div class="col-2">
                                     <label for="satuan" class="form-label">Satuan</label>
-                                    <input type="text" class="form-control input-focus mb-2" aria-label="Disabled input example" disabled readonly>
+                                    <input type="text" class="form-control input-focus mb-2" id="satuan" aria-label="Disabled input example" disabled readonly>
                                 </div>
                                 <div class="col">
                                     <label for="item" class="form-label">Banyak Diminta</label>
-                                    <input type="number" class="form-control input-focus mb-2">
+                                    <input type="number" class="form-control input-focus mb-2" id="item">
                                 </div>
                             </div>
                             <div class="col text-end">
-                                <button type="button" class="btn btn-primary">Tambah</button>
+                                <button type="button" class="btn btn-primary mb-2" id="tambah">Tambah</button>
                             </div>
 
-          <!-- Tabel Bootstrap di bawah form alamat -->
-            <div class="table-responsive mt-3">
-            <table class="table table-sm table-bordered">
-            <thead>
-            <tr>
-                <th scope="col">no</th>
-                <th scope="col">Nama Material</th>
-                <th scope="col">Satuan</th>
-                <th scope="col">Banyak Diminta</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>Material 1</td>
-                <td>Pcs</td>
-                <td>10</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Material 2</td>
-                <td>Kg</td>
-                <td>5</td>
-            </tr>
-            <!-- Tambahkan baris sesuai kebutuhan -->
-        </tbody>
-    </table>
+                            <!-- Tabel Bootstrap di bawah form alamat -->
+                            <div class="table-responsive mt-3">
+                                <table class="table table-sm table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Nama Material</th>
+                                            <th scope="col">Satuan</th>
+                                            <th scope="col">Banyak Diminta</th>
+                                            <th scope="col">Hapus</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{-- items --}}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col text-end">
+                                <button class="btn btn-success mb-2" type="submit" id="cetaksurat">Cetak</button>
                             </div>
                         </div>
                     </div>
@@ -150,6 +151,106 @@
             </div>
         </div>
     </main>
+    <script type="text/javascript">
+        let productsData = {};  // Object to hold product data
+        let productSatuan = {};  // Object to hold product data
+
+        $('#search').on('keyup', function () {
+            let $value = $(this).val();
+
+            $.ajax({
+                type: "GET",
+                url: `/search`,
+                data: {
+                    'search': $value
+                },
+                success: function (response) {
+                    let options = '';
+                    productsData = {}; // Clear previous data
+                    productSatuan = {}
+
+                    response.materials.forEach(product => {
+                        options += `<option value="${product.nama}" data-id="${product.id}">`;
+                        productsData[product.nama] = product.normalisasi;
+                        productSatuan[product.nama] = product.satuan;
+                    });
+
+                    $('#materialdl').html(options);
+                }
+            });
+        });
+
+        $('#search').on('input', function () {
+            let selectedTitle = $(this).val();
+            if (productsData[selectedTitle]) {
+                $('#normalisasi').val(productsData[selectedTitle]);
+            } else {
+                $('#normalisasi').val('');
+            }
+        });
+
+        $('#search').on('input', function () {
+            let selectedTitle = $(this).val();
+            if (productSatuan[selectedTitle]) {
+                $('#satuan').val(productSatuan[selectedTitle]);
+            } else {
+                $('#satuan').val('');
+            }
+        });
+
+        $("#tambah").click(function() {
+        // Ambil nilai dari input
+        let namaMaterial = $('#search').val();
+        let normalisasi = $('#normalisasi').val();
+        let satuan = $('#satuan').val();
+        let banyakDiminta = $('#item').val();
+
+        // Pastikan semua field diisi sebelum menambahkan baris ke tabel
+        if (namaMaterial && normalisasi && satuan && banyakDiminta) {
+            // Dapatkan jumlah baris yang sudah ada di tabel
+            let rowCount = $("table tbody tr").length + 1;
+
+            // Buat baris baru
+            let newRow = `<tr>
+                            <td>${rowCount}</td>
+                            <td>${namaMaterial}</td>
+                            <td>${satuan}</td>
+                            <td>${banyakDiminta}</td>
+                            <td><button type="button" class="btn btn-danger delete-row"><i class="bi bi-trash3"></i></button></td>
+                        </tr>`;
+
+            // Tambahkan baris ke dalam tabel
+            $("table tbody").append(newRow);
+
+            // Kosongkan input setelah menambahkan ke tabel
+            $('#search').val('');
+            $('#normalisasi').val('');
+            $('#satuan').val('');
+            $('#item').val('');
+        } else {
+            alert("Pastikan semua field diisi.");
+        }
+    });
+
+    // Event listener untuk menghapus baris
+    $(document).on('click', '.delete-row', function() {
+        $(this).closest('tr').remove();
+
+        // Update nomor urut setelah penghapusan
+        $("table tbody tr").each(function(index) {
+            $(this).find('td:first').text(index + 1);
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'csrftoken': '{{ csrf_token() }}'
+            }
+        });
+    </script>
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
