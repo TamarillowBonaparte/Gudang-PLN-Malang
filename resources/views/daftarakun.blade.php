@@ -143,21 +143,22 @@
         <div class="col-12">
             <div class="card recent-sales overflow-auto">
                 <div class="card-body">
-                    <h5 class="card-title">Status Surat Jalan</h5>
+                    <h5 class="card-title">Daftar akun</h5>
                     <table class="table table-borderless datatable">
                         <thead>
                             <tr>
+                                <th scope="col">Nama</th>
                                 <th scope="col">Username</th>
-                                <th scope="col">Password</th>
                                 <th scope="col">Level</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ($users as $user)
                             <tr>
-                                <td>wisnu</td>
-                                <td>123</td>
-                                <td>vendor</td>
+                                <td>{{ $user->nama }}</td>
+                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->jenisUser->tipe}}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
                                         <i class="bi bi-brush"></i>
@@ -167,32 +168,9 @@
                                     </button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>dani</td>
-                                <td>admin123</td>
-                                <td>vendor</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
-                                        <i class="bi bi-brush"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-delete" data-id="3">
-                                        <i class="bi bi-trash2"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>faiz</td>
-                                <td>cabul</td>
-                                <td>vendor</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
-                                        <i class="bi bi-brush"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-delete" data-id="3">
-                                        <i class="bi bi-trash2"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            @empty
+
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

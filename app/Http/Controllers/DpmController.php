@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -34,5 +35,12 @@ class DpmController extends Controller {
     
             return response()->json(['materials' => $results]);
         }
+    }
+
+    public function insertData(Request $request): RedirectResponse {
+
+        
+
+        return redirect()->route('')->with(['success' => 'Data berhasil disimpan']);
     }
 }

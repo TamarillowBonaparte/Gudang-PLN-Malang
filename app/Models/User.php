@@ -24,4 +24,9 @@ class User extends Authenticatable
     protected $primaryKey = 'id_user';
 
     public $timestamps = false;
+
+    public function jenisUser() {
+
+        return $this->belongsTo(JenisUser::class, 'id_jenis_user');
+    }
 }
