@@ -215,9 +215,7 @@
 
             <!-- Recent Activity -->
             <div class="card">
-                <!-- Header dan struktur card tetap sama -->
-
-                <div class="card-body">
+                <div class="card-body ">
                 <div id="calendar-container">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                     <button class="btn btn-outline-secondary" id="prevMonth">&lt;</button>
