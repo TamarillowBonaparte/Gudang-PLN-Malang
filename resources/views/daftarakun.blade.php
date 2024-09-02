@@ -155,7 +155,7 @@
                         </thead>
                         <tbody>
                             @forelse ($users as $user)
-                            <tr>
+                            <tr>                                
                                 <td>{{ $user->nama }}</td>
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->jenisUser->tipe}}</td>
