@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="_token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>PLN ARM MALANG</title>
     <meta content="" name="description">
@@ -48,18 +48,45 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="">
-                    <div class="row mt-3">
+                <form action="{{ route('cetaksurat') }}" method="POST">
+                    @csrf
+                    <div class="row mt-3">                    
                         <div class="col-5">
-                            <label for="nospk" class="form-label">No. SPK</label>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="setuju" class="form-label">Setuju<span style="color: red;">*</span></label>                                    
+                                    <input type="text" name="setuju" id="setuju" class="form-control input-focus mb-2" aria-label="Disabled input example">
+                                </div>
+                                <div class="col">
+                                    <label for="kepalagudang" class="form-label">Kepala Gudang<span style="color: red;">*</span></label>
+                                    @forelse ($kepalaGdng as $kplgdng)
+                                    <input type="text" name="kepalagudang" id="kepalagudang" class="form-control input-focus disable mb-2" aria-label="Disabled input example">
+                                    @empty
+                                        
+                                    @endforelse
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <label for="pemeriksa" class="form-label">Pemeriksa<span style="color: red;">*</span></label>
+                                    <input type="text" name="pemeriksa" id="pemeriksa" class="form-control input-focus mb-2">
+                                </div>
+                                <div class="col">
+                                    <label for="penerima" class="form-label">Pengambil<span style="color: red;">*</span></label>
+                                    <input type="text" name="penerima" id="penerima" class="form-control input-focus mb-2">
+                                </div>
+                            </div>
+                            
+                            <label for="nospk" class="form-label">No. SPK<span style="color: red;">*</span></label>
                             <input
                             type="text"
                             name="nospk"
                             id="nospk"
                             class="form-control input-focus mb-2">
 
-                            <label for="jenispkrjn" class="form-label">Jenis Pekerjaan</label>
-                            <select class="form-select mb-2 nospk" aria-label="Default select example">
+                            <label for="jenispkrjn" class="form-label">Jenis Pekerjaan<span style="color: red;">*</span></label>
+                            <select class="form-select mb-2 nospk" id="jenispekerjaan" name="jenispekerjaan" aria-label="Default select example">
                                 <option selected></option>
                                 <option value="1">SUTR</option>
                                 <option value="2">GKS</option>
@@ -72,19 +99,29 @@
                                 <option value="9">PEMELIHARAAN</option>
                             </select>
 
-                            <label for="idpel" class="form-label">IDPEL</label>
+                            <label for="idpel" class="form-label">IDPEL<span style="color: red;">*</span></label>
                             <input type="text" name="idpel" id="idpel" class="form-control input-focus mb-2">
 
-                            <label for="nama_pel" class="form-label">Nama Pelanggan</label>
+                            <label for="nama_pel" class="form-label">Nama Pelanggan<span style="color: red;">*</span></label>
                             <input type="text" name="nama_pel" id="nama_pel" class="form-control input-focus mb-2">
 
-                            <label for="alamat_pel" class="form-label">Alamat Pelanggan</label>
+                            <label for="alamat_pel" class="form-label">Alamat Pelanggan<span style="color: red;">*</span></label>
                             <input type="text" name="alamat_pel" id="alamat_pel" class="form-control input-focus mb-2">
+
+                            <label for="ulp" class="form-label">Pelanggan ULP<span style="color: red;">*</span></label>                            
+                            <select name="ulp" id="ulp" class="form-select mb-2 nospk" aria-label="Default select example">
+                                    <option selected></option>
+                                @forelse ($ulps as $ulp)
+                                    <option value="{{ $ulp->id_ulp }}">{{ $ulp->nama }}</option>
+                                @empty
+                                    
+                                @endforelse
+                            </select>
 
                             <div class="row">
                                 <div class="col-3">
-                                    <label for="pbpd" class="form-label">PB/PD</label>
-                                    <select class="form-select mb-2 nospk" aria-label="Default select example">
+                                    <label for="pbpd" class="form-label">PB/PD<span style="color: red;">*</span></label>
+                                    <select class="form-select mb-2 nospk" id="pbpd" name="pbpd" aria-label="Default select example">
                                         <<option selected></option>
                                         <option value="1">PB</option>
                                         <option value="2">PD</option>
@@ -95,20 +132,22 @@
                                     <input type="text" name="dayalama" id="dayalama" class="form-control input-focus mb-2">
                                 </div>
                                 <div class="col">
-                                    <label for="dayabaru" class="form-label">Tarif/Daya Baru</label>
+                                    <label for="dayabaru" class="form-label">Tarif/Daya Baru<span style="color: red;">*</span></label>
                                     <input type="text" name="dayabaru" id="dayabaru" class="form-control input-focus mb-2">
                                 </div>
-                            </div>
+                            </div>                            
                         </div>
+
                         <div class="col">
-                            <label for="nospk" class="form-label">Nama Material</label>
-                            <input type="text" class="form-control input-focus mb-2" list="materialdl" id="search" name="search" placeholder="Cari...">
+                            <label for="search" class="form-label">Nama Material<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control input-focus mb-2" list="materialdl" id="search" placeholder="Cari...">
                             <datalist id="materialdl">
-                                
+                                {{-- list material --}}
                             </datalist>
 
                             <div class="row">
                                 <div class="col">
+                                    <input type="text" style="display:none;" id="idmaterial">
                                     <label for="normalisasi" class="form-label">Normalisasi</label>
                                     <input type="text" class="form-control input-focus mb-2" id="normalisasi" aria-label="Disabled input example" disabled readonly>
                                 </div>
@@ -117,7 +156,7 @@
                                     <input type="text" class="form-control input-focus mb-2" id="satuan" aria-label="Disabled input example" disabled readonly>
                                 </div>
                                 <div class="col">
-                                    <label for="item" class="form-label">Banyak Diminta</label>
+                                    <label for="item" class="form-label">Banyak Diminta<span style="color: red;">*</span></label>
                                     <input type="number" class="form-control input-focus mb-2" id="item">
                                 </div>
                             </div>
@@ -145,15 +184,17 @@
                             <div class="col text-end">
                                 <button class="btn btn-success mb-2" type="submit" id="cetaksurat">Cetak</button>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                 </form>
             </div>
         </div>
     </main>
     <script type="text/javascript">
+
         let productsData = {};  // Object to hold product data
         let productSatuan = {};  // Object to hold product data
+        let productsId = {}
 
         $('#search').on('keyup', function () {
             let $value = $(this).val();
@@ -166,11 +207,13 @@
                 },
                 success: function (response) {
                     let options = '';
+                    productsId = {}
                     productsData = {}; // Clear previous data
-                    productSatuan = {}
+                    productSatuan = {}            
 
                     response.materials.forEach(product => {
                         options += `<option value="${product.nama}" data-id="${product.id}">`;
+                        productsId[product.nama] = product.id;
                         productsData[product.nama] = product.normalisasi;
                         productSatuan[product.nama] = product.satuan;
                     });
@@ -178,6 +221,15 @@
                     $('#materialdl').html(options);
                 }
             });
+        });
+
+        $('#search').on('input', function () {
+            let selectedTitle = $(this).val();
+            if (productsId[selectedTitle]) {
+                $('#idmaterial').val(productsId[selectedTitle]);
+            } else {
+                $('#idmaterial').val('');
+            }
         });
 
         $('#search').on('input', function () {
@@ -199,38 +251,40 @@
         });
 
         $("#tambah").click(function() {
-        // Ambil nilai dari input
-        let namaMaterial = $('#search').val();
-        let normalisasi = $('#normalisasi').val();
-        let satuan = $('#satuan').val();
-        let banyakDiminta = $('#item').val();
+            // Ambil nilai dari input
+            let idMaterial = $('#idmaterial').val();
+            let namaMaterial = $('#search').val();
+            let normalisasi = $('#normalisasi').val();
+            let satuan = $('#satuan').val();
+            let banyakDiminta = $('#item').val();
 
-        // Pastikan semua field diisi sebelum menambahkan baris ke tabel
-        if (namaMaterial && normalisasi && satuan && banyakDiminta) {
-            // Dapatkan jumlah baris yang sudah ada di tabel
-            let rowCount = $("table tbody tr").length + 1;
+            // Pastikan semua field diisi sebelum menambahkan baris ke tabel
+            if (namaMaterial && normalisasi && satuan && banyakDiminta) {
+                // Dapatkan jumlah baris yang sudah ada di tabel
+                let rowCount = $("table tbody tr").length + 1;
 
-            // Buat baris baru
-            let newRow = `<tr>
-                            <td>${rowCount}</td>
-                            <td>${namaMaterial}</td>
-                            <td>${satuan}</td>
-                            <td>${banyakDiminta}</td>
-                            <td><button type="button" class="btn btn-danger delete-row"><i class="bi bi-trash3"></i></button></td>
-                        </tr>`;
+                // Buat baris baru
+                let newRow = `<tr>
+                                <td style="display:none;"><input type="text" value="${idMaterial}" name="idmaterial[]" class="form-control input-focus mb-2" id="idmaterial" aria-label="Disabled input example"></td>
+                                <td>${rowCount}</td>
+                                <td>${namaMaterial}</td>
+                                <td>${satuan}</td>
+                                <td><input type="text" value="${banyakDiminta}" name="banyakdiminta[]" class="form-control input-focus mb-2" id="banyakdiminta" aria-label="Disabled input example" style="display:none;">${banyakDiminta}</td>
+                                <td><button type="button" class="btn btn-danger delete-row"><i class="bi bi-trash3"></i></button></td>
+                            </tr>`;
 
-            // Tambahkan baris ke dalam tabel
-            $("table tbody").append(newRow);
+                // Tambahkan baris ke dalam tabel
+                $("table tbody").append(newRow);
 
-            // Kosongkan input setelah menambahkan ke tabel
-            $('#search').val('');
-            $('#normalisasi').val('');
-            $('#satuan').val('');
-            $('#item').val('');
-        } else {
-            alert("Pastikan semua field diisi.");
-        }
-    });
+                // Kosongkan input setelah menambahkan ke tabel
+                $('#search').val('');
+                $('#normalisasi').val('');
+                $('#satuan').val('');
+                $('#item').val('');
+            } else {
+                alert("Pastikan semua field diisi.");
+            }
+        });
 
     // Event listener untuk menghapus baris
     $(document).on('click', '.delete-row', function() {
@@ -241,6 +295,29 @@
             $(this).find('td:first').text(index + 1);
         });
     });
+    </script>
+
+    <script>
+        //buat vendor
+        document.addEventListener('DOMContentLoaded', function() {
+            var userSelect = document.getElementById('pbpd');
+            var dayalama = document.getElementById('dayalama');            
+
+            function toggleAlamatField() {
+                if (userSelect.value === "1") {
+                    dayalama.disabled = true;
+                    dayalama.value = '';  // Reset nilai input jika diinginkan
+                } else {
+                    dayalama.disabled = false;
+                }
+            }
+
+            // Panggil fungsi pertama kali untuk set default state
+            toggleAlamatField();
+
+            // Event listener untuk dropdown user level
+            userSelect.addEventListener('change', toggleAlamatField);
+        });
     </script>
 
     <script type="text/javascript">

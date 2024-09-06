@@ -16,17 +16,13 @@ class User extends Authenticatable
 
     protected $fillable = [
         'nama',
+        'alamat',
         'username',
         'password',
-        'id_jenis_user'
+        'id_jenis_user',
     ];
 
     protected $primaryKey = 'id_user';
 
     public $timestamps = false;
-
-    public function jenisUser() {
-
-        return $this->belongsTo(JenisUser::class, 'id_jenis_user');
-    }
 }

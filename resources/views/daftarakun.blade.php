@@ -67,7 +67,7 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Tambah akun
+                    Tambah Akun
                 </button>
             </form>
         </nav>
@@ -83,62 +83,71 @@
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <div class="modal-body">
-                        <div class="container">
+                    <form action="{{ route('register') }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="container">
 
-                            <div class="form-group row" id="perinput">
-                                <label class="col-sm-3 col-form-label">Username:</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="username" name="username" class="form-control" placeholder="Enter Username">
-                                </div>
-                            </div>
-
-                            <div class="form-group row" id="perinput">
-                                <label class="col-sm-3 col-form-label">Password:</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group">
-                                        <input type="password" class="form-control input-focus" placeholder="Input Password" aria-label="Input Password" aria-describedby="button-addon2" id="passwordInput">
-                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
-                                            <i class="bi bi-eye" id="toggleIcon"></i>
-                                        </button>
+                                <div class="form-group row" id="perinput">
+                                    <label class="col-sm-3 col-form-label">Nama:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama anda atau perusahaan anda">
                                     </div>
                                 </div>
-                            </div>
 
+                                <div class="form-group row" id="perinput">
+                                    <label class="col-sm-3 col-form-label">Username:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="username" name="username" class="form-control" placeholder="Username untuk login anda. Ex: ptjaya">
+                                    </div>
+                                </div>
 
-                            <div class="form-group row" id="perinput">
-                                <label class="col-sm-3 col-form-label">User Level:</label>
-                                <div class="dropdown col-sm-9">
-                                    <div class="form-group">
+                                <div class="form-group row" id="perinput">
+                                    <label class="col-sm-3 col-form-label">Password:</label>
+                                    <div class="col-sm-9">
                                         <div class="input-group">
-                                            <select class="form-control" id="jenis_user" name="jenis_user">
-                                                <option value="1">Admin</option>
-                                                <option value="2">Vendor</option>
-                                                <option value="3">Gudang</option>
-                                            </select>
-                                            <!-- Ikon dropdown menggunakan Bootstrap Icons -->
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="dropdown-icon"><i class="bi bi-caret-down-fill"></i></span>
+                                            <input type="password" class="form-control input-focus" placeholder="Password anda" aria-label="Input Password" aria-describedby="button-addon2" id="passwordInput" name="passwordInput">
+                                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                                                <i class="bi bi-eye" id="toggleIcon"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row" id="perinput">
+                                    <label class="col-sm-3 col-form-label">User Level:</label>
+                                    <div class="dropdown col-sm-9">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <select class="form-control" id="jenis_user" name="jenis_user">
+                                                    <option value="101">Admin</option>
+                                                    <option value="102">Vendor</option>
+                                                    <option value="103">Gudang</option>
+                                                </select>
+                                                <!-- Ikon dropdown menggunakan Bootstrap Icons -->
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="dropdown-icon"><i class="bi bi-caret-down-fill"></i></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row" id="alamat_container">
-                                <label class="col-sm-3 col-form-label">Alamat:</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Masukkan Alamat Vendor">
+                                <div class="form-group row" id="alamat_container">
+                                    <label class="col-sm-3 col-form-label">Alamat:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Jl Bersama Dia">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="button" class="btn btn-primary">Daftar</button>
-                    </div>
-
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Daftar</button>
+                        </div>
+                    </form>
 
                 </div>
             </div>
@@ -152,10 +161,35 @@
 
         @endif
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        
+
         <!-- end popup register -->
         @include('editakun')
         <!-- Recent Sales -->
         <div class="col-12">
+            <h1>{{ session('jenisUser') }}</h1>
             <div class="card recent-sales overflow-auto">
                 <div class="card-body">
                     <h5 class="card-title">Daftar akun</h5>
@@ -170,10 +204,10 @@
                         </thead>
                         <tbody>
                             @forelse ($users as $user)
-                            <tr>                                
+                            <tr>
                                 <td>{{ $user->nama }}</td>
                                 <td>{{ $user->username }}</td>
-                                <td>{{ $user->jenisUser->tipe}}</td>
+                                <td>{{ $user->tipe }}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
                                         <i class="bi bi-brush"></i>
@@ -240,25 +274,6 @@
             });
         </script>
 
-
-        {{-- <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const togglePassword = document.querySelector('#button-addon2');
-                const passwordInput = document.querySelector('#passwordInput');
-                const eyeIcon = document.querySelector('#eyeIcon');
-
-                togglePassword.addEventListener('click', function() {
-                    // Toggle the type attribute
-                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                    passwordInput.setAttribute('type', type);
-
-                    // Toggle the eye icon
-                    eyeIcon.classList.toggle('bi-eye');
-                    eyeIcon.classList.toggle('bi-eye-slash');
-                });
-            });
-        </script> --}}
-
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const deleteButtons = document.querySelectorAll('.btn-delete');
@@ -285,7 +300,7 @@
         var dropdownIcon = document.getElementById('dropdown-icon');
 
         function toggleAlamatField() {
-            if (userSelect.value === "2") {
+            if (userSelect.value === "102") {
                 alamatContainer.style.display = 'flex';
             } else {
                 alamatContainer.style.display = 'none';

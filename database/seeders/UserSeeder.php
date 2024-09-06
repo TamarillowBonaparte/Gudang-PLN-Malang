@@ -17,23 +17,20 @@ class UserSeeder extends Seeder
         //
         $user = [
             [
-                'nama'=>'admin 1',
                 'username'=>'admin1',
                 'password'=>Hash::make('admin123'),
-                'id_jenis_user'=>'101'
+                'id_jenis_user'=>'101',
             ],
             [
-                'nama'=>'gudang bawah',
-                'username'=>'gudangbawah',
-                'password'=>Hash::make('gudangbawah'),
-                'id_jenis_user'=>'103'
-            ],
-            [
-                'nama'=>'vendor 1',
                 'username'=>'vendor1',
                 'password'=>Hash::make('vendor123'),
                 'id_jenis_user'=>'102'
             ],
+            [
+                'username'=>'gudangbawah',
+                'password'=>Hash::make('gudangbawah'),
+                'id_jenis_user'=>'103'
+            ],            
         ];
 
         foreach ($user as $key => $value) {

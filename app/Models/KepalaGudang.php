@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class JenisUser extends Model
+class KepalaGudang extends Model
 {
     use HasFactory;
 
-    protected $table = "jenis_user";
+    protected $table = "kepala_gudang";
 
-    protected $fillable= [
-        'tipe'
+    protected $fillable = [
+        "nama"
     ];
-
-    protected $primaryKey = 'id_jenis_user';
-
+    protected $primaryKey = "id_kepala_gudang";
+    
     public $timestamps = false;
 }
