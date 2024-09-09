@@ -55,12 +55,23 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="setuju" class="form-label">Setuju<span style="color: red;">*</span></label>                                    
-                                    <input type="text" name="setuju" id="setuju" class="form-control input-focus mb-2" aria-label="Disabled input example">
+                                    <input type="text" name="setuju" id="setuju" list="setujuls" class="form-control input-focus mb-2" autocomplete="off">
+                                    <datalist id="setujuls">
+                                    @forelse ($setuju as $stj)
+                                        <option value="{{ $stj->nama }}">
+                                        </datalist>
+                                    @empty
+                                        
+                                    @endforelse
                                 </div>
                                 <div class="col">
                                     <label for="kepalagudang" class="form-label">Kepala Gudang<span style="color: red;">*</span></label>
+                                    
+                                    <input type="text" name="kepalagudang" id="kepalagudang" list="kplgdng" class="form-control input-focus disable mb-2">
+                                    <datalist id="kplgdng">
                                     @forelse ($kepalaGdng as $kplgdng)
-                                    <input type="text" name="kepalagudang" id="kepalagudang" class="form-control input-focus disable mb-2" aria-label="Disabled input example">
+                                        <option value="{{ $kplgdng->nama }}">
+                                        </datalist>
                                     @empty
                                         
                                     @endforelse
@@ -70,7 +81,14 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="pemeriksa" class="form-label">Pemeriksa<span style="color: red;">*</span></label>
-                                    <input type="text" name="pemeriksa" id="pemeriksa" class="form-control input-focus mb-2">
+                                    <input type="text" name="pemeriksa" id="pemeriksa" list="pemeriksals" class="form-control input-focus mb-2">
+                                    <datalist id="pemeriksals">
+                                    @forelse ($setuju as $stj)
+                                        <option value="{{ $stj->nama }}">
+                                        </datalist>
+                                    @empty
+                                        
+                                    @endforelse
                                 </div>
                                 <div class="col">
                                     <label for="penerima" class="form-label">Pengambil<span style="color: red;">*</span></label>

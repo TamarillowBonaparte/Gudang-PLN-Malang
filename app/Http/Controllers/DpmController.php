@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DaftarMaterial;
 use App\Models\DpmSuratJalan;
 use App\Models\KepalaGudang;
+use App\Models\Pemeriksa;
 use App\Models\Setuju;
 use App\Models\SuratJalan;
 use App\Models\Ulp;
@@ -20,6 +21,7 @@ class DpmController extends Controller {
         $ulps = Ulp::all();
         $kepalaGdng = KepalaGudang::all();
         $setuju = Setuju::all();
+        $pemeriksa = Pemeriksa::all();
 
         return view('dpm', compact('ulps', 'kepalaGdng', 'setuju'));
     }
