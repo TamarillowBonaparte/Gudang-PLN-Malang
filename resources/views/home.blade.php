@@ -213,6 +213,8 @@
             <!-- Right side columns -->
             <div class="col-lg-4">
 
+
+
             <!-- Recent Activity -->
             <div class="card">
                 <div class="card-body ">
@@ -377,15 +379,6 @@
                 });
             });
             </script>
-
-
-            <!-- Website Traffic -->
-
-            <!-- End Website Traffic -->
-
-            <!-- News & Updates Traffic -->
-
-            <!-- End News & Updates -->
 
             </div><!-- End Right side columns -->
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\SettingController;
 
 // Route ke halaman Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -23,6 +24,9 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route ke halaman Login
 Route::get('/daftar-akun', [DaftarAkun::class, 'index'])->name('daftar.akun');
+
+//route ke halaman setting
+Route::get('/setting', [SettingController::class, 'index'])->name('setting');
 
 // Route ke edit akun
 Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');

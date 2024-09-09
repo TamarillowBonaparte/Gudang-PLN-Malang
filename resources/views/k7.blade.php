@@ -15,6 +15,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
 
     <!-- Vendor CSS Files -->
     <link href="{{asset ('admin/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -25,192 +27,249 @@
     <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
+
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
+
     <style>
-        .table th, .table td {
+        body {
+            font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+        .a4 {
+            width: 297mm;
+            height: 210mm;
+            margin: auto;
+            padding: 10mm;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+
+        th, td {
+            font-size: 10px;
             border: 1px solid black;
             padding: 5px;
-            vertical-align: middle;
-        }
-        .table {
-            margin: auto;
-            width: 95%;
-            border-collapse: collapse;
-        }
-        .title {
             text-align: center;
-            font-weight: bold;
         }
-        .no-border {
-            border: none !important;
-        }
+
+
     </style>
+
 </head>
 <body>
 
-    <!-- ======= Header ======= -->
-    @include('header')
+    {{-- <!-- ======= Header ======= -->
+    @include('header') --}}
     <!-- End Header -->
 
     <!-- ======= Vendor Sidebar ======= -->
-    @include('sidebarvendor')
+    {{-- @include('sidebarvendor') --}}
 
-    <div class="container mt-4">
-        <table class="table table-bordered">
+    <div class="a4">
+        <table class="nourut-table">
             <thead>
                 <tr>
-                    <th colspan="8" class="text-left">
-                        TUG 5
-                    </th>
-                    <th colspan="5" class="text-right">
-                        TUG 5. MLG23-0046
-                    </th>
+                    <th style="vertical-align: bottom; padding: 0; line-height: 2; border-bottom: none;">No.</th>
+                    <th style="vertical-align: bottom; padding: 0; line-height: 1; border-bottom: none;" colspan="5">Nama Barang</th>
+                    <th style="vertical-align: bottom; padding: 0; line-height: 1; border-bottom: none;" colspan="2">No.</th>
+                    <th style="vertical-align: bottom; padding: 0; line-height: 1; border-bottom: none;">Sa-</th>
+                    <th style="padding: 0; line-height: 2;" colspan="6">Banyaknya yang diminta</th>
+                    <th style="padding: 0; line-height: 2;" colspan="6">Banyaknya yang diterima</th>
+                    <th style="vertical-align: bottom; padding: 0; line-height: 1; border-bottom: none;" colspan="3">Jumlah Uang</th>
                 </tr>
                 <tr>
-                    <th colspan="2">Tanggal diminta</th>
-                    <th colspan="3"></th>
-                    <th colspan="2">Tanggal diberikan</th>
-                    <th colspan="3"></th>
-                </tr>
-                <tr>
-                    <th colspan="3">Kepada :</th>
-                    <th colspan="6">Harap dikirim ke :</th>
-                    <th>Kode Jurnal</th>
-                </tr>
-                <tr>
-                    <th colspan="3">PT. PLN (Persero) UP3 Malang</th>
-                    <th colspan="6">PT. ANINDO BERTAHANUTS PERKASA</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th colspan="3">Gudang PLN Aries Munandar</th>
-                    <th colspan="6">Jl. Dansu Toba 8-19 Malang</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th colspan="3">Alamat :</th>
-                    <th colspan="6">Alamat :</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th>No. Urut</th>
-                    <th colspan="3">Nama Barang<br><small>(ditulis selengkap-lengkapnya)</small></th>
-                    <th>Normalisasi</th>
-                    <th colspan="2">Banyaknya yang diminta</th>
-                    <th colspan="2">Banyaknya yang diterima</th>
-                    <th colspan="2">Jumlah Uang</th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Satuan</th>
-                    <th>Dengan Angka</th>
-                    <th>Dengan Huruf</th>
-                    <th>Dengan Angka</th>
-                    <th>Dengan Huruf</th>
-                    <th></th>
+                    <th style="vertical-align: top; padding: 0; line-height: 1; border-top: none; border-bottom: none;">Urut</th>
+                    <th style="vertical-align: top; padding: 0; line-height: 1; border-top: none; border-bottom: none;" colspan="5">(ditulis selengkap - lengkapnya)</th>
+                    <th style="vertical-align: top; padding: 0; line-height: 1; border-top: none; border-bottom: none;" colspan="2">Normalisasi</th>
+                    <th style="vertical-align: top; padding: 0; line-height: 1; border-top: none; border-bottom: none;">tuan</th>
+                    <th style="padding: 0; line-height: 2;" colspan="3">dengan angka</th>
+                    <th style="padding: 0; line-height: 2;" colspan="3">dengan tulisan</th>
+                    <th style="padding: 0; line-height: 2;" colspan="3">dengan angka</th>
+                    <th style="padding: 0; line-height: 2;" colspan="3">dengan tulisan</th>
+                    <th style="vertical-align: top; padding: 0; line-height: 1; border-top: none; border-bottom: none;" colspan="3">Rp.</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td colspan="3">PIN PORC</td>
-                    <td>BH</td>
-                    <td>6</td>
-                    <td>Tujuh</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td colspan="3">HANG ISOLATOR</td>
-                    <td>BH</td>
-                    <td>7</td>
-                    <td>Dua Empat</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td colspan="3">AAACS 150</td>
-                    <td>M</td>
-                    <td>24</td>
-                    <td>Nol</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="11" class="no-border"></td>
-                </tr>
-                <tr>
-                    <td colspan="4">VENDOR</td>
-                    <td colspan="4">No. SPK</td>
-                    <td colspan="3">WPK MATERIAL:</td>
-                </tr>
-                <tr>
-                    <td colspan="4">PT. ANINDO BERTAHANUTS PERKASA</td>
-                    <td colspan="4">637/KR/DAN.01.03.00/2022 - 018/PK/REN.UP3-MLG/2023</td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td colspan="4">JENIS PEKERJAAN</td>
-                    <td colspan="4">NO. SPJ</td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td colspan="4">IDPEL</td>
-                    <td colspan="4">133980021378</td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td colspan="4">NAMA PELANGGAN</td>
-                    <td colspan="4">IR SANDOJO SUSANTO (STARBUCKS)</td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td colspan="4">ALAMAT PELANGGAN</td>
-                    <td colspan="4">JL. DIPONEGORO NO.173, SISIR, BATU</td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td colspan="4">ULP</td>
-                    <td colspan="4">ULP BATU</td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td colspan="4">Banyak jenis barang:</td>
-                    <td colspan="4">3</td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td colspan="4">Setuju :</td>
-                    <td colspan="4"></td>
-                    <td colspan="3">No. P. K</td>
-                </tr>
-                <tr>
-                    <td colspan="4">Asman Konstruksi</td>
-                    <td colspan="4">Kepala Gudang</td>
-                    <td colspan="3"></td>
-                </tr>
-                <tr>
-                    <td colspan="4">GATOT HARYANTO</td>
-                    <td colspan="4">MONIKA ROHATIUS</td>
-                    <td colspan="3"></td>
-                </tr>
-            </tfoot>
-        </table>
+
+
+            <!--isian-->
+        <tbody>
+            <tr>
+                <td></td>
+                <td colspan="5"></td>
+                <td colspan="2"></td>
+                <td></td>
+                <td colspan="3"></td>
+                <td colspan="3"></td>
+                <td colspan="3"></td>
+                <td colspan="3"></td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td colspan="5">BDC 3X70+1X70</td>
+                <td colspan="2">3070151</td>
+                <td>M</td>
+                <td colspan="3">7</td>
+                <td colspan="3">Tujuh Koma Nul</td>
+                <td colspan="3"></td>
+                <td colspan="3"></td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border: none;">Vendor</td>
+                <td style="border: none;">:</td>
+                <td colspan="7" style="border: none;">PT. Budiono Siregar</td>
+                <td colspan="3" style="border-top: none; border-bottom: none;">MERK MATERIAL :</td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"style="border: none;"></td>
+            </tr>
+            <tr>
+                <td style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border: none;">No. SPK</td>
+                <td style="border: none;">:</td>
+                <td colspan="7" style="border: none;">0839.KR/DAH.01.03/F04070000/2022 035/PK/REN.UP3-MLG/2023</td>
+                <td colspan="3" style="border-top: none; border-bottom: none;">NOMER RESERVASI :</td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"style="border: none;"></td>
+            </tr>
+            <tr>
+                <td style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border: none;">JENIS PEKERJAAN</td>
+                <td style="border: none;">:</td>
+                <td colspan="7" style="border: none;">SUTR</td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"style="border: none;"></td>
+            </tr>
+            <tr>
+                <td style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border: none;">ID PEL</td>
+                <td style="border: none;">:</td>
+                <td colspan="7" style="border: none;">KOL/51312/202221231/04440</td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"style="border: none;"></td>
+            </tr>
+            <tr>
+                <td style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border: none;">NAMA PELANGGAN</td>
+                <td style="border: none;">:</td>
+                <td colspan="7" style="border: none;">WISNU HADI MAHENDRA</td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"style="border: none;"></td>
+            </tr>
+            <tr>
+                <td style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border: none;">ALAMAT PELANGGAN</td>
+                <td style="border: none;">:</td>
+                <td colspan="7" style="border: none;">Jl. Satu-satu</td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"style="border: none;"></td>
+            </tr>
+            <tr>
+                <td style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border: none;">DAYA</td>
+                <td style="border: none;">:</td>
+                <td  style="border: none;">PB</td>
+                <td colspan="2" style="border: none;"></td>
+                <td  style="border: none;">ke</td>
+                <td style="border: none;"></td>
+                <td style="border: none;"></td>
+                <td  style="border: none;">10 x RIT /1300 VA</td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"style="border: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"style="border: none;"></td>
+            </tr>
+            <tr>
+                <td style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border: none;">ULP</td>
+                <td style="border: none;">:</td>
+                <td  style="border: none;">ULP BELIMBING</td>
+                <td colspan="2" style="border: none;"></td>
+                <td  style="border: none;">14055</td>
+                <td style="border: none;"></td>
+                <td style="border: none;"></td>
+                <td  style="border: none;"></td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"style="border: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="2" style="border-top: none; border-bottom: none;"></td>
+                <td colspan="3" style="border-top: none; border-bottom: none;"style="border: none;"></td>
+            </tr>
+            <!---Anjay-->
+            <tr>
+                <td colspan="3" style="border-bottom: none;">Banyak Jenis</td>
+                <td colspan="4" style="border-bottom: none;">Sifat Pekerjaan</td>
+                <td style="border-bottom: none;">No. PK :</td>
+                <td  style="border-bottom: none;">Nomer e wlwlwlwlwlwl</td>
+                <td colspan="2"></td>
+                <td ></td>
+                <td colspan="3">No. Urut</td>
+                <td colspan="4"></td>
+                <td colspan="3" >KODE PERKIRAAN</td>
+            </tr>
+            <tr>
+                <td colspan="3" style="border-bottom: none;">Barang :</td>
+                <td colspan="4" style="border-bottom: none;">Pas.Baru/Perluasan/Perbaikan/Pamel/JBST Pembongkaran.</td>
+                <td style="border-bottom: none;"></td>
+                <td  style="border-bottom: none;">Nomer e wlwlwlwlwlwl</td>
+                <td colspan="2"></td>
+                <td ></td>
+                <td colspan="3">SKI/SKP/PKP/PFK</td>
+                <td></td>
+                <td colspan="3">No. P. K</td>
+                <td colspan="3" >KODE PERKIRAAN</td>
+            </tr>
+            <tr>
+                <td colspan="3" style="border-bottom: none;"></td>
+                <td colspan="4" style="border-bottom: none;"></td>
+                <td colspan="7">No. PDL.</td>
+                <td colspan="3"></td>
+                <td></td>
+                <td colspan="3">No. P. K</td>
+                <td colspan="3" >KODE PERKIRAAN</td>
+            </tr>
+            <tr>
+                <td>Setuju</td>
+                <td>:</td>
+                <td>Asman Kontruksi</td>
+                <td></td>
+                <td>Kepala Gudang :</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Pemerihaan :</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
     </div>
-
-
-
 </body>
 </html>

@@ -52,6 +52,13 @@
         </a>
       </li><!-- End Daftar Akun Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('setting') ? 'active' : '' }}" href="{{ url('setting') }}">
+            <i class="bi bi-gear"></i>
+          <span>Setting</span>
+        </a>
+      </li><!-- End Daftar Akun Nav -->
+
       <!-- ... (rest of the sidebar content) ... -->
     </ul>
 </aside><!-- End Sidebar-->
