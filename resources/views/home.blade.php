@@ -44,7 +44,6 @@
         <h1>Dashboard</h1>
         <nav>
             <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
             <li class="breadcrumb-item active">Dashboard</li>
             </ol>
         </nav>
@@ -212,9 +211,10 @@
             </div><!-- End Left side columns -->
 
             <div class="col-lg-4">
+
             <!-- Recent Activity -->
             <div class="card">
-                <div class="card-body" style="padding-top: 20px;">
+                <div class="card-body ">
                 <div id="calendar-container">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                     <button class="btn btn-outline-secondary" id="prevMonth">&lt;</button>

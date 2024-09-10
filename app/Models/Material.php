@@ -10,6 +10,7 @@ class Material extends Model {
     use HasFactory;
 
     protected $table = "material";
+    
     protected $fillable = ["normalisasi", "nama", "deskripsi", "satuan", "bagian", "sumlah_sap"];
     protected $primaryKey = "id_material";
     
