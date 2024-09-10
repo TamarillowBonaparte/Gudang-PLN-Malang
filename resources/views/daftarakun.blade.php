@@ -176,14 +176,11 @@
                 {{ session('success') }}
             </div>
         @endif
-
         @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
         @endif
-
-        
 
         <!-- end popup register -->
         @include('editakun')
@@ -251,10 +248,69 @@
             </div>
         </div>
 
+        <!-- Modal Konfirmasi Hapus -->
+        <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteLabel">Konfirmasi Hapus</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Apakah Anda yakin ingin menghapus data ini?
+                    </div>
+                    <div class="modal-footer">
+                        <form id="deleteForm" method="POST" action="">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Include Bootstrap JS and Popper.js -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const togglePassword = document.querySelector('#button-addon2');
+                const passwordInput = document.querySelector('#passwordInput');
+                const eyeIcon = document.querySelector('#eyeIcon');
+
+                togglePassword.addEventListener('click', function() {
+                    // Toggle the type attribute
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+
+                    // Toggle the eye icon
+                    eyeIcon.classList.toggle('bi-eye');
+                    eyeIcon.classList.toggle('bi-eye-slash');
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const deleteButtons = document.querySelectorAll('.btn-delete');
+                const deleteForm = document.querySelector('#deleteForm');
+                const modal = document.querySelector('#confirmDelete');
+                let deleteUrl = '';
+
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        deleteUrl = `/your-delete-route/${id}`; // Update with your route
+                        deleteForm.action = deleteUrl;
+                        $(modal).modal('show');
+                    });
+                });
+            });
+        </script>
 
         <script>
             //untuk show password pada tambah akun

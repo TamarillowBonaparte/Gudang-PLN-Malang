@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -31,15 +30,13 @@
 </head>
 
 <body>
+<!-- ======= Header =======-->
+    @include('header')
 
-  <!-- ======= Header ======= -->
-  @include('header')
-  <!-- End Header -->
+<!-- ======= Sidebar ======= -->
+    @include('sidebarvendor')
 
-  <!-- ======= Vendor Sidebar ======= -->
-  @include('sidebarvendor')
-
-  <main id="main" class="main">
+<main id="main" class="main">
     <div class="pagetitle">
       <h1>Dashboard</h1>
     </div>
@@ -76,9 +73,9 @@
                 <h5 class="card-title">K3</h5>
               </div>
             </div>
-          </a>
         </div>
-      </div>
+        </div>
+    </div>
     </section>
     <section class="section mt-5">
       <div class="row">
@@ -162,4 +159,5 @@
   <!-- Template Main JS File -->
   <script src="{{asset ('admin/assets/js/main.js')}}"></script>
 </body>
+
 </html>

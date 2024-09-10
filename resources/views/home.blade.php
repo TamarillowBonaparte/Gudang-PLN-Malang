@@ -129,19 +129,19 @@
                         <tbody>
                         <tr>
                             <th scope="row">3457</a></th>
-                            <td>12 Agustus 2024</td>
+                            <td>12/08/2024</td>
                             <td>PT.Kabel Sejahtera</td>
                             <td><span class="badge bg-warning">Belum dicetak</span></td>
                         </tr>
                         <tr>
-                            <th scope="row"><a href="#">3062</a></th>
-                            <td>14 Agustus 2024</td>
+                            <th scope="row">3062</a></th>
+                            <td>14/08/2024</td>
                             <td>PT.Malindo</td>
                             <td><span class="badge bg-warning">Belum dicetak</span></td>
                         </tr>
                         <tr>
-                            <th scope="row"><a href="#">3025</a></th>
-                            <td>19 Agustus 2024</td>
+                            <th scope="row">3025</a></th>
+                            <td>19/08/2024</td>
                             <td>PT.Malindo</td>
                             <td><span class="badge bg-warning">Belum dicetak</span></td>
                         </tr>
@@ -210,10 +210,7 @@
             </div>
             </div><!-- End Left side columns -->
 
-            <!-- Right side columns -->
             <div class="col-lg-4">
-
-
 
             <!-- Recent Activity -->
             <div class="card">
