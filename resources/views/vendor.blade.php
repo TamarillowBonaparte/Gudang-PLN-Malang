@@ -85,23 +85,36 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">History Terakhir</h5>
+              <h5 class="card-title">History Terakhir Daftar Permintaan Material (DPM)</h5>
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
                   <tr>
-                    <th><b>Tanggal</b></th>
-                    <th><b>Jenis Surat</b></th>
-                    <th>Nomer</th>
+                    <th>Tanggal</th>                    
+                    <th>Nomor DPB</th>
+                    <th>Jenis Pekerjaan</th>
                     <th>Nama Pelanggan</th>
+                    <th>Alamat Pelanggan</th>
+                    <th>ULP</th>
+                    <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>12 Agustus 2024</td>
-                    <td>DPM</td>
-                    <td>3008</td>
-                    <td>Slamet Dunia</td>
+                  @forelse ($suratDpm as $surat)
+                    <td>{{$surat->tgl_diminta}}</td>
+                    <td>{{$surat->nomor_dpb}}</td>
+                    <td>{{$surat->jnspkrjaan}}</td>
+                    <td>{{$surat->nama_pelanggan}}</td>
+                    <td>{{$surat->alamat_pelanggan}}</td>
+                    <td>{{$surat->ulpnama}}</td>
+                    <td>
+                      <a href="" class="btn btn-outline-primary mb-1">Detail</a>
+                      <a href="" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                    </td>
+                  @empty
+                  
+                  @endforelse
                   </tr>
                 </tbody>
               </table>

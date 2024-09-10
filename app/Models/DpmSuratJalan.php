@@ -13,6 +13,7 @@ class DpmSuratJalan extends Model
     
     protected $fillable = [
         'kepala_gudang',
+        'penerima',
         'no_spk',
         'id_jenis_pekerjaan',
         'idpel',
@@ -27,4 +28,9 @@ class DpmSuratJalan extends Model
     protected $primaryKey = 'id_dpb_suratjalan';
     
     public $timestamps = false;
+
+    public function dpm()
+    {
+        return $this->hasMany(Dpm::class);
+    }
 }
