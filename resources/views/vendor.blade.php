@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -31,15 +30,13 @@
 </head>
 
 <body>
+<!-- ======= Header =======-->
+    @include('header')
 
-  <!-- ======= Header ======= -->
-  @include('header')
-  <!-- End Header -->
+<!-- ======= Sidebar ======= -->
+    @include('sidebarvendor')
 
-  <!-- ======= Vendor Sidebar ======= -->
-  @include('sidebarvendor')
-
-  <main id="main" class="main">
+<main id="main" class="main">
     <div class="pagetitle">
       <h1>Dashboard</h1>
     </div>
@@ -76,36 +73,44 @@
                 <h5 class="card-title">K3</h5>
               </div>
             </div>
-          </a>
         </div>
-      </div>
+        </div>
+    </div>
     </section>
-    <section class="section mt-5">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">History Terakhir</h5>
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th><b>Tanggal</b></th>
-                    <th><b>Jenis Surat</b></th>
-                    <th>Nomer</th>
-                    <th>Nama Pelanggan</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>12 Agustus 2024</td>
-                    <td>DPM</td>
-                    <td>3008</td>
-                    <td>Slamet Dunia</td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
+
+    <section class="section mt-2 ">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">History Terakhir</h5>
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th><b>Tanggal</b></th>
+                      <th><b>Nomer  Surat</b></th>
+                      <th><b>Jenis Surat</b></th>
+                      <th>Nama Pelanggan</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>12/08/2024</td>
+                      <td>DPM</td>
+                      <td>3008</td>
+                      <td>Slamet Dunia</td>
+                    </tr>
+                    <tr>
+                      <td>12/08/2024</td>
+                      <td>DPM</td>
+                      <td>3008</td>
+                      <td>Habib Soleh Tanggul</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+              </div>
             </div>
           </div>
         </div>
@@ -147,6 +152,7 @@
   <script src="{{asset ('admin/assets/vendor/tinymce/tinymce.min.js')}}"></script>
   <script src="{{asset ('admin/assets/vendor/php-email-form/validate.js')}}"></script>
   <!-- Template Main JS File -->
-  <script src="{{asset ('admin/assets/js/main.js')}}"></script>
+  <script src="{{asset ('admin/assets/js/main.js')}}"></script>btn btn-outline-success
 </body>
+
 </html>

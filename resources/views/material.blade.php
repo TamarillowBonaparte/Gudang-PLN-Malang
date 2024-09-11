@@ -62,12 +62,11 @@
                     <th>
                       <b>Nama Material</b>
                     </th>
-                    <th>
-                      <b>Deskripsi Material</b>
-                    </th>
+                    <th> Deskripsi Material</th>
                     <th>Normalisasi</th>
                     <th>Satuan</th>
                     <th>Bagian</th>
+                    <th>Jumlah</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -79,6 +78,7 @@
                     <td>{{ $material->normalisasi }}</td>
                     <td>{{ $material->satuan }}</td>
                     <td>{{ $material->bagian }}</td>
+                    <td>{{ $material->jumlah_sap }}</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-outline-secondary me-1">
                         <i class="bi bi-download"></i> Download
