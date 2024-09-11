@@ -2,7 +2,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="http://127.0.0.1:8000/gudangdpm" class="logo d-flex align-items-center">
+      <a href="{{ url('/') }}" class="logo d-flex align-items-center">
         <img src="{{asset('admin/assets/img/logo pln.png')}}" alt="" >
         <span class="d-none d-lg-block">PLN ARM MALANG</span>
       </a>
@@ -89,40 +89,54 @@
       </li><!-- End Notification Nav -->
 
       <li class="nav-item dropdown pe-3">
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src= " {{ asset('admin/assets/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-          </a><!-- End Profile Iamge Icon -->
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <img src= " {{ asset('admin/assets/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->nama }}</span>
+        </a><!-- End Profile Iamge Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Admin</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6>{{ Auth::user()->nama }}</h6>
+            <span id="roleuser">
+              @switch(Auth::user()->id_jenis_user)
+                  @case(101)
+                      Admin
+                      @break
+                  @case(102)
+                      Vendor
+                      @break
+                  @case(103)
+                      Gudang Bawah
+                      @break
+                  @default
+                      Unknown Role
+              @endswitch
+            </span>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
-      </ul>
-    </nav><!-- End Icons Navigation -->
-  </header><!-- End Header -->
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="{{ url('logout') }}">
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Sign Out</span>
+            </a>
+          </li>
+        </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
+    </ul>
+  </nav><!-- End Icons Navigation -->
+</header><!-- End Header -->

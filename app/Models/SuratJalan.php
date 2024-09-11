@@ -12,7 +12,7 @@ class SuratJalan extends Model
     protected $table = "surat_jalan";
 
     protected $fillable = [
-        "id_dpb_suratjalan",
+        "nomor_suratjln",
         "tgl_diterima",
         "nomor_polisi",
         "pengemudi"

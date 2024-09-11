@@ -94,14 +94,31 @@ class DpmController extends Controller {
             ]);
         }
 
-        $kepalaGudang = strtoupper($request->input('setuju'));
-        $penerima = strtoupper($request->input('pemeriksa'));
+        $merkmat = $request->input('merkmaterial');
+
+        $lastSJ = SuratJalan::orderBy('id_surat_jalan', 'desc')->first();
+        $lastDpmNum = $lastSJ ? $lastSJ->id_surat_jalan + 1 : 1;
+        $nomorSuratJalan = $lastDpmNum."/LOG.00.02/GD. ARIES/VI/".date("Y");
+
+        // Insert SuratJalan
+        $sJln = SuratJalan::create([
+            'nomor_suratjln'    => $nomorSuratJalan,
+            'tgl_diterima'      => null,
+            'nomor_polisi'      => null,
+            'pengemudi'         => null
+        ]);
+
+        $lastSurJalId = $sJln->id_surat_jalan;
+
+        $kepalaGudang = strtoupper($request->input('kepalagudang'));
+        $penerima = strtoupper($request->input('penerima'));
 
         $this->createIfNotExists(KepalaGudang::class, 'nama', $kepalaGudang);
         $this->createIfNotExists(PengambilPenerima::class, 'nama', $penerima);
 
         // Insert DpmSuratJalan
         $dpmSuratJalan = DpmSuratJalan::create([
+            'id_suratjalan'         => $lastSurJalId,
             'kepala_gudang'         => $kepalaGudang,
             'penerima'              => $penerima,
             'no_spk'                => $request->input('nospk'),
@@ -113,6 +130,7 @@ class DpmController extends Controller {
             'id_pb_pd'              => $request->input('pbpd'),
             'tarif_daya_lama'       => $pbpd == 2 ? $request->input('dayalama') : null,
             'tarif_daya_baru'       => $request->input('dayabaru'),
+            'merk_material'         => $merkmat != null ? $merkmat : null,
             'id_user'               => $idUser
         ]);
 
@@ -146,14 +164,6 @@ class DpmController extends Controller {
         // Proses penyimpanan data "setuju" dan "pemeriksa" jika belum ada di database
         $this->createIfNotExists(Setuju::class, 'nama', $setuju);
         $this->createIfNotExists(Pemeriksa::class, 'nama', $pemeriksa);
-
-        // Insert SuratJalan
-        SuratJalan::create([
-            'id_dpb_suratjalan' => $lastInsertedId,
-            'tgl_diterima'      => null,
-            'nomor_polisi'      => null,
-            'pengemudi'         => null
-        ]);
 
         return redirect('/detail-surat');
     }
