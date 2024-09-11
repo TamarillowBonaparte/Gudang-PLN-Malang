@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GudangBawahController;
 use App\Http\Controllers\DaftarPermintaanMaterialController;
+use App\Http\Controllers\DetailSuratController;
 use App\Http\Controllers\EditAkun;
 use App\Http\Controllers\DpmController;
 use App\Http\Controllers\DpmPreviewController;
@@ -53,7 +54,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::group(['middleware' => ['cek_login:102']], function() {
         Route::resource('vendor', VendorController::class);
         Route::resource('dpm', DpmController::class);
-        Route::resource('dpm-preview', DpmPreviewController::class);
+        Route::resource('detail-surat', DetailSuratController::class);
         Route::resource('k7', K7Controller::class);
         Route::resource('k3', K3Controller::class);
     });

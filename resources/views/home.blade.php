@@ -211,6 +211,7 @@
             </div><!-- End Left side columns -->
 
             <div class="col-lg-4">
+            
             <!-- Recent Activity -->
             <div class="card">
                 <div class="card-body ">

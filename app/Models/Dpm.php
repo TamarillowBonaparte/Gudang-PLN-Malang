@@ -12,12 +12,18 @@ class Dpm extends Model
     protected $table = "daftar_permintaan_material";
     
     protected $fillable = [
+        'nomor_dpb',
         'id_dpb_suratjalan',
         'tgl_diminta',
-        'id_setuju',
-        'id_pemeriksa'
+        'setuju',
+        'pemeriksa'
     ];
-    protected $primaryKey = 'nomor_dpb';
+    protected $primaryKey = 'id_dpb';
     
     public $timestamps = false;
+
+    public function dpmSuratJalan()
+    {
+        return $this->belongsTo(DpmSuratJalan::class);
+    }
 }

@@ -58,41 +58,47 @@
                                     <input type="text" name="setuju" id="setuju" list="setujuls" class="form-control input-focus mb-2" autocomplete="off">
                                     <datalist id="setujuls">
                                     @forelse ($setuju as $stj)
-                                        <option value="{{ $stj->nama }}">
-                                        </datalist>
+                                        <option value="{{ $stj->nama }}">                                        
                                     @empty
                                         
                                     @endforelse
+                                    </datalist>
                                 </div>
                                 <div class="col">
-                                    <label for="kepalagudang" class="form-label">Kepala Gudang<span style="color: red;">*</span></label>
-                                    
-                                    <input type="text" name="kepalagudang" id="kepalagudang" list="kplgdng" class="form-control input-focus disable mb-2">
+                                    <label for="kepalagudang" class="form-label">Kepala Gudang<span style="color: red;">*</span></label>                            
+                                    <input type="text" name="kepalagudang" id="kepalagudang" list="kplgdng" class="form-control input-focus mb-2" autocomplete="off">
                                     <datalist id="kplgdng">
                                     @forelse ($kepalaGdng as $kplgdng)
-                                        <option value="{{ $kplgdng->nama }}">
-                                        </datalist>
+                                        <option value="{{ $kplgdng->nama }}">                                        
                                     @empty
                                         
                                     @endforelse
+                                    </datalist>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
                                     <label for="pemeriksa" class="form-label">Pemeriksa<span style="color: red;">*</span></label>
-                                    <input type="text" name="pemeriksa" id="pemeriksa" list="pemeriksals" class="form-control input-focus mb-2">
+                                    <input type="text" name="pemeriksa" id="pemeriksa" list="pemeriksals" class="form-control input-focus mb-2" autocomplete="off">
                                     <datalist id="pemeriksals">
-                                    @forelse ($setuju as $stj)
-                                        <option value="{{ $stj->nama }}">
-                                        </datalist>
+                                    @forelse ($pemeriksa as $pmrksa)
+                                        <option value="{{ $pmrksa->nama }}">                                        
                                     @empty
                                         
                                     @endforelse
+                                    </datalist>
                                 </div>
                                 <div class="col">
-                                    <label for="penerima" class="form-label">Pengambil<span style="color: red;">*</span></label>
-                                    <input type="text" name="penerima" id="penerima" class="form-control input-focus mb-2">
+                                    <label for="penerima" class="form-label">Penerima<span style="color: red;">*</span></label>
+                                    <input type="text" name="penerima" id="penerima" class="form-control input-focus mb-2" list="penerimals" autocomplete="off">
+                                    <datalist id="penerimals">
+                                    @forelse ($penerima as $pnrm)
+                                        <option value="{{ $pnrm->nama }}">                                        
+                                    @empty
+                                        
+                                    @endforelse
+                                    </datalist>
                                 </div>
                             </div>
                             
@@ -101,7 +107,8 @@
                             type="text"
                             name="nospk"
                             id="nospk"
-                            class="form-control input-focus mb-2">
+                            class="form-control input-focus mb-2"
+                            autocomplete="off">
 
                             <label for="jenispkrjn" class="form-label">Jenis Pekerjaan<span style="color: red;">*</span></label>
                             <select class="form-select mb-2 nospk" id="jenispekerjaan" name="jenispekerjaan" aria-label="Default select example">
@@ -118,13 +125,13 @@
                             </select>
 
                             <label for="idpel" class="form-label">IDPEL<span style="color: red;">*</span></label>
-                            <input type="text" name="idpel" id="idpel" class="form-control input-focus mb-2">
+                            <input type="text" name="idpel" id="idpel" class="form-control input-focus mb-2" autocomplete="off">
 
                             <label for="nama_pel" class="form-label">Nama Pelanggan<span style="color: red;">*</span></label>
-                            <input type="text" name="nama_pel" id="nama_pel" class="form-control input-focus mb-2">
+                            <input type="text" name="nama_pel" id="nama_pel" class="form-control input-focus mb-2" autocomplete="off">
 
                             <label for="alamat_pel" class="form-label">Alamat Pelanggan<span style="color: red;">*</span></label>
-                            <input type="text" name="alamat_pel" id="alamat_pel" class="form-control input-focus mb-2">
+                            <input type="text" name="alamat_pel" id="alamat_pel" class="form-control input-focus mb-2" autocomplete="off">
 
                             <label for="ulp" class="form-label">Pelanggan ULP<span style="color: red;">*</span></label>                            
                             <select name="ulp" id="ulp" class="form-select mb-2 nospk" aria-label="Default select example">
@@ -147,18 +154,21 @@
                                 </div>
                                 <div class="col">
                                     <label for="dayalama" class="form-label">Tarif/Daya Lama</label>
-                                    <input type="text" name="dayalama" id="dayalama" class="form-control input-focus mb-2">
+                                    <input type="text" name="dayalama" id="dayalama" class="form-control input-focus mb-2" placeholder="Cth: R2 / 5500 VA" autocomplete="off">
                                 </div>
                                 <div class="col">
                                     <label for="dayabaru" class="form-label">Tarif/Daya Baru<span style="color: red;">*</span></label>
-                                    <input type="text" name="dayabaru" id="dayabaru" class="form-control input-focus mb-2">
+                                    <input type="text" name="dayabaru" id="dayabaru" class="form-control input-focus mb-2" autocomplete="off">
                                 </div>
-                            </div>                            
+                            </div>
+
+                            <label for="merkmaterial" class="form-label">Merk Material (Khusus Material Trafo dan Kubikel)</label>
+                            <input type="text" name="merkmaterial" id="merkmaterial" class="form-control input-focus mb-2" autocomplete="off">
                         </div>
 
                         <div class="col">
                             <label for="search" class="form-label">Nama Material<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control input-focus mb-2" list="materialdl" id="search" placeholder="Cari...">
+                            <input type="text" class="form-control input-focus mb-2" list="materialdl" id="search" placeholder="Cari..." autocomplete="off">
                             <datalist id="materialdl">
                                 {{-- list material --}}
                             </datalist>
