@@ -27,6 +27,8 @@ Route::post('proses_login', [LoginController::class, 'proses_login'])->name('pro
 // proses logout
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::get('tabel', [DpmController::class, 'showTable'])->name('tabel');
+
 // Route membuat akun
 Route::post('register', [DaftarAkunController::class, 'store'])->name('register');
 
