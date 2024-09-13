@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>PLN ARM MALANG</title>
-<meta content="" name="description">
-<meta content="" name="keywords">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<!-- Favicons -->
-<link href="{{ asset('admin/assets/img/logo pln.png') }}" rel="icon">
-<link href="{{ asset('admin/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+  <title>PLN ARM MALANG</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-<!-- Google Fonts -->
-<link href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!-- Favicons -->
+  <link href="{{ asset('admin/assets/img/logo pln.png') }}" rel="icon">
+  <link href="{{asset ('admin/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
-<!-- Vendor CSS Files -->
-<link href="{{ asset('admin/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-<link href="{{ asset('admin/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-<link href="{{ asset('admin/assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
-<link href="{{ asset('admin/assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
-<link href="{{ asset('admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
-<link href="{{ asset('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
-<link href="{{ asset('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-<!-- Template Main CSS File -->
-<link href="{{asset('admin/assets/css/style.css')}}" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="{{asset ('admin/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{asset ('admin/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{asset ('admin/assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{asset ('admin/assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
+  <link href="{{asset ('admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+  <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+  <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
+  <!-- Template Main CSS File -->
+  <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
 </head>
 
 <body>
@@ -36,143 +36,128 @@
 <!-- ======= Sidebar ======= -->
     @include('sidebarvendor')
 
-
-
-
 <main id="main" class="main">
     <div class="pagetitle">
-    <h1>Dashboard</h1>
-    <nav>
-        <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-    </nav>
-    </div><!-- End Page Title -->
+      <h1>Dashboard</h1>
+    </div>
+    <!-- End Page Title -->
 
-
-    <section class="section dashboard">
-    <div class="row">
-        <!-- Left side columns -->
-        <div class="col-lg-12">
-        <div class="row">
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
-                <div class="card-body">
-                <h5 class="card-title">DAFTAR PERMINTAAN MATERIAL/DPB</span></h5>
-
-                <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-archive-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                    <h6>145</h6>
-                    <span >Jumlah</span>
-                    </div>
-                </div>
-                </div>
+    <!--Card Atas Untuk Vendro-->
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-4">
+          <a href="{{ url('dpm') }}" class="text-decoration-none">
+            <div class="card text-white bg-primary mb-3 h-100 surat">
+              <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                <img src="{{asset ('admin/assets/img/delivered 1.png')}}" alt="Gambar 1" class="img-fluid mb-3">
+                <h5 class="card-title">DPM/DPB</h5>
+              </div>
             </div>
-            </div><!-- End Sales Card -->
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-            <div class="card info-card revenue-card">
-                <div class="card-body">
-                <h5 class="card-title">BON PENGEMBALIAN MATERIAL </span></h5>
-                <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-dropbox"></i>
-                    </div>
-                    <div class="ps-3">
-                    <h6>87</h6>
-                    <span>Jumlah</span>
-                    </div>
-                </div>
-                </div>
+          </a>
+        </div>
+        <div class="col-lg-4">
+          <a href="{{ url('k7') }}" class="text-decoration-none">
+            <div class="card text-dark bg-warning mb-3 h-100 surat">
+              <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                <img src="{{asset ('admin/assets/img/tools 2.png')}}" alt="Gambar 2" class="img-fluid mb-3">
+                <h5 class="card-title">K7</h5>
+              </div>
             </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-            <div class="card info-card customers-card">
-                <div class="card-body">
-                <h5 class="card-title">BON PEMAKAIAN MATERIAL</h5>
-                <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-box-seam-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                    <h6>1244</h6>
-                    <span>Jumlah</span>
-                    </div>
-                </div>
-                </div>
-            </div>
+          </a>
+        </div>
+        <div class="col-lg-4">
+          <a href="{{ url('k3') }}" class="text-decoration-none">
+            <div class="card text-white bg-success mb-3 h-100 surat">
+              <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                <img src="{{asset ('admin/assets/img/exchange 1.png')}}" alt="Gambar 3" class="img-fluid mb-3">
+                <h5 class="card-title">K3</h5>
+              </div>
             </div>
         </div>
         </div>
     </div>
     </section>
-
-    <section class="section mt-2 ">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">History Terakhir</h5>
-                <!-- Table with stripped rows -->
-                <table class="table datatable">
-                  <thead>
-                    <tr>
-                      <th><b>Tanggal</b></th>
-                      <th><b>Nomer  Surat</b></th>
-                      <th><b>Jenis Surat</b></th>
-                      <th>Nama Pelanggan</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>12/08/2024</td>
-                      <td>DPM</td>
-                      <td>3008</td>
-                      <td>Slamet Dunia</td>
-                    </tr>
-                    <tr>
-                      <td>12/08/2024</td>
-                      <td>DPM</td>
-                      <td>3008</td>
-                      <td>Habib Soleh Tanggul</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <!-- End Table with stripped rows -->
-              </div>
+    <section class="section mt-5">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">History Terakhir Daftar Permintaan Material (DPM)</h5>
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th>Tanggal</th>                    
+                    <th>Nomor DPB</th>
+                    <th>Jenis Pekerjaan</th>
+                    <th>Nama Pelanggan</th>
+                    <th>Alamat Pelanggan</th>
+                    <th>ULP</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  @forelse ($suratDpm as $surat)
+                    <td>{{$surat->tgl_diminta}}</td>
+                    <td>{{$surat->nomor_dpb}}</td>
+                    <td>{{$surat->jnspkrjaan}}</td>
+                    <td>{{$surat->nama_pelanggan}}</td>
+                    <td>{{$surat->alamat_pelanggan}}</td>
+                    <td>{{$surat->ulpnama}}</td>
+                    <td>
+                      <a href="" class="btn btn-outline-primary mb-1">Detail</a>
+                      <a href="" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                    </td>
+                  @empty
+                  
+                  @endforelse
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
             </div>
           </div>
         </div>
-      </section>
-    </main>  <!-- End #main -->
+      </div>
+    </section>
+  </main>  <!-- End #main -->
 
-</main><!-- End #main -->
+  <!-- ======= Footer ======= -->
+ @include('footer')
+  </footer><!-- End Footer -->
 
-<!-- ======= footer ======= -->
-@include('footer')
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-<!-- Vendor JS Files -->
-<script src="{{asset('admin/assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
-<script src="{{asset('admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('admin/assets/vendor/chart.js/chart.umd.js')}}"></script>
-<script src="{{asset('admin/assets/vendor/echarts/echarts.min.js')}}"></script>
-<script src="{{asset('admin/assets/vendor/quill/quill.js')}}"></script>
-<script src="{{asset('admin/assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
-<script src="{{asset('admin/assets/vendor/tinymce/tinymce.min.js')}}"></script>
-<script src="{{asset('admin/assets/vendor/php-email-form/validate.js')}}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const cards = document.querySelectorAll('.surat');
 
-<!-- Template Main JS File -->
-<script src="{{asset('admin/assets/js/main.js')}}"></script>
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      this.style.transition = 'transform 0.3s ease-in-out';
+      this.style.transform = 'scale(1.05)';
+    });
 
+    card.addEventListener('mouseleave', function() {
+      this.style.transition = 'transform 0.3s ease-in-out';
+      this.style.transform = 'scale(1)';
+    });
+  });
+});
+  </script>
+
+  <!-- Vendor JS Files -->
+  <script src="{{asset ('admin/assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
+  <script src="{{asset ('admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset ('admin/assets/vendor/chart.js/chart.umd.js')}}"></script>
+  <script src="{{asset ('admin/assets/vendor/echarts/echarts.min.js')}}"></script>
+  <script src="{{asset ('admin/assets/vendor/quill/quill.js')}}"></script>
+  <script src="{{asset ('admin/assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
+  <script src="{{asset ('admin/assets/vendor/tinymce/tinymce.min.js')}}"></script>
+  <script src="{{asset ('admin/assets/vendor/php-email-form/validate.js')}}"></script>
+  <!-- Template Main JS File -->
+  <script src="{{asset ('admin/assets/js/main.js')}}"></script>btn btn-outline-success
 </body>
 
 </html>

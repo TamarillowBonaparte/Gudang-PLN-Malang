@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -32,10 +33,7 @@
 <body>
   <!-- ======= Header =======-->
   @include('headergudang')
-
-
-
-
+  
   <main id="mai" class="main">
     <div class="pagetitle">
       <h1>Dashboard</h1>
@@ -47,17 +45,17 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section mt-2 ">
+    <section class="section mt-5 ms-4 me-4">
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Belum Memiliki Surat Jalan</h5>
+              <h5 class="card-title">DPB/DPM Belum Memiliki Surat Jalan</h5>
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
                   <tr>
-                    <th><b>Jenis</b></th>
+                    <th><b>Tanggal Diminta</b></th>
                     <th><b>Nomer Surat</b></th>
                     <th><b>Vendor</b></th>
                     <th><b>Pelanggan</b></th>
@@ -67,32 +65,25 @@
                   </tr>
                 </thead>
                 <tbody>
+                                      
+                  @forelse ($dpmOngoing as $ongoing)
                   <tr>
-                    <td>DPM/DPB</td>
-                    <td>TUG 5 NS.MLG23-0077</td>
-                    <td>PT MELCOINDO</td>
-                    <td>Wisnu</td>
-                    <td><input type="" class="form-control"></td>
-                    <td><input type="" class="form-control"></td>
-                    <td>
-                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">
-                        <i class="bi bi-save"></i>
-                      </a>
-                    </td>
+                    <form action="" method="POST">
+                      <td>{{ $ongoing->tgl }}</td>
+                      <td>{{ $ongoing->nomor }}</td>
+                      <td>{{ $ongoing->vendor }}</td>
+                      <td>{{ $ongoing->pelanggan }}</td>
+                      <td><input type="" class="form-control"></td>
+                      <td><input type="" class="form-control"></td>
+                      <td>
+                        <button class="btn btn-outline-success">Cetak</button>
+                      </td>
+                    </form>
                   </tr>
-                  <tr>
-                    <td>K3</td>
-                    <td>TUG 5 NS.MLG23-0078</td>
-                    <td>PT MELCOINDO</td>
-                    <td>Wisnu</td>
-                    <td><input type="" class="form-control"></td>
-                    <td><input type="" class="form-control"></td>
-                    <td>
-                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">
-                        <i class="bi bi-save"></i>
-                      </a>
-                    </td>
-                  </tr>
+                  @empty
+                      
+                  @endforelse
+                  
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
@@ -102,7 +93,7 @@
       </div>
     </section>
 
-    <section class="section mt-2 ">
+    <section class="section ms-4 me-4">
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
@@ -112,42 +103,33 @@
               <table class="table datatable">
                 <thead>
                   <tr>
-                    <th><b>Tanggal Cetak</b></th>
-                    <th><b>Jenis</b></th>
-                    <th><b>Nomer DPM/DPB</b></th>
                     <th><b>Nomer Surat Jalan</b></th>
+                    <th><b>Tanggal Cetak</b></th>
+                    <th><b>Nomer DPM/DPB</b></th>
+                    <th><b>Vendor</b></th>
                     <th><b>No. Polisi</b></th>
                     <th><b>Pengemudi</b></th>
                     <th><b>Action</b></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>12/08/2024</td>
-                    <td>DPM/DPB</td>
-                    <td>TUG 5 NS.MLG23-0077</td>
-                    <td>......./LOG.00.02/GD. ARIES/VI/2024</td>
-                    <td>ULP DAMPIT</td>
-                    <td>Joko Anwar</td>
-                    <td>
-                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">
-                        <i class="bi bi-eye"></i>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>13/08/2024</td>
-                    <td>K3</td>
-                    <td>TUG 5 NS.MLG23-0078</td>
-                    <td>......./LOG.00.02/GD. ARIES/VI/2024</td>
-                    <td>ULP BATU</td>
-                    <td>Gracia</td>
-                    <td>
-                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">
-                        <i class="bi bi-eye"></i>
-                      </a>
-                    </td>
-                  </tr>
+                  @forelse ($dpm as $dpb)
+                    <tr>
+                      <td>{{ $dpb->nosj }}</td>
+                      <td>{{ $dpb->tgldicetak }}</td>
+                      <td>{{ $dpb->nomor }}</td>
+                      <td>{{ $dpb->vendor }}</td>
+                      <td>{{ $dpb->nomor_polisi }}</td>
+                      <td>{{ $dpb->pengemudi }}</td>
+                      <td>
+                        <a href="#" class="btn btn-sm btn-outline-secondary me-1">
+                          <i class="bi bi-eye"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  @empty
+                      
+                  @endforelse
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
