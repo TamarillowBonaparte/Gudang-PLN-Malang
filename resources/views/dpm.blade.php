@@ -58,7 +58,7 @@
                                     <input type="text" name="setuju" id="setuju" list="setujuls" class="form-control input-focus mb-2" autocomplete="off">
                                     <datalist id="setujuls">
                                     @forelse ($setuju as $stj)
-                                        <option value="{{ $stj->nama }}">                                        
+                                        <option value="{{ $stj->nama }}">
                                     @empty
                                         
                                     @endforelse

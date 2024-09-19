@@ -68,15 +68,17 @@
 
                   @forelse ($dpmOngoing as $ongoing)
                   <tr>
-                    <form action="" method="POST">
+                    <form action="{{ route('cetaksrtjln') }}" method="POST">
+                      @csrf
+                      <td style="display:none;"><input type="text" name="idsrtjln" value="{{ $ongoing->id_srtjln }} "></td>
                       <td>{{ $ongoing->tgl }}</td>
                       <td>{{ $ongoing->nomor }}</td>
                       <td>{{ $ongoing->vendor }}</td>
                       <td>{{ $ongoing->pelanggan }}</td>
-                      <td><input type="" class="form-control"></td>
-                      <td><input type="" class="form-control"></td>
+                      <td><input type="text" name="nopol" class="form-control"></td>
+                      <td><input type="text" name="pengemudi" class="form-control"></td>
                       <td>
-                        <button class="btn btn-outline-success">Cetak</button>
+                        <button type="submit" class="btn btn-outline-success">Cetak</button>
                       </td>
                     </form>
                   </tr>

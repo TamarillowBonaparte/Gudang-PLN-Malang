@@ -32,7 +32,11 @@ Route::post('register', [DaftarAkunController::class, 'store'])->name('register'
 
 Route::get('/search', [DpmController::class, 'search']);
 
+// route input DPM
 Route::post('/cetaksurat', [DpmController::class, 'store'])->name('cetaksurat');
+
+// route input nopol dan pengemudi surat jalan
+Route::post('/cetaksrtjln', [GudangBawahController::class, 'inputNopolDriver'])->name('cetaksrtjln');
 
 //route ke halaman setting
 Route::get('/setting', [SettingController::class, 'index'])->name('setting');
