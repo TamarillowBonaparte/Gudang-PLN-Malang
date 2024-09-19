@@ -170,7 +170,7 @@ class DpmController extends Controller {
 
     public function showTable() {
 
-        return view('forn_dpm');
+        return view('form_suratjalan');
     }
 
     /**

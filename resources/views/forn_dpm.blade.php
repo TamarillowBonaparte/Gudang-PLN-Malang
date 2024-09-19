@@ -16,6 +16,15 @@
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.6/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script> --}}
 </head>
 
     <!-- Vendor CSS Files -->
@@ -61,27 +70,27 @@
         }
 
         .hide {
-            border-style: none;
+            border-style: unset;
         }
         .hider {
-            border-right-style: none;
+            border-right-style: unset;
         }
         .hidel {
-            border-left-style: none;
+            border-left-style: unset;
         }
         .hiderl {
-            border-right-style: none;
-            border-left-style: none;
+            border-right-style: unset;
+            border-left-style: unset;
         }
         .hidet {
-            border-top-style: none;
+            border-top-style: unset;
         }
         .hideb {
-            border-bottom-style: none;
+            border-bottom-style: unset;
         }
         .hidetb {
-            border-top-style: none;
-            border-bottom-style: none;
+            border-top-style: unset;
+            border-bottom-style: unset;
         }
 
         .bdottb {
@@ -133,7 +142,7 @@
 <body>
 
     <div class="a4 fnt">
-        <table >
+        <table id="dpm" class="display">
             {{-- tr 0 --}}
             <tr>
                 <td class="altbntu"></td> {{-- 1 --}}
@@ -304,7 +313,7 @@
             </tr>
             {{-- row 11 --}}
             <tr>
-                <td class="bdottb pdtb"></td>
+                <td class="bdottb" style="height: 15px"></td>
                 <td class="bdottb pdtb" colspan="5"></td>
                 <td class="bdottb pdtb" colspan="2"></td>
                 <td class="bdottb pdtb"></td>
@@ -638,5 +647,22 @@
             </tr>
         </table>
     </div>
+    {{-- <button type="button"><span>print</span></button>
+
+    <script>
+        new DataTable('#dpm', {
+            columnDefs: [
+                {
+                    targets: 0,
+                    searchable: false
+                }
+            ],
+            layout: {
+                topStart: {
+                    buttons: ['print']
+                }
+            }
+        });
+    </script> --}}
 </body>
 </html>
