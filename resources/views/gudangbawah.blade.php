@@ -33,7 +33,7 @@
 <body>
   <!-- ======= Header =======-->
   @include('headergudang')
-  
+
   <main id="mai" class="main">
     <div class="pagetitle">
       <h1>Dashboard</h1>
@@ -65,7 +65,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                                      
+
                   @forelse ($dpmOngoing as $ongoing)
                   <tr>
                     <form action="" method="POST">
@@ -81,9 +81,9 @@
                     </form>
                   </tr>
                   @empty
-                      
+
                   @endforelse
-                  
+
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
@@ -128,7 +128,7 @@
                       </td>
                     </tr>
                   @empty
-                      
+
                   @endforelse
                 </tbody>
               </table>

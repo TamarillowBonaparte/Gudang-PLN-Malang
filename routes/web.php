@@ -58,4 +58,6 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('k7', K7Controller::class);
         Route::resource('k3', K3Controller::class);
     });
+
+    Route::patch('/update-dpm/{id}', 'DpmController@update')->name('update.dpm');
 });

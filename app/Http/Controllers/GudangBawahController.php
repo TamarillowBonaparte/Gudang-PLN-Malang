@@ -22,9 +22,9 @@ class GudangBawahController extends Controller
         )
         ->get();
 
-        $dpm = DB::table('daftar_permintaan_material')        
+        $dpm = DB::table('daftar_permintaan_material')
         ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
-        ->join('surat_jalan', 'dpb_suratjalan.id_suratjalan', '=', 'surat_jalan.id_surat_jalan')        
+        ->join('surat_jalan', 'dpb_suratjalan.id_suratjalan', '=', 'surat_jalan.id_surat_jalan')
         ->join('user', 'dpb_suratjalan.id_user', '=', 'user.id_user')
         ->whereNotNull('nomor_polisi')
         ->select(
@@ -38,5 +38,5 @@ class GudangBawahController extends Controller
         ->get();
 
         return view('gudangbawah', compact('dpmOngoing', 'dpm'));
-    }    
+    }
 }
