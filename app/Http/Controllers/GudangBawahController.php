@@ -52,8 +52,8 @@ class GudangBawahController extends Controller
 
         SuratJalan::where('id_surat_jalan', $request->input('idsrtjln'))
         ->update([
-            'nomor_polisi'  => $request->input('nopol'),
-            'pengemudi'     => $request->input('pengemudi'),
+            'nomor_polisi'  => trim ($request->input('nopol')),
+            'pengemudi'     => trim ($request->input('pengemudi')),
             'tgl_diterima'  => date('Y-m-d H:i:s')
             ]);
 
