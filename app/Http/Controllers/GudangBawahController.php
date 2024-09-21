@@ -39,4 +39,9 @@ class GudangBawahController extends Controller
 
         return view('gudangbawah', compact('dpmOngoing', 'dpm'));
     }    
+
+    public function show() {
+
+        return view('form_suratjalan');
+    }
 }

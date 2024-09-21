@@ -10,6 +10,7 @@ use App\Http\Controllers\DetailSuratController;
 use App\Http\Controllers\EditAkun;
 use App\Http\Controllers\DpmController;
 use App\Http\Controllers\DpmPreviewController;
+use App\Http\Controllers\GudangController;
 use App\Http\Controllers\K3Controller;
 use App\Http\Controllers\K7Controller;
 use App\Http\Controllers\SuratJalanController;
@@ -38,6 +39,8 @@ Route::post('/cetaksurat', [DpmController::class, 'store'])->name('cetaksurat');
 
 //route ke halaman setting
 Route::get('/setting', [SettingController::class, 'index'])->name('setting');
+
+Route::get('/formsrt', [GudangBawahController::class, 'show'])->name('formsrt');
 
 // Route ke edit akun
 Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');
