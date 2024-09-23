@@ -64,3 +64,11 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('k3', K3Controller::class);
     });
 });
+
+// Route ke gudang
+Route::get('/gudang', [GudangController::class, 'index'])->name('gudang');
+
+// Route ke gudang DPM
+Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dpm');
+
+Route::get('/suratjalan', [GudangController::class, 'index'])->name('suratjalan');
