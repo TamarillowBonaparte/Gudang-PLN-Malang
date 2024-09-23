@@ -18,6 +18,6 @@ class SuratJalan extends Model
         "pengemudi"
     ];
     protected $primaryKey = "id_surat_jalan";
-    
+
     public $timestamps = false;
 }

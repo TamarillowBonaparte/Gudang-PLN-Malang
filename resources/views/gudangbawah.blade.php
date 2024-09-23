@@ -8,6 +8,8 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <!-- Favicons -->
   <link href="{{ asset('admin/assets/img/logo pln.png') }}" rel="icon">
   <link href="{{ asset('admin/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -28,12 +30,16 @@
   <!-- Template Main CSS File -->
   <link href="{{asset('admin/assets/css/style.css')}}" rel="stylesheet">
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
 </head>
 
 <body>
   <!-- ======= Header =======-->
   @include('headergudang')
-  
+
   <main id="mai" class="main">
     <div class="pagetitle">
       <h1>Dashboard</h1>
@@ -65,26 +71,30 @@
                   </tr>
                 </thead>
                 <tbody>
-                                      
-                  @forelse ($dpmOngoing as $ongoing)
-                  <tr>
-                    <form action="" method="POST">
-                      <td>{{ $ongoing->tgl }}</td>
-                      <td>{{ $ongoing->nomor }}</td>
-                      <td>{{ $ongoing->vendor }}</td>
-                      <td>{{ $ongoing->pelanggan }}</td>
-                      <td><input type="" class="form-control"></td>
-                      <td><input type="" class="form-control"></td>
-                      <td>
-                        <button class="btn btn-outline-success">Cetak</button>
+                @forelse ($dpmOngoing as $ongoing)
+                <tr>
+                  <form action="{{ route('cetaksrtjln') }}" method="POST">
+                    @csrf
+                    <td style="display:none;"><input type="text" name="idsrtjln" value="{{ $ongoing->id_srtjln }} "></td>
+                    <td>{{ $ongoing->tgl }}</td>
+                    <td>{{ $ongoing->nomor }}</td>
+                    <td>{{ $ongoing->vendor }}</td>
+                    <td>{{ $ongoing->pelanggan }}</td>
+                    <td>
+                        <input type="text" name="nopol" class="form-control" placeholder="Contoh: N 1234 CG" maxlength="11" required oninput="this.value = this.value.toUpperCase();">
+                    </td>
+                    <td>
+                        <input type="text" name="pengemudi" class="form-control" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();"  required>
+                    </td>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-outline-success" onclick="return confirmSubmit()">Cetak</button>
                       </td>
-                    </form>
-                  </tr>
-                  @empty
-                      
-                  @endforelse
-                  
-                </tbody>
+                  </form>
+                </tr>
+                @empty
+                @endforelse
+              </tbody>
               </table>
               <!-- End Table with stripped rows -->
             </div>
@@ -92,6 +102,14 @@
         </div>
       </div>
     </section>
+    
+    <script>
+        function confirmSubmit() {
+          // Dialog konfirmasi bawaan browser
+          return confirm('Apakah Anda yakin ingin mencetak?');
+        }
+      </script>
+
 
     <section class="section ms-4 me-4">
       <div class="row">
@@ -128,7 +146,7 @@
                       </td>
                     </tr>
                   @empty
-                      
+
                   @endforelse
                 </tbody>
               </table>
