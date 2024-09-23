@@ -47,3 +47,5 @@ Route::get('/gudang', [GudangController::class, 'index'])->name('gudang');
 
 // Route ke gudang DPM
 Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dpm');
+
+Route::get('/suratjalan', [GudangDPMController::class, 'srt'])->name('suratjalan');

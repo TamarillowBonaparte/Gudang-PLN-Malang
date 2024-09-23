@@ -5,6 +5,234 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Surat Angkutan</title>
     <link rel="stylesheet" href="style_k7.css" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height:  297mm;
+            width: 210mm;
+        }
+
+
+        .kop-surat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-container {
+            padding-left: 2%;
+            padding-right: 1%;
+        }
+
+        img{
+            width: 45px;
+        }
+
+        .info-container {
+            font-family: Arial;
+            flex: auto;
+            text-align: left;
+        }
+
+        .info-container p {
+            margin: 2px 0;
+            font-size: 10pt;
+            padding: 3px;
+        }
+
+        .surat-angkutan {
+            margin: 20px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .title p {
+            text-align: center;
+            margin: 1px 0;
+            font-family: 'roboto mono';
+            font-weight: bold;
+            font-size: 12pt;
+        }
+
+        .title h3 {
+            text-align: center;
+            text-decoration: underline;
+            margin: 1px 0;
+            font-family: 'arial';
+            font-size: 18pt;
+        }
+
+        .detail-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+            font-weight: bold;
+            font-family: 'roboto mono';
+            font-size: 11pt;
+            /* margin-bottom: 10px; */
+
+        }
+
+        .left-detail, .right-detail {
+            width: 48%;
+        }
+
+        .left-detail p{
+            height: 9%;
+        }
+
+        .right-detail {
+            text-align: left;
+        }
+
+        #panjangne{
+            width: 3cm;
+        }
+
+        tr td #kiri2{
+            padding-top: 10px;
+        }
+
+        .barang-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .barang-table thead{
+            border-collapse: collapse;
+            font-size: 11pt;
+            font-family: 'roboto mono';
+            background-color: yellow;
+        }
+
+        .barang-table #yowes{
+            font-size: 12pt;
+            font-family: 'roboto mono';
+            font-weight: bold;
+        }
+
+        .barang-table #nourut{
+            text-align: center;
+            width: 1.3cm;
+        }
+
+        .barang-table #namamaterial{
+            width: 30%;
+        }
+
+        .barang-table #normalisasimaterial{
+            width: 1pt;
+        }
+
+        .barang-table #satuan{
+            width: 1pt;
+            text-align: center;
+        }
+
+        .barang-table #jumlahmaterial{
+            width: 1pt;
+            text-align: right;
+        }
+
+        .barang-table #keterangan1{
+            border-width: 0;
+            width: 3.2cm;
+            text-align: left;
+        }
+
+        .barang-table #keterangan2{
+            border-top: 0;
+            border-right: 0;
+            width: 1pt;
+            text-align: left;
+        }
+
+        .barang-table #keterangan3{
+            border-right: 0;
+            width: 3.2cm;
+            text-align: left;
+        }
+
+        .barang-table #keterangan4{
+            width: 3.2cm;
+            text-align: center;
+        }
+
+
+        .barang-table #ket1{
+            border-left: 0;
+        }
+
+        .barang-table th, .barang-table td {
+            border: 1px solid black;
+        }
+
+        #ko{
+            margin: 1%;
+            font-size: 11pt;
+            font-family: 'roboto mono';
+            font-weight: bold;
+        }
+
+        #ku{
+            margin: 1% 0;
+            font-size: 11pt;
+            font-family: 'roboto mono';
+            font-weight: bold;
+        }
+
+        #ke{
+            padding-top: 21%;
+        }
+
+        #ki{
+            padding-top: 10%;
+        }
+
+        .footer-info {
+            margin-top: 2%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11pt;
+            font-family: 'roboto mono';
+            font-weight: bold;
+        }
+
+        .left-footer, .right-footer {
+            width: 48%;
+        }
+
+        .right-footer {
+            text-align: right;
+            padding-right: 1%;
+        }
+
+        .left-footer{
+            padding-left: 1%;
+        }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 11pt;
+            font-family: 'roboto mono';
+            font-weight: bold;
+        }
+
+        .left-signature, .center-signature, .right-signature {
+            text-align: center;
+            width: 21%;
+        }
+
+        .left-signature p, .center-signature p, .right-signature p {
+            margin: 0;
+        }
+    </style>
   </head>
   <body>
     <div class="kop-surat">
@@ -25,7 +253,7 @@
       </div>
 
       <div class="detail-info">
-        
+
         <div class="left-detail">
           <p>Kendaraan No.  &emsp;&ensp;&ensp;&ensp;&nbsp;:  N 8979 BF</p>
           <p>Nama Pengemudi &emsp;&nbsp;&nbsp;&nbsp;: SULIS</p>
@@ -35,7 +263,7 @@
         <div class="right-detail">
 
           <table>
-            
+
           <tr>
           <td rowspan="5" id="panjangne">
             KEPADA &nbsp;:
@@ -61,7 +289,7 @@
           <td id="kiri2">8039/PJ/DAN.01.03/F04700080/2024 - PK/REN.UP3-MLG/2024</td>
           </tr>
 
-          
+
           </table>
 
         </div>
@@ -77,7 +305,7 @@
             <th>Jumlah <br> Material</th>
             <th colspan="2">Keterangan</th>
           </tr>
-          
+
         </thead>
         <tbody>
           <tr id="yowes">
@@ -167,13 +395,13 @@
                       <td id="keterangan4" colspan="2" >TUG 123989132D</td>
                       </tr>
 
-            
+
 
         </tbody>
       </table>
 
       <div class="footer-info">
-       
+
         <div class="left-footer">
           Diterima tgl&emsp;........................
         </div>
@@ -206,7 +434,7 @@
             <br>
             <p>...................</p>
         </div>
-      
+
           <div class="right-signature">
               <br>
               <p>Yang menyerahkan,</p>
@@ -219,7 +447,7 @@
           </div>
 
         </div>
-      
+
 
   </body>
 </html>
