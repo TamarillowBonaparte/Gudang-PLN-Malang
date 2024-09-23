@@ -11,6 +11,7 @@ use App\Http\Controllers\EditAkun;
 use App\Http\Controllers\DpmController;
 use App\Http\Controllers\DpmPreviewController;
 use App\Http\Controllers\GudangController;
+use App\Http\Controllers\GudangDPMController;
 use App\Http\Controllers\K3Controller;
 use App\Http\Controllers\K7Controller;
 use App\Http\Controllers\SuratJalanController;

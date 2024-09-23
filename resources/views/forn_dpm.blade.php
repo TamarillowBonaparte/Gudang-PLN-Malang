@@ -206,7 +206,7 @@
                 <td class="fntb hideb hiderl pdtb">Bln.</td>
                 <td class="fntb hideb hidel pdtb" style="padding-left: 0px; padding-right: 0px;">Thn.</td>
 
-                <td rowspan="3" colspan="5" class="fntb hidet" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px; width: 0%; font-size: 18px; color: rgb(177, 10, 10)">TUG 5. MLG24-0000</td>
+                <td rowspan="3" colspan="5" class="fntb hidet" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px; width: 0%; font-size: 18px; color: #ff0000">TUG 5. MLG24-0000</td>
             </tr>
             {{-- row 4 --}}
             <tr class="dpm">
