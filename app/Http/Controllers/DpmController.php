@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class DpmController extends Controller {    
+class DpmController extends Controller {
 
     public function index () {
 
@@ -34,13 +34,13 @@ class DpmController extends Controller {
 
     public function search(Request $request) {
         if($request->ajax()) {
-    
+
             $materials = DB::table('material')
                 ->where('nama','LIKE','%'.$request->search."%")
                 ->get();
-    
+
             $results = [];
-    
+
             if($materials) {
                 foreach ($materials as $material) {
                     $results[] = [
@@ -51,7 +51,7 @@ class DpmController extends Controller {
                     ];
                 }
             }
-    
+
             return response()->json(['materials' => $results]);
         }
     }
@@ -170,7 +170,7 @@ class DpmController extends Controller {
 
     public function showTable() {
 
-        return view('form_suratjalan');
+        return view('forn_dpm');
     }
 
     /**

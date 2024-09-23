@@ -25,7 +25,7 @@
     <script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script> --}}
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="{{asset ('admin/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -65,7 +65,7 @@
 
         th, td {
             font-size: 10px;
-            border: 1px solid black;
+            border: 1.5px solid black;
             text-align: center;
         }
 
@@ -119,7 +119,7 @@
         }
 
         .fontl {
-            text-align: left 
+            text-align: left
         }
 
         .txtalgl {
@@ -133,7 +133,7 @@
         }
 
         .dpm {
-            background-color: #3ea534
+            background-color: #d9ead3
         }
 
     </style>
@@ -173,7 +173,7 @@
                 <td class="hideb hider" style="width: 20px"></td>
                 <td colspan="4" rowspan="2" class="fntb hidel" style="font-size: 20px; padding: 0px; width: 20%; height: 0%;">TUG 5</td>
                 <td colspan="4" class="hider hideb fntb pdtb" style="text-align: left; padding-left: 40px; overflow: visible">PT. PLN (PERSERO) UID JATIM UP3 MALANG</td>
-                
+
                 <td class="hiderl hideb"></td>
                 <td class="hiderl hideb"></td>
                 <td class="hiderl hideb"></td>
@@ -192,7 +192,7 @@
             {{-- row 2 --}}
             <tr class="dpm">
                 <td class="hidet hider"></td>
-                <td rowspan="4" colspan="12" class="fntb hidet pdtb" style="font-size: 20px; width: 600px; height: 0px;">DAFTAR PERMINTAAN MATERIAL</td>
+                <td rowspan="4" colspan="12" class="fntb hidet pdtb" style="font-size: 24px; width: 600px; height: 0px;">DAFTAR PERMINTAAN MATERIAL</td>
                 <td class="hider hidetb"></td>
                 <td class="hide"></td>
                 <td class="hide"></td>
@@ -228,7 +228,7 @@
                 <td class="fntb hideb hider pdtb">Tgl.</td>
                 <td class="fntb hideb hiderl pdtb">Bln.</td>
                 <td class="fntb hideb hidel pdtb">Thn.</td>
-                
+
                 <td class="fntb fontl pdtb hider hideb">Kepada:</td>
                 <td class="fntb fontl pdtb hidel hideb" style="width: 0px" colspan="5">PT XXXXXX</td>
 
@@ -255,7 +255,7 @@
                 <td class="hide"></td>
                 <td class="hide"></td>
                 <td class="hide"></td>
-                <td class="hidel hidetb"></td>            
+                <td class="hidel hidetb"></td>
             </tr>
             {{-- row 8 --}}
             <tr class="dpm">
@@ -263,7 +263,7 @@
                 <td class="fntb pdtb"></td>
                 <td class="fntb pdtb"></td>
                 <td class="fntb pdtb"></td>
-                
+
                 <td class="fntb fontl pdtb hider hidet">Alamat:</td>
                 <td class="fntb fontl pdtb hidel hidet" colspan="5">Jl. Aries Munandar No. 77A Malang</td>
 
@@ -304,7 +304,7 @@
                 <td class="fntb pdtb " colspan="3">dengan angka</td>
 
                 <td class="fntb pdtb " colspan="3">dengan huruf</td>
-                
+
                 <td class="fntb pdtb " colspan="2">dengan angka</td>
 
                 <td class="fntb pdtb " colspan="2">dengan huruf</td>
@@ -473,7 +473,7 @@
                 <td class="fntb hide pdtb txtalgl" colspan="3">N0. SPK</td>
                 <td class="fntb hide pdtb">:</td>
                 <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">000.KR/DAN.00.00/A00000000/0000 - 000/PK/REN.UP3-MLG/0000</td>
-                
+
                 <td class="fntb hidetb pdtb txtalgl" colspan="3">NOMOR RESERVASI :</td>
 
                 <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
