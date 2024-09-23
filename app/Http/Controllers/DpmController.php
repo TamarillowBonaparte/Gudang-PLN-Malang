@@ -168,6 +168,11 @@ class DpmController extends Controller {
         return redirect('/detail-surat');
     }
 
+    public function showTable() {
+
+        return view('forn_dpm');
+    }
+
     /**
      * Helper function untuk create record jika belum ada.
      */

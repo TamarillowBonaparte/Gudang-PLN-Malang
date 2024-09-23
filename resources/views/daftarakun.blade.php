@@ -148,7 +148,6 @@
                             <button type="submit" class="btn btn-primary">Daftar</button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

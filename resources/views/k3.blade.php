@@ -15,6 +15,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
 
     <!-- Vendor CSS Files -->
     <link href="{{asset ('admin/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -25,13 +27,46 @@
     <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
+
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+        .a4 {
+            width: 297mm;
+            height: 210mm;
+            margin: auto;
+            padding: 10mm;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+
+        th, td {
+            font-size: 10px;
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+
+
+    </style>
+
 </head>
 <body>
 
-    <!-- ======= Header ======= -->
-    @include('header')
+    {{-- <!-- ======= Header ======= -->
+    @include('header') --}}
     <!-- End Header -->
 
     <!-- ======= Vendor Sidebar ======= -->
