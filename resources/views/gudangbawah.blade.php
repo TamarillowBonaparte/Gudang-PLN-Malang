@@ -102,7 +102,7 @@
         </div>
       </div>
     </section>
-    
+
     <script>
         function confirmSubmit() {
           // Dialog konfirmasi bawaan browser
@@ -140,8 +140,8 @@
                       <td>{{ $dpb->nomor_polisi }}</td>
                       <td>{{ $dpb->pengemudi }}</td>
                       <td>
-                        <a href="#" class="btn btn-sm btn-outline-secondary me-1">
-                          <i class="bi bi-eye"></i>
+                        <a href="{{ route('gudangbawah.show', $dpb->idsrt) }}" class="btn btn-sm btn-outline-secondary me-1">
+                          <i class="bi bi-eye"></i> Detail
                         </a>
                       </td>
                     </tr>

@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('daftar-akun', DaftarAkunController::class);
     });
     Route::group(['middleware' => ['cek_login:103']], function() {
-        Route::resource('gudangbawah', GudangBawahController::class);
+        Route::resource('/gudangbawah', GudangBawahController::class);
     });
     Route::group(['middleware' => ['cek_login:102']], function() {
         Route::resource('vendor', VendorController::class);

@@ -20,9 +20,6 @@
             height: 297mm;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         /* Style content with shaded background */
@@ -162,6 +159,7 @@
                 <td class="fntarial pdtb hide" colspan="5">1. Pengantar 2. Security 3. Pengambil material</td>
             </tr>
             {{-- row 3 --}}
+
             <tr>
                 <td class="fntarial pdtb fontl hide" colspan="8">UNIT INDUK DISTRIBUSI (UID) JAWA TIMUR</td>
                 <td class="fntarial pdtb" colspan="5">PERHATIAN :</td>
@@ -185,7 +183,7 @@
             </tr>
             {{-- row 8 --}}
             <tr>
-                <td class="fntb pdtb hide" colspan="15">0000 /LOG.00.02/GD. ARIES/VI/2024</td>
+                <td class="fntb pdtb hide" colspan="15">{{ $sj->nosj }}</td>
             </tr>
             {{-- row 9 --}}
             <tr>
@@ -195,14 +193,14 @@
             <tr>
                 <td class="fntb pdtb fontl hide" colspan="2">Kendaraan No.</td>
                 <td class="fntb pdtb hide">:</td>
-                <td class="fntb pdtb fontl hide" colspan="5"></td>
-                <td class="fntb pdtb fontl hide" colspan="5">PT. XXXXXX</td>
+                <td class="fntb pdtb fontl hide" colspan="5">{{ $sj->nomor_polisi }}</td>
+                <td class="fntb pdtb fontl hide" colspan="5">{{ $sj->vendor }}</td>
             </tr>
             {{-- row 11 --}}
             <tr>
                 <td class="fntb pdtb fontl hide" colspan="2">Nama Pengemudi</td>
                 <td class="fntb pdtb hide">:</td>
-                <td class="fntb pdtb fontl hide" colspan="11"></td>
+                <td class="fntb pdtb fontl hide" colspan="11">{{ $sj->pengemudi }}</td>
             </tr>
             {{-- row 12 --}}
             <tr>
@@ -210,17 +208,17 @@
                 <td class="fntb pdtb hide">:</td>
                 <td class="fntb pdtb fontl hide" colspan="3">UP3 MALANG</td>
                 <td class="fntb pdtb fontl hide" colspan="2">SPK NO. :</td>
-                <td class="fntb pdtb fontl hide" colspan="3">ULP KEPANJEN</td>
+                <td class="fntb pdtb fontl hide" colspan="3">{{ $sj->ulp }}</td>
             </tr>
             {{-- row 13 --}}
             <tr>
                 <td class="hide" colspan="8"></td>
-                <td class="fntb pdtb fontl hide" colspan="6">0042.KR/DAN.01.03/E04070000/2022 -079/PK/REN.UP3-MLG/2023</td>
+                <td class="fntb pdtb fontl hide" colspan="6">{{ '$sj->nospk' }}</td>
             </tr>
             {{-- row 14 --}}
             <tr>
                 <td class="hide" colspan="8"></td>
-                <td class="fntb pdtb fontl hide" colspan="6">DARMAWAN</td>
+                <td class="fntb pdtb fontl hide" colspan="6">{{ $sj->nampel}}</td>
             </tr>
             {{-- row 15 --}}
             <tr>
@@ -254,14 +252,17 @@
                 <td class="bdottb" colspan="2" style="height: 10px"></td>
             </tr>
             {{-- row 19 --}}
+            @forelse ($suratjln as $sj)
             <tr>
-                <td class="fntb bdottb pdtb fnt12 itmth">1</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5">UNIV ACC;COVER BUSHING TRAFO</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">1030074</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">U</td>
+                <td class="fntb bdottb pdtb fnt12 itmth">{{ $loop->iteration }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5">{{ $sj->nammat }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ $sj->normalisasi }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $sj->satuan }}</td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">1</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ $sj->jumlah }}</td>
             </tr>
+            @empty
+            @endforelse
             {{-- row 20 --}}
             <tr>
                 <td class="fntb bdottb pdtb fnt12 itmth">2</td>
@@ -343,6 +344,7 @@
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
             </tr>
+
             {{-- row 29 --}}
             <tr>
                 <td class="bdottb" colspan="" style="height: 10px"></td>
@@ -357,7 +359,7 @@
                 <td class="hidetb"></td>
                 <td class="fntb hide fontl" colspan="3">VENDOR</td>
                 <td class="fntb hide">:</td>
-                <td class="fntb hide fontl" colspan="7">PT. XXXXXX</td>
+                <td class="fntb hide fontl" colspan="7">{{ $sj->vendor }}</td>
                 <td class="hidetb" colspan="2"></td>
             </tr>
             {{-- row 31 --}}
@@ -365,7 +367,7 @@
                 <td class="hidetb"></td>
                 <td class="fntb hide fontl" colspan="3">NO. SPK</td>
                 <td class="fntb hide">:</td>
-                <td class="fntb hide fontl" colspan="7">0042.KR/DAN.01.03/E04070000/2022 -079/PK/REN.UP3-MLG/2023</td>
+                <td class="fntb hide fontl" colspan="7">{{ $sj->nospk }}</td>
                 <td class="hidetb" colspan="2"></td>
             </tr>
             {{-- row 32 --}}
@@ -373,15 +375,15 @@
                 <td class="hidetb"></td>
                 <td class="fntb hide fontl fontbott" colspan="3" style="height: 90px;">JENIS PEKERJAAN</td>
                 <td class="fntb hide fontbott">:</td>
-                <td class="fntb hide fontl fontbott" colspan="7">GKS</td>
-                <td class="fntb" colspan="2" style="font-size: 24px; color: #ff0000">TUG 5. MLG23-0086</td>
+                <td class="fntb hide fontl fontbott" colspan="7">{{ $sj->nmpkrjn }}</td>
+                <td class="fntb" colspan="2" style="font-size: 24px; color: #ff0000">{{ $sj->nodpb }}</td>
             </tr>
             {{-- row 33 --}}
             <tr>
                 <td class="hidetb"></td>
                 <td class="fntb hide fontl" colspan="3">IDPEL</td>
                 <td class="fntb hide">:</td>
-                <td class="fntb hide fontl" colspan="7">513051752108</td>
+                <td class="fntb hide fontl" colspan="7">{{ $sj->idpel }}</td>
                 <td class="hidetb" colspan="2"></td>
             </tr>
             {{-- row 34 --}}
@@ -389,7 +391,7 @@
                 <td class="hidetb"></td>
                 <td class="fntb hide fontl" colspan="3">NAMA PELANGGAN</td>
                 <td class="fntb hide">:</td>
-                <td class="fntb hide fontl" colspan="7">DARMAWAN</td>
+                <td class="fntb hide fontl" colspan="7">{{ $sj->nampel }}</td>
                 <td class="hidetb" colspan="2"></td>
             </tr>
             {{-- row 35 --}}
@@ -397,7 +399,7 @@
                 <td class="hidetb"></td>
                 <td class="fntb hide fontl" colspan="3">ALAMAT PELANGGAN</td>
                 <td class="fntb hide">:</td>
-                <td class="fntb hide fontl" colspan="7">JL RAYA PAKISAJI NO 23 RT 1 RW 1 PAKISAJI KEPANJEN</td>
+                <td class="fntb hide fontl" colspan="7">{{ $sj->almtpel }}</td>
                 <td class="hidetb" colspan="2"></td>
             </tr>
             {{-- row 36 --}}
@@ -406,9 +408,9 @@
                 <td class="fntb hide fontl" colspan="3">DAYA</td>
                 <td class="fntb hide">:</td>
                 <td class="fntb hide fontl" colspan="1">PB</td>
-                <td class="fntb hide" colspan="2"></td>
+                <td class="fntb hide" colspan="2">{{ $sj->daylam }}</td>
                 <td class="fntb hide" colspan="1">ke</td>
-                <td class="fntb hide" colspan="3">I2 / 66000 VA</td>
+                <td class="fntb hide" colspan="3">{{ $sj->daybar }}</td>
                 <td class="hidetb" colspan="2"></td>
             </tr>
             {{-- row 37 --}}
@@ -426,11 +428,12 @@
             {{-- row 39 --}}
             <tr>
                 <td class="fntb hide fontl" colspan="2">Diterima tgl</td>
-                <td class="fntb hide fontl" colspan="4">.......................</td>
+                <td class="fntb hide fontl" colspan="4">{{ $sj->tgldicetak }}</td>
                 <td class="hide" colspan="2"></td>
                 <td class="fntb hide" colspan="1">Malang,</td>
                 <td class="fntb hide fontl" colspan="5">.......................</td>
             </tr>
+
             {{-- row 40 --}}
             <tr>
                 <td class="hide" colspan="5"></td>
@@ -471,11 +474,11 @@
             </tr>
             {{-- row 48 --}}
             <tr>
-                <td class="fntb hide" colspan="3">CHUSNUL</td>
+                <td class="fntb hide" colspan="3">{{ $sj->penerima }}</td>
                 <td class="hide" colspan="2"></td>
                 <td class="fntb hide" colspan="3">.................</td>
                 <td class="hide"></td>
-                <td class="fntb hide" colspan="5">MONIKA ROHMATUS S.</td>
+                <td class="fntb hide" colspan="5">{{ $sj->kepala_gudang }}</td>
             </tr>
         </table>
     </div>
