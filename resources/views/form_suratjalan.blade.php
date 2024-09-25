@@ -182,6 +182,7 @@
                 <td class="fntarial pdtb hide" colspan="15" style="font-size: 18px;"><u>SURAT ANGKUTAN</u></td>
             </tr>
             {{-- row 8 --}}
+            @forelse ($suratjln as $sj)
             <tr>
                 <td class="fntb pdtb hide" colspan="15">{{ $sj->nosj }}</td>
             </tr>
@@ -213,7 +214,7 @@
             {{-- row 13 --}}
             <tr>
                 <td class="hide" colspan="8"></td>
-                <td class="fntb pdtb fontl hide" colspan="6">{{ '$sj->nospk' }}</td>
+                <td class="fntb pdtb fontl hide" colspan="6">{{ $sj->nospk }}</td>
             </tr>
             {{-- row 14 --}}
             <tr>
@@ -242,6 +243,8 @@
                 <td class="fntb pdtb hidet" colspan="3">dengan angka</td>
                 <td class="fntb pdtb hidet" colspan="2">dengan angka</td>
             </tr>
+            @empty
+            @endforelse
             {{-- row 18 --}}
             <tr>
                 <td class="bdottb" colspan="" style="height: 10px"></td>
@@ -355,6 +358,7 @@
                 <td class="bdottb" colspan="2" style="height: 10px"></td>
             </tr>
             {{-- row 30 --}}
+            @forelse ($suratjln as $sj)
             <tr>
                 <td class="hidetb"></td>
                 <td class="fntb hide fontl" colspan="3">VENDOR</td>
@@ -480,6 +484,8 @@
                 <td class="hide"></td>
                 <td class="fntb hide" colspan="5">{{ $sj->kepala_gudang }}</td>
             </tr>
+            @empty
+            @endforelse
         </table>
     </div>
 </body>
