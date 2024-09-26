@@ -255,99 +255,28 @@
                 <td class="bdottb" colspan="2" style="height: 10px"></td>
             </tr>
             {{-- row 19 --}}
-            @forelse ($suratjln as $sj)
+            @forelse ($material as $mat)
             <tr>
                 <td class="fntb bdottb pdtb fnt12 itmth">{{ $loop->iteration }}</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5">{{ $sj->nammat }}</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ $sj->normalisasi }}</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $sj->satuan }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5">{{ $mat->nammat }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ $mat->normalisasi }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $mat->satuan }}</td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ $sj->jumlah }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ $mat->jumlah }}</td>
             </tr>
             @empty
             @endforelse
             {{-- row 20 --}}
+            @for ($i = $list; $i <= 10; $i++)
             <tr>
-                <td class="fntb bdottb pdtb fnt12 itmth">2</td>
+                <td class="fntb bdottb pdtb fnt12 itmth">{{$i}}</td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="5"></td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="1"></td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
             </tr>
-            {{-- row 21 --}}
-            <tr>
-                <td class="fntb bdottb pdtb fnt12 itmth">3</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-            </tr>
-            {{-- row 22 --}}
-            <tr>
-                <td class="fntb bdottb pdtb fnt12 itmth">4</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-            </tr>
-            {{-- row 23 --}}
-            <tr>
-                <td class="fntb bdottb pdtb fnt12 itmth">5</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-            </tr>
-            {{-- row 24 --}}
-            <tr>
-                <td class="fntb bdottb pdtb fnt12 itmth">6</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-            </tr>
-            {{-- row 25 --}}
-            <tr>
-                <td class="fntb bdottb pdtb fnt12 itmth">7</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-            </tr>
-            {{-- row 26 --}}
-            <tr>
-                <td class="fntb bdottb pdtb fnt12 itmth">8</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-            </tr>
-            {{-- row 27 --}}
-            <tr>
-                <td class="fntb bdottb pdtb fnt12 itmth">9</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-            </tr>
-            {{-- row 28 --}}
-            <tr>
-                <td class="fntb bdottb pdtb fnt12 itmth">10</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
-            </tr>
-
+            @endfor
             {{-- row 29 --}}
             <tr>
                 <td class="bdottb" colspan="" style="height: 10px"></td>

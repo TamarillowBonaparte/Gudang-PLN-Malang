@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('/gudangbawah', GudangBawahController::class);
     });
     Route::group(['middleware' => ['cek_login:102']], function() {
-        Route::resource('vendor', VendorController::class);
+        Route::resource('/vendor', VendorController::class);
         Route::resource('dpm', DpmController::class);
         Route::resource('detail-surat', DetailSuratController::class);
         Route::resource('k7', K7Controller::class);
