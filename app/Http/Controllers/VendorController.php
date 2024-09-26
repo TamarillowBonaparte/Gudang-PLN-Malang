@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 class VendorController extends Controller
 {
@@ -23,7 +24,9 @@ class VendorController extends Controller
         return view ('vendor', compact('suratDpm'));
     }
 
-    public function show(String $id) {
+    public function show(String $encryptedId) {
+
+        $id = Crypt::decryptString($encryptedId);
 
         $dpm = DB::table('daftar_permintaan_material')
         ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')

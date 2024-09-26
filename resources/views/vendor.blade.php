@@ -113,9 +113,8 @@
                                         <td>{{$surat->alamat_pelanggan}}</td>
                                         <td>{{$surat->ulpnama}}</td>
                                         <td>
-                                            <a href="{{ route('vendor.show', $surat->id_dpb) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                                            <a href="" class="btn btn-outline-success"><i
-                                                    class="bi bi-download"></i></a>
+                                            <a href="{{ route('vendor.show', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                                            <a href="" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
                                         </td>
                                     </tr>
                                     @empty
