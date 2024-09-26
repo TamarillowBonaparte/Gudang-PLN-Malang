@@ -39,6 +39,8 @@ Route::get('/search', [DpmController::class, 'search']);
 // route input DPM
 Route::post('/cetaksurat', [DpmController::class, 'store'])->name('cetaksurat');
 
+Route::get('/print', [DpmController::class, 'cetak'])->name('print');
+
 // route input nopol dan pengemudi surat jalan
 Route::post('/cetaksrtjln', [GudangBawahController::class, 'inputNopolDriver'])->name('cetaksrtjln');
 
@@ -63,7 +65,7 @@ Route::group(['middleware' => ['auth']], function() {
     });
     Route::group(['middleware' => ['cek_login:102']], function() {
         Route::resource('/vendor', VendorController::class);
-        Route::resource('dpm', DpmController::class);
+        Route::resource('/dpm', DpmController::class);
         Route::resource('detail-surat', DetailSuratController::class);
         Route::resource('k7', K7Controller::class);
         Route::resource('k3', K3Controller::class);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 
@@ -9,6 +10,8 @@ class VendorController extends Controller
 {
     public function index()
     {
+        $idUser = Auth::user()->id_user;
+
         $suratDpm = DB::table('daftar_permintaan_material')
         ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
         ->join('ulp', 'dpb_suratjalan.id_ulp', '=', 'ulp.id_ulp')
@@ -19,6 +22,7 @@ class VendorController extends Controller
             'jenis_pekerjaan.pekerjaan as jnspkrjaan',
             'ulp.nama as ulpnama'
             )
+        ->where('dpb_suratjalan.id_user', '=', $idUser)
         ->get();
 
         return view ('vendor', compact('suratDpm'));
@@ -101,7 +105,7 @@ class VendorController extends Controller
             ];
         }
 
-        return view('detailsurat', compact('dpm', 'material', 'list', 'material'));
+        return view('detailsurat', compact('dpm', 'material', 'list'));
     }
 
     public function angkaKeHuruf($angka) {

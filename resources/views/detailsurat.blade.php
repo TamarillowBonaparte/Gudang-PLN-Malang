@@ -541,7 +541,7 @@
                     <td class="fntb hidetb txtalgl" colspan="5"></td>
                     <td class="fntb hidetb txtalgl" colspan="7"></td>
 
-                    <td class="fntb hidetb pdtb txtalgl" colspan="5">{{ $i->nmu }}</td>
+                    <td class="fntb hidetb pdtb txtalgl" colspan="5" style="overflow: hidden;">{{ $i->nmu }}</td>
                 </tr>
                 {{-- row 37 --}}
                 <tr>
