@@ -6,6 +6,7 @@ use App\Models\DpmSuratJalan;
 use App\Models\SuratJalan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\View\View;
 
 class GudangBawahController extends Controller
@@ -63,8 +64,10 @@ class GudangBawahController extends Controller
         return redirect('gudangbawah');
     }
 
-    public function show(String $id): View {
+    public function show(String $encryptedId): View {
 
+        $id = Crypt::decrypt($encryptedId);
+        
         $suratjln = DB::table('dpb_suratjalan')
         ->select(
             'surat_jalan.nomor_suratjln as nosj',
