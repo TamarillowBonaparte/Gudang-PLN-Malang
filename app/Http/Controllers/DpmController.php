@@ -107,13 +107,9 @@ class DpmController extends Controller {
 
         $merkmat = $request->input('merkmaterial');
 
-        $lastSJ = SuratJalan::orderBy('id_surat_jalan', 'desc')->first();
-        $lastDpmNum = $lastSJ ? $lastSJ->id_surat_jalan + 1 : 1;
-        $nomorSuratJalan = $lastDpmNum."/LOG.00.02/GD. ARIES/VI/".date("Y");
-
         // Insert SuratJalan
         $sJln = SuratJalan::create([
-            'nomor_suratjln'    => $nomorSuratJalan,
+            'nomor_suratjln'    => null,
             'tgl_diterima'      => null,
             'nomor_polisi'      => null,
             'pengemudi'         => null

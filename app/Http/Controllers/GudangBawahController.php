@@ -45,9 +45,20 @@ class GudangBawahController extends Controller
         ->get();
 
         return view('gudangbawah', compact('dpmOngoing', 'dpm'));
+        // return view('gudangbawah', compact('dpm'));
     }
 
     function inputNopolDriver(Request $request) {
+
+        $lastSJ = DB::table('surat_jalan')
+        ->selectRaw("nomor_suratjln, CAST(SUBSTRING_INDEX(nomor_suratjln, '/', 1) AS UNSIGNED) AS nosrtjln")
+        ->orderBy('nosrtjln', 'DESC')
+        ->limit(1)
+        ->pluck('nosrtjln')
+        ->first();
+        preg_match('/^\d+/', $lastSJ, $matches);
+        $lastAngka = $matches[0] + 1;
+        $nomorSuratJalan = $lastAngka."/LOG.00.02/GD. ARIES/VI/".date("Y");
 
         $request->validate([
             "nopol" => 'required',
@@ -56,6 +67,7 @@ class GudangBawahController extends Controller
 
         SuratJalan::where('id_surat_jalan', $request->input('idsrtjln'))
         ->update([
+            'nomor_suratjln' => $nomorSuratJalan,
             'nomor_polisi'  => trim ($request->input('nopol')),
             'pengemudi'     => trim ($request->input('pengemudi')),
             'tgl_diterima'  => date('Y-m-d H:i:s')
@@ -67,7 +79,7 @@ class GudangBawahController extends Controller
     public function show(String $encryptedId): View {
 
         $id = Crypt::decrypt($encryptedId);
-        
+
         $suratjln = DB::table('dpb_suratjalan')
         ->select(
             'surat_jalan.nomor_suratjln as nosj',
@@ -124,5 +136,23 @@ class GudangBawahController extends Controller
         $list = $jumlah+1;
 
         return view('form_suratjalan', compact('suratjln', 'material', 'list'));
+    }
+
+    public function showSurat(Request $request) {
+        $dpmOngoing = DB::table('daftar_permintaan_material')
+        ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
+        ->join('surat_jalan', 'dpb_suratjalan.id_suratjalan', '=', 'surat_jalan.id_surat_jalan')
+        ->join('user', 'dpb_suratjalan.id_user', '=', 'user.id_user')
+        ->whereNull('surat_jalan.pengemudi')
+        ->select(
+            'surat_jalan.id_surat_jalan as id_srtjln',
+            'daftar_permintaan_material.tgl_diminta as tgl',
+            'daftar_permintaan_material.nomor_dpb as nomor',
+            'user.nama as vendor',
+            'dpb_suratjalan.nama_pelanggan as pelanggan'
+        )
+        ->get();
+
+        return response()->json($dpmOngoing);
     }
 }

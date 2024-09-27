@@ -49,6 +49,9 @@ Route::get('/setting', [SettingController::class, 'index'])->name('setting');
 
 Route::get('/formsrt', [GudangBawahController::class, 'show'])->name('formsrt');
 
+// route ajax show surat jalan
+Route::get('/suratongoing', [GudangBawahController::class, 'showSurat'])->name('suratongoing');
+
 // Route ke edit akun
 Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');
 //middleware untuk cek kondisi login

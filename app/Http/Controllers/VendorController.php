@@ -25,7 +25,7 @@ class VendorController extends Controller
         ->where('dpb_suratjalan.id_user', '=', $idUser)
         ->get();
 
-        return view ('vendor', compact('suratDpm'));
+        return view('vendor', compact('suratDpm'));
     }
 
     public function show(String $encryptedId) {
