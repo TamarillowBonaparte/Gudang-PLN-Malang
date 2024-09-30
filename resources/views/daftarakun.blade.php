@@ -83,7 +83,7 @@
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <form action="{{ route('register') }}" method="POST">
+                    <form action="{{ url('register') }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <div class="container">

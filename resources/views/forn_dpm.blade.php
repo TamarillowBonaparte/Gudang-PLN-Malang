@@ -647,22 +647,5 @@
             </tr>
         </table>
     </div>
-    {{-- <button type="button"><span>print</span></button>
-
-    <script>
-        new DataTable('#dpm', {
-            columnDefs: [
-                {
-                    targets: 0,
-                    searchable: false
-                }
-            ],
-            layout: {
-                topStart: {
-                    buttons: ['print']
-                }
-            }
-        });
-    </script> --}}
 </body>
 </html>

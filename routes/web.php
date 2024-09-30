@@ -39,6 +39,8 @@ Route::get('/search', [DpmController::class, 'search']);
 // route input DPM
 Route::post('/cetaksurat', [DpmController::class, 'store'])->name('cetaksurat');
 
+Route::get('/print', [DpmController::class, 'cetak'])->name('print');
+
 // route input nopol dan pengemudi surat jalan
 Route::post('/cetaksrtjln', [GudangBawahController::class, 'inputNopolDriver'])->name('cetaksrtjln');
 
@@ -46,6 +48,9 @@ Route::post('/cetaksrtjln', [GudangBawahController::class, 'inputNopolDriver'])-
 Route::get('/setting', [SettingController::class, 'index'])->name('setting');
 
 Route::get('/formsrt', [GudangBawahController::class, 'show'])->name('formsrt');
+
+// route ajax show surat jalan
+Route::get('/suratongoing', [GudangBawahController::class, 'showSurat'])->name('suratongoing');
 
 // Route ke edit akun
 Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');
@@ -59,11 +64,11 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('daftar-akun', DaftarAkunController::class);
     });
     Route::group(['middleware' => ['cek_login:103']], function() {
-        Route::resource('gudangbawah', GudangBawahController::class);
+        Route::resource('/gudangbawah', GudangBawahController::class);
     });
     Route::group(['middleware' => ['cek_login:102']], function() {
-        Route::resource('vendor', VendorController::class);
-        Route::resource('dpm', DpmController::class);
+        Route::resource('/vendor', VendorController::class);
+        Route::resource('/dpm', DpmController::class);
         Route::resource('detail-surat', DetailSuratController::class);
         Route::resource('k7', K7Controller::class);
         Route::resource('k3', K3Controller::class);
