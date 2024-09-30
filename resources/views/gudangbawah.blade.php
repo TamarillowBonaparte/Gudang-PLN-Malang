@@ -143,6 +143,7 @@
                       <td>{{ $dpb->pengemudi }}</td>
                       <td>
                         <a href="{{ route('gudangbawah.show', Crypt::encrypt($dpb->idsrt)) }}" class="btn btn-sm btn-outline-secondary me-1"><i class="bi bi-eye"></i> Detail</a>
+                        <a href="{{ route('gudangbawah.show', Crypt::encrypt($dpb->idsrt)) }}" class="btn btn-sm btn-outline-secondary me-1"><i class="bi bi-eye"></i> Detail</a>
                       </td>
                     </tr>
                   @empty

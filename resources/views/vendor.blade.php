@@ -114,11 +114,10 @@
                                         <td>{{$surat->ulpnama}}</td>
                                         <td>
                                             <a href="{{ route('vendor.show', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                                            <a href="{{ route('print', Crypt::encryptString($surat->id_dpb))}}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                                            <a href="{{ route('print', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
                                         </td>
                                     </tr>
                                     @empty
-
                                     @endforelse
                                 </tbody>
                             </table>

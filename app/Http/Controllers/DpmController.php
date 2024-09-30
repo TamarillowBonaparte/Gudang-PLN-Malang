@@ -177,7 +177,7 @@ class DpmController extends Controller {
         return redirect()->route('print')->with('id', $id);
     }
 
-    public function cetak() {
+    public function cetak(String $id) {
 
         $id = session('id');
 

@@ -66,7 +66,7 @@
                         <i class="bi bi-archive-fill"></i>
                         </div>
                         <div class="ps-3">
-                        <h6>145</h6>
+                        <h6>{{ $dpbjumlah }}</h6>
                         <span >Jumlah</span>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                         <i class="bi bi-dropbox"></i>
                         </div>
                         <div class="ps-3">
-                        <h6>87</h6>
+                        <h6>0</h6>
                         <span>Jumlah</span>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                         <i class="bi bi-box-seam-fill"></i>
                         </div>
                         <div class="ps-3">
-                        <h6>1244</h6>
+                        <h6>0</h6>
                         <span>Jumlah</span>
                         </div>
                     </div>
@@ -120,31 +120,22 @@
                     <table class="table table-borderless datatable">
                         <thead>
                         <tr>
-                            <th scope="col">No Surat Jalan</th>
-                            <th scope="col">Tanggal</th>
+                            <th scope="col">No DPB</th>
+                            <th scope="col">Tanggal Diminta</th>
                             <th scope="col">Vendor</th>
                             <th scope="col">Status</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">3457</a></th>
-                            <td>12/08/2024</td>
-                            <td>PT.Kabel Sejahtera</td>
-                            <td><span class="badge bg-warning">Belum dicetak</span></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3062</a></th>
-                            <td>14/08/2024</td>
-                            <td>PT.Malindo</td>
-                            <td><span class="badge bg-warning">Belum dicetak</span></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3025</a></th>
-                            <td>19/08/2024</td>
-                            <td>PT.Malindo</td>
-                            <td><span class="badge bg-warning">Belum dicetak</span></td>
-                        </tr>
+                            @forelse ($suratJln as $sj)
+                            <tr>
+                                <th scope="row" style="{{ $sj->ndpb == null ? "text-align: center" : "" }}">{{ $sj->ndpb != null ? $sj->ndpb : "-" }}</a></th>
+                                <td style="{{ $sj->tgl == null ? "text-align: center" : "" }}">{{ $sj->tgl != null ? \Carbon\Carbon::parse($sj->tgl)->format('d M Y') : "-" }}</td>
+                                <td>{{ $sj->nmuser }}</td>
+                                <td><span class="{{ $sj->nsurat != null ? "badge bg-success" : "badge bg-warning" }}">{{ $sj->nsurat != null ? "Sudah dicetak" : "Belum dicetak" }}</span></td>
+                            </tr>
+                            @empty
+                            @endforelse
                         </tbody>
                     </table>
                     </div>
@@ -164,9 +155,9 @@
                     new Chart(document.querySelector('#barChart'), {
                         type: 'bar',
                         data: {
-                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August'],
                         datasets: [{
-                            data: [65, 59, 80, 81, 56, 55, 40],
+                            data: [65, 59, 80, 81, 56, 55, 40, 30],
                             backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(255, 159, 64, 0.2)',
@@ -211,7 +202,7 @@
             </div><!-- End Left side columns -->
 
             <div class="col-lg-4">
-            
+
             <!-- Recent Activity -->
             <div class="card">
                 <div class="card-body ">

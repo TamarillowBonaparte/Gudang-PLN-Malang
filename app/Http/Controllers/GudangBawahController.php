@@ -138,6 +138,68 @@ class GudangBawahController extends Controller
         return view('form_suratjalan', compact('suratjln', 'material', 'list'));
     }
 
+    public function print(String $encryptedId): View {
+
+        $id = Crypt::decrypt($encryptedId);
+
+        $suratjln = DB::table('dpb_suratjalan')
+        ->select(
+            'surat_jalan.nomor_suratjln as nosj',
+            'surat_jalan.nomor_polisi',
+            'surat_jalan.pengemudi',
+            'dpb_suratjalan.no_spk as nospk',
+            'dpb_suratjalan.nama_pelanggan as nampel',
+            'dpb_suratjalan.idpel as idpel',
+            'dpb_suratjalan.alamat_pelanggan as almtpel',
+            'dpb_suratjalan.tarif_daya_lama as daylam',
+            'dpb_suratjalan.tarif_daya_baru as daybar',
+            'surat_jalan.tgl_diterima as tgldicetak',
+            'dpb_suratjalan.penerima',
+            'dpb_suratjalan.kepala_gudang',
+            'daftar_permintaan_material.nomor_dpb as nodpb',
+            'user.nama as vendor',
+            'ulp.nama as ulp',
+            'jenis_pekerjaan.pekerjaan as nmpkrjn',
+        )
+        ->join('surat_jalan', 'dpb_suratjalan.id_suratjalan', '=', 'surat_jalan.id_surat_jalan')
+        ->join('daftar_permintaan_material', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
+        ->join('user', 'dpb_suratjalan.id_user', '=', 'user.id_user')
+        ->join('ulp', 'dpb_suratjalan.id_ulp', '=', 'ulp.id_ulp')
+        ->join('jenis_pekerjaan', 'dpb_suratjalan.id_jenis_pekerjaan', '=', 'jenis_pekerjaan.id_jenis_pekerjaan')
+        ->where('id_surat_jalan', '=', $id)
+        ->get();
+
+        $iddpbsrtjln = DB::table('daftar_permintaan_material')
+        ->select('id_dpb_suratjalan')
+        ->where('id_dpb', '=', $id);
+
+        $material = DB::table('daftar_material')
+        ->select(
+            'daftar_material.jumlah',
+            'daftar_material.id_dpb_suratjalan',
+            'material.nama as nammat',
+            'material.normalisasi',
+            'material.satuan',
+        )
+        ->join('material', 'daftar_material.id_material', '=', 'material.id_material')
+        ->where('id_dpb_suratjalan', '=', $iddpbsrtjln)
+        ->get();
+
+        $dpbsrt = DB::table('dpb_suratjalan')
+        ->select('id_dpb_suratjalan')
+        ->where('id_suratjalan', '=', $id)
+        ->pluck('id_dpb_suratjalan');
+
+        $jumlah = DB::table('daftar_material')
+        ->select('id_dpb_suratjalan')
+        ->where('id_dpb_suratjalan', '=', $dpbsrt)
+        ->count();
+
+        $list = $jumlah+1;
+
+        return view('form_suratjalan', compact('suratjln', 'material', 'list'));
+    }
+
     public function showSurat(Request $request) {
         $dpmOngoing = DB::table('daftar_permintaan_material')
         ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
