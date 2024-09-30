@@ -20,11 +20,11 @@
     <!-- Vendor CSS Files -->
     <link href="{{asset ('admin/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-    <!-- <link href="{{asset ('admin/assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet"> -->
-    <!-- <link href="{{asset ('admin/assets/vendor/quill/quill.snow.css')}}" rel="stylesheet"> -->
-    <!-- <link href="{{asset ('admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet"> -->
-    <!-- <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet"> -->
-    <!-- <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet"> -->
+    <link href="{{asset ('admin/assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{asset ('admin/assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
+    <link href="{{asset ('admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+    <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+    <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
@@ -62,12 +62,12 @@
 
         <nav class="navbar">
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('home') }}">Dashboard</a></li>
                 <li class="breadcrumb-item active">Daftar Akun</li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    <i class="bi bi-plus"></i>
+                    Tambah Akun
                 </button>
             </form>
         </nav>
@@ -83,85 +83,127 @@
                         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <div class="modal-body">
-                        <div class="container">
+                    <form action="{{ url('register') }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="container">
 
-                            <div class="form-group row" id="perinput">
-                                <label class="col-sm-3 col-form-label">Username:</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="username" name="username" class="form-control" placeholder="Enter Username">
+                                <div class="form-group row" id="perinput">
+                                    <label class="col-sm-3 col-form-label">Nama:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama anda atau perusahaan anda">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row" id="perinput">
-                                <label class="col-sm-3 col-form-label">Password:</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group">
-                                        <input type="password" class="form-control input-focus" placeholder="Input Password" aria-label="Input Password" aria-describedby="button-addon2" id="passwordInput">
-                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="bi bi-eye"></i></button>
+                                <div class="form-group row" id="perinput">
+                                    <label class="col-sm-3 col-form-label">Username:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="username" name="username" class="form-control" placeholder="Username untuk login anda. Ex: ptjaya">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row" id="perinput">
+                                    <label class="col-sm-3 col-form-label">Password:</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            <input type="password" class="form-control input-focus" placeholder="Password anda" aria-label="Input Password" aria-describedby="button-addon2" id="passwordInput" name="passwordInput">
+                                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                                                <i class="bi bi-eye" id="toggleIcon"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row" id="perinput">
+                                    <label class="col-sm-3 col-form-label">User Level:</label>
+                                    <div class="dropdown col-sm-9">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <select class="form-control" id="jenis_user" name="jenis_user">
+                                                    <option value="101">Admin</option>
+                                                    <option value="102">Vendor</option>
+                                                    <option value="103">Gudang</option>
+                                                </select>
+                                                <!-- Ikon dropdown menggunakan Bootstrap Icons -->
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="dropdown-icon"><i class="bi bi-caret-down-fill"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row" id="alamat_container">
+                                    <label class="col-sm-3 col-form-label">Alamat:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Jl Bersama Dia">
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="form-group row" id="perinput">
-                                <label class="col-sm-3 col-form-label">User Level:</label>
-                                <div class="dropdown col-sm-9">
-                                    <div class="form-group">
-                                        <select class="form-control" id="jenis_user" name="jenis_user">
-                                            <option value="1">Admin</option>
-                                            <option value="2">Vendor</option>
-                                            <option value="3">Gudang</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="button" class="btn btn-primary">Daftar</button>
-                    </div>
-
-
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Daftar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
         <!-- @if(session('show_modal'))
-    <script>
-        $(document).ready(function() {
+        <script>
+            $(document).ready(function() {
             $('#exampleModal').modal('show');
         });
-    </script> -->
+        </script> -->
 
         @endif
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <!-- end popup register -->
-
-
-
         @include('editakun')
-
         <!-- Recent Sales -->
         <div class="col-12">
+            <h1>{{ session('jenisUser') }}</h1>
             <div class="card recent-sales overflow-auto">
                 <div class="card-body">
-                    <h5 class="card-title">Status Surat Jalan</h5>
+                    <h5 class="card-title">Daftar akun</h5>
                     <table class="table table-borderless datatable">
                         <thead>
                             <tr>
+                                <th scope="col">Nama</th>
                                 <th scope="col">Username</th>
-                                <th scope="col">Password</th>
                                 <th scope="col">Level</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse ($users as $user)
                             <tr>
-                                <td>wisnu</td>
-                                <td>mboh</td>
-                                <td>vendor</td>
+                                <td>{{ $user->nama }}</td>
+                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->tipe }}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
                                         <i class="bi bi-brush"></i>
@@ -171,37 +213,39 @@
                                     </button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>dani</td>
-                                <td>predator</td>
-                                <td>vendor</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
-                                        <i class="bi bi-brush"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-delete" data-id="3">
-                                        <i class="bi bi-trash2"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>faiz</td>
-                                <td>baik</td>
-                                <td>vendor</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
-                                        <i class="bi bi-brush"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-delete" data-id="3">
-                                        <i class="bi bi-trash2"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            @empty
+
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
         </div><!-- End Recent Sales -->
+      </main>
+
+        <!-- Modal Konfirmasi Hapus -->
+        <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteLabel">Konfirmasi Hapus</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Apakah Anda yakin ingin menghapus data ini?
+                    </div>
+                    <div class="modal-footer">
+                        <form id="deleteForm" method="POST" action="">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Modal Konfirmasi Hapus -->
         <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
@@ -267,4 +311,87 @@
             });
         </script>
 
+        <script>
+            //untuk show password pada tambah akun
+            document.getElementById('button-addon2').addEventListener('click', function() {
+                var passwordInput = document.getElementById('passwordInput');
+                var toggleIcon = document.getElementById('toggleIcon');
+
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    toggleIcon.classList.remove('bi-eye');
+                    toggleIcon.classList.add('bi-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    toggleIcon.classList.remove('bi-eye-slash');
+                    toggleIcon.classList.add('bi-eye');
+                }
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const deleteButtons = document.querySelectorAll('.btn-delete');
+                const deleteForm = document.querySelector('#deleteForm');
+                const modal = document.querySelector('#confirmDelete');
+                let deleteUrl = '';
+
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        deleteUrl = `/your-delete-route/${id}`; // Update with your route
+                        deleteForm.action = deleteUrl;
+                        $(modal).modal('show');
+                    });
+                });
+            });
+        </script>
+
+<script>
+    //buat vendor
+    document.addEventListener('DOMContentLoaded', function() {
+        var userSelect = document.getElementById('jenis_user');
+        var alamatContainer = document.getElementById('alamat_container');
+        var dropdownIcon = document.getElementById('dropdown-icon');
+
+        function toggleAlamatField() {
+            if (userSelect.value === "102") {
+                alamatContainer.style.display = 'flex';
+            } else {
+                alamatContainer.style.display = 'none';
+            }
+        }
+
+        // Panggil fungsi pertama kali untuk set default state
+        toggleAlamatField();
+
+        // Event listener untuk dropdown user level
+        userSelect.addEventListener('change', toggleAlamatField);
+
+        // Event listener untuk ikon dropdown
+        dropdownIcon.addEventListener('click', function() {
+            userSelect.focus();  // Membuat dropdown fokus
+            userSelect.click();  // Membuka dropdown
+        });
+    });
+</script>
+
+
+
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{asset ('admin/assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/chart.js/chart.umd.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/echarts/echarts.min.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/quill/quill.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/tinymce/tinymce.min.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/php-email-form/validate.js')}}"></script>
+    <!-- Template Main JS File -->
+    <script src="{{asset ('admin/assets/js/main.js')}}"></script>
 </body>
+</html>
