@@ -42,7 +42,7 @@
       <h1>Surat Jalan</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{ url('home') }}">Dashboard</a></li>
           <li class="breadcrumb-item">Surat Jalan</li>
         </ol>
       </nav>
