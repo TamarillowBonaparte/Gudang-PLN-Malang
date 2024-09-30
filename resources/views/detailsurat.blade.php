@@ -160,8 +160,8 @@
                     <td class="altbntu" style="width: 45px"></td> {{-- 8 --}}
                     <td class="altbntu" style="width: 60px"></td> {{-- 9 --}}
                     <td class="altbntu"></td> {{-- 10 --}}
-                    <td class="altbntu" style="width: 20px"></td> {{-- 11 --}}
-                    <td class="altbntu" style="width: 60px"></td> {{-- 12 --}}
+                    <td class="altbntu" style="width: 40px"></td> {{-- 11 --}}
+                    <td class="altbntu" style="width: 40px"></td> {{-- 12 --}}
                     <td class="altbntu" style="width: 50px"></td> {{-- 13 --}}
                     <td class="altbntu" style="width: 55px"></td> {{-- 14 --}}
                     <td class="altbntu" style="width: 0px"></td> {{-- 15 --}}
