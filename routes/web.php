@@ -39,7 +39,7 @@ Route::get('/search', [DpmController::class, 'search']);
 // route input DPM
 Route::post('/cetaksurat', [DpmController::class, 'store'])->name('cetaksurat');
 
-Route::get('/print', [DpmController::class, 'cetak'])->name('print');
+Route::get('/print/{id}', [VendorController::class, 'cetak'])->name('print');
 
 // route input nopol dan pengemudi surat jalan
 Route::post('/cetaksrtjln', [GudangBawahController::class, 'inputNopolDriver'])->name('cetaksrtjln');

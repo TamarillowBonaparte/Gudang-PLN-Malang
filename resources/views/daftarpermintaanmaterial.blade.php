@@ -28,6 +28,12 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset ('admin/assets/css/style.css')}}" rel="stylesheet">
+
+    <style>
+        .tblefrmt {
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
@@ -75,81 +81,27 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>12/08/2024</td>
-                    <td>TUG 5 NS.MLG23-0077</td>
-                    <td>PT.AYODYA JAYA</td>
-                    <td>ULP Batu</td>
-                    <td>Ruko 3</td>
-                    <td>
-                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">
-                        <i class="bi bi-download"></i> Download
-                      </a>
-                      <a href="#" class="btn btn-sm btn-outline-secondary">
-                        <i class="bi bi-printer"></i> Print
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>12/08/2024</td>
-                    <td>TUG 5 NS.MLG23-0077</td>
-                    <td>PT.AYODYA JAYA</td>
-                    <td>ULP Batu</td>
-                    <td>Ruko 3</td>
-                    <td>
-                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">
-                        <i class="bi bi-download"></i> Download
-                      </a>
-                      <a href="#" class="btn btn-sm btn-outline-secondary">
-                        <i class="bi bi-printer"></i> Print
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>12/08/2024</td>
-                    <td>TUG 5 NS.MLG23-0077</td>
-                    <td>PT.AYODYA JAYA</td>
-                    <td>ULP Batu</td>
-                    <td>Ruko 3</td>
-                    <td>
-                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">
-                        <i class="bi bi-download"></i> Download
-                      </a>
-                      <a href="#" class="btn btn-sm btn-outline-secondary">
-                        <i class="bi bi-printer"></i> Print
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>12/08/2024</td>
-                    <td>TUG 5 NS.MLG23-0077</td>
-                    <td>PT.AYODYA JAYA</td>
-                    <td>ULP Batu</td>
-                    <td>Ruko 3</td>
-                    <td>
-                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">
-                        <i class="bi bi-download"></i> Download
-                      </a>
-                      <a href="#" class="btn btn-sm btn-outline-secondary">
-                        <i class="bi bi-printer"></i> Print
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>12/08/2024</td>
-                    <td>TUG 5 NS.MLG23-0077</td>
-                    <td>PT.AYODYA JAYA</td>
-                    <td>ULP Batu</td>
-                    <td>Ruko 3</td>
-                    <td>
-                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">
-                        <i class="bi bi-download"></i> Download
-                      </a>
-                      <a href="#" class="btn btn-sm btn-outline-secondary">
-                        <i class="bi bi-printer"></i> Print
-                      </a>
-                    </td>
-                  </tr>
+                    @forelse ($dpb as $i)
+                    <tr>
+                        <td class="tblefrmt">{{ \Carbon\Carbon::parse($i->tgl)->format('d M Y') }}</td>
+                        <td class="tblefrmt">{{ $i->ndpb}}</td>
+                        <td class="tblefrmt">{{ $i->nmu}}</td>
+                        <td class="tblefrmt">{{ $i->ulpnm}}</td>
+                        <td class="tblefrmt">{{ $i->nmpel}}</td>
+                        <td>
+                            <a href="{{ route('daftar-permintaan-material.show', Crypt::encryptString($i->id)) }}" class="btn btn-sm btn-outline-secondary me-1">
+                                Detail
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary me-1">
+                                <i class="bi bi-download"></i> Download
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-printer"></i> Print
+                            </a>
+                        </td>
+                    </tr>
+                    @empty
+                    @endforelse
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
