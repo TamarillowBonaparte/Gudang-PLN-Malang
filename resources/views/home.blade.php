@@ -101,6 +101,8 @@
 </div>
 <!-- End Sales Card -->
 
+
+
                 <!-- Revenue Card -->
             <div class="col-xxl-4 col-md-6">
                 <div class="card info-card revenue-card">
@@ -151,6 +153,36 @@
                             <th scope="col">Tanggal Diminta</th>
                             <th scope="col">Vendor</th>
                             <th scope="col">Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($suratJln as $sj)
+                            <tr>
+                                <th scope="row" style="{{ $sj->ndpb == null ? "text-align: center" : "" }}">{{ $sj->ndpb != null ? $sj->ndpb : "-" }}</a></th>
+                                <td style="{{ $sj->tgl == null ? "text-align: center" : "" }}">{{ $sj->tgl != null ? \Carbon\Carbon::parse($sj->tgl)->format('d M Y') : "-" }}</td>
+                                <td>{{ $sj->nmuser }}</td>
+                                <td><span class="{{ $sj->nsurat != null ? "badge bg-success" : "badge bg-warning" }}">{{ $sj->nsurat != null ? "Sudah dicetak" : "Belum dicetak" }}</span></td>
+                            </tr>
+                            @empty
+                            @endforelse
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                </div><!-- End Recent Sales -->
+
+
+                <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                    <div class="card-body">
+                    <h5 class="card-title">Barang Keluar</h5>
+                    <table class="table table-borderless datatable" id="suratJalanTable">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nama Barang</th>
+                            <th scope="col">Normalisasi</th>
+                            <th scope="col">Satuan</th>
+                            <th scope="col">Jumlah</th>
                         </tr>
                         </thead>
                         <tbody>
