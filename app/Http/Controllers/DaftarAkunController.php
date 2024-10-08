@@ -28,12 +28,6 @@ class DaftarAkunController extends Controller
 
             switch ($jenisUser) {
                 case 101:
-                    // $this->validate($request, [
-                    //     'nama'      => 'required',
-                    //     'username'  => 'required',
-                    //     'passwordInput'  => 'required',
-                    //     'jenis_user'=> 'required|in:101,102,103'
-                    // ]);
 
                     User::create([
                         'nama'          => $request->input('nama'),
@@ -45,13 +39,6 @@ class DaftarAkunController extends Controller
                 break;
 
                 case 102:
-                    // $this->validate($request, [
-                    //     'nama'      => 'required',
-                    //     'username'  => 'required',
-                    //     'password'  => 'required',
-                    //     'jenis_user'=> 'required|in:101,102,103',
-                    //     'alamat'    => 'required'
-                    // ]);
 
                     User::create([
                         'nama'          => $request->input('nama'),
@@ -63,12 +50,6 @@ class DaftarAkunController extends Controller
                 break;
 
                 case 103:
-                    // $this->validate($request, [
-                    //     'nama'          => 'required',
-                    //     'username'      => 'required',
-                    //     'passwordInput' => 'required',
-                    //     'jenis_user'    => 'required|in:101,102,103'
-                    // ]);
 
                     User::create([
                         'nama'          => $request->input('nama'),
@@ -76,6 +57,17 @@ class DaftarAkunController extends Controller
                         'username'      => $request->input('username'),
                         'password'      => $hashedPassword,
                         'id_jenis_user' => 103
+                    ]);
+                break;
+
+                case 104:
+
+                    User::create([
+                        'nama'          => $request->input('nama'),
+                        'alamat'        => $request->input('alamat'),
+                        'username'      => $request->input('username'),
+                        'password'      => $hashedPassword,
+                        'id_jenis_user' => 104
                     ]);
                 break;
             }

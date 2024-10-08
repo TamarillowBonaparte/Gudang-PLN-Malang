@@ -124,6 +124,7 @@
                                                     <option value="101">Admin</option>
                                                     <option value="102">Vendor</option>
                                                     <option value="103">Gudang</option>
+                                                    <option value="104">ULP</option>
                                                 </select>
                                                 <!-- Ikon dropdown menggunakan Bootstrap Icons -->
                                                 <div class="input-group-append">
@@ -355,7 +356,7 @@
         var dropdownIcon = document.getElementById('dropdown-icon');
 
         function toggleAlamatField() {
-            if (userSelect.value === "102") {
+            if (userSelect.value === "102" || userSelect.value === "104") {
                 alamatContainer.style.display = 'flex';
             } else {
                 alamatContainer.style.display = 'none';
@@ -375,9 +376,6 @@
         });
     });
 </script>
-
-
-
 
     <!-- Include Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

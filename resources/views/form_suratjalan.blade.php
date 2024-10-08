@@ -84,7 +84,7 @@
         .fntb {
             font-family: 'Roboto Mono', monospace;
             font-weight: bold
-        }
+        }\
         .fntarial {
             font-family: Arial, sans-serif;
             font-weight: bold
@@ -126,7 +126,7 @@
             height: 25px;
         }
         .dpm {
-            background-color: #3ea534
+            background-color: #d9ead3
         }
     </style>
 </head>
@@ -293,7 +293,7 @@
                 <td class="fntb hide fontl" colspan="3">VENDOR</td>
                 <td class="fntb hide">:</td>
                 <td class="fntb hide fontl" colspan="7">{{ $sj->vendor }}</td>
-                <td class="hidetb" colspan="2"></td>
+                <td class="bdottb fntb" colspan="2">DPB NO.</td>
             </tr>
             {{-- row 31 --}}
             <tr>
@@ -309,7 +309,7 @@
                 <td class="fntb hide fontl fontbott" colspan="3" style="height: 90px;">JENIS PEKERJAAN</td>
                 <td class="fntb hide fontbott">:</td>
                 <td class="fntb hide fontl fontbott" colspan="7">{{ $sj->nmpkrjn }}</td>
-                <td class="fntb" colspan="2" style="font-size: 24px; color: #ff0000">{{ $sj->nodpb }}</td>
+                <td class="fntb dpm" colspan="2" style="font-size: 24px; color: #ff0000">{{ $sj->nodpb }}</td>
             </tr>
             {{-- row 33 --}}
             <tr>
