@@ -55,7 +55,7 @@
                             <div class="row">
                                 <div class="col">
                                     <label for="setuju" class="form-label">Setuju<span style="color: red;">*</span></label>
-                                    <input type="text" name="setuju" id="setuju" list="setujuls" class="form-control input-focus mb-2" autocomplete="off">
+                                    <input type="text" name="setuju" id="setuju" list="setujuls" class="form-control input-focus mb-2" autocomplete="off" style="text-transform: uppercase;">
                                     <datalist id="setujuls">
                                     {{-- @forelse ($setuju as $stj)
                                         <option value="{{ $stj->nama }}">
@@ -129,11 +129,11 @@
                             <label for="ulp" class="form-label">Pelanggan ULP<span style="color: red;">*</span></label>
                             <select name="ulp" id="ulp" class="form-select mb-2 nospk" aria-label="Default select example">
                                     <option selected></option>
-                                {{-- @forelse ($ulps as $ulp)
+                                @forelse ($ulps as $ulp)
                                     <option value="{{ $ulp->id_ulp }}">{{ $ulp->nama }}</option>
                                 @empty
 
-                                @endforelse --}}
+                                @endforelse
                             </select>
 
                             <div class="row">
@@ -158,7 +158,7 @@
 
                         <div class="col">
                             <label for="search" class="form-label">Nama Material<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control input-focus mb-2" list="materialdl" id="search" placeholder="Cari...">
+                            <input type="text" class="form-control input-focus mb-2" list="materialdl" id="search" placeholder="Cari..." autocomplete="off">
                             <datalist id="materialdl">
                                 {{-- list material --}}
                             </datalist>
@@ -219,7 +219,7 @@
 
             $.ajax({
                 type: "GET",
-                url: `/search`,
+                url: `/search_k7`,
                 data: {
                     'search': $value
                 },

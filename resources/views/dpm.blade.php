@@ -50,28 +50,28 @@
             <div class="card-body">
                 <form action="{{ route('cetaksurat') }}" method="POST">
                     @csrf
-                    <div class="row mt-3">                    
+                    <div class="row mt-3">
                         <div class="col-5">
                             <div class="row">
                                 <div class="col">
-                                    <label for="setuju" class="form-label">Setuju<span style="color: red;">*</span></label>                                    
+                                    <label for="setuju" class="form-label">Setuju<span style="color: red;">*</span></label>
                                     <input type="text" name="setuju" id="setuju" list="setujuls" class="form-control input-focus mb-2" autocomplete="off">
                                     <datalist id="setujuls">
                                     @forelse ($setuju as $stj)
-                                        <option value="{{ $stj->nama }}">                                        
+                                        <option value="{{ $stj->nama }}">
                                     @empty
-                                        
+
                                     @endforelse
                                     </datalist>
                                 </div>
                                 <div class="col">
-                                    <label for="kepalagudang" class="form-label">Kepala Gudang<span style="color: red;">*</span></label>                            
+                                    <label for="kepalagudang" class="form-label">Kepala Gudang<span style="color: red;">*</span></label>
                                     <input type="text" name="kepalagudang" id="kepalagudang" list="kplgdng" class="form-control input-focus mb-2" autocomplete="off">
                                     <datalist id="kplgdng">
                                     @forelse ($kepalaGdng as $kplgdng)
-                                        <option value="{{ $kplgdng->nama }}">                                        
+                                        <option value="{{ $kplgdng->nama }}">
                                     @empty
-                                        
+
                                     @endforelse
                                     </datalist>
                                 </div>
@@ -83,9 +83,9 @@
                                     <input type="text" name="pemeriksa" id="pemeriksa" list="pemeriksals" class="form-control input-focus mb-2" autocomplete="off">
                                     <datalist id="pemeriksals">
                                     @forelse ($pemeriksa as $pmrksa)
-                                        <option value="{{ $pmrksa->nama }}">                                        
+                                        <option value="{{ $pmrksa->nama }}">
                                     @empty
-                                        
+
                                     @endforelse
                                     </datalist>
                                 </div>
@@ -94,14 +94,14 @@
                                     <input type="text" name="penerima" id="penerima" class="form-control input-focus mb-2" list="penerimals" autocomplete="off">
                                     <datalist id="penerimals">
                                     @forelse ($penerima as $pnrm)
-                                        <option value="{{ $pnrm->nama }}">                                        
+                                        <option value="{{ $pnrm->nama }}">
                                     @empty
-                                        
+
                                     @endforelse
                                     </datalist>
                                 </div>
                             </div>
-                            
+
                             <label for="nospk" class="form-label">No. SPK<span style="color: red;">*</span></label>
                             <input
                             type="text"
@@ -133,13 +133,13 @@
                             <label for="alamat_pel" class="form-label">Alamat Pelanggan<span style="color: red;">*</span></label>
                             <input type="text" name="alamat_pel" id="alamat_pel" class="form-control input-focus mb-2" autocomplete="off">
 
-                            <label for="ulp" class="form-label">Pelanggan ULP<span style="color: red;">*</span></label>                            
+                            <label for="ulp" class="form-label">Pelanggan ULP<span style="color: red;">*</span></label>
                             <select name="ulp" id="ulp" class="form-select mb-2 nospk" aria-label="Default select example">
                                     <option selected></option>
                                 @forelse ($ulps as $ulp)
                                     <option value="{{ $ulp->id_ulp }}">{{ $ulp->nama }}</option>
                                 @empty
-                                    
+
                                 @endforelse
                             </select>
 
@@ -210,9 +210,9 @@
                                 </table>
                             </div>
                             <div class="col text-end">
-                                <button class="btn btn-success mb-2" type="submit" id="cetaksurat">Cetak</button>
+                                <button class="btn btn-success mb-2" target="_blank" type="submit" id="cetaksurat">Cetak</button>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </form>
             </div>
@@ -237,7 +237,7 @@
                     let options = '';
                     productsId = {}
                     productsData = {}; // Clear previous data
-                    productSatuan = {}            
+                    productSatuan = {}
 
                     response.materials.forEach(product => {
                         options += `<option value="${product.nama}" data-id="${product.id}">`;
@@ -329,7 +329,7 @@
         //buat vendor
         document.addEventListener('DOMContentLoaded', function() {
             var userSelect = document.getElementById('pbpd');
-            var dayalama = document.getElementById('dayalama');            
+            var dayalama = document.getElementById('dayalama');
 
             function toggleAlamatField() {
                 if (userSelect.value === "1") {
@@ -355,7 +355,7 @@
             }
         });
     </script>
-    
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
