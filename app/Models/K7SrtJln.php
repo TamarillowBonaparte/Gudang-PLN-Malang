@@ -5,30 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DpmSuratJalan extends Model
+class K7SrtJln extends Model
 {
     use HasFactory;
-
-    protected $table = "dpb_suratjalan";
+    protected $table = "k7_srtj";
 
     protected $fillable = [
         'id_suratjalan',
-        'kepala_gudang',
+        'kpl_gudang',
         'penerima',
         'no_spk',
-        'id_jenis_pekerjaan',
+        'id_jns_pekerjaan',
         'idpel',
-        'nama_pelanggan',
-        'alamat_pelanggan',
+        'nm_pelanggan',
+        'almt_pelanggan',
         'id_ulp',
         'id_pb_pd',
-        'tarif_daya_lama',
-        'tarif_daya_baru',
-        'merk_material',
+        'trdy_lama',
+        'trdy_baru',
         'id_user'
     ];
-
-    protected $primaryKey = 'id_dpb_suratjalan';
 
     public $timestamps = false;
 
