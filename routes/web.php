@@ -85,4 +85,4 @@ Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dp
 
 Route::get('/suratjalan', [GudangController::class, 'index'])->name('suratjalan');
 
-//Route link dpm
+Route::post('/material-baru', [MaterialController::class, 'materialBaru'])->name('materialBaru');
