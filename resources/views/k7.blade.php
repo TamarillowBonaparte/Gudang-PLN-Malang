@@ -304,15 +304,15 @@
             }
         });
 
-    // Event listener untuk menghapus baris
-    $(document).on('click', '.delete-row', function() {
-        $(this).closest('tr').remove();
+        // Event listener untuk menghapus baris
+        $(document).on('click', '.delete-row', function() {
+            $(this).closest('tr').remove();
 
-        // Update nomor urut setelah penghapusan
-        $("table tbody tr").each(function(index) {
-            $(this).find('td:first').text(index + 1);
+            // Update nomor urut setelah penghapusan
+            $("table tbody tr").each(function(index) {
+                $(this).find('td:first').text(index + 1);
+            });
         });
-    });
     </script>
 
     <script>

@@ -34,7 +34,7 @@ class K7Controller extends Controller
     public function search(Request $request) {
         if($request->ajax()) {
 
-            $materials = DB::table('material_k7')
+            $materials = DB::table('material_bekas')
                 ->where('nama','LIKE','%'.$request->search."%")
                 ->get();
 
@@ -250,12 +250,10 @@ class K7Controller extends Controller
             ];
         }
 
-        return view('print', compact('dpm', 'material', 'jumlah', 'list'));
+        return view('print', compact('dp    m', 'material', 'jumlah', 'list'));
     }
 
-    /**
-     * Helper function untuk create record jika belum ada.
-     */
+
     private function createIfNotExists($model, $field, $value) {
 
         $idUser = Auth::user()->id_user;

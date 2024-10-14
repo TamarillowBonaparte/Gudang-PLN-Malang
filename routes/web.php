@@ -36,7 +36,7 @@ Route::post('register', [DaftarAkunController::class, 'store'])->name('register'
 
 Route::get('/search', [DpmController::class, 'search']);
 
-Route::get('/search_k7', [K7Controller::class, 'search']);
+Route::get('/search_k7', [K7Controller::class, 'search'])->name('search_k7');
 
 // route input DPM
 Route::post('/cetaksurat', [DpmController::class, 'store'])->name('cetaksurat');
