@@ -16,7 +16,13 @@ class K7 extends model{
         'id_k7srtjln',
         'tgl_diminta',
         'setuju',
-        'pemeriksa'
+        'pemeriksa',
+        'id_gdngpemberi',
+        'merk_material',
+        'noseri_material',
+        'keterangan',
+        'id_jnssurat',
+
     ];
 
     public $timestamps = false;

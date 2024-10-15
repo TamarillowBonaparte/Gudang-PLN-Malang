@@ -41,6 +41,9 @@ Route::get('/search_k7', [K7Controller::class, 'search'])->name('search_k7');
 // route input DPM
 Route::post('/cetaksurat', [DpmController::class, 'store'])->name('cetaksurat');
 
+//Route cetak surat K7
+Route::post('/cetaksuratk7', [K7Controller::class, 'store'])->name('cetaksuratk7');
+
 Route::get('/print/{id}', [VendorController::class, 'cetak'])->name('print');
 
 // route input nopol dan pengemudi surat jalan

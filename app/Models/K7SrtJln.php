@@ -8,21 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class K7SrtJln extends Model
 {
     use HasFactory;
-    protected $table = "k7_srtj";
+    protected $table = "k7_srtjln";
 
     protected $fillable = [
-        'id_suratjalan',
+        'id_srtjln',
         'kpl_gudang',
         'penerima',
-        'no_spk',
+        'nospk',
         'id_jns_pekerjaan',
         'idpel',
         'nm_pelanggan',
         'almt_pelanggan',
         'id_ulp',
-        'id_pb_pd',
-        'trdy_lama',
-        'trdy_baru',
+        'id_pbpd',
+        'trfdy_lama',
+        'trfdy_baru',
         'id_user'
     ];
 
