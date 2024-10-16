@@ -25,8 +25,6 @@
     <link href="{{asset ('admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
     <!-- Template Main CSS File -->
@@ -62,19 +60,18 @@
 
 
     </style>
-
 </head>
 <body>
 
-    <!-- ======= Header ======= -->
-    @include('header')
+    {{-- <!-- ======= Header ======= -->
+    @include('header') --}}
     <!-- End Header -->
 
     <!-- ======= Vendor Sidebar ======= -->
     @include('sidebarvendor')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Bon Pengembalian Material</h1>
+            <h1>Daftar Permintaan Material</h1>
         </div><!-- End Page Title -->
 
 

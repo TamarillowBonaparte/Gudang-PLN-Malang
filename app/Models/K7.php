@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Dpm extends Model
-{
+class K7 extends model{
+
     use HasFactory;
 
-    protected $table = "daftar_permintaan_material";
+    protected $table = "k7";
 
     protected $fillable = [
-        'nomor_dpb',
-        'id_dpb_suratjalan',
+        'nmr_k7',
+        'id_k7srtjln',
         'tgl_diminta',
         'setuju',
         'pemeriksa'
     ];
-    protected $primaryKey = 'id_dpb';
 
     public $timestamps = false;
 
@@ -27,3 +26,4 @@ class Dpm extends Model
         return $this->belongsTo(DpmSuratJalan::class);
     }
 }
+

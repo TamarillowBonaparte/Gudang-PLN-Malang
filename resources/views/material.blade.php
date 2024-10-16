@@ -54,7 +54,7 @@
         </div>
       </nav>
     </div><!-- End Page Title -->
-    
+
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
@@ -85,7 +85,7 @@
                     <td>{{ $material->satuan }}</td>
                     <td>{{ $material->bagian }}</td>
                     <td>{{ $material->jumlah_sap }}</td>
-                    <td>                      
+                    <td>
                       <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#edittmbh"><i class="bi bi-pencil"></i> Edit/Tambah</button>
                     </td>
                   </tr>
@@ -129,6 +129,8 @@
           </div>
         </section>
       </div>
+
+      <!--Tabel Material Masuk-->
       <div class="col">
         <section class="section">
           <div class="row">
@@ -147,6 +149,13 @@
                       </tr>
                     </thead>
                     <tbody>
+                        @forelse ($MaterialMasuk as $matsuk)
+                        <tr>
+                            <td>{{$matsuk->nammat}}</td>
+                            <td>{{\Carbon\Carbon::parse($matsuk->tgl)->format('d M Y')}}</td>
+                        </tr>
+                        @empty
+                        @endforelse
                     </tbody>
                   </table>
                   <!-- End Table with stripped rows -->
@@ -158,6 +167,7 @@
       </div>
     </div>
 
+    <!--Tabel Material Bekas-->
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
@@ -197,54 +207,62 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="#" method="POST">
-              <div class="form-group row mb-2" id="perinput">
-                <label class="col-sm-3 col-form-label">Nama:<span style="color: red;">*</span></label>
-                <div class="col-sm-9">
-                    <input type="text" id="namaMat" name="namaMat" class="form-control" placeholder="" autocomplete="off">
+            <form action="{{ route('materialBaru') }}" method="POST">
+                @csrf
+                <div class="form-group row mb-2" id="perinput">
+                  <label class="col-sm-3 col-form-label">Nama:<span style="color: red;">*</span></label>
+                  <div class="col-sm-9">
+                      <input type="text" id="namaMat" name="namaMat" class="form-control" autocomplete="off">
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group row mb-2" id="perinput">
-                <label class="col-sm-3 col-form-label">normalisasi:<span style="color: red;">*</span></label>
-                <div class="col-sm-9">
-                    <input type="text" id="normalisasi" name="normalisasi" class="form-control" placeholder="" autocomplete="off">
+                <div class="form-group row mb-2" id="perinput">
+                  <label class="col-sm-3 col-form-label">normalisasi:<span style="color: red;">*</span></label>
+                  <div class="col-sm-9">
+                      <input type="number" id="normalisasi" name="normalisasi" class="form-control" autocomplete="off">
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group row mb-2" id="perinput">
-                <label class="col-sm-3 col-form-label">Derkripsi:</label>
-                <div class="col-sm-9">
-                    <input type="text" id="deskripsi" name="deskripsi" class="form-control" placeholder="" autocomplete="off">
+                <div class="form-group row mb-2" id="perinput">
+                  <label class="col-sm-3 col-form-label">Deskripsi:</label>
+                  <div class="col-sm-9">
+                      <input type="text" id="deskripsi" name="deskripsi" class="form-control" autocomplete="off">
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group row mb-2" id="perinput">
-                <label class="col-sm-3 col-form-label">Satuan:<span style="color: red;">*</span></label>
-                <div class="col-sm-9">
-                    <input type="text" id="satuan" name="satuan" class="form-control" placeholder="" autocomplete="off">
+                <div class="form-group row mb-2" id="perinput">
+                    <label class="col-sm-3 col-form-label">Satuan:<span style="color: red;">*</span></label>
+                    <div class="col-sm-9">
+                        <select id="satuan" name="satuan" class="form-select" required>
+                            <option value="" disabled selected>Pilih</option>
+                            <option value="BH">BH</option>
+                            <option value="U">U</option>
+                            <option value="M">M</option>
+                            <option value="SET">SET</option>
+                            <option value="BGT">BGT</option>
+                        </select>
+                    </div>
                 </div>
-              </div>
 
-              <div class="form-group row mb-2" id="perinput">
-                <label class="col-sm-3 col-form-label">Bagian:</label>
-                <div class="col-sm-9">
-                    <input type="text" id="bagian" name="bagian" class="form-control" placeholder="" autocomplete="off">
+                <div class="form-group row mb-2" id="perinput">
+                  <label class="col-sm-3 col-form-label">Bagian:</label>
+                  <div class="col-sm-9">
+                      <input type="text" id="bagian" name="bagian" class="form-control" autocomplete="off">
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-group row" id="perinput">
-                <label class="col-sm-3 col-form-label">Jumlah SAP:<span style="color: red;">*</span></label>
-                <div class="col-sm-9">
-                    <input type="text" id="jlmh" name="jlmh" class="form-control" placeholder="" autocomplete="off">
+                <div class="form-group row" id="perinput">
+                  <label class="col-sm-3 col-form-label">Jumlah SAP:<span style="color: red;">*</span></label>
+                  <div class="col-sm-9">
+                      <input type="number" id="jlmh" name="jumlah_sap" class="form-control" autocomplete="off">
+                  </div>
                 </div>
-              </div>
 
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-              <button type="button" class="btn btn-primary">Simpan</button>
-            </form>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+              </form>
           </div>
         </div>
       </div>
@@ -269,10 +287,27 @@
     </div>
   </main>
 
+  <!-- Sweet alertnya tambah material baru -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ session('success') }}',
+            confirmButtonText: 'OK'
+        });
+    @endif
+</script>
+
+
   <!-- ======= Footer ======= -->
   @include('footer')
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
 
   <!-- Vendor JS Files -->
   <script src="{{asset ('admin/assets/vendor/apexcharts/apexcharts.min.js')}}"></script>

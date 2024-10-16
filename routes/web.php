@@ -38,6 +38,8 @@ Route::get('/search', [DpmController::class, 'search']);
 
 Route::get('/searchk3', [K3Controller::class, 'searchK3']);
 
+Route::get('/search_k7', [K7Controller::class, 'search']);
+
 // route input DPM
 Route::post('/cetaksurat', [DpmController::class, 'store'])->name('cetaksurat');
 
@@ -90,4 +92,4 @@ Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dp
 
 Route::get('/suratjalan', [GudangController::class, 'index'])->name('suratjalan');
 
-//Route link dpm
+Route::post('/material-baru', [MaterialController::class, 'materialBaru'])->name('materialBaru');

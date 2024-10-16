@@ -22,7 +22,6 @@ class DpmController extends Controller {
     public function index () {
 
         $user = Auth::user();
-
         $ulps = Ulp::all();
         $kepalaGdng = KepalaGudang::all();
         $setuju = Setuju::all();
