@@ -102,7 +102,7 @@
 
                             <label for="jenispkrjn" class="form-label">Jenis Pekerjaan<span style="color: red;">*</span></label>
                             <select class="form-select mb-2 nospk" id="jenispekerjaan" name="jenispekerjaan" aria-label="Default select example">
-                                <option selected></option>
+                                <option selected disabled>Pilih</option>
                                 <option value="1">SUTR</option>
                                 <option value="2">GKS</option>
                                 <option value="3">GKU</option>
@@ -125,7 +125,7 @@
 
                             <label for="ulp" class="form-label">Pelanggan ULP<span style="color: red;">*</span></label>
                             <select name="ulp" id="ulp" class="form-select mb-2 nospk" aria-label="Default select example">
-                                    <option selected></option>
+                                <option selected disabled>Pilih</option>
                                 @forelse ($ulps as $ulp)
                                     <option value="{{ $ulp->id_ulp }}">{{ $ulp->nama }}</option>
                                 @empty
@@ -136,7 +136,7 @@
                                 <div class="col-3">
                                     <label for="pbpd" class="form-label">PB/PD<span style="color: red;">*</span></label>
                                     <select class="form-select mb-2 nospk" id="pbpd" name="pbpd" aria-label="Default select example">
-                                        <<option selected></option>
+                                        <option selected disabled>Pilih</option>
                                         <option value="1">PB</option>
                                         <option value="2">PD</option>
                                     </select>
