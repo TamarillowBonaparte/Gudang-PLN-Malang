@@ -293,7 +293,7 @@
 
                 // Buat baris baru
                 let newRow = `<tr>
-                                <td style="display:none;"><input type="text" value="${idMaterial}" name="idmaterial[]" class="form-control input-focus mb-2" id="idmaterial" aria-label="Disabled input example"></td>
+                                <td style="display:none;"><input type="text" value="${idMaterial}" name="9[]" class="form-control input-focus mb-2" id="idmaterial" aria-label="Disabled input example"></td>
                                 <td>${rowCount}</td>
                                 <td>${namaMaterial}</td>
                                 <td>${satuan}</td>
