@@ -23,10 +23,6 @@ use Illuminate\Http\Request;
 class K7Controller extends Controller
 {
     public function index () {
-<<<<<<< HEAD
-        return view('k7');
-    }
-=======
 
         $user = Auth::user();
         $ulps = Ulp::all();
@@ -319,5 +315,4 @@ class K7Controller extends Controller
 
         return $hasil;
     }
->>>>>>> 50e4585cf1a8e874788b38be342299149bf42ef0
 }
