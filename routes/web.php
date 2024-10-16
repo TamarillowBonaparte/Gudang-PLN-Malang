@@ -36,12 +36,15 @@ Route::post('register', [DaftarAkunController::class, 'store'])->name('register'
 
 Route::get('/search', [DpmController::class, 'search']);
 
-Route::get('/searchk3', [K3Controller::class, 'searchK3']);
+Route::get('/search_k7', [K7Controller::class, 'search'])->name('search_k7');
 
-Route::get('/search_k7', [K7Controller::class, 'search']);
+Route::get('/searchk3', [K3Controller::class, 'searchK3']);
 
 // route input DPM
 Route::post('/cetaksurat', [DpmController::class, 'store'])->name('cetaksurat');
+
+//Route cetak surat K7
+Route::post('/cetaksuratk7', [K7Controller::class, 'store'])->name('cetaksuratk7');
 
 // route input K3
 Route::post('/cetaksuratk3', [K3Controller::class, 'store'])->name('cetaksurat');

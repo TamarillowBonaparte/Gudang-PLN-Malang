@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\DaftarMaterial;
+use App\Models\DaftarMaterialK7;
 use App\Models\Dpm;
 use App\Models\DpmSuratJalan;
+use App\Models\K7;
 use App\Models\K7SrtJln;
 use App\Models\KepalaGudang;
 use App\Models\Material;
+use App\Models\MaterialBekas;
 use App\Models\Pemeriksa;
 use App\Models\PengambilPenerima;
 use App\Models\Setuju;
@@ -38,7 +41,7 @@ class K7Controller extends Controller
     public function search(Request $request) {
         if($request->ajax()) {
 
-            $materials = DB::table('material_k7')
+            $materials = DB::table('material_bekas')
                 ->where('nama','LIKE','%'.$request->search."%")
                 ->get();
 
@@ -47,7 +50,7 @@ class K7Controller extends Controller
             if($materials) {
                 foreach ($materials as $material) {
                     $results[] = [
-                        'id'            => $material->id_material,
+                        'id'            => $material->id,
                         'nama'          => $material->nama,
                         'normalisasi'   => $material->normalisasi,
                         'satuan'        => $material->satuan
@@ -65,7 +68,7 @@ class K7Controller extends Controller
 
         // Mengambil id_dpb terakhir atau menginisiasi nomor baru
         $noK7 = DB::table('k7')
-        ->orderBy('nmr', 'desc')
+        ->orderBy('nmr_k7', 'desc')
         ->first();
         $nomorK7String = $noK7? ($noDpm->nomor_dpb ?? 0) : 0;
         $parts = explode('-', $nomorK7String);
@@ -127,15 +130,15 @@ class K7Controller extends Controller
         // Insert DpmSuratJalan
         $k7SuratJalan = K7SrtJln::create([
             'id_srtjln'         => $lastSurJalId,
-            'kepala_gudang'         => $kepalaGudang,
+            'kpl_gudang'         => $kepalaGudang,
             'penerima'              => $penerima,
-            'no_spk'                => $request->input('nospk'),
+            'nospk'                => $request->input('nospk'),
             'id_jns_pekerjaan'    => $request->input('jenispekerjaan'),
             'idpel'                 => $request->input('idpel'),
             'nm_pelanggan'        => $request->input('nama_pel'),
             'almt_pelanggan'      => $request->input('alamat_pel'),
             'id_ulp'                => $request->input('ulp'),
-            'id_pb_pd'              => $request->input('pbpd'),
+            'id_pbpd'              => $request->input('pbpd'),
             'trfdy_lama'       => $pbpd == 2 ? $request->input('dayalama') : null,
             'trfdy_baru'       => $request->input('dayabaru'),
             'id_user'               => $idUser
@@ -147,26 +150,35 @@ class K7Controller extends Controller
         // Looping untuk insert daftar material dan update stok
         foreach ($request->input('idmaterial') as $index => $idMaterial) {
             $banyakDiminta = $request->input('banyakdiminta')[$index];
-            $material = Material::find($idMaterial);
+            $material = MaterialBekas::find($idMaterial);
             $material->decrement('jumlah_sap', $banyakDiminta);
 
-            DaftarMaterial::create([
-                'id' => $lastInsertedId,
-                'id_material'       => $idMaterial,
-                'jumlah'            => $banyakDiminta
+            DaftarMaterialK7::create([
+                'id_mtrl_k7'       => $idMaterial,
+                'jumlah'            => $banyakDiminta,
+                'id_k7srtjln' => $lastInsertedId,
+                'tgl_keluar' => null,
+
             ]);
         }
 
         $setuju = strtoupper($request->input('setuju'));
         $pemeriksa = strtoupper($request->input('pemeriksa'));
 
-        // Insert Dpm
-        $dPM = Dpm::create([
-            'nomor_dpb'         => $nomorDPB,
-            'id' => $lastInsertedId,
+
+        // Insert SurratK&
+        $dPM = K7::create([
+            'nmr_k7'         => $nomorDPB,
+            'id_k7srtjln' => $lastInsertedId,
             'tgl_diminta'       => date('Y-m-d'),
             'setuju'            => $setuju,
-            'pemeriksa'         => $pemeriksa
+            'pemeriksa'         => $pemeriksa,
+            'id_gdngpemberi' => 3,
+            'merkmaterial' => $request->input('merkmaterial'),
+            'noseri' => $request->input('noseri'),
+            'keterangan' => $request->input('keterangan'),
+            'id_jnssurat' => 2,
+
         ]);
 
         $id = $dPM->id_dpb;
@@ -175,7 +187,7 @@ class K7Controller extends Controller
         $this->createIfNotExists(Setuju::class, 'nama', $setuju);
         $this->createIfNotExists(Pemeriksa::class, 'nama', $pemeriksa);
 
-        return redirect()->route('print')->with('id', $id);
+        return redirect()->back();
     }
 
     public function cetak(String $id) {
@@ -254,12 +266,10 @@ class K7Controller extends Controller
             ];
         }
 
-        return view('print', compact('dpm', 'material', 'jumlah', 'list'));
+        return view('print', compact('dp    m', 'material', 'jumlah', 'list'));
     }
 
-    /**
-     * Helper function untuk create record jika belum ada.
-     */
+
     private function createIfNotExists($model, $field, $value) {
 
         $idUser = Auth::user()->id_user;
