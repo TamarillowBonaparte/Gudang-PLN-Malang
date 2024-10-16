@@ -6,6 +6,7 @@ use App\Models\DaftarMaterialK3;
 use App\Models\Gudang;
 use App\Models\K3;
 use App\Models\KepalaGudang;
+use App\Models\MaterialBekas;
 use App\Models\Pemeriksa;
 use App\Models\Pengembali;
 use App\Models\Setuju;
@@ -78,10 +79,11 @@ class K3Controller extends Controller
         $lastInsertedId = $k3->id;
 
         foreach ($request->input('idmaterial') as $index => $idMaterial) {
+            // dd($request->input('namamaterial')[$index]);
             $namaMat = $request->input('namamaterial')[$index];
             $normalisasi = $request->input('normalisasi')[$index];
             $satuan = $request->input('satuan')[$index];
-            $banyakDikembalikan = $request->input('banyakDikembalikan')[$index];
+            $banyakDikembalikan = $request->input('banyakdiminta')[$index];
 
             DaftarMaterialK3::create([
                 "nama" => $namaMat,
@@ -91,10 +93,12 @@ class K3Controller extends Controller
                 "id_k3" => $lastInsertedId
             ]);
 
+            MaterialBekas::where('id', $idMaterial)
+            ->increment('jumlah_sap', $banyakDikembalikan);
             
-        }        
+        }
         
-        return redirect();
+        return redirect()->back();
     }
 
     private function createIfNotExists($model, $field, $value) {

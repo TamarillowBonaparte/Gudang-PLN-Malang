@@ -25,6 +25,8 @@
     <link href="{{asset ('admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
     <!-- Template Main CSS File -->
@@ -60,18 +62,19 @@
 
 
     </style>
+
 </head>
 <body>
 
-    {{-- <!-- ======= Header ======= -->
-    @include('header') --}}
+    <!-- ======= Header ======= -->
+    @include('header')
     <!-- End Header -->
 
     <!-- ======= Vendor Sidebar ======= -->
     @include('sidebarvendor')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Daftar Permintaan Material</h1>
+            <h1>Bon Pengembalian Material</h1>
         </div><!-- End Page Title -->
 
 
@@ -213,7 +216,7 @@
                                     <input type="text" class="form-control input-focus mb-2" id="satuan" aria-label="Disabled input example" disabled readonly>
                                 </div>
                                 <div class="col">
-                                    <label for="item" class="form-label">Banyaknya yang Dikembalikan<span style="color: red;">*</span></label>
+                                    <label for="item" class="form-label">Banyaknya yang dikembalikan<span style="color: red;">*</span></label>
                                     <input type="number" class="form-control input-focus mb-2" id="item">
                                 </div>
                             </div>
@@ -229,7 +232,7 @@
                                             <th scope="col">No</th>
                                             <th scope="col">Nama Material</th>
                                             <th scope="col">Satuan</th>
-                                            <th scope="col">Banyaknya yang Dikembalikan</th>
+                                            <th scope="col">Banyak Diminta</th>
                                             <th scope="col">Hapus</th>
                                         </tr>
                                     </thead>
@@ -313,7 +316,7 @@
             let namaMaterial = $('#search').val();
             let normalisasi = $('#normalisasi').val();
             let satuan = $('#satuan').val();
-            let banyakDikembalikan = $('#item').val();
+            let banyakDiminta = $('#item').val();
 
             // Pastikan semua field diisi sebelum menambahkan baris ke tabel
             if (namaMaterial && normalisasi && satuan && banyakDiminta) {
@@ -323,11 +326,11 @@
                 // Buat baris baru
                 let newRow = `<tr>
                                 <td style="display:none;"><input type="text" value="${idMaterial}" name="idmaterial[]" class="form-control input-focus mb-2" id="idmaterial" aria-label="Disabled input example"></td>
-                                <td style="display:none;"><input type="text" value="${normalisasi}" name="normalisasi[]" class="form-control input-focus mb-2" id="idmaterial" aria-label="Disabled input example"></td>
+                                <td style="display:none;"><input type="text" value="${normalisasi}" name="normalisasi[]" class="form-control input-focus mb-2" id="normalisasi" aria-label="Disabled input example">=</td>
                                 <td>${rowCount}</td>
-                                <td name="namamaterial[]">${namaMaterial}</td>
-                                <td name="satuan[]">${satuan}</td>
-                                <td><input type="text" value="${banyakDikembalikan}" name="banyakDikembalikan[]" class="form-control input-focus mb-2" id="banyakDikembalikan" aria-label="Disabled input example" style="display:none;">${banyakDikembalikan}</td>
+                                <td><input type="text" value="${namaMaterial}" name="namamaterial[]" class="form-control input-focus mb-2" id="namamaterial" aria-label="Disabled input example" style="display:none;">${namaMaterial}</td>
+                                <td><input type="text" value="${satuan}" name="satuan[]" class="form-control input-focus mb-2" id="namamaterial" aria-label="Disabled input example" style="display:none;">${satuan}</td>
+                                <td><input type="text" value="${banyakDiminta}" name="banyakdiminta[]" class="form-control input-focus mb-2" id="banyakdiminta" aria-label="Disabled input example" style="display:none;">${banyakDiminta}</td>
                                 <td><button type="button" class="btn btn-danger delete-row"><i class="bi bi-trash3"></i></button></td>
                             </tr>`;
 

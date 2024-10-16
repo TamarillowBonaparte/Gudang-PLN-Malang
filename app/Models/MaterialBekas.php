@@ -11,7 +11,15 @@ class MaterialBekas extends Model
 
     protected $table = "material_bekas";
 
-    protected $fillable = ["normalisasi", "nama", "deskripsi", "satuan", "bagian", "jumlah_sap"];
+    protected $fillable = [
+        "normalisasi",
+        "nama",
+        "deskripsi",
+        "satuan",
+        "bagian",
+        "jumlah_sap"
+    ];
+    
     protected $primaryKey = "id";
 
     public $timestamps = false;
