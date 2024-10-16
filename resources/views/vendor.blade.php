@@ -73,13 +73,15 @@
                     </a>
                 </div>
                 <div class="col-lg-4">
-                    <div class="card text-white bg-success mb-3 h-100 surat">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
-                            <img src="{{asset ('admin/assets/img/exchange 1.png')}}" alt="Gambar 3"
-                                class="img-fluid mb-3">
-                            <h5 class="card-title">K3</h5>
+                    <a href="{{ url('k3') }}" class="text-decoration-none">
+                        <div class="card text-white bg-success mb-3 h-100 surat">
+                            <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                                <img src="{{asset ('admin/assets/img/exchange 1.png')}}" alt="Gambar 3"
+                                    class="img-fluid mb-3">
+                                <h5 class="card-title">K3</h5>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
             </div>
