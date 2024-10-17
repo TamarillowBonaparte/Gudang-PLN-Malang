@@ -82,7 +82,7 @@
                 <div class="card-body d-flex justify-content-between align-items-center">
                   <!-- Ikon di kiri -->
                   <div class="icon">
-                    <img src="{{asset ('admin/assets/img/tools 2.png')}}" alt="Gambar 2" class="img-fluid" style="width: 40px;">
+                    <img src="{{asset ('admin/assets/img/bekas.png')}}" alt="Gambar 2" class="img-fluid" style="width: 40px;">
                   </div>
                   <!-- Teks di kanan -->
                   <div class="text-end">
@@ -138,8 +138,9 @@
                       <td>{{$surat->tgl_diminta}}</td>
                       <td>{{$surat->nomor_dpb}}</td>
                       <td>
-                        <a href="" class="btn btn-outline-primary mb-1">Detail</a>
-                        <a href="" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                        <a href="{{ route('vendor.show', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                        <a href="{{ route('print', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+
                       </td>
                     </tr>
                     @empty
