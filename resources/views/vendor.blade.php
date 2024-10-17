@@ -25,6 +25,19 @@
   <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
+  <!--Punyak e hover card listener--->
+  <style>
+    .card {
+      transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Animasi perubahan warna */
+    }
+
+    .card.hover-effect:hover {
+        background-color: #007bff; /* Warna biru saat hover */
+        color: #fff; /* Warna teks saat hover (putih) */
+    }
+  </style>
+
+
   <!-- Template Main CSS File -->
   <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
 </head>
@@ -44,84 +57,162 @@
 
     <!--Card Atas Untuk Vendro-->
     <section class="section">
-      <div class="row">
-        <div class="col-lg-4">
-          <a href="{{ url('dpm') }}" class="text-decoration-none">
-            <div class="card text-white bg-primary mb-3 h-100 surat">
-              <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
-                <img src="{{asset ('admin/assets/img/delivered 1.png')}}" alt="Gambar 1" class="img-fluid mb-3">
-                <h5 class="card-title">DPM/DPB</h5>
+        <div class="row">
+          <div class="col-lg-4">
+            <a href="{{ url('dpm') }}" class="text-decoration-none">
+              <div class="card mb-3 shadow-sm rounded-3 h-100 surat hover-effect">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                  <!-- Ikon di kiri -->
+                  <div class="icon">
+                    <img src="{{asset ('admin/assets/img/delivered 1.png')}}" alt="Gambar 1" class="img-fluid" style="width: 40px;">
+                  </div>
+                  <!-- Teks di kanan -->
+                  <div class="text-end">
+                    <h5 class="card-title mb-1">7</h5>
+                    <p class="card-text">Total DPM</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4">
-          <a href="{{ url('k7') }}" class="text-decoration-none">
-            <div class="card text-dark bg-warning mb-3 h-100 surat">
-              <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
-                <img src="{{asset ('admin/assets/img/tools 2.png')}}" alt="Gambar 2" class="img-fluid mb-3">
-                <h5 class="card-title">K7</h5>
+            </a>
+          </div>
+
+          <div class="col-lg-4">
+            <a href="{{ url('k7') }}" class="text-decoration-none">
+              <div class="card mb-3 shadow-sm rounded-3 h-100 surat hover-effect">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                  <!-- Ikon di kiri -->
+                  <div class="icon">
+                    <img src="{{asset ('admin/assets/img/tools 2.png')}}" alt="Gambar 2" class="img-fluid" style="width: 40px;">
+                  </div>
+                  <!-- Teks di kanan -->
+                  <div class="text-end">
+                    <h5 class="card-title mb-1">$3,287.49</h5>
+                    <p class="card-text">Total K7</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-4">
-          <a href="{{ url('k3') }}" class="text-decoration-none">
-            <div class="card text-white bg-success mb-3 h-100 surat">
-              <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
-                <img src="{{asset ('admin/assets/img/exchange 1.png')}}" alt="Gambar 3" class="img-fluid mb-3">
-                <h5 class="card-title">K3</h5>
+            </a>
+          </div>
+
+          <div class="col-lg-4">
+            <a href="{{ url('k3') }}" class="text-decoration-none">
+              <div class="card mb-3 shadow-sm rounded-3 h-100 surat hover-effect">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                  <!-- Ikon di kiri -->
+                  <div class="icon">
+                    <img src="{{asset ('admin/assets/img/exchange 1.png')}}" alt="Gambar 3" class="img-fluid" style="width: 40px;">
+                  </div>
+                  <!-- Teks di kanan -->
+                  <div class="text-end">
+                    <h5 class="card-title mb-1">15</h5>
+                    <p class="card-text">Total K3</p>
+                  </div>
+                </div>
               </div>
-            </div>
+            </a>
+          </div>
         </div>
-        </div>
-    </div>
-    </section>
+      </section>
+
+
+
     <section class="section mt-5">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">History Terakhir Daftar Permintaan Material (DPM)</h5>
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th>Tanggal</th>                    
-                    <th>Nomor DPB</th>
-                    <th>Jenis Pekerjaan</th>
-                    <th>Nama Pelanggan</th>
-                    <th>Alamat Pelanggan</th>
-                    <th>ULP</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                  @forelse ($suratDpm as $surat)
-                    <td>{{$surat->tgl_diminta}}</td>
-                    <td>{{$surat->nomor_dpb}}</td>
-                    <td>{{$surat->jnspkrjaan}}</td>
-                    <td>{{$surat->nama_pelanggan}}</td>
-                    <td>{{$surat->alamat_pelanggan}}</td>
-                    <td>{{$surat->ulpnama}}</td>
-                    <td>
-                      <a href="" class="btn btn-outline-primary mb-1">Detail</a>
-                      <a href="" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
-                    </td>
-                  @empty
-                  
-                  @endforelse
-                  </tr>
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
+        <div class="row">
+          <!-- Kolom untuk tabel pertama -->
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Riwayat Terakhir Daftar Permintaan Material (DPM)</h5>
+                <!-- Tabel pertama -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>Nomor DPB</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @forelse ($suratDpm as $surat)
+                    <tr>
+                      <td>{{$surat->tgl_diminta}}</td>
+                      <td>{{$surat->nomor_dpb}}</td>
+                      <td>
+                        <a href="" class="btn btn-outline-primary mb-1">Detail</a>
+                        <a href="" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                      </td>
+                    </tr>
+                    @empty
+                    <tr>
+                      <td colspan="3">Data tidak ditemukan</td>
+                    </tr>
+                    @endforelse
+                  </tbody>
+                </table>
+                <!-- End Tabel pertama -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Kolom untuk tabel kedua -->
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Riwayat Terakhir Daftar Pemakaian Material (K7) </h5>
+                <!-- Tabel kedua -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>Nomor DPB</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @forelse ($suratDpm as $surat)
+                    <tr>
+                      <td>{{$surat->tgl_diminta}}</td>
+                      <td>{{$surat->nomor_dpb}}</td>
+                      <td>
+                        <a href="{{ route('vendor.show', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                        <a href="{{ route('print', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                      </td>
+                    </tr>
+                    @empty
+                    <tr>
+                      <td colspan="3">Data tidak ditemukan</td>
+                    </tr>
+                    @endforelse
+                  </tbody>
+                </table>
+                <!-- End Tabel kedua -->
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
   </main>  <!-- End #main -->
+
+  <!--Hover Listernernya-->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.hover-effect');
+
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.backgroundColor = '#007bff';  // Ubah ke biru saat hover
+          this.style.color = '#fff';               // Ubah teks menjadi putih
+        });
+
+        card.addEventListener('mouseleave', function() {
+          this.style.backgroundColor = '';         // Kembali ke warna default
+          this.style.color = '';                   // Kembali ke warna teks default
+        });
+      });
+    });
+  </script>
+
 
   <!-- ======= Footer ======= -->
  @include('footer')
