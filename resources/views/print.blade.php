@@ -1,31 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>PLN ARM MALANG</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TUG (Tata Usaha Gudang ) 5</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{asset ('admin/assets/img/favicon.png')}}" rel="icon">
+    <link href="{{ asset('admin/assets/img/logo pln.png') }}" rel="icon">
     <link href="{{asset ('admin/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.dataTables.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.1.2/css/buttons.dataTables.css">
-
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdn.datatables.net/2.1.6/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.dataTables.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script> --}}
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="{{asset ('admin/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -35,27 +24,40 @@
     <link href="{{asset ('admin/assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
 
     <style>
+
+        @page {
+            size: A4 landscape;
+            margin: 10mm;
+            margin-left: 5mm;
+            margin-right: 5mm
+        }
+
+        @media print {
+            html, body {
+                height:100vh;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden;
+            }
+        }
+        html, body {
+            width: 297mm;
+            /* height: 210mm; */
+            margin: 0px;
+            padding: 0px;
+        }
         body {
             font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            width: 297mm; /* 297mm */
-            height: 210mm;
         }
-
-        .a4 {
-            width: 297mm; /* 297mm */
-            height: 210mm;
-            margin: auto;
-            box-sizing: border-box;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -137,11 +139,9 @@
         }
 
     </style>
-
 </head>
 <body>
-
-    <div class="a4 fnt">
+    <div class="fnt centered-div">
         <table id="dpm" class="display">
             {{-- tr 0 --}}
             <tr>
@@ -200,13 +200,14 @@
                 <td class="hidel hidetb"></td>
             </tr>
             {{-- row 3 --}}
+            @forelse ($dpm as $i)
             <tr class="dpm">
                 <td colspan="2" class="fntb hideb pdtb" style="width: 100px">Taggal</td>
                 <td class="fntb hideb hider pdtb">Tgl.</td>
                 <td class="fntb hideb hiderl pdtb">Bln.</td>
                 <td class="fntb hideb hidel pdtb" style="padding-left: 0px; padding-right: 0px;">Thn.</td>
 
-                <td rowspan="3" colspan="5" class="fntb hidet" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px; width: 0%; font-size: 18px; color: #ff0000">TUG 5. MLG24-0000</td>
+                <td rowspan="3" colspan="5" class="fntb hidet" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px; width: 0%; font-size: 18px; color: #ff0000">{{ $i->nomor_dpb}}</td>
             </tr>
             {{-- row 4 --}}
             <tr class="dpm">
@@ -218,9 +219,10 @@
             {{-- row 5 --}}
             <tr class="dpm">
                 <td colspan="2" class="hidet"></td>
-                <td class="fntb pdtb">00</td>
-                <td class="fntb pdtb">00</td>
-                <td class="fntb pdtb pdtb" style="padding-left: 0px; padding-right: 0px;">0000</td>
+
+                <td class="fntb pdtb">{{\Carbon\Carbon::parse($i->tgl_diminta)->format('d')}}</td>
+                <td class="fntb pdtb">{{\Carbon\Carbon::parse($i->tgl_diminta)->format('m')}}</td>
+                <td class="fntb pdtb pdtb" style="padding-left: 0px; padding-right: 0px;">{{\Carbon\Carbon::parse($i->tgl_diminta)->format('Y')}}</td>
             </tr>
             {{-- row 6 --}}
             <tr class="dpm">
@@ -230,7 +232,7 @@
                 <td class="fntb hideb hidel pdtb">Thn.</td>
 
                 <td class="fntb fontl pdtb hider hideb">Kepada:</td>
-                <td class="fntb fontl pdtb hidel hideb" style="width: 0px" colspan="5">PT XXXXXX</td>
+                <td class="fntb fontl pdtb hidel hideb" style="width: 0px" colspan="5">PT PLN (Persero) UP3 Malang</td>
 
                 <td class="fntb fontl pdtb hideb" colspan="6">Harap dikirim ke :</td>
 
@@ -249,7 +251,7 @@
                 <td class="fntb fontl pdtb hider hidetb" style="width: 0px">Gudang:</td>
                 <td class="fntb fontl pdtb hidel hidetb" colspan="5">Gudang PLN Aries Munandar</td>
 
-                <td class="fntb fontl pdtb hidetb" colspan="6">PT. ANINDO BERTAHANNUTS PERKASA</td>
+                <td class="fntb fontl pdtb hidetb" colspan="6">{{ $i->nmu }}</td>
 
                 <td class="hider hidetb"></td>
                 <td class="hide"></td>
@@ -267,7 +269,7 @@
                 <td class="fntb fontl pdtb hider hidet">Alamat:</td>
                 <td class="fntb fontl pdtb hidel hidet" colspan="5">Jl. Aries Munandar No. 77A Malang</td>
 
-                <td class="fntb fontl pdtb hidet" colspan="6">Jl. Danau Toba B.19 Malang</td>
+                <td class="fntb fontl pdtb hidet" colspan="6">{{ $i->almtu }}</td>
 
                 <td class="hidet hider"></td>
                 <td class="hidet hiderl"></td>
@@ -275,6 +277,8 @@
                 <td class="hidet hiderl"></td>
                 <td class="hidet hidel"></td>
             </tr>
+            @empty
+            @endforelse
             {{-- row 9 --}}
             <tr>
                 <td class="fntb pdtb hideb" style="vertical-align: bottom; height: 25px; width: 0px; padding-left: 2px; padding-right: 2px;">No.</td>
@@ -324,20 +328,25 @@
                 <td class="bdottb" colspan="3"></td>
             </tr>
             {{-- row 12 --}}
+            @forelse ($material as $mat)
             <tr>
-                <td class="bdottb pdtb">1</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
+                <td class="bdottb pdtb">{{ $loop->iteration }}</td>
+                <td class="bdottb pdtb" colspan="5">{{ $mat['lMaterial']->nammat }}</td>
+                <td class="bdottb pdtb" colspan="2">{{ $mat['lMaterial']->normalisasi }}</td>
+                <td class="bdottb pdtb">{{ $mat['lMaterial']->satuan }}</td>
+                <td class="bdottb pdtb" colspan="3">{{ $mat['lMaterial']->jumlah }}</td>
+                <td class="bdottb pdtb" colspan="3">{{ $mat['jumlah'] }}</td>
                 <td class="bdottb pdtb" colspan="2"></td>
                 <td class="bdottb pdtb" colspan="2"></td>
                 <td class="bdottb" colspan="3"></td>
             </tr>
+            @empty
+
+            @endforelse
             {{-- row 13 --}}
+            @for ($i = $list; $i <= 10; $i++)
             <tr>
-                <td class="bdottb pdtb">2</td>
+                <td class="bdottb pdtb">{{ $i }}</td>
                 <td class="bdottb pdtb" colspan="5"></td>
                 <td class="bdottb pdtb" colspan="2"></td>
                 <td class="bdottb pdtb"></td>
@@ -347,103 +356,7 @@
                 <td class="bdottb pdtb" colspan="2"></td>
                 <td class="bdottb" colspan="3"></td>
             </tr>
-            {{-- row 14 --}}
-            <tr>
-                <td class="bdottb pdtb">3</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 15 --}}
-            <tr>
-                <td class="bdottb pdtb">4</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 16 --}}
-            <tr>
-                <td class="bdottb pdtb">5</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 17 --}}
-            <tr>
-                <td class="bdottb pdtb">6</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 18 --}}
-            <tr>
-                <td class="bdottb pdtb">7</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 19 --}}
-            <tr>
-                <td class="bdottb pdtb">8</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 20 --}}
-            <tr>
-                <td class="bdottb pdtb">9</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 21 --}}
-            <tr>
-                <td class="bdottb pdtb">10</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 22 --}}
+            @endfor
             <tr>
                 <td class="bdottb pdtb" style="height: 15px"></td>
                 <td class="bdottb pdtb" colspan="5"></td>
@@ -456,15 +369,16 @@
                 <td class="bdottb" colspan="3"></td>
             </tr>
             {{-- row 23 --}}
+            @forelse ($dpm as $i)
             <tr>
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">VENDOR</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">PT XXXXXXXX</td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">{{ $i->nmu }}</td>
 
                 <td class="fntb hidetb pdtb txtalgl" colspan="3">MERK MATERIAL :</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
+                <td class="fntb hidetb pdtb txtalgl" colspan="4">{{ $i->merk_material }}</td>
                 <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
             </tr>
             {{-- row 24 --}}
@@ -472,7 +386,7 @@
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">N0. SPK</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">000.KR/DAN.00.00/A00000000/0000 - 000/PK/REN.UP3-MLG/0000</td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">{{ $i->no_spk }}</td>
 
                 <td class="fntb hidetb pdtb txtalgl" colspan="3">NOMOR RESERVASI :</td>
 
@@ -484,7 +398,7 @@
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">JENIS PEKERJAAN</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">GKS</td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">{{ $i->jpkj }}</td>
 
                 <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
 
@@ -496,7 +410,7 @@
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">IDPEL</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">0000000000000</td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">{{ $i->idpel }}</td>
 
                 <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
 
@@ -508,7 +422,7 @@
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">NAMA PELANGGAN</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">XXXXX XXXXXXXX</td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">{{ $i->np }}</td>
 
                 <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
 
@@ -520,7 +434,7 @@
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">ALAMAT PELANGGGAN</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">JL XXXXXX XX</td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">{{ $i->almtp }}</td>
 
                 <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
 
@@ -532,10 +446,10 @@
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">DAYA</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hide pdtb txtalgl" colspan="1">PB/PD</td>
-                <td class="fntb hide pdtb txtalgl" colspan="2">R1/00000 VA</td>
+                <td class="fntb hide pdtb txtalgl" colspan="1">{{ $i->nmpbd }}</td>
+                <td class="fntb hide pdtb txtalgl" colspan="2">{{ $i->tdlama }}</td>
                 <td class="fntb hide pdtb txtalgl" colspan="1">ke</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="3">R3/00000 VA</td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="3">{{ $i->tdbaru }}</td>
 
                 <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
 
@@ -547,10 +461,10 @@
                 <td class="hidet pdtb"></td>
                 <td class="fntb hidet hiderl pdtb txtalgl" colspan="3">ULP</td>
                 <td class="fntb hidet hiderl pdtb">:</td>
-                <td class="fntb hidet hiderl pdtb txtalgl" colspan="1">ULP MALANG</td>
+                <td class="fntb hidet hiderl pdtb txtalgl" colspan="1">{{ $i->nmulp }}</td>
                 <td class="fntb hidet hiderl pdtb txtalgl"></td>
                 <td class="fntb hidet hiderl pdtb txtalgl"></td>
-                <td class="fntb hidel hidet pdtb txtalgl" colspan="4">00000</td>
+                <td class="fntb hidel hidet pdtb txtalgl" colspan="4">{{ $i->kpos }}</td>
 
                 <td class="fntb hidet pdtb txtalgl" colspan="3"></td>
 
@@ -622,7 +536,7 @@
                 <td class="fntb hidetb txtalgl" colspan="5"></td>
                 <td class="fntb hidetb txtalgl" colspan="7"></td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="5">PT. AYODYA JAYA</td>
+                <td class="fntb hidetb pdtb txtalgl" colspan="5">{{ $i->nmu }}</td>
             </tr>
             {{-- row 37 --}}
             <tr>
@@ -640,12 +554,18 @@
             </tr>
             {{-- row 39 --}}
             <tr>
-                <td class="fntb hidet pdtb" colspan="5">NAMA</td>
-                <td class="fntb hidet pdtb" colspan="5">NAMA</td>
-                <td class="fntb hidet pdtb" colspan="7">NAMA</td>
-                <td class="fntb hidet pdtb" colspan="5">NAMA</td>
+                <td class="fntb hidet pdtb" colspan="5">{{ $i->setuju }}</td>
+                <td class="fntb hidet pdtb" colspan="5">{{ $i->kpgdg }}</td>
+                <td class="fntb hidet pdtb" colspan="7">{{ $i->pemeriksa }}</td>
+                <td class="fntb hidet pdtb" colspan="5">{{ $i->penerima }}</td>
             </tr>
+            @empty
+            @endforelse
         </table>
     </div>
+
+    <script>
+        window.print()
+    </script>
 </body>
 </html>

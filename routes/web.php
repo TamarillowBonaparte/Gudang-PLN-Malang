@@ -10,6 +10,8 @@ use App\Http\Controllers\DetailSuratController;
 use App\Http\Controllers\EditAkun;
 use App\Http\Controllers\DpmController;
 use App\Http\Controllers\DpmPreviewController;
+use App\Http\Controllers\GudangController;
+use App\Http\Controllers\GudangDPMController;
 use App\Http\Controllers\K3Controller;
 use App\Http\Controllers\K7Controller;
 use App\Http\Controllers\SuratJalanController;
@@ -27,15 +29,38 @@ Route::post('proses_login', [LoginController::class, 'proses_login'])->name('pro
 // proses logout
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::get('tabel', [DpmController::class, 'showTable'])->name('tabel');
+
 // Route membuat akun
 Route::post('register', [DaftarAkunController::class, 'store'])->name('register');
 
 Route::get('/search', [DpmController::class, 'search']);
 
+Route::get('/search_k7', [K7Controller::class, 'search'])->name('search_k7');
+
+Route::get('/searchk3', [K3Controller::class, 'searchK3']);
+
+// route input DPM
 Route::post('/cetaksurat', [DpmController::class, 'store'])->name('cetaksurat');
+
+//Route cetak surat K7
+Route::post('/cetaksuratk7', [K7Controller::class, 'store'])->name('cetaksuratk7');
+
+// route input K3
+Route::post('/cetaksuratk3', [K3Controller::class, 'store'])->name('cetaksurat');
+
+Route::get('/print/{id}', [VendorController::class, 'cetak'])->name('print');
+
+// route input nopol dan pengemudi surat jalan
+Route::post('/cetaksrtjln', [GudangBawahController::class, 'inputNopolDriver'])->name('cetaksrtjln');
 
 //route ke halaman setting
 Route::get('/setting', [SettingController::class, 'index'])->name('setting');
+
+Route::get('/formsrt', [GudangBawahController::class, 'show'])->name('formsrt');
+
+// route ajax show surat jalan
+Route::get('/suratongoing', [GudangBawahController::class, 'showSurat'])->name('suratongoing');
 
 // Route ke edit akun
 Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');
@@ -49,13 +74,25 @@ Route::group(['middleware' => ['auth']], function() {
         Route::resource('daftar-akun', DaftarAkunController::class);
     });
     Route::group(['middleware' => ['cek_login:103']], function() {
-        Route::resource('gudangbawah', GudangBawahController::class);
+        Route::resource('/gudangbawah', GudangBawahController::class);
     });
     Route::group(['middleware' => ['cek_login:102']], function() {
-        Route::resource('vendor', VendorController::class);
-        Route::resource('dpm', DpmController::class);
+        Route::resource('/vendor', VendorController::class);
+        Route::resource('/dpm', DpmController::class);
         Route::resource('detail-surat', DetailSuratController::class);
         Route::resource('k7', K7Controller::class);
         Route::resource('k3', K3Controller::class);
     });
+
+    Route::patch('/update-dpm/{id}', 'DpmController@update')->name('update.dpm');
 });
+
+// Route ke gudang
+Route::get('/gudang', [GudangController::class, 'index'])->name('gudang');
+
+// Route ke gudang DPM
+Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dpm');
+
+Route::get('/suratjalan', [GudangController::class, 'index'])->name('suratjalan');
+
+Route::post('/material-baru', [MaterialController::class, 'materialBaru'])->name('materialBaru');
