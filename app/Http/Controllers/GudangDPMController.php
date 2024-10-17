@@ -10,4 +10,9 @@ class GudangDPMController extends Controller
     {
         return view('gudangdpm');
     }
+
+    public function srt()
+    {
+        return view('suratjalanK7');
+    }
 }

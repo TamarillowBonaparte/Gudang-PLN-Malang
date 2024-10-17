@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DaftarMaterial;
 use App\Models\DaftarMaterialK7;
-use App\Models\Dpm;
-use App\Models\DpmSuratJalan;
 use App\Models\K7;
 use App\Models\K7SrtJln;
 use App\Models\KepalaGudang;
-use App\Models\Material;
 use App\Models\MaterialBekas;
 use App\Models\Pemeriksa;
 use App\Models\PengambilPenerima;
@@ -23,10 +19,6 @@ use Illuminate\Http\Request;
 class K7Controller extends Controller
 {
     public function index () {
-<<<<<<< HEAD
-        return view('k7');
-    }
-=======
 
         $user = Auth::user();
         $ulps = Ulp::all();
@@ -80,7 +72,7 @@ class K7Controller extends Controller
         }
         $lastDpmNum = $filteredPart + 1;
         $nomorBon = "MLG" . date("y") . "-" . str_pad($lastDpmNum, 4, '0', STR_PAD_LEFT);
-        $nomorDPB = "TUG 5 NS. " . $nomorBon;
+        $nomorDPB = "TUG 5 NS." . $nomorBon;
 
         // Validasi umum
         $request->validate([
@@ -269,7 +261,6 @@ class K7Controller extends Controller
         return view('print', compact('dp    m', 'material', 'jumlah', 'list'));
     }
 
-
     private function createIfNotExists($model, $field, $value) {
 
         $idUser = Auth::user()->id_user;
@@ -319,5 +310,4 @@ class K7Controller extends Controller
 
         return $hasil;
     }
->>>>>>> 50e4585cf1a8e874788b38be342299149bf42ef0
 }
