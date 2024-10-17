@@ -19,6 +19,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ShowForm;
 
 // Route ke halaman Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -36,8 +37,20 @@ Route::post('register', [DaftarAkunController::class, 'store'])->name('register'
 
 Route::get('/search', [DpmController::class, 'search']);
 
+Route::get('/search_k7', [K7Controller::class, 'search'])->name('search_k7');
+
+Route::get('/searchk3', [K3Controller::class, 'searchK3']);
+
 // route input DPM
 Route::post('/cetaksurat', [DpmController::class, 'store'])->name('cetaksurat');
+
+//Route cetak surat K7
+Route::post('/cetaksuratk7', [K7Controller::class, 'store'])->name('cetaksuratk7');
+
+Route::get('/suratk7', [ShowForm::class, 'index'])->name('suratk7');
+
+// route input K3
+Route::post('/cetaksuratk3', [K3Controller::class, 'store'])->name('cetaksurat');
 
 Route::get('/print/{id}', [VendorController::class, 'cetak'])->name('print');
 
@@ -84,3 +97,5 @@ Route::get('/gudang', [GudangController::class, 'index'])->name('gudang');
 Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dpm');
 
 Route::get('/suratjalan', [GudangController::class, 'index'])->name('suratjalan');
+
+Route::post('/material-baru', [MaterialController::class, 'materialBaru'])->name('materialBaru');

@@ -22,7 +22,6 @@ class DpmController extends Controller {
     public function index () {
 
         $user = Auth::user();
-
         $ulps = Ulp::all();
         $kepalaGdng = KepalaGudang::all();
         $setuju = Setuju::all();
@@ -37,6 +36,7 @@ class DpmController extends Controller {
         if($request->ajax()) {
 
             $materials = DB::table('material')
+                ->where('jumlah_sap', '>', 0)
                 ->where('nama','LIKE','%'.$request->search."%")
                 ->get();
 
@@ -144,7 +144,7 @@ class DpmController extends Controller {
         $lastInsertedId = $dpmSuratJalan->id_dpb_suratjalan;
 
         // Looping untuk insert daftar material dan update stok
-        foreach ($request->input('idmaterial') as $index => $idMaterial) {
+        foreach ($request->input('idmaterial') as $index => $idMaterial) {        
             $banyakDiminta = $request->input('banyakdiminta')[$index];
             $material = Material::find($idMaterial);
             $material->decrement('jumlah_sap', $banyakDiminta);
