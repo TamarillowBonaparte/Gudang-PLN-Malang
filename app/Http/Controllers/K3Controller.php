@@ -93,7 +93,7 @@ class K3Controller extends Controller
                 "id_k3" => $lastInsertedId
             ]);
 
-            MaterialBekas::where('id', $idMaterial)
+            MaterialBekas::where('id', $idMaterial) 
             ->increment('jumlah_sap', $banyakDikembalikan);
             
         }

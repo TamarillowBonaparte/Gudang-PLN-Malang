@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DaftarMaterial;
 use App\Models\DaftarMaterialK7;
-use App\Models\Dpm;
-use App\Models\DpmSuratJalan;
 use App\Models\K7;
 use App\Models\K7SrtJln;
 use App\Models\KepalaGudang;
-use App\Models\Material;
 use App\Models\MaterialBekas;
 use App\Models\Pemeriksa;
 use App\Models\PengambilPenerima;
@@ -264,7 +260,6 @@ class K7Controller extends Controller
 
         return view('print', compact('dp    m', 'material', 'jumlah', 'list'));
     }
-
 
     private function createIfNotExists($model, $field, $value) {
 

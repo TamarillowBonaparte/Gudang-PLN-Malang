@@ -19,6 +19,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ShowForm;
 
 // Route ke halaman Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -45,6 +46,8 @@ Route::post('/cetaksurat', [DpmController::class, 'store'])->name('cetaksurat');
 
 //Route cetak surat K7
 Route::post('/cetaksuratk7', [K7Controller::class, 'store'])->name('cetaksuratk7');
+
+Route::get('/suratk7', [ShowForm::class, 'index'])->name('suratk7');
 
 // route input K3
 Route::post('/cetaksuratk3', [K3Controller::class, 'store'])->name('cetaksurat');
