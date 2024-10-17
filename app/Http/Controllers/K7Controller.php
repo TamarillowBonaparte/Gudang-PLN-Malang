@@ -72,7 +72,7 @@ class K7Controller extends Controller
         }
         $lastDpmNum = $filteredPart + 1;
         $nomorBon = "MLG" . date("y") . "-" . str_pad($lastDpmNum, 4, '0', STR_PAD_LEFT);
-        $nomorDPB = "TUG 5 NS. " . $nomorBon;
+        $nomorDPB = "TUG 5 NS." . $nomorBon;
 
         // Validasi umum
         $request->validate([

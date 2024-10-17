@@ -78,18 +78,26 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <label for="pemeriksa" class="form-label">Pemeriksa<span style="color: red;">*</span></label>
+                                    <label for="pemeriksa" class="form-label">Pemeriksa/Pengawas<span style="color: red;">*</span></label>
                                     <input type="text" name="pemeriksa" id="pemeriksa" list="pemeriksals" class="form-control input-focus mb-2">
                                     <datalist id="pemeriksals">
-                                    @forelse ($setuju as $stj)
-                                        <option value="{{ $stj->nama }}">
-                                    @empty
-                                    @endforelse
-                                </datalist>
+                                        @forelse ($pemeriksa as $pmrksa)
+                                            <option value="{{ $pmrksa->nama }}">
+                                        @empty
+    
+                                        @endforelse
+                                    </datalist>
                                 </div>
                                 <div class="col">
                                     <label for="penerima" class="form-label">Pengambil<span style="color: red;">*</span></label>
                                     <input type="text" name="penerima" id="penerima" class="form-control input-focus mb-2">
+                                    <datalist id="penerimals">
+                                        @forelse ($penerima as $pnrm)
+                                            <option value="{{ $pnrm->nama }}">
+                                        @empty
+    
+                                        @endforelse
+                                        </datalist>
                                 </div>
                             </div>
 
@@ -289,7 +297,7 @@
             let banyakDiminta = $('#item').val();
 
             // Pastikan semua field diisi sebelum menambahkan baris ke tabel
-            if (namaMaterial && normalisasi && satuan && banyakDiminta) {
+            if (namaMaterial && banyakDiminta) {
                 // Dapatkan jumlah baris yang sudah ada di tabel
                 let rowCount = $("table tbody tr").length + 1;
 
