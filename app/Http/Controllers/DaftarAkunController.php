@@ -26,15 +26,8 @@ class DaftarAkunController extends Controller
 
         $jenisUser = $request->input('jenis_user');
 
-        try {
             switch ($jenisUser) {
                 case 101:
-                    $this->validate($request, [
-                        'nama'      => 'required',
-                        'username'  => 'required',
-                        'passwordInput'  => 'required',
-                        'jenis_user'=> 'required|in:101,102,103'
-                    ]);
 
                     User::create([
                         'nama'          => $request->input('nama'),
@@ -44,16 +37,9 @@ class DaftarAkunController extends Controller
                         'id_jenis_user' => 101
                     ]);
                 break;
-                
+
                 case 102:
-                    $this->validate($request, [
-                        'nama'      => 'required',
-                        'username'  => 'required',
-                        'password'  => 'required',
-                        'jenis_user'=> 'required|in:101,102,103',
-                        'alamat'    => 'required'
-                    ]);
-    
+
                     User::create([
                         'nama'          => $request->input('nama'),
                         'alamat'        => $request->input('alamat'),
@@ -62,14 +48,8 @@ class DaftarAkunController extends Controller
                         'id_jenis_user' => 102
                     ]);
                 break;
-                
+
                 case 103:
-                    $this->validate($request, [
-                        'nama'          => 'required',
-                        'username'      => 'required',
-                        'passwordInput' => 'required',
-                        'jenis_user'    => 'required|in:101,102,103'
-                    ]);
 
                     User::create([
                         'nama'          => $request->input('nama'),
@@ -79,13 +59,21 @@ class DaftarAkunController extends Controller
                         'id_jenis_user' => 103
                     ]);
                 break;
+
+                case 104:
+
+                    User::create([
+                        'nama'          => $request->input('nama'),
+                        'alamat'        => $request->input('alamat'),
+                        'username'      => $request->input('username'),
+                        'password'      => $hashedPassword,
+                        'id_jenis_user' => 104
+                    ]);
+                break;
             }
-    
-            return redirect()->back()->with(['success' => 'Berhasil', 'jenisUser' => $jenisUser]);
-        } catch (\Exception $e) {
-            Log::error('Error:', ['message' => $e->getMessage()]);
-            return redirect()->back()->withErrors(['error' => 'Terjadi kesalahan, silakan coba lagi.', 'jenisUser' => $jenisUser]);
+
+            return redirect()->back();
         }
-        
+
     }
-}
+

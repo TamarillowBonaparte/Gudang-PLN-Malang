@@ -10,7 +10,7 @@ class DpmSuratJalan extends Model
     use HasFactory;
 
     protected $table = "dpb_suratjalan";
-    
+
     protected $fillable = [
         'id_suratjalan',
         'kepala_gudang',
@@ -27,9 +27,9 @@ class DpmSuratJalan extends Model
         'merk_material',
         'id_user'
     ];
-    
+
     protected $primaryKey = 'id_dpb_suratjalan';
-    
+
     public $timestamps = false;
 
     public function dpm()
