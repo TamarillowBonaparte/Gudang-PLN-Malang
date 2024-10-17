@@ -11,6 +11,10 @@ class VendorController extends Controller
     public function index()
     {
         $idUser = Auth::user()->id_user;
+        $dpbjumlah = DB::table('dpb_suratjalan')->where('dpb_suratjalan.id_user', '=', $idUser)->count();
+        $k7jumlah = DB::table('k7_srtjln')->where('k7_srtjln.id_user',"=", $idUser)->count();
+        $k3jumlah = DB::table('k3')->where('k3.id',"=",$idUser)->count();
+
 
         $suratDpm = DB::table('daftar_permintaan_material')
         ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
@@ -25,7 +29,18 @@ class VendorController extends Controller
         ->where('dpb_suratjalan.id_user', '=', $idUser)
         ->get();
 
-        return view('vendor', compact('suratDpm'));
+
+        $suratk7 = DB::table('k7')
+        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id')
+        ->select(
+            'k7.*',
+            'k7_srtjln.*',
+            )
+        ->where('k7_srtjln.id_user', '=', $idUser)
+        ->get();
+
+
+        return view('vendor', compact('suratDpm','dpbjumlah', 'k7jumlah','k3jumlah','suratk7'));
     }
 
     public function show(String $encryptedId) {
