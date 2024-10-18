@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class VendorController extends Controller
 {
@@ -199,8 +200,12 @@ class VendorController extends Controller
                 'jumlah' => $angkaKeHuruf[$i]
             ];
         }
+        $pdf = Pdf::loadView('print', compact('dpm', 'material', 'jumlah', 'list'));
 
-        return view('print', compact('dpm', 'material', 'jumlah', 'list'));
+        // Mengirimkan file PDF untuk didownload
+        return $pdf->download('DaftarPermintaanMaterial_' . $id . '.pdf');
+
+        // return view('print', compact('dpm', 'material', 'jumlah', 'list'));
     }
 
     public function angkaKeHuruf($angka) {
