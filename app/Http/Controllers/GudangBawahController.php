@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\K7;
 use App\Models\DpmSuratJalan;
 use App\Models\SuratJalan;
 use Illuminate\Http\Request;
@@ -40,13 +40,45 @@ class GudangBawahController extends Controller
             'user.nama as vendor',
             'surat_jalan.nomor_polisi',
             'surat_jalan.pengemudi',
+        ) ->orderByDesc('nomor_suratjln')
+        ->get();
+
+        $k7Ongoing = DB::table('k7')
+        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id_k7srtjln')
+        ->join('surat_jalan', 'k7_srtjln.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
+        ->join('user', 'k7_srtjln.id_user', '=', 'user.id_user')
+        ->whereNull('surat_jalan.pengemudi')
+        ->select(
+            'surat_jalan.id_surat_jalan as id_srtjln',
+            'k7.tgl_diminta as tgl',
+            'k7.nmr_k7 as nomor',
+            'user.nama as vendor',
+            'k7_srtjln.nm_pelanggan as pelanggan'
+        )
+        ->get();
+
+        $k7 = DB::table('k7')
+        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id_k7srtjln')
+        ->join('surat_jalan', 'k7_srtjln.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
+        ->join('user', 'k7_srtjln.id_user', '=', 'user.id_user')
+        ->whereNotNull('nomor_polisi')
+        ->select(
+            'surat_jalan.id_surat_jalan as idsrt',
+            'surat_jalan.nomor_suratjln as nosj',
+            'surat_jalan.tgl_diterima as tgldicetak',
+            'k7.nmr_k7 as nomor',
+            'user.nama as vendor',
+            'surat_jalan.nomor_polisi',
+            'surat_jalan.pengemudi',
         )
         ->orderByDesc('nomor_suratjln')
         ->get();
 
-        return view('gudangbawah', compact('dpmOngoing', 'dpm'));
+        return view('gudangbawah', compact('dpmOngoing', 'k7Ongoing', 'dpm' , 'k7'));
         // return view('gudangbawah', compact('dpm'));
     }
+
+    
 
     function inputNopolDriver(Request $request) {
 
@@ -74,6 +106,146 @@ class GudangBawahController extends Controller
             ]);
 
         return redirect('gudangbawah');
+    }
+
+    public function show_k7(String $encryptedId): View {
+
+        $id = Crypt::decrypt($encryptedId);
+
+        $suratjalan = DB::table('k7_srtjln')
+        ->select(
+            'surat_jalan.nomor_suratjln as nosj',
+            'surat_jalan.nomor_polisi',
+            'surat_jalan.pengemudi',
+            'k7_srtjln.no_spk as nospk',
+            'k7_srtjln.nm_pelanggan as nampel',
+            'k7_srtjln.idpel as idpel',
+            'k7_srtjln.almt_pelanggan as almtpel',
+            'k7_srtjln.trfdy_lama as daylam',
+            'k7_srtjln.trfdy_baru as daybar',
+            'surat_jalan.tgl_diterima as tgldicetak',
+            'k7.nmr_k7 as nok7',
+            'k7_srtjln.penerima',
+            'k7_srtjln.kepala_gudang',
+            'user.nama as vendor',
+        )
+        ->join('surat_jalan', 'k7_srtjln.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
+        ->join('k7', 'k7_srtjln.id_k7srtjln', '=', 'k7.id')
+        ->join('user', 'k7_srtjln.id_user', '=', 'user.id_user')
+        ->join('jenis_pekerjaan', 'k7_srtjln.id_jenis_pekerjaan', '=', 'jenis_pekerjaan.id_jenis_pekerjaan')
+        ->join('ulp', 'k7_srtjln.id_ulp', '=', 'ulp.id_ulp')
+        ->join('pb/pd', 'k7_srtjln.id_pbpd', '=', '.id_pb_pd')
+        ->where('id_surat_jalan', '=', $id)
+        ->get();
+
+        $idk7srtjln = DB::table('k7')
+        ->select('id_k7srtjln')
+        ->where('id', '=', $id);
+
+        $material = DB::table('dftrmaterial_k7')
+        ->select(
+            'dftrmaterial_k7.jumlah',
+            'dftrmaterial_k7.id_k7srtjln',
+            'material.nama as nammat',
+            'material.normalisasi',
+            'material.satuan',
+        )
+        ->join('material', 'daftar_material.id_material', '=', 'material.id_material')
+        ->where('id_k7srtjln', '=', $idk7srtjln)
+        ->get();
+
+        $k7srt = DB::table('k7_srtjln')
+        ->select('id_k7srtjln')
+        ->where('id_srtjln', '=', $id)
+        ->pluck('id_k7srtjln');
+
+        $jumlah = DB::table('daftar_material')
+        ->select('id_k7srtjln')
+        ->where('id_k7srtjln', '=', $k7srt)
+        ->count();
+
+        $list = $jumlah+1;
+
+        return view('suratjalank7', compact('suratjln', 'material', 'list'));
+    }
+
+    public function printk7(String $encryptedId): View {
+
+        $id = Crypt::decrypt($encryptedId);
+
+        $suratjalan = DB::table('k7_srtjln')
+        ->select(
+            'surat_jalan.nomor_suratjln as nosj',
+            'surat_jalan.nomor_polisi',
+            'surat_jalan.pengemudi',
+            'k7_srtjln.no_spk as nospk',
+            'k7_srtjln.nm_pelanggan as nampel',
+            'k7_srtjln.idpel as idpel',
+            'k7_srtjln.almt_pelanggan as almtpel',
+            'k7_srtjln.trfdy_lama as daylam',
+            'k7_srtjln.trfdy_baru as daybar',
+            'surat_jalan.tgl_diterima as tgldicetak',
+            'k7.nmr_k7 as nok7',
+            'k7_srtjln.penerima',
+            'k7_srtjln.kepala_gudang',
+            'user.nama as vendor',
+        )
+        ->join('surat_jalan', 'k7_srtjln.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
+        ->join('k7', 'k7_srtjln.id_k7srtjln', '=', 'k7.id')
+        ->join('user', 'k7_srtjln.id_user', '=', 'user.id_user')
+        ->join('jenis_pekerjaan', 'k7_srtjln.id_jenis_pekerjaan', '=', 'jenis_pekerjaan.id_jenis_pekerjaan')
+        ->join('ulp', 'k7_srtjln.id_ulp', '=', 'ulp.id_ulp')
+        ->join('pb/pd', 'k7_srtjln.id_pbpd', '=', '.id_pb_pd')
+        ->where('id_surat_jalan', '=', $id)
+        ->get();
+
+        $idk7srtjln = DB::table('k7')
+        ->select('id_k7srtjln')
+        ->where('id', '=', $id);
+
+        $material = DB::table('dftrmaterial_k7')
+        ->select(
+            'dftrmaterial_k7.jumlah',
+            'dftrmaterial_k7.id_k7srtjln',
+            'material.nama as nammat',
+            'material.normalisasi',
+            'material.satuan',
+        )
+        ->join('material', 'daftar_material.id_material', '=', 'material.id_material')
+        ->where('id_k7srtjln', '=', $idk7srtjln)
+        ->get();
+
+        $k7srt = DB::table('k7_srtjln')
+        ->select('id_k7srtjln')
+        ->where('id_srtjln', '=', $id)
+        ->pluck('id_k7srtjln');
+
+        $jumlah = DB::table('daftar_material')
+        ->select('id_k7srtjln')
+        ->where('id_k7srtjln', '=', $k7srt)
+        ->count();
+
+        $list = $jumlah+1;
+
+        return view('suratjalank7', compact('suratjln', 'material', 'list'));
+    }
+
+    public function showSuratk7(Request $request) {
+        $k7Ongoing = DB::table('k7')
+        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id_k7srtjln')
+        ->join('surat_jalan', 'k7_srtjln.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
+        ->join('user', 'k7_srtjln.id_user', '=', 'user.id_user')
+        ->whereNull('surat_jalan.pengemudi')
+        ->select(
+            'surat_jalan.id_surat_jalan as id_srtjln',
+            'k7.tgl_diminta as tgl',
+            'k7.nmr_k7 as nomor',
+            'user.nama as vendor',
+            'k7_srtjln.nm_pelanggan as pelanggan'
+        )
+        ->get();
+
+        return response()->json($k7Ongoing);
     }
 
     public function show(String $encryptedId): View {

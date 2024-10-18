@@ -22,7 +22,6 @@ class K7 extends model{
         'noseri_material',
         'keterangan',
         'id_jnssurat',
-
     ];
 
     public $timestamps = false;

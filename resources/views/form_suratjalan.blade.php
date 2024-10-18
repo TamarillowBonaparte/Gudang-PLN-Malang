@@ -84,7 +84,7 @@
         .fntb {
             font-family: 'Roboto Mono', monospace;
             font-weight: bold
-        }\
+        }
         .fntarial {
             font-family: Arial, sans-serif;
             font-weight: bold
