@@ -44,7 +44,7 @@ class GudangBawahController extends Controller
         ->get();
 
         $k7Ongoing = DB::table('k7')
-        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id_k7srtjln')
+        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id')
         ->join('surat_jalan', 'k7_srtjln.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
         ->join('user', 'k7_srtjln.id_user', '=', 'user.id_user')
         ->whereNull('surat_jalan.pengemudi')
@@ -58,7 +58,7 @@ class GudangBawahController extends Controller
         ->get();
 
         $k7 = DB::table('k7')
-        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id_k7srtjln')
+        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id')
         ->join('surat_jalan', 'k7_srtjln.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
         ->join('user', 'k7_srtjln.id_user', '=', 'user.id_user')
         ->whereNotNull('nomor_polisi')
@@ -130,7 +130,7 @@ class GudangBawahController extends Controller
             'user.nama as vendor',
         )
         ->join('surat_jalan', 'k7_srtjln.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
-        ->join('k7', 'k7_srtjln.id_k7srtjln', '=', 'k7.id')
+        ->join('k7', 'k7_srtjln.id', '=', 'k7.id_k7srtjln')
         ->join('user', 'k7_srtjln.id_user', '=', 'user.id_user')
         ->join('jenis_pekerjaan', 'k7_srtjln.id_jenis_pekerjaan', '=', 'jenis_pekerjaan.id_jenis_pekerjaan')
         ->join('ulp', 'k7_srtjln.id_ulp', '=', 'ulp.id_ulp')
@@ -140,7 +140,7 @@ class GudangBawahController extends Controller
 
         $idk7srtjln = DB::table('k7')
         ->select('id_k7srtjln')
-        ->where('id', '=', $id);
+        ->where('id_k7srtjln', '=', $id);
 
         $material = DB::table('dftrmaterial_k7')
         ->select(
@@ -150,16 +150,16 @@ class GudangBawahController extends Controller
             'material.normalisasi',
             'material.satuan',
         )
-        ->join('material', 'daftar_material.id_material', '=', 'material.id_material')
-        ->where('id_k7srtjln', '=', $idk7srtjln)
+        ->join('material_bekas', 'dftrmaterial_k7.id', '=', 'material_bekas.id')
+        ->where('dftrmaterial_k7.id_mtrl_k7', '=', $idk7srtjln)
         ->get();
 
         $k7srt = DB::table('k7_srtjln')
-        ->select('id_k7srtjln')
+        ->select('id')
         ->where('id_srtjln', '=', $id)
-        ->pluck('id_k7srtjln');
+        ->pluck('id');
 
-        $jumlah = DB::table('daftar_material')
+        $jumlah = DB::table('dftrmaterial_k7')
         ->select('id_k7srtjln')
         ->where('id_k7srtjln', '=', $k7srt)
         ->count();
@@ -191,7 +191,7 @@ class GudangBawahController extends Controller
             'user.nama as vendor',
         )
         ->join('surat_jalan', 'k7_srtjln.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
-        ->join('k7', 'k7_srtjln.id_k7srtjln', '=', 'k7.id')
+        ->join('k7', 'k7_srtjln.id', '=', 'k7.id_k7srtjln')
         ->join('user', 'k7_srtjln.id_user', '=', 'user.id_user')
         ->join('jenis_pekerjaan', 'k7_srtjln.id_jenis_pekerjaan', '=', 'jenis_pekerjaan.id_jenis_pekerjaan')
         ->join('ulp', 'k7_srtjln.id_ulp', '=', 'ulp.id_ulp')
@@ -201,7 +201,7 @@ class GudangBawahController extends Controller
 
         $idk7srtjln = DB::table('k7')
         ->select('id_k7srtjln')
-        ->where('id', '=', $id);
+        ->where('id_k7srtjln', '=', $id);
 
         $material = DB::table('dftrmaterial_k7')
         ->select(
@@ -211,16 +211,16 @@ class GudangBawahController extends Controller
             'material.normalisasi',
             'material.satuan',
         )
-        ->join('material', 'daftar_material.id_material', '=', 'material.id_material')
-        ->where('id_k7srtjln', '=', $idk7srtjln)
+        ->join('material_bekas', 'dftrmaterial_k7.id', '=', 'material_bekas.id')
+        ->where('dftrmaterial_k7.id_mtrl_k7', '=', $idk7srtjln)
         ->get();
 
         $k7srt = DB::table('k7_srtjln')
-        ->select('id_k7srtjln')
+        ->select('id')
         ->where('id_srtjln', '=', $id)
-        ->pluck('id_k7srtjln');
+        ->pluck('id');
 
-        $jumlah = DB::table('daftar_material')
+        $jumlah = DB::table('dftrmaterial_k7')
         ->select('id_k7srtjln')
         ->where('id_k7srtjln', '=', $k7srt)
         ->count();
@@ -232,7 +232,7 @@ class GudangBawahController extends Controller
 
     public function showSuratk7(Request $request) {
         $k7Ongoing = DB::table('k7')
-        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id_k7srtjln')
+        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id')
         ->join('surat_jalan', 'k7_srtjln.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
         ->join('user', 'k7_srtjln.id_user', '=', 'user.id_user')
         ->whereNull('surat_jalan.pengemudi')
