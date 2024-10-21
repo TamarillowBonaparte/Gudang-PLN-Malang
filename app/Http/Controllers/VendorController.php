@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class VendorController extends Controller
 {
     public function index()
     {
         $idUser = Auth::user()->id_user;
+        $dpbjumlah = DB::table('dpb_suratjalan')->where('dpb_suratjalan.id_user', '=', $idUser)->count();
+        $k7jumlah = DB::table('k7_srtjln')->where('k7_srtjln.id_user',"=", $idUser)->count();
+        $k3jumlah = DB::table('k3')->where('k3.id',"=",$idUser)->count();
+
 
         $suratDpm = DB::table('daftar_permintaan_material')
         ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
@@ -27,7 +32,18 @@ class VendorController extends Controller
         ->where('dpb_suratjalan.id_user', '=', $idUser)
         ->get();
 
-        return view('vendor', compact('suratDpm'));
+
+        $suratk7 = DB::table('k7')
+        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id')
+        ->select(
+            'k7.*',
+            'k7_srtjln.*',
+            )
+        ->where('k7_srtjln.id_user', '=', $idUser)
+        ->get();
+
+
+        return view('vendor', compact('suratDpm','dpbjumlah', 'k7jumlah','k3jumlah','suratk7'));
     }
 
     public function show(String $encryptedId, String $srtJlnEncryptdId) {
@@ -188,8 +204,12 @@ class VendorController extends Controller
                 'jumlah' => $angkaKeHuruf[$i]
             ];
         }
+        $pdf = Pdf::loadView('print', compact('dpm', 'material', 'jumlah', 'list'));
 
-        return view('print', compact('dpm', 'material', 'jumlah', 'list'));
+        // Mengirimkan file PDF untuk didownload
+        return $pdf->download('DaftarPermintaanMaterial_' . $id . '.pdf');
+
+        // return view('print', compact('dpm', 'material', 'jumlah', 'list'));
     }
 
     public function angkaKeHuruf($angka) {
