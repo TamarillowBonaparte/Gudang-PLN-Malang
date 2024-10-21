@@ -138,9 +138,8 @@
                       <td>{{$surat->tgl_diminta}}</td>
                       <td>{{$surat->nomor_dpb}}</td>
                       <td>
-                        <a href="{{ route('vendor.show', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                        <a href="{{ route('print', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
-
+                        <a href="{{ route('show', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                        <a href="{{ route('print', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
                       </td>
                     </tr>
                     @empty
@@ -175,8 +174,8 @@
                       <td>{{$k7->tgl_diminta}}</td>
                       <td>{{$k7->nmr_k7}}</td>
                       <td>
-                        <a href="{{ route('vendor.show', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                        <a href="{{ route('print', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                        <a href="{{ route('show', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                        <a href="{{ route('print', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
                       </td>
                     </tr>
                     @empty

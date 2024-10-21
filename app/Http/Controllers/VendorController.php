@@ -21,11 +21,13 @@ class VendorController extends Controller
         ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
         ->join('ulp', 'dpb_suratjalan.id_ulp', '=', 'ulp.id_ulp')
         ->join('jenis_pekerjaan', 'dpb_suratjalan.id_jenis_pekerjaan', '=', 'jenis_pekerjaan.id_jenis_pekerjaan')
+        ->join('surat_jalan', 'dpb_suratjalan.id_suratjalan', '=', 'surat_jalan.id_surat_jalan')
         ->select(
             'daftar_permintaan_material.*',
             'dpb_suratjalan.*',
             'jenis_pekerjaan.pekerjaan as jnspkrjaan',
-            'ulp.nama as ulpnama'
+            'ulp.nama as ulpnama',
+            'surat_jalan.id_surat_jalan as idsrtjln'
             )
         ->where('dpb_suratjalan.id_user', '=', $idUser)
         ->get();
@@ -44,9 +46,10 @@ class VendorController extends Controller
         return view('vendor', compact('suratDpm','dpbjumlah', 'k7jumlah','k3jumlah','suratk7'));
     }
 
-    public function show(String $encryptedId) {
+    public function show(String $encryptedId, String $srtJlnEncryptdId) {
 
         $id = Crypt::decryptString($encryptedId);
+        $srtJlnId = Crypt::decryptString($srtJlnEncryptdId);
 
         $dpm = DB::table('daftar_permintaan_material')
         ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
@@ -96,7 +99,7 @@ class VendorController extends Controller
 
         $dpbsrt = DB::table('dpb_suratjalan')
         ->select('id_dpb_suratjalan')
-        ->where('id_suratjalan', '=', $id)
+        ->where('id_suratjalan', '=', $srtJlnId)
         ->pluck('id_dpb_suratjalan');
 
         $jumlah = DB::table('daftar_material')
@@ -124,9 +127,10 @@ class VendorController extends Controller
         return view('detailsurat', compact('dpm', 'material', 'list'));
     }
 
-    public function cetak(String $encryptedId) {
+    public function cetak(String $encryptedId, String $srtJlnEncryptdId) {
 
         $id = Crypt::decryptString($encryptedId);
+        $srtJlnId = Crypt::decryptString($srtJlnEncryptdId);
 
         $dpm = DB::table('daftar_permintaan_material')
         ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
@@ -176,7 +180,7 @@ class VendorController extends Controller
 
         $dpbsrt = DB::table('dpb_suratjalan')
         ->select('id_dpb_suratjalan')
-        ->where('id_suratjalan', '=', $id)
+        ->where('id_suratjalan', '=', $srtJlnId)
         ->pluck('id_dpb_suratjalan');
 
         $jumlah = DB::table('daftar_material')
