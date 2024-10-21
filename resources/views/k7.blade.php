@@ -220,7 +220,7 @@
                                 </table>
                             </div>
                             <div class="col text-end">
-                                <button class="btn btn-success mb-2" type="submit" id="cetaksurat">Cetak</button>
+                                <button class="btn btn-success mb-2" type="submit" target="_blank" id="cetaksurat">Cetak</button>
                             </div>
                         </div>
                     </div>

@@ -465,7 +465,7 @@
                 <td class="fntb hide pdtb">:</td>
                 <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">000.KR/DAN.00.00/A00000000/0000 - 000/PK/REN.UP3-MLG/0000</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="3">NOMOR RESERVASI :</td>
+                <td class="fntb hidetb pdtb txtalgl" colspan="3">NOMOR SERI :</td>
 
                 <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
                 <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>

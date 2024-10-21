@@ -165,7 +165,8 @@ class DpmController extends Controller {
             'id_dpb_suratjalan' => $lastInsertedId,
             'tgl_diminta'       => date('Y-m-d'),
             'setuju'            => $setuju,
-            'pemeriksa'         => $pemeriksa
+            'pemeriksa'         => $pemeriksa,
+            'id_jnssurat'       => 1
         ]);
 
         $id = $dPM->id_dpb;
@@ -174,7 +175,7 @@ class DpmController extends Controller {
         $this->createIfNotExists(Setuju::class, 'nama', $setuju);
         $this->createIfNotExists(Pemeriksa::class, 'nama', $pemeriksa);
 
-        return redirect()->route('print')->with('id', $id);
+        return redirect()->route('print', ['id' => Crypt::encryptString($id), 'srtJlnId' => Crypt::encryptString($lastSurJalId)]);
     }
 
     public function cetak(String $id) {
