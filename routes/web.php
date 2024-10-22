@@ -48,6 +48,7 @@ Route::post('/cetaksuratk3', [K3Controller::class, 'store'])->name('cetaksuratk3
 
 Route::get('/print/{id}/{srtJlnId}', [VendorController::class, 'cetak'])->name('print');
 Route::get('/show/{id}/{srtJlnId}', [VendorController::class, 'show'])->name('show');
+Route::get('/showK7/{id}/{srtJlnId}', [VendorController::class, 'showK7'])->name('showK7');
 
 // route input nopol dan pengemudi surat jalan
 Route::post('/cetaksrtjln', [GudangBawahController::class, 'inputNopolDriver'])->name('cetaksrtjln');
