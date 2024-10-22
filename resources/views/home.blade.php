@@ -278,7 +278,7 @@
                 </div>
 
                 <script>
-                    document.addEventListener('DOMContentLoaded', function() {
+                document.addEventListener('DOMContentLoaded', function() {
                     const today = new Date();
                     let currentDate = new Date();
                     const calendarBody = document.getElementById('calendar-body');
@@ -424,8 +424,6 @@
         </div>
     </section>
 </main><!-- End #main -->
-
-
 
 <!-- ======= footer ======= -->
 @include('footer')
