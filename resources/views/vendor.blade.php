@@ -25,17 +25,29 @@
   <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
-  <!--Punyak e hover card listener--->
-  <style>
+ <!--Punyak e hover card listener-->
+<style>
     .card {
       transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Animasi perubahan warna */
     }
 
-    .card.hover-effect:hover {
-        background-color: #007bff; /* Warna biru saat hover */
-        color: #fff; /* Warna teks saat hover (putih) */
+    /* Hover effect khusus untuk setiap card */
+    .card.hover-effect-dpm:hover {
+      background-color: #d9ead3; /* Warna hijau muda saat hover */
+      color: #000; /* Warna teks saat hover */
+    }
+
+    .card.hover-effect-k7:hover {
+      background-color: #f2dbdb; /* Warna merah muda saat hover */
+      color: #000; /* Warna teks saat hover */
+    }
+
+    .card.hover-effect-k3:hover {
+      background-color: #ffc000; /* Warna kuning saat hover */
+      color: #000; /* Warna teks saat hover */
     }
   </style>
+
 
 
   <!-- Template Main CSS File -->
@@ -60,7 +72,7 @@
         <div class="row">
           <div class="col-lg-4">
             <a href="{{ url('dpm') }}" class="text-decoration-none">
-              <div class="card mb-3 shadow-sm rounded-3 h-100 surat hover-effect">
+                <div class="card mb-3 shadow-sm rounded-3 h-100 surat hover-effect hover-effect-dpm">
                 <div class="card-body d-flex justify-content-between align-items-center">
                   <!-- Ikon di kiri -->
                   <div class="icon">
@@ -78,7 +90,7 @@
 
           <div class="col-lg-4">
             <a href="{{ url('k7') }}" class="text-decoration-none">
-              <div class="card mb-3 shadow-sm rounded-3 h-100 surat hover-effect">
+                <div class="card mb-3 shadow-sm rounded-3 h-100 surat hover-effect hover-effect-k7">
                 <div class="card-body d-flex justify-content-between align-items-center">
                   <!-- Ikon di kiri -->
                   <div class="icon">
@@ -96,7 +108,7 @@
 
           <div class="col-lg-4">
             <a href="{{ url('k3') }}" class="text-decoration-none">
-              <div class="card mb-3 shadow-sm rounded-3 h-100 surat hover-effect">
+                <div class="card mb-3 shadow-sm rounded-3 h-100 surat hover-effect hover-effect-k3">
                 <div class="card-body d-flex justify-content-between align-items-center">
                   <!-- Ikon di kiri -->
                   <div class="icon">
@@ -196,18 +208,14 @@
 
   <!--Hover Listernernya-->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const cards = document.querySelectorAll('.hover-effect');
+   document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.hover-effect');
 
       cards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-          this.style.backgroundColor = '#007bff';  // Ubah ke biru saat hover
-          this.style.color = '#fff';               // Ubah teks menjadi putih
         });
 
         card.addEventListener('mouseleave', function() {
-          this.style.backgroundColor = '';         // Kembali ke warna default
-          this.style.color = '';                   // Kembali ke warna teks default
         });
       });
     });
