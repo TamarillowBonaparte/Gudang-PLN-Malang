@@ -68,7 +68,7 @@
                   </div>
                   <!-- Teks di kanan -->
                   <div class="text-end">
-                    <h5 class="card-title mb-1">7</h5>
+                    <h5 class="card-title mb-1">{{ $dpbjumlah }}</h5>
                     <p class="card-text">Total DPM</p>
                   </div>
                 </div>
@@ -86,7 +86,7 @@
                   </div>
                   <!-- Teks di kanan -->
                   <div class="text-end">
-                    <h5 class="card-title mb-1">$3,287.49</h5>
+                    <h5 class="card-title mb-1"> {{$k7jumlah}}</h5>
                     <p class="card-text">Total K7</p>
                   </div>
                 </div>
@@ -104,7 +104,7 @@
                   </div>
                   <!-- Teks di kanan -->
                   <div class="text-end">
-                    <h5 class="card-title mb-1">15</h5>
+                    <h5 class="card-title mb-1">{{$k3jumlah}}</h5>
                     <p class="card-text">Total K3</p>
                   </div>
                 </div>
@@ -138,9 +138,8 @@
                       <td>{{$surat->tgl_diminta}}</td>
                       <td>{{$surat->nomor_dpb}}</td>
                       <td>
-                        <a href="{{ route('vendor.show', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                        <a href="{{ route('print', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
-
+                        <a href="{{ route('show', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                        <a href="{{ route('print', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
                       </td>
                     </tr>
                     @empty
@@ -155,7 +154,7 @@
             </div>
           </div>
 
-          <!-- Kolom untuk tabel kedua -->
+          <!-- Tabel kedua -->
           <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
@@ -170,13 +169,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @forelse ($suratDpm as $surat)
+                    @forelse ($suratk7 as $k7)
                     <tr>
-                      <td>{{$surat->tgl_diminta}}</td>
-                      <td>{{$surat->nomor_dpb}}</td>
+                      <td>{{$k7->tgl_diminta}}</td>
+                      <td>{{$k7->nmr_k7}}</td>
                       <td>
-                        <a href="{{ route('vendor.show', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                        <a href="{{ route('print', Crypt::encryptString($surat->id_dpb)) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                        <a href="{{ route('showK7', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                        <a href="{{ route('print', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
                       </td>
                     </tr>
                     @empty

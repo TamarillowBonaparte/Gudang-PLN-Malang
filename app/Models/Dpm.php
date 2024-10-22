@@ -16,7 +16,8 @@ class Dpm extends Model
         'id_dpb_suratjalan',
         'tgl_diminta',
         'setuju',
-        'pemeriksa'
+        'pemeriksa',
+        'id_jnssurat'
     ];
     protected $primaryKey = 'id_dpb';
 
