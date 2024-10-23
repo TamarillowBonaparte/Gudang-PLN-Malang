@@ -32,6 +32,27 @@
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
 
     <style>
+        @page {
+            size: A4 landscape;
+            margin: 10mm;
+            margin-left: 5mm;
+            margin-right: 5mm
+        }
+
+        @media print {
+            html, body {
+                height:100vh;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden;
+            }
+        }
+        html, body {
+            width: 297mm;
+            /* height: 210mm; */
+            margin: 0px;
+            padding: 0px;
+        }
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -39,14 +60,6 @@
             width: 297mm; /* 297mm */
             height: 210mm;
         }
-
-        .a4 {
-            width: 297mm; /* 297mm */
-            height: 210mm;
-            margin: auto;
-            box-sizing: border-box;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -132,7 +145,7 @@
 </head>
 <body>
 
-    <div class="a4 fnt">
+    <div class="fnt">
         <table id="dpm" class="display">
             {{-- tr 0 --}}
             <tr>
