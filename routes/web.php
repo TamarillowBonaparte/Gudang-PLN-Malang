@@ -10,6 +10,8 @@ use App\Http\Controllers\DetailSuratController;
 use App\Http\Controllers\EditAkun;
 use App\Http\Controllers\DpmController;
 use App\Http\Controllers\DpmPreviewController;
+use App\Http\Controllers\GudangBawahHistory;
+use App\Http\Controllers\GudangBawahHistoryController;
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\GudangDPMController;
 use App\Http\Controllers\K3Controller;
@@ -86,6 +88,9 @@ Route::group(['middleware' => ['auth']], function() {
 
 // Route ke gudang
 Route::get('/gudang', [GudangController::class, 'index'])->name('gudang');
+// Route ke gudang history
+Route::get('/gudangbawahhistory', [GudangBawahHistoryController::class, 'index'])->name('gudangbawahhistory');
+
 
 // Route ke gudang DPM
 Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dpm');
