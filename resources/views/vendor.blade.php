@@ -187,7 +187,7 @@
                       <td>{{$k7->nmr_k7}}</td>
                       <td>
                         <a href="{{ route('showK7', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                        <a href="{{ route('print', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                        <a href="{{ route('printk7', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
                       </td>
                     </tr>
                     @empty

@@ -12,6 +12,7 @@ use App\Models\PengambilPenerima;
 use App\Models\Setuju;
 use App\Models\SuratJalan;
 use App\Models\Ulp;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -64,7 +65,7 @@ class K7Controller extends Controller
         $noK7 = DB::table('k7')
         ->orderBy('nmr_k7', 'desc')
         ->first();
-        $nomorK7String = $noK7? ($noDpm->nomor_dpb ?? 0) : 0;
+        $nomorK7String = $noK7? ($noK7->nmr_k7 ?? 0) : 0;
         $parts = explode('-', $nomorK7String);
         $lastPart = end($parts); // Mengambil bagian terakhir
 
@@ -184,9 +185,10 @@ class K7Controller extends Controller
         return redirect()->route('printk7', ['id' => Crypt::encryptString($id)]);
     }
 
-    public function cetak(String $encryptedId) {
+    public function cetak(String $encryptedId, String $srtJlnEncryptdId) {
 
         $id = Crypt::decryptString($encryptedId);
+        $srtJlnId = Crypt::decryptString($srtJlnEncryptdId);
 
         $dpm = DB::table('k7')
         ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id')
@@ -238,7 +240,7 @@ class K7Controller extends Controller
 
         $dpbsrt = DB::table('k7_srtjln')
         ->select('id')
-        ->where('id_srtjln', '=', $id)
+        ->where('id_srtjln', '=', $srtJlnId)
         ->pluck('id');
 
         $jumlah = DB::table('dftrmaterial_k7')
@@ -263,7 +265,9 @@ class K7Controller extends Controller
             ];
         }
 
-        return view('printk7', compact('dpm', 'material', 'jumlah', 'list'));
+        $pdf = Pdf::loadView('printk7', compact('dpm', 'material', 'jumlah', 'list'));
+
+        return $pdf->download('BonPemakaian_' . $id . '.pdf');
     }
 
     private function createIfNotExists($model, $field, $value) {
