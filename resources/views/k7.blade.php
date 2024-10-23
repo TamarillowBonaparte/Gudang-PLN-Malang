@@ -48,7 +48,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('cetaksurat') }}" method="POST">
+                <form action="{{ route('cetaksuratk7') }}" method="POST">
                     @csrf
                     <div class="row mt-3">
                         <div class="col-5">
@@ -57,42 +57,47 @@
                                     <label for="setuju" class="form-label">Setuju<span style="color: red;">*</span></label>
                                     <input type="text" name="setuju" id="setuju" list="setujuls" class="form-control input-focus mb-2" autocomplete="off" style="text-transform: uppercase;">
                                     <datalist id="setujuls">
-                                    {{-- @forelse ($setuju as $stj)
+                                    @forelse ($setuju as $stj)
                                         <option value="{{ $stj->nama }}">
-                                        </datalist>
                                     @empty
-
-                                    @endforelse --}}
+                                    @endforelse
+                                </datalist>
                                 </div>
                                 <div class="col">
                                     <label for="kepalagudang" class="form-label">Kepala Gudang<span style="color: red;">*</span></label>
 
                                     <input type="text" name="kepalagudang" id="kepalagudang" list="kplgdng" class="form-control input-focus disable mb-2">
                                     <datalist id="kplgdng">
-                                    {{-- @forelse ($kepalaGdng as $kplgdng)
+                                    @forelse ($kepalaGdng as $kplgdng)
                                         <option value="{{ $kplgdng->nama }}">
-                                        </datalist>
                                     @empty
-
-                                    @endforelse --}}
+                                    @endforelse
+                                </datalist>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col">
-                                    <label for="pemeriksa" class="form-label">Pemeriksa<span style="color: red;">*</span></label>
+                                    <label for="pemeriksa" class="form-label">Pemeriksa/Pengawas<span style="color: red;">*</span></label>
                                     <input type="text" name="pemeriksa" id="pemeriksa" list="pemeriksals" class="form-control input-focus mb-2">
                                     <datalist id="pemeriksals">
-                                    {{-- @forelse ($setuju as $stj)
-                                        <option value="{{ $stj->nama }}">
-                                        </datalist>
-                                    @empty
-
-                                    @endforelse --}}
+                                        @forelse ($pemeriksa as $pmrksa)
+                                            <option value="{{ $pmrksa->nama }}">
+                                        @empty
+    
+                                        @endforelse
+                                    </datalist>
                                 </div>
                                 <div class="col">
                                     <label for="penerima" class="form-label">Pengambil<span style="color: red;">*</span></label>
                                     <input type="text" name="penerima" id="penerima" class="form-control input-focus mb-2">
+                                    <datalist id="penerimals">
+                                        @forelse ($penerima as $pnrm)
+                                            <option value="{{ $pnrm->nama }}">
+                                        @empty
+    
+                                        @endforelse
+                                        </datalist>
                                 </div>
                             </div>
 
@@ -105,7 +110,7 @@
 
                             <label for="jenispkrjn" class="form-label">Jenis Pekerjaan<span style="color: red;">*</span></label>
                             <select class="form-select mb-2 nospk" id="jenispekerjaan" name="jenispekerjaan" aria-label="Default select example">
-                                <option selected></option>
+                                <option selected disabled>Pilih</option>
                                 <option value="1">SUTR</option>
                                 <option value="2">GKS</option>
                                 <option value="3">GKU</option>
@@ -128,11 +133,10 @@
 
                             <label for="ulp" class="form-label">Pelanggan ULP<span style="color: red;">*</span></label>
                             <select name="ulp" id="ulp" class="form-select mb-2 nospk" aria-label="Default select example">
-                                    <option selected></option>
+                                <option selected disabled>Pilih</option>
                                 @forelse ($ulps as $ulp)
                                     <option value="{{ $ulp->id_ulp }}">{{ $ulp->nama }}</option>
                                 @empty
-
                                 @endforelse
                             </select>
 
@@ -140,7 +144,7 @@
                                 <div class="col-3">
                                     <label for="pbpd" class="form-label">PB/PD<span style="color: red;">*</span></label>
                                     <select class="form-select mb-2 nospk" id="pbpd" name="pbpd" aria-label="Default select example">
-                                        <<option selected></option>
+                                        <option selected disabled>Pilih</option>
                                         <option value="1">PB</option>
                                         <option value="2">PD</option>
                                     </select>
@@ -154,9 +158,25 @@
                                     <input type="text" name="dayabaru" id="dayabaru" class="form-control input-focus mb-2">
                                 </div>
                             </div>
+                            <div class="col">
+                                <label for="merkmaterial" class="form-label">Merk Material</label>
+                                <input type="text" name="merkmaterial" id="merkmaterial" class="form-control input-focus mb-2">
+                            </div>
+
+                            <div class="col">
+                                <label for="noseri" class="form-label">No. Seri Material</label>
+                                <input type="text" name="noseri" id="noseri" class="form-control input-focus mb-2">
+                            </div>
+
+                            <div class="col">
+                                <label for="keterangan" class="form-label">Keterangan</label>
+                                <input type="text" name="keterangan" id="keterangan" class="form-control input-focus mb-2">
+                            </div>
+
                         </div>
 
                         <div class="col">
+
                             <label for="search" class="form-label">Nama Material<span style="color: red;">*</span></label>
                             <input type="text" class="form-control input-focus mb-2" list="materialdl" id="search" placeholder="Cari..." autocomplete="off">
                             <datalist id="materialdl">
@@ -200,7 +220,7 @@
                                 </table>
                             </div>
                             <div class="col text-end">
-                                <button class="btn btn-success mb-2" type="submit" id="cetaksurat">Cetak</button>
+                                <button class="btn btn-success mb-2" type="submit" target="_blank" id="cetaksurat">Cetak</button>
                             </div>
                         </div>
                     </div>
@@ -277,7 +297,7 @@
             let banyakDiminta = $('#item').val();
 
             // Pastikan semua field diisi sebelum menambahkan baris ke tabel
-            if (namaMaterial && normalisasi && satuan && banyakDiminta) {
+            if (namaMaterial && banyakDiminta) {
                 // Dapatkan jumlah baris yang sudah ada di tabel
                 let rowCount = $("table tbody tr").length + 1;
 
@@ -304,15 +324,15 @@
             }
         });
 
-    // Event listener untuk menghapus baris
-    $(document).on('click', '.delete-row', function() {
-        $(this).closest('tr').remove();
+        // Event listener untuk menghapus baris
+        $(document).on('click', '.delete-row', function() {
+            $(this).closest('tr').remove();
 
-        // Update nomor urut setelah penghapusan
-        $("table tbody tr").each(function(index) {
-            $(this).find('td:first').text(index + 1);
+            // Update nomor urut setelah penghapusan
+            $("table tbody tr").each(function(index) {
+                $(this).find('td:first').text(index + 1);
+            });
         });
-    });
     </script>
 
     <script>
