@@ -33,6 +33,10 @@
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
 
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <style>
         html, body {
             height: 100%; /* Pastikan body dan html memiliki tinggi 100% */
@@ -569,5 +573,17 @@
             </table>
         </div>
     </main>
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if ((event.ctrlKey || event.metaKey) && event.key === 'p') {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Peringatan',
+                    text: 'Fungsi print dinonaktifkan pada halaman ini.'
+                });
+            }
+        });
+    </script>
 </body>
 </html>
