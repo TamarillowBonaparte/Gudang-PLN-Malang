@@ -138,7 +138,7 @@
                       <td>{{$surat->tgl_diminta}}</td>
                       <td>{{$surat->nomor_dpb}}</td>
                       <td>
-                        <a href="{{ route('show', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                      <a href="{{ route('detail.page') }}" class="button btn-outline-primary mb-1">Detail</a>
                         <a href="{{ route('print', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
                       </td>
                     </tr>
@@ -148,7 +148,7 @@
                     </tr>
                     @endforelse
                   </tbody>
-                </table>
+                </table>  
                 <!-- End Tabel pertama -->
               </div>
             </div>
@@ -164,7 +164,7 @@
                   <thead>
                     <tr>
                       <th>Tanggal</th>
-                      <th>Nomor DPB</th>
+                      <th>Nomor K7</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>

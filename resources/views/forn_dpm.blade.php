@@ -293,7 +293,7 @@
             </tr>
             {{-- row 10 --}}
             <tr>
-                <td class="fntb pdtb hidet" style="vertical-align: top; height: width: 0px; 25px; padding-left: 2px; padding-right: 2px;">Urut</td>
+                <td class="fntb pdtb hidet" style="vertical-align: top; height:  0px; width: 25px; padding-left: 2px; padding-right: 2px;">Urut</td>
 
                 <td class="fntb pdtb hidet" style="vertical-align: top; height: 25px" colspan="5">(ditulis selengkap - lengkapnya)</td>
 

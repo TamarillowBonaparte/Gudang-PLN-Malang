@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GudangBawahController;
 use App\Http\Controllers\DaftarPermintaanMaterialController;
+use App\Http\Controllers\DetailPageController;
 use App\Http\Controllers\DetailSuratController;
 use App\Http\Controllers\EditAkun;
 use App\Http\Controllers\DpmController;
@@ -93,3 +94,5 @@ Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dp
 Route::get('/suratjalan', [GudangController::class, 'index'])->name('suratjalan');
 
 Route::post('/material-baru', [MaterialController::class, 'materialBaru'])->name('materialBaru');
+
+Route::get('/detail-page', [DetailPageController::class, 'index'])->name('detail.page');
