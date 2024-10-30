@@ -203,7 +203,6 @@
           </div>
         </div>
       </section>
-
   </main>  <!-- End #main -->
 
   <!--Hover Listernernya-->
@@ -230,20 +229,20 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-  const cards = document.querySelectorAll('.surat');
+      const cards = document.querySelectorAll('.surat');
 
-  cards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-      this.style.transition = 'transform 0.3s ease-in-out';
-      this.style.transform = 'scale(1.05)';
-    });
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transition = 'transform 0.3s ease-in-out';
+          this.style.transform = 'scale(1.05)';
+        });
 
-    card.addEventListener('mouseleave', function() {
-      this.style.transition = 'transform 0.3s ease-in-out';
-      this.style.transform = 'scale(1)';
+        card.addEventListener('mouseleave', function() {
+          this.style.transition = 'transform 0.3s ease-in-out';
+          this.style.transform = 'scale(1)';
+        });
+      });
     });
-  });
-});
   </script>
 
   <!-- Vendor JS Files -->
@@ -258,5 +257,4 @@
   <!-- Template Main JS File -->
   <script src="{{asset ('admin/assets/js/main.js')}}"></script>btn btn-outline-success
 </body>
-
 </html>

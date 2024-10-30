@@ -90,7 +90,7 @@
                                     </datalist>
                                 </div>
                                 <div class="col">
-                                    <label for="penerima" class="form-label">Penerima<span style="color: red;">*</span></label>
+                                    <label for="penerima" class="form-label">Penerima/Pengambil<span style="color: red;">*</span></label>
                                     <input type="text" name="penerima" id="penerima" class="form-control input-focus mb-2" list="penerimals" autocomplete="off">
                                     <datalist id="penerimals">
                                     @forelse ($penerima as $pnrm)
@@ -215,6 +215,38 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Riwayat Surat DPM/DPB</h5>
+                <table class="table datatable">
+                    <thead>
+                        <tr>
+                            <th>Tanggal Diminta</th>
+                            <th>Nomor Bon</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($suratDpm as $item)
+                            <tr>
+                                <td>{{ \Carbon\Carbon::parse($item->tgl_diminta)->format('d M Y') }}</td>
+                                <td>{{ $item->nomor_dpb }}</td>
+                                <td>{{ $item->nama_pelanggan }}</td>
+                                <td>
+                                    <a href="{{ route('show', ['id' => Crypt::encryptString($item->id_dpb_suratjalan), 'srtJlnId' => Crypt::encryptString($item->idsrtjln)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                                </td>
+                            </tr>
+                        @empty
+                        <tr>
+                            <td>Kosong</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
