@@ -201,6 +201,43 @@
               </div>
             </div>
           </div>
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Riwayat Terakhir Daftar Pemakaian Material (K7) </h5>
+                <!-- Tabel kedua -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>Nomor DPB</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @forelse ($suratk7 as $k7)
+                    <tr>
+                      <td>{{$k7->tgl_diminta}}</td>
+                      <td>{{$k7->nmr_k7}}</td>
+                      <td>
+                        <a href="{{ route('showK7', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                        <a href="{{ route('printk7', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                      </td>
+                    </tr>
+                    @empty
+                    <tr>
+                      <td colspan="3">Data tidak ditemukan</td>
+                    </tr>
+                    @endforelse
+                  </tbody>
+                </table>
+                <!-- End Tabel kedua -->
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </section>
 
