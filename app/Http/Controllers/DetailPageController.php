@@ -3,19 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailPage;
-use Barryvdh\Snappy\Facades\SnappyImage;
-use Illuminate\Http\Request;
+use Spatie\Browsershot\Browsershot;
+use Illuminate\Support\Facades\Storage;
 
 class DetailPageController extends Controller
 {
-    public function convertToImage($id_dpb)
+
+    public function index()
     {
-        // Mengambil data surat berdasarkan ID dari tabel 'surat'
+        return view('detailpage');
+    }
+
+    public function screenshotDetailsurat($id_dpb)
+    {
+        // Ambil data surat berdasarkan ID
         $surat = DetailPage::findOrFail($id_dpb);
 
-        // Mengonversi detailsurat.blade.php menjadi gambar
-        $image = SnappyImage::loadView('detail.surat', compact('surat'));
+        // URL atau path ke halaman yang akan di-screenshot
+        $url = route('detailsurat', ['id' => $id_dpb]);
 
-        return $image->inline(); // Menampilkan gambar langsung di browser
+        // Nama file gambar untuk disimpan
+        $fileName = 'screenshot_surat_' . $id_dpb . '.png';
+
+        // Simpan screenshot dari halaman detailsurat
+        Browsershot::url($url)
+            ->setScreenshotType('png', 100)
+            ->save(storage_path("app/public/{$fileName}"));
+
+        // Kembalikan path file gambar ke view detailpage
+        return view('detailpage', [
+            'surat' => $surat,
+            'imagePath' => Storage::url($fileName)
+        ]);
+    }
+
+    public function showDetailsurat($id_dpb)
+    {
+        $surat = DetailPage::findOrFail($id_dpb);
+        return view('detailsurat', compact('surat'));
     }
 }

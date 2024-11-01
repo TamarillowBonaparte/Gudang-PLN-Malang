@@ -76,11 +76,12 @@
     <div class="row vh-100">
       <!-- Sisi Kiri: Gambar -->
       <div class="col-md-6 left-side">
-        @forelse ($suratDPM as $surat)
-        <img src="{{ route('surat.image', ['id' => $surat->id]) }}" alt="Gambar Kerangka Surat" />
-        @empty
-
-        @endforelse
+        @if(isset($imagePath))
+        <img src="{{ $imagePath }}" alt="Screenshot Detailsurat">
+        @include('tabel                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ')
+        @else
+        <p>Gambar belum tersedia.</p>
+        @endif
       </div>
 
       <!-- Sisi Kanan: Penjelasan -->

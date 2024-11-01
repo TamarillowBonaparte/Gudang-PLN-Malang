@@ -96,3 +96,8 @@ Route::get('/suratjalan', [GudangController::class, 'index'])->name('suratjalan'
 Route::post('/material-baru', [MaterialController::class, 'materialBaru'])->name('materialBaru');
 
 Route::get('/detail-page', [DetailPageController::class, 'index'])->name('detail.page');
+
+Route::get('/detailsurat/{id}/screenshot', [DetailPageController::class, 'screenshotDetailsurat'])->name('detailsurat.screenshot');
+
+Route::get('/detailsurat/{id}', [DetailPageController::class, 'showDetailsurat'])->name('detailsurat.show');
+

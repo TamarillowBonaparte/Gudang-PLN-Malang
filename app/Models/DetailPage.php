@@ -14,5 +14,7 @@ class DetailPage extends Model
 
     // Tentukan jika primary key berbeda dari 'id'
     protected $primaryKey = 'id_dpb';  // Misal, jika primary key adalah 'id_surat'
+
+    public $timestamps = false; 
 }
 
