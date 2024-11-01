@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\DaftarAkun;
 use App\Http\Controllers\DaftarAkunController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -9,8 +8,6 @@ use App\Http\Controllers\DaftarPermintaanMaterialController;
 use App\Http\Controllers\DetailSuratController;
 use App\Http\Controllers\EditAkun;
 use App\Http\Controllers\DpmController;
-use App\Http\Controllers\DpmPreviewController;
-use App\Http\Controllers\GudangBawahHistory;
 use App\Http\Controllers\GudangBawahHistoryController;
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\GudangDPMController;
@@ -22,6 +19,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShowForm;
+use App\Http\Controllers\testpdf;
 
 // Route ke halaman Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -47,6 +45,8 @@ Route::get('/suratk7', [ShowForm::class, 'index'])->name('suratk7');
 Route::get('/searchk3', [K3Controller::class, 'searchK3']);
 // route input K3
 Route::post('/cetaksuratk3', [K3Controller::class, 'store'])->name('cetaksuratk3');
+Route::get('/printk3/{id}', [K3Controller::class, 'cetak'])->name('printk3');
+Route::get('/showk3/{id}', [K3Controller::class, 'show'])->name('showk3');
 
 Route::get('/print/{id}/{srtJlnId}', [VendorController::class, 'cetak'])->name('print');
 Route::get('/show/{id}/{srtJlnId}', [VendorController::class, 'show'])->name('show');
@@ -98,3 +98,5 @@ Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dp
 Route::get('/suratjalan', [GudangController::class, 'index'])->name('suratjalan');
 
 Route::post('/material-baru', [MaterialController::class, 'materialBaru'])->name('materialBaru');
+
+Route::get('/testpdf', [testpdf::class, 'index'])->name('testpdf');
