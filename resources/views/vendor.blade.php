@@ -205,7 +205,7 @@
           <div class="col-lg-6">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Riwayat Terakhir Daftar Pemakaian Material (K7) </h5>
+                <h5 class="card-title">Riwayat Terakhir Daftar Pengembalian Material (K3) </h5>
                 <!-- Tabel kedua -->
                 <table class="table datatable">
                   <thead>
