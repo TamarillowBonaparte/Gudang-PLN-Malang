@@ -40,7 +40,7 @@ Route::post('register', [DaftarAkunController::class, 'store'])->name('register'
 Route::get('/search_k7', [K7Controller::class, 'search'])->name('search_k7');
 //Route cetak surat K7
 Route::post('/cetaksuratk7', [K7Controller::class, 'store'])->name('cetaksuratk7');
-Route::get('/printk7/{id}', [K7Controller::class, 'cetak'])->name('printk7');
+Route::get('/printk7/{id}/{srtJlnId}', [K7Controller::class, 'cetak'])->name('printk7');
 Route::get('/suratk7', [ShowForm::class, 'index'])->name('suratk7');
 
 Route::get('/searchk3', [K3Controller::class, 'searchK3']);

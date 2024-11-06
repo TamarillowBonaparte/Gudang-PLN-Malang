@@ -33,6 +33,8 @@
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         html, body {
             height: 100%; /* Pastikan body dan html memiliki tinggi 100% */
@@ -177,7 +179,7 @@
                     <td class="hideb hider" style="width: 20px"></td>
                     <td colspan="4" rowspan="2" class="fntb hidel" style="font-size: 20px; padding: 0px; width: 20%; height: 0%;">KODE 7</td>
                     <td colspan="4" class="hider hideb fntb pdtb" style="text-align: left; padding-left: 40px; overflow: visible">PT. PLN (PERSERO) UID JATIM UP3 MALANG</td>
-    
+
                     <td class="hiderl hideb"></td>
                     <td class="hiderl hideb"></td>
                     <td class="hiderl hideb"></td>
@@ -186,7 +188,7 @@
                     <td class="hiderl hideb"></td>
                     <td class="hiderl hideb"></td>
                     <td class="hiderl hideb"></td>
-    
+
                     <td class="hider hideb"></td>
                     <td class="hiderl hideb"></td>
                     <td class="hiderl hideb"></td>
@@ -210,7 +212,7 @@
                         <td class="fntb hideb hider pdtb">Tgl.</td>
                         <td class="fntb hideb hiderl pdtb">Bln.</td>
                         <td class="fntb hideb hidel pdtb" style="padding-left: 0px; padding-right: 0px;">Thn.</td>
-    
+
                         <td rowspan="3" colspan="5" class="fntb hidet" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px; width: 0%; font-size: 18px; color: #ff0000">{{ $i->nmr_k7 }}</td>
                     </tr>
                     {{-- row 4 --}}
@@ -233,14 +235,14 @@
                         <td class="fntb hideb hider pdtb">Tgl.</td>
                         <td class="fntb hideb hiderl pdtb">Bln.</td>
                         <td class="fntb hideb hidel pdtb">Thn.</td>
-    
+
                         <td class="fntb fontl pdtb hider hideb">Kepada:</td>
                         <td class="fntb fontl pdtb hidel hideb" style="width: 0px" colspan="5"></td>
-    
+
                         <td class="fntb fontl pdtb hideb" colspan="6">Harap dikirim ke :</td>
-    
+
                         <td class="hide fntb fontl pdtb" colspan="3">Kode Jurnal</td>
-    
+
                         <td class="hiderl hideb"></td>
                         <td class="hidel hideb"></td>
                     </tr>
@@ -250,12 +252,12 @@
                         <td class="hider hidet"></td>
                         <td class="hiderl hidet"></td>
                         <td class="hidel hidetb"></td>
-    
+
                         <td class="fntb fontl pdtb hider hidetb" style="width: 0px">Gudang:</td>
                         <td class="fntb fontl pdtb hidel hidetb" colspan="5">Gudang PLN Aries Munandar</td>
-    
+
                         <td class="fntb fontl pdtb hidetb" colspan="6">{{ $i->nmu }}</td>
-    
+
                         <td class="hider hidetb"></td>
                         <td class="hide"></td>
                         <td class="hide"></td>
@@ -268,54 +270,54 @@
                         <td class="fntb pdtb"></td>
                         <td class="fntb pdtb"></td>
                         <td class="fntb pdtb"></td>
-    
+
                         <td class="fntb fontl pdtb hider hidet">Alamat:</td>
                         <td class="fntb fontl pdtb hidel hidet" colspan="5">Jl. Aries Munandar No. 77A Malang</td>
-    
+
                         <td class="fntb fontl pdtb hidet" colspan="6">{{ $i->almt }}</td>
-    
+
                         <td class="hidet hider"></td>
                         <td class="hidet hiderl"></td>
                         <td class="hidet hiderl"></td>
                         <td class="hidet hiderl"></td>
                         <td class="hidet hidel"></td>
-                    </tr>                
-                @empty                
-                @endforelse        
+                    </tr>
+                @empty
+                @endforelse
                 {{-- row 9 --}}
                 <tr>
                     <td class="fntb pdtb hideb" style="vertical-align: bottom; height: 25px; width: 0px; padding-left: 2px; padding-right: 2px;">No.</td>
-    
+
                     <td class="fntb pdtb hideb" style="vertical-align: bottom; height: 25px; overflow: visible" colspan="5">Nama Barang</td>
-    
+
                     <td class="fntb pdtb hideb" style="vertical-align: bottom; height: 25px; width: 0px" colspan="2">No.</td>
-    
+
                     <td class="fntb pdtb hideb" style="vertical-align: bottom">Sa-</td>
-    
+
                     <td class="fntb pdtb hideb" colspan="6">Banyaknya yang diminta</td>
-    
+
                     <td class="fntb pdtb hideb" colspan="4">Banyak yang diterima</td>
-    
+
                     <td class="fntb pdtb hideb" style="vertical-align: bottom" colspan="3">Jumlah Uang</td>
                 </tr>
                 {{-- row 10 --}}
                 <tr>
                     <td class="fntb pdtb hidet" style="vertical-align: top; height: width: 0px; 25px; padding-left: 2px; padding-right: 2px;">Urut</td>
-    
+
                     <td class="fntb pdtb hidet" style="vertical-align: top; height: 25px" colspan="5">(ditulis selengkap - lengkapnya)</td>
-    
+
                     <td class="fntb pdtb hidet" style="vertical-align: top; height: 25px" colspan="2">Normalisasi</td>
-    
+
                     <td class="fntb pdtb hidet" style="vertical-align: top">tuan</td>
-    
+
                     <td class="fntb pdtb " colspan="3">dengan angka</td>
-    
+
                     <td class="fntb pdtb " colspan="3">dengan huruf</td>
-    
+
                     <td class="fntb pdtb " colspan="2">dengan angka</td>
-    
+
                     <td class="fntb pdtb " colspan="2">dengan huruf</td>
-    
+
                     <td class="fntb pdtb hidet" style="vertical-align: top" colspan="3">Rp.</td>
                 </tr>
                 {{-- row 11 --}}
@@ -331,7 +333,7 @@
                     <td class="bdottb" colspan="3"></td>
                 </tr>
                 {{-- row 12 --}}
-                @forelse ($material as $i)                            
+                @forelse ($material as $i)
                     <tr>
                         <td class="bdottb pdtb">{{ $loop->iteration }}</td>
                         <td class="bdottb pdtb" colspan="5">{{ $i['lMaterial']->nammat }}</td>
@@ -343,7 +345,7 @@
                         <td class="bdottb pdtb" colspan="2"></td>
                         <td class="bdottb" colspan="3"></td>
                     </tr>
-                @empty                
+                @empty
                 @endforelse
                 {{-- row 13 --}}
                 @for ($i = $list; $i <= 10; $i++)
@@ -360,15 +362,15 @@
                     </tr>
                 @endfor
                 {{-- row 23 --}}
-                @forelse ($dpm as $i)                        
+                @forelse ($dpm as $i)
                     <tr>
                         <td class="hidetb pdtb"></td>
                         <td class="fntb hide pdtb txtalgl" colspan="3">VENDOR</td>
                         <td class="fntb hide pdtb">:</td>
                         <td class="fntb hidel hidetb pdtb txtalgl" colspan="7" style="color: #0000ff">{{ $i->nmu }}</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="3">MERK MATERIAL :</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="4">{{ $i->merk_material }}</td>
                         <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
                     </tr>
@@ -378,9 +380,9 @@
                         <td class="fntb hide pdtb txtalgl" colspan="3">N0. SPK</td>
                         <td class="fntb hide pdtb">:</td>
                         <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">{{ $i->nospk}}</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="3">NOMOR SERI :</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="4">{{ $i->nosrmat }}</td>
                         <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
                     </tr>
@@ -390,9 +392,9 @@
                         <td class="fntb hide pdtb txtalgl" colspan="3">JENIS PEKERJAAN</td>
                         <td class="fntb hide pdtb">:</td>
                         <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">{{ $i->jpkj }}</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="3">KETERANGAN :</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="4">{{ $i->keterangan }}</td>
                         <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
                     </tr>
@@ -402,9 +404,9 @@
                         <td class="fntb hide pdtb txtalgl" colspan="3">IDPEL</td>
                         <td class="fntb hide pdtb">:</td>
                         <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">{{ $i->idpel }}</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
                         <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
                     </tr>
@@ -414,9 +416,9 @@
                         <td class="fntb hide pdtb txtalgl" colspan="3">NAMA PELANGGAN</td>
                         <td class="fntb hide pdtb">:</td>
                         <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">{{ $i->np }}</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
                         <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
                     </tr>
@@ -426,9 +428,9 @@
                         <td class="fntb hide pdtb txtalgl" colspan="3">ALAMAT PELANGGGAN</td>
                         <td class="fntb hide pdtb">:</td>
                         <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">{{ $i->almtp }}</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
                         <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
                     </tr>
@@ -441,9 +443,9 @@
                         <td class="fntb hide pdtb txtalgl" colspan="2">{{ $i->tdlama }}</td>
                         <td class="fntb hide pdtb txtalgl" colspan="1">ke</td>
                         <td class="fntb hidel hidetb pdtb txtalgl" colspan="3">{{ $i->tdbaru }}</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
                         <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
                     </tr>
@@ -456,13 +458,13 @@
                         <td class="fntb hidet hiderl pdtb txtalgl"></td>
                         <td class="fntb hidet hiderl pdtb txtalgl"></td>
                         <td class="fntb hidel hidet pdtb txtalgl" colspan="4">{{ $i->kpos }}</td>
-    
+
                         <td class="fntb hidet pdtb txtalgl" colspan="3"></td>
-    
+
                         <td class="fntb hidet pdtb txtalgl" colspan="4"></td>
                         <td class="fntb hidet pdtb txtalgl" colspan="3"></td>
                     </tr>
-                
+
                     {{-- row 31 --}}
                     <tr>
                         <td class="hideb" colspan="22"></td>
@@ -470,56 +472,56 @@
                     {{-- row 32 --}}
                     <tr>
                         <td class="fntb hidetb pdtb txtalgl" colspan="2" style="vertical-align: bottom; height: 30px">Banyak jenis</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="4" style="vertical-align: bottom; height: 30px">Sifat pekerjaan</td>
-    
+
                         <td class="fntb hidetb hiderl pdtb txtalgl" colspan="1" style="vertical-align: bottom; height: 30px">No. PK</td>
                         <td class="fntb hidetb hiderl pdtb txtalgl" colspan="5" style="vertical-align: bottom; height: 30px">:</td>
-    
+
                         <td class="fntb hidetb hiderl pdtb txtalgl" colspan="3" style="vertical-align: bottom; height: 30px">No. Urut</td>
-    
+
                         <td class="hide" colspan="4"></td>
-    
+
                         <td class="fntb hidetb hidel pdtb" colspan="3" style="vertical-align: bottom; height: 30px">Kode Perkiraan</td>
                     </tr>
                     {{-- row 33 --}}
                     <tr>
                         <td class="fntb hidetb pdtb txtalgl" colspan="2">barang :</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="4">Perbaikan/pemeliharaan</td>
-    
+
                         <td class="hidetb hiderl pdtb txtalgl" colspan="6"></td>
-    
+
                         <td class="fntb hidetb hiderl pdtb txtalgl" colspan="3">SKI/SKP/PKP/PFK</td>
-    
+
                         <td class="fntb hidetb hiderl pdtb txtalgl"></td>
-    
+
                         <td class="fntb hidetb hiderl pdtb" colspan="3">No. P. K</td>
-    
+
                         <td class="hidel hidetb" colspan="3"></td>
                     </tr>
                     {{-- row 34 --}}
                     <tr>
                         <td class="fntb hidet pdtb txtalgl" colspan="2"></td>
-    
+
                         <td class="hidet pdtb txtalgl" colspan="4" style="vertical-align: top; height: 25px"></td>
-    
+
                         <td class="fntb hidet hiderl pdtb txtalgl" colspan="" style="vertical-align: bottom; height: 25px; padding-right: 0px;">No. PDL</td>
-    
+
                         <td class="hidet hiderl pdtb txtalgl" colspan="7" style="vertical-align: bottom; height: 25px; padding-right: 0px;">.............................................</td>
-    
+
                         <td class="hidet hidel pdtb" colspan="8" style="vertical-align: bottom; height: 25px"></td>
                     </tr>
                     {{-- row 35 --}}
                     <tr>
                         <td class="fntb hidetb hider pdtb txtalgl" colspan="2">Setuju :</td>
                         <td class="fntb hidetb hidel pdtb txtalgl" colspan="3"></td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="5">Kepala Gudang :</td>
-    
+
                         <td class="fntb hidetb hider pdtb txtalgl" colspan="3">Pemeriksa :</td>
                         <td class="fntb hidetb hidel pdtb txtalgl" colspan="4">Pengawas</td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="5">Penerima :</td>
                     </tr>
                     {{-- row 36 --}}
@@ -527,7 +529,7 @@
                         <td class="fntb hidetb txtalgl" colspan="5"></td>
                         <td class="fntb hidetb txtalgl" colspan="5"></td>
                         <td class="fntb hidetb txtalgl" colspan="7"></td>
-    
+
                         <td class="fntb hidetb pdtb txtalgl" colspan="5">{{ $i->nmu }}</td>
                     </tr>
                     {{-- row 37 --}}
@@ -552,10 +554,22 @@
                         <td class="fntb hidet pdtb" colspan="5">{{ $i->penerima }}</td>
                     </tr>
                 @empty
-                    
+
                 @endforelse
             </table>
         </div>
     </main>
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if ((event.ctrlKey || event.metaKey) && event.key === 'p') {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Peringatan',
+                    text: 'Fungsi print dinonaktifkan pada halaman ini.'
+                });
+            }
+        });
+    </script>
 </body>
 </html>
