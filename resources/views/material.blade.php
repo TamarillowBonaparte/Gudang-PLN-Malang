@@ -300,9 +300,9 @@
             @csrf
             <div class="modal-body">                           
                 <div class="form-group row mb-2">
-                  <label for="" class="col col-form-label">Tambah Material :</label>
+                  <label for="tambahmaterial" class="col col-form-label">Tambah Material :</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control">
+                    <input type="text" name="tambahmaterial" id="tambahmaterial" class="form-control">
                   </div>
                 </div>
 

@@ -20,7 +20,7 @@ class MaterialController extends Controller
             'material.nama as nammat',
             'material_masuk.tgl'
         )
-        ->join('material', 'material_masuk.id_material', '=', 'material.id_material')
+        ->join('material', 'material_masuk.id_material', '=', 'mater2ial.id_material')
         ->orderByDesc('tgl')
         ->get();
 
@@ -30,8 +30,13 @@ class MaterialController extends Controller
         )
         ->get();
 
-        return view ('material', ['materials' => $materials, 'MaterialMasuk' => $MaterialMasuk, 'detailMat' => $detailMat ]);
+        $material = DB::table('material')->where('id_material', "=", 3)->get();
 
+        foreach ($material as $item) {
+            dd($item);
+        }
+
+        return view ('material', ['materials' => $materials, 'MaterialMasuk' => $MaterialMasuk, 'detailMat' => $detailMat]);
     }
 
     public function materialBaru(Request $request) {
@@ -56,8 +61,6 @@ class MaterialController extends Controller
             'id_material' => $idMat
         ]);
 
-
-
         return redirect()->back()->with('success', 'Material baru berhasil ditambahkan.');
 
     }
@@ -72,7 +75,21 @@ class MaterialController extends Controller
         return response()->json($material);
     }
 
-    public function tambahMaterial() {
-        
+    public function tambahMaterial(Request $request, String $id) {
+
+        $material = DB::table('material')->where('id_material', "=", $id)->get();
+
+        foreach ($material as $item) {
+            dd($item);
+        }
+
+        if ($request->input('tambahmaterial') != null) {
+            
+            $addMaterial = Material::find($id);
+
+            $addMaterial->nama = $request->input('tambahmaterial');
+        }
+
+        return redirect()->back()->with('success', 'Material berhasil ditambahkan.');
     }
 }
