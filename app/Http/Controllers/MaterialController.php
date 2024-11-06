@@ -7,25 +7,30 @@ use App\Models\MaterialMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function Laravel\Prompts\select;
+
 class MaterialController extends Controller
 {
     public function index()
     {
         $materials = Material::all();
 
-
         $MaterialMasuk = DB::table('material_masuk')
         ->select(
             'material.nama as nammat',
             'material_masuk.tgl'
-
         )
         ->join('material', 'material_masuk.id_material', '=', 'material.id_material')
         ->orderByDesc('tgl')
         ->get();
 
+        $detailMat = DB::table('material')
+        ->select(
+            '*'
+        )
+        ->get();
 
-        return view ('material', ['materials' => $materials, 'MaterialMasuk'=> $MaterialMasuk ]);
+        return view ('material', ['materials' => $materials, 'MaterialMasuk' => $MaterialMasuk, 'detailMat' => $detailMat ]);
 
     }
 
@@ -55,5 +60,19 @@ class MaterialController extends Controller
 
         return redirect()->back()->with('success', 'Material baru berhasil ditambahkan.');
 
+    }
+
+    public function detailMaterial($id) {
+
+        $material = DB::table('material')
+        ->select('*')
+        ->where('id_material', '=', $id)
+        ->get();
+
+        return response()->json($material);
+    }
+
+    public function tambahMaterial() {
+        
     }
 }

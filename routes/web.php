@@ -20,6 +20,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShowForm;
+use App\Models\Material;
 
 // Route ke halaman Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -58,6 +59,9 @@ Route::get('/suratongoing', [GudangBawahController::class, 'showSurat'])->name('
 
 //route ke halaman setting
 Route::get('/setting', [SettingController::class, 'index'])->name('setting');
+
+Route::get('/detailmaterial/{id}', [MaterialController::class, 'detailMaterial'])->name('detailmaterial');
+Route::post('/tambahmaterial', [MaterialController::class, 'tambahMaterial'])->name('tambahmaterial');
 
 // Route ke edit akun
 Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');
