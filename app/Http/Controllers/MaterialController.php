@@ -7,26 +7,36 @@ use App\Models\MaterialMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function Laravel\Prompts\select;
+
 class MaterialController extends Controller
 {
     public function index()
     {
         $materials = Material::all();
 
-
         $MaterialMasuk = DB::table('material_masuk')
         ->select(
             'material.nama as nammat',
             'material_masuk.tgl'
-
         )
-        ->join('material', 'material_masuk.id_material', '=', 'material.id_material')
+        ->join('material', 'material_masuk.id_material', '=', 'mater2ial.id_material')
         ->orderByDesc('tgl')
         ->get();
 
+        $detailMat = DB::table('material')
+        ->select(
+            '*'
+        )
+        ->get();
 
-        return view ('material', ['materials' => $materials, 'MaterialMasuk'=> $MaterialMasuk ]);
+        $material = DB::table('material')->where('id_material', "=", 3)->get();
 
+        foreach ($material as $item) {
+            dd($item);
+        }
+
+        return view ('material', ['materials' => $materials, 'MaterialMasuk' => $MaterialMasuk, 'detailMat' => $detailMat]);
     }
 
     public function materialBaru(Request $request) {
@@ -51,9 +61,35 @@ class MaterialController extends Controller
             'id_material' => $idMat
         ]);
 
-
-
         return redirect()->back()->with('success', 'Material baru berhasil ditambahkan.');
 
+    }
+
+    public function detailMaterial($id) {
+
+        $material = DB::table('material')
+        ->select('*')
+        ->where('id_material', '=', $id)
+        ->get();
+
+        return response()->json($material);
+    }
+
+    public function tambahMaterial(Request $request, String $id) {
+
+        $material = DB::table('material')->where('id_material', "=", $id)->get();
+
+        foreach ($material as $item) {
+            dd($item);
+        }
+
+        if ($request->input('tambahmaterial') != null) {
+            
+            $addMaterial = Material::find($id);
+
+            $addMaterial->nama = $request->input('tambahmaterial');
+        }
+
+        return redirect()->back()->with('success', 'Material berhasil ditambahkan.');
     }
 }
