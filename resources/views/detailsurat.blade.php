@@ -581,13 +581,13 @@
             // Tambahkan event listener untuk mendeteksi penekanan tombol
             document.addEventListener('keydown', function(event) {
                 // Cek jika tombol Ctrl dan P ditekan
-                if (event.ctrlKey && event.key === 'p') {
-                    // Jika ID pengguna bukan 1, disable tindakan cetak
-                    if (userId !== 7) {
-                        event.preventDefault(); // Mencegah aksi default (print)
-                        alert('Anda tidak memiliki izin untuk mencetak.'); // Opsional: tampilkan pesan
-                    }
-                }
+                // if (event.ctrlKey && event.key === 'p') {
+                //     // Jika ID pengguna bukan 1, disable tindakan cetak
+                //     if (userId !== 7) {
+                //         event.preventDefault(); // Mencegah aksi default (print)
+                //         alert('Anda tidak memiliki izin untuk mencetak.'); // Opsional: tampilkan pesan
+                //     }
+                // }
             });
         });
     </script>
