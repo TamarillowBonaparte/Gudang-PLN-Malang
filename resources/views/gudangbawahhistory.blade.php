@@ -49,64 +49,16 @@
 
   <main id="mai" class="main">
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Riwayat Surat Yang Sudah Memiliki Surat Jalan</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">Riwayat Surat Jalan</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section mt-5 ms-4 me-4">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">DPB/DPM Belum Memiliki Surat Jalan</h5>
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th>Tanggal Diminta</th>
-                    <th>Nomer Surat</th>
-                    <th>Vendor</th>
-                    <th>Pelanggan</th>
-                    <th>No. Polisi</th>
-                    <th>Pengemudi</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody id="dpmOngoing">
-                  @forelse ($dpmOngoing as $ongoing)
-                  <tr>
-                    <form action="{{ route('cetaksrtjln') }}" method="POST">
-                      @csrf
-                      <td style="display:none;"><input type="text" name="idsrtjln" value="{{ $ongoing->id_srtjln }}"></td>
-                      <td>{{ \Carbon\Carbon::parse($ongoing->tgl)->format('d M Y') }}</td>
-                      <td>{{ $ongoing->nomor }}</td>
-                      <td>{{ $ongoing->vendor }}</td>
-                      <td>
-                        <input type="text" name="nopol" class="form-control" placeholder="Contoh: N 1234 CG" maxlength="11" required oninput="this.value = this.value.toUpperCase();">
-                      </td>
-                      <td>
-                        <input type="text" name="pengemudi" class="form-control" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();" required>
-                      </td>
-                      <td>
-                        <button type="submit" class="btn btn-outline-success" onclick="return confirmSubmit()">Cetak</button>
-                      </td>
-                    </form>
-                  </tr>
-                  @empty
-                  @endforelse
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {{-- <section class="section ms-4 me-4">
+    <section class="section ms-4 me-4">
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
@@ -145,13 +97,14 @@
           </div>
         </div>
       </div>
-    </section> --}}
+    </section>
 
   </main><!-- End #main -->
-{{--
+
   <!-- Footer -->
-  @include('footergudang')
+  {{-- @include('footergudang')
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> --}}
+
 
   <!-- Vendor JS Files -->
   <script src="{{asset('admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>

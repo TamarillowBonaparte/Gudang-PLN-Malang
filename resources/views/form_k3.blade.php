@@ -17,7 +17,6 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-
     <!-- Vendor CSS Files -->
     <link href="{{asset ('admin/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset ('admin/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
@@ -137,7 +136,7 @@
         }
 
         .dpm {
-            background-color: #f2dbdb
+            background-color: #ffc000
         }
 
     </style>
@@ -175,8 +174,8 @@
             {{-- row 1 --}}
             <tr class="dpm">
                 <td class="hideb hider" style="width: 20px"></td>
-                <td colspan="4" rowspan="2" class="fntb hidel" style="font-size: 20px; padding: 0px; width: 20%; height: 0%;">KODE 7</td>
-                <td colspan="4" class="hider hideb fntb pdtb" style="text-align: left; padding-left: 40px; overflow: visible">PT. PLN (PERSERO) UID JATIM UP3 MALANG</td>
+                <td colspan="4" rowspan="2" class="fntb hidel" style="font-size: 20px; padding: 0px; width: 20%; height: 0%;">TUG 10</td>
+                <td colspan="4" class="hider hideb fntb pdtb txtalgl" style="padding-left: 40px; overflow: visible">PT. PLN (PERSERO) UID JATIM UP3 MALANG</td>
 
                 <td class="hiderl hideb"></td>
                 <td class="hiderl hideb"></td>
@@ -187,16 +186,12 @@
                 <td class="hiderl hideb"></td>
                 <td class="hiderl hideb"></td>
 
-                <td class="hider hideb"></td>
-                <td class="hiderl hideb"></td>
-                <td class="hiderl hideb"></td>
-                <td class="hiderl hideb"></td>
-                <td class="hidel hideb"></td>
+                <td class="hideb fntb pdtb txtalgl" colspan="5">Untuk TUG (Tata Usaha Gudang)</td>
             </tr>
             {{-- row 2 --}}
             <tr class="dpm">
                 <td class="hidet hider"></td>
-                <td rowspan="4" colspan="12" class="fntb hidet pdtb" style="font-size: 24px; width: 600px; height: 0px;">BON PEMAKAIAN</td>
+                <td rowspan="4" colspan="12" class="fntb hidet pdtb" style="font-size: 24px; width: 600px; height: 0px;">BON PENGEMBALIAN MATERIAL</td>
                 <td class="hider hidetb"></td>
                 <td class="hide"></td>
                 <td class="hide"></td>
@@ -210,7 +205,7 @@
                 <td class="fntb hideb hiderl pdtb">Bln.</td>
                 <td class="fntb hideb hidel pdtb" style="padding-left: 0px; padding-right: 0px;">Thn.</td>
 
-                <td rowspan="3" colspan="5" class="fntb hidet" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px; width: 0%; font-size: 18px; color: #ff0000">TUG 5 NS.MLG24-0000</td>
+                <td rowspan="3" colspan="5" class="fntb hidet" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px; width: 0%; font-size: 18px; color: #ff0000">TUG 10.MLG24-0000</td>
             </tr>
             {{-- row 4 --}}
             <tr class="dpm">
@@ -234,7 +229,7 @@
                 <td class="fntb hideb hidel pdtb">Thn.</td>
 
                 <td class="fntb fontl pdtb hider hideb">Kepada:</td>
-                <td class="fntb fontl pdtb hidel hideb" style="width: 0px" colspan="5"></td>
+                <td class="fntb fontl pdtb hidel hideb" style="width: 0px" colspan="5">PT PLN (PERSERO) UP3 MALANG</td>
 
                 <td class="fntb fontl pdtb hideb" colspan="6">Harap dikirim ke :</td>
 
@@ -423,168 +418,116 @@
                 <td class="bdottb pdtb" colspan="2"></td>
                 <td class="bdottb" colspan="3"></td>
             </tr>
-            {{-- row 20 --}}
-            <tr>
-                <td class="bdottb pdtb">9</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 21 --}}
-            <tr>
-                <td class="bdottb pdtb">10</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
             {{-- row 22 --}}
             <tr>
-                <td class="bdottb pdtb" style="height: 15px"></td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
+                <td class="hidetb pdtb" style="height: 15px"></td>
+                <td class="hidetb hiderl pdtb" colspan="5"></td>
+                <td class="hidetb hiderl pdtb" colspan="2"></td>
+                <td class="hidetb hiderl pdtb"></td>
+                <td class="hidetb hiderl pdtb" colspan="3"></td>
+                <td class="hidetb hiderl pdtb" colspan="3"></td>
+                <td class="hidetb hiderl pdtb" colspan="2"></td>
+                <td class="hidetb hiderl pdtb" colspan="2"></td>
+                <td class="hidetb hidel" colspan="3"></td>
             </tr>
             {{-- row 23 --}}
             <tr>
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">VENDOR</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7" style="color: #0000ff">PT XXXXXXXX</td>
+                <td class="fntb hide pdtb txtalgl" colspan="7">PT XXXXXXXX</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="3">MERK MATERIAL :</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">NOMOR SERI</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
-                <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
+                <td class="fntb hide pdtb" colspan="1">:</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">MAXIMA NO.190300017-P</td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="3"></td>
             </tr>
             {{-- row 24 --}}
             <tr>
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">N0. SPK</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">000.KR/DAN.00.00/A00000000/0000 - 000/PK/REN.UP3-MLG/0000</td>
+                <td class="fntb hide pdtb txtalgl" colspan="7">000.KR/DAN.00.00/A00000000/0000 - 000/PK/REN.UP3-MLG/0000</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="3">NOMOR SERI :</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">KONDISI MATERIAL</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
-                <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
+                <td class="fntb hide pdtb" colspan="1">:</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">Masih dapat dipergunakan</td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="3"></td>
             </tr>
             {{-- row 25 --}}
             <tr>
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">JENIS PEKERJAAN</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">GKS</td>
+                <td class="fntb hide hidetb pdtb txtalgl" colspan="7">GKS</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="3">KETERANGAN :</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">KETERANGAN DETILE</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
-                <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
+                <td class="fntb hide pdtb" colspan="1">:</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">Ex. Uprating Trafo D.0027 - ULP Batu</td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="3"></td>
             </tr>
             {{-- row 26 --}}
             <tr>
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">IDPEL</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">0000000000000</td>
+                <td class="fntb hide hidetb pdtb txtalgl" colspan="7">0000000000000</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">NO. DPB / BUKTI</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
-                <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
+                <td class="fntb hide pdtb" colspan="1">:</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3"></td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="3"></td>
             </tr>
             {{-- row 27 --}}
             <tr>
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">NAMA PELANGGAN</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">XXXXX XXXXXXXX</td>
+                <td class="fntb hide hidetb pdtb txtalgl" colspan="7">XXXXX XXXXXXXX</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">LOKASI PENEMPATAN MATERIAL/DIPAKAI</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
-                <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
+                <td class="fntb hide pdtb" colspan="1">:</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">Gudang PLN ULP Blimbing</td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="3"></td>
             </tr>
             {{-- row 28 --}}
             <tr>
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">ALAMAT PELANGGGAN</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="7">JL XXXXXX XX</td>
+                <td class="fntb hiderl hidetb pdtb txtalgl" colspan="7">JL XXXXXX XX</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
+                <td class="fntb hide pdtb txtalgl" colspan="3"></td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
-                <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
-            </tr>
-            {{-- row 29 --}}
-            <tr>
-                <td class="hidetb pdtb"></td>
-                <td class="fntb hide pdtb txtalgl" colspan="3">DAYA</td>
-                <td class="fntb hide pdtb">:</td>
-                <td class="fntb hide pdtb txtalgl" colspan="1">PB/PD</td>
-                <td class="fntb hide pdtb txtalgl" colspan="2">R1/00000 VA</td>
-                <td class="fntb hide pdtb txtalgl" colspan="1">ke</td>
-                <td class="fntb hidel hidetb pdtb txtalgl" colspan="3">R3/00000 VA</td>
-
-                <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
-
-                <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
-                <td class="fntb hidetb pdtb txtalgl" colspan="3"></td>
-            </tr>
-            {{-- row 30 --}}
-            <tr>
-                <td class="hidet pdtb"></td>
-                <td class="fntb hidet hiderl pdtb txtalgl" colspan="3">ULP</td>
-                <td class="fntb hidet hiderl pdtb">:</td>
-                <td class="fntb hidet hiderl pdtb txtalgl" colspan="1">ULP MALANG</td>
-                <td class="fntb hidet hiderl pdtb txtalgl"></td>
-                <td class="fntb hidet hiderl pdtb txtalgl"></td>
-                <td class="fntb hidel hidet pdtb txtalgl" colspan="4">00000</td>
-
-                <td class="fntb hidet pdtb txtalgl" colspan="3"></td>
-
-                <td class="fntb hidet pdtb txtalgl" colspan="4"></td>
-                <td class="fntb hidet pdtb txtalgl" colspan="3"></td>
-            </tr>
-            {{-- row 31 --}}
-            <tr>
-                <td class="hideb" colspan="22"></td>
+                <td class="fntb hide pdtb" colspan="1">:</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3"></td>
+                <td class="fntb hidel hidetb pdtb txtalgl" colspan="3"></td>
             </tr>
             {{-- row 32 --}}
             <tr>
-                <td class="fntb hidetb pdtb txtalgl" colspan="2" style="vertical-align: bottom; height: 30px">Banyak jenis</td>
+                <td class="fntb hideb pdtb txtalgl" colspan="2" >Banyak jenis</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="4" style="vertical-align: bottom; height: 30px">Sifat pekerjaan</td>
+                <td class="fntb hideb pdtb txtalgl" colspan="4" >Sifat pekerjaan</td>
 
-                <td class="fntb hidetb hiderl pdtb txtalgl" colspan="1" style="vertical-align: bottom; height: 30px">No. PK</td>
-                <td class="fntb hidetb hiderl pdtb txtalgl" colspan="5" style="vertical-align: bottom; height: 30px">:</td>
+                <td class="fntb hideb hiderl pdtb txtalgl" colspan="1">No. PK</td>
+                <td class="fntb hideb hiderl pdtb txtalgl" colspan="5">:</td>
 
-                <td class="fntb hidetb hiderl pdtb txtalgl" colspan="3" style="vertical-align: bottom; height: 30px">No. Urut</td>
+                <td class="fntb hideb hiderl pdtb txtalgl" colspan="3">No. Urut</td>
 
-                <td class="hide" colspan="4"></td>
+                <td class="hideb hiderl" colspan="4"></td>
 
-                <td class="fntb hidetb hidel pdtb" colspan="3" style="vertical-align: bottom; height: 30px">Kode Perkiraan</td>
+                <td class="hideb hidel pdtb" colspan="3"></td>
             </tr>
             {{-- row 33 --}}
             <tr>
-                <td class="fntb hidetb pdtb txtalgl" colspan="2">barang :</td>
+                <td class="fntb hidetb pdtb txtalgl" colspan="2" style="vertical-align: top;">barang :</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="4">Perbaikan/pemeliharaan</td>
+                <td class="fntb hidetb pdtb txtalgl" colspan="4"></td>
 
                 <td class="hidetb hiderl pdtb txtalgl" colspan="6"></td>
 
@@ -594,19 +537,83 @@
 
                 <td class="fntb hidetb hiderl pdtb" colspan="3">No. P. K</td>
 
-                <td class="hidel hidetb" colspan="3"></td>
+                <td class="fntb hidel hidetb" colspan="3">Kode Perkiraan</td>
             </tr>
             {{-- row 34 --}}
             <tr>
                 <td class="fntb hidet pdtb txtalgl" colspan="2"></td>
 
-                <td class="hidet pdtb txtalgl" colspan="4" style="vertical-align: top; height: 25px"></td>
+                <td class="hidet pdtb txtalgl" colspan="4"></td>
 
-                <td class="fntb hidet hiderl pdtb txtalgl" colspan="" style="vertical-align: bottom; height: 25px; padding-right: 0px;">No. PDL</td>
+                <td class="fntb hidet hiderl pdtb txtalgl" colspan="" style="vertical-align: bottom; padding-right: 0px;">No. PDL</td>
 
-                <td class="hidet hiderl pdtb txtalgl" colspan="7" style="vertical-align: bottom; height: 25px; padding-right: 0px;">.............................................</td>
+                <td class="hidet hiderl pdtb txtalgl" colspan="7" style="vertical-align: bottom; padding-right: 0px;">.............................................</td>
 
-                <td class="hidet hidel pdtb" colspan="8" style="vertical-align: bottom; height: 25px"></td>
+                <td class="hidet hidel pdtb" colspan="8" style="vertical-align: bottom;"></td>
+            </tr>
+            {{-- row 34 --}}
+            <tr>
+                <td class="fntb hideb pdtb txtalgl" colspan="10" style="height: 15px"></td>
+
+                <td class="hideb hidel pdtb" colspan="14" style="height: 15px"></td>
+            </tr>
+            {{-- row 34 --}}
+            <tr>
+                <td class="fntb hider hidetb pdtb " colspan="2">Kode</td>
+
+                <td class="hide pdtb txtalgl" colspan="1">1.</td>
+
+                <td class="fntb hide hiderl pdtb txtalgl" colspan="3">Barang kembali dalam keadaan</td>
+
+                <td class="fntb hidetb hidel pdtb txtalgl" colspan="4">Rusak</td>
+
+                <td class="fntb hide pdtb" colspan="2">No. PK</td>
+                <td class="hidetb hidel pdtb" colspan="10"></td>
+            </tr>
+            {{-- row 34 --}}
+            <tr>
+                <td class="fntb hider hidetb pdtb " colspan="2"></td>
+
+                <td class="hide pdtb txtalgl" colspan="1">2.</td>
+
+                <td class="fntb hide hiderl pdtb">"</td>
+                <td class="fntb hide hiderl pdtb">"</td>
+                <td class="fntb hide hiderl pdtb">"</td>
+
+                <td class="fntb hidetb hidel pdtb txtalgl" colspan="4" style="background-color: #ffff00">Masih dapat dipergunakan</td>
+
+                <td class="fntb hide pdtb" colspan="2"></td>
+                <td class="hidetb hidel pdtb" colspan="10"></td>
+            </tr>
+            {{-- row 34 --}}
+            <tr>
+                <td class="fntb hider hidetb pdtb " colspan="2"></td>
+
+                <td class="hide pdtb txtalgl" colspan="1">3.</td>
+
+                <td class="fntb hide hiderl pdtb">"</td>
+                <td class="fntb hide hiderl pdtb">"</td>
+                <td class="fntb hide hiderl pdtb">"</td>
+
+                <td class="fntb hidetb hidel pdtb txtalgl" colspan="4">Baru</td>
+
+                <td class="fntb hide pdtb" colspan="2">No. PDL</td>
+                <td class="hidetb hidel pdtb txtalgl" colspan="10">: .................</td>
+            </tr>
+            {{-- row 34 --}}
+            <tr>
+                <td class="fntb hider hidet pdtb " colspan="2"></td>
+
+                <td class="hidet hiderl pdtb txtalgl" colspan="1">4.</td>
+
+                <td class="fntb hidet hiderl pdtb">"</td>
+                <td class="fntb hidet hiderl pdtb">"</td>
+                <td class="fntb hidet hiderl pdtb">"</td>
+
+                <td class="fntb hidet hidel pdtb txtalgl" colspan="4">Garansi</td>
+
+                <td class="fntb hidet hiderl pdtb" colspan="2"></td>
+                <td class="hidet hidel pdtb txtalgl" colspan="10"></td>
             </tr>
             {{-- row 35 --}}
             <tr>
@@ -618,7 +625,7 @@
                 <td class="fntb hidetb hider pdtb txtalgl" colspan="3">Pemeriksa :</td>
                 <td class="fntb hidetb hidel pdtb txtalgl" colspan="4">Pengawas</td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="5">Penerima :</td>
+                <td class="fntb hidetb pdtb txtalgl" colspan="5">Yang menyerahkan :</td>
             </tr>
             {{-- row 36 --}}
             <tr>
@@ -626,7 +633,7 @@
                 <td class="fntb hidetb txtalgl" colspan="5"></td>
                 <td class="fntb hidetb txtalgl" colspan="7"></td>
 
-                <td class="fntb hidetb pdtb txtalgl" colspan="5">PT. ANINDO BERTAHANNUTS PERKASA</td>
+                <td class="fntb hidetb pdtb txtalgl" colspan="5" style="height: 30px"></td>
             </tr>
             {{-- row 37 --}}
             <tr>

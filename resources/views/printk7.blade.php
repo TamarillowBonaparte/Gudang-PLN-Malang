@@ -279,9 +279,9 @@
                     <td class="hidet hiderl"></td>
                     <td class="hidet hiderl"></td>
                     <td class="hidet hidel"></td>
-                </tr>                
-            @empty                
-            @endforelse        
+                </tr>
+            @empty
+            @endforelse
             {{-- row 9 --}}
             <tr>
                 <td class="fntb pdtb hideb" style="vertical-align: bottom; height: 25px; width: 0px; padding-left: 2px; padding-right: 2px;">No.</td>
@@ -331,7 +331,7 @@
                 <td class="bdottb" colspan="3"></td>
             </tr>
             {{-- row 12 --}}
-            @forelse ($material as $i)                            
+            @forelse ($material as $i)
                 <tr>
                     <td class="bdottb pdtb">{{ $loop->iteration }}</td>
                     <td class="bdottb pdtb" colspan="5">{{ $i['lMaterial']->nammat }}</td>
@@ -343,7 +343,7 @@
                     <td class="bdottb pdtb" colspan="2"></td>
                     <td class="bdottb" colspan="3"></td>
                 </tr>
-            @empty                
+            @empty
             @endforelse
             {{-- row 13 --}}
             @for ($i = $list; $i <= 10; $i++)
@@ -360,7 +360,7 @@
                 </tr>
             @endfor
             {{-- row 23 --}}
-            @forelse ($dpm as $i)                        
+            @forelse ($dpm as $i)
                 <tr>
                     <td class="hidetb pdtb"></td>
                     <td class="fntb hide pdtb txtalgl" colspan="3">VENDOR</td>
@@ -462,7 +462,7 @@
                     <td class="fntb hidet pdtb txtalgl" colspan="4"></td>
                     <td class="fntb hidet pdtb txtalgl" colspan="3"></td>
                 </tr>
-            
+
                 {{-- row 31 --}}
                 <tr>
                     <td class="hideb" colspan="22"></td>
@@ -552,7 +552,7 @@
                     <td class="fntb hidet pdtb" colspan="5">{{ $i->penerima }}</td>
                 </tr>
             @empty
-                
+
             @endforelse
         </table>
     </div>

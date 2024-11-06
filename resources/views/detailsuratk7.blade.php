@@ -40,6 +40,13 @@
             height: 100%; /* Pastikan body dan html memiliki tinggi 100% */
             margin: 0; /* Hilangkan margin dari body */
         }
+
+        @media print {
+    #page-2 {
+        display: none !important;
+    }
+}
+
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -559,7 +566,7 @@
             </table>
         </div>
     </main>
-    <script>
+    {{-- <script>
         document.addEventListener('keydown', function(event) {
             if ((event.ctrlKey || event.metaKey) && event.key === 'p') {
                 event.preventDefault();
@@ -570,6 +577,6 @@
                 });
             }
         });
-    </script>
+    </script> --}}
 </body>
 </html>
