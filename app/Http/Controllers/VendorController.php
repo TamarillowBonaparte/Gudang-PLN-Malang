@@ -14,7 +14,7 @@ class VendorController extends Controller
         $idUser = Auth::user()->id_user;
         $dpbjumlah = DB::table('dpb_suratjalan')->where('dpb_suratjalan.id_user', '=', $idUser)->count();
         $k7jumlah = DB::table('k7_srtjln')->where('k7_srtjln.id_user',"=", $idUser)->count();
-        $k3jumlah = DB::table('k3')->where('k3.id',"=",$idUser)->count();
+        $k3jumlah = DB::table('k3')->where('k3.id_user',"=",$idUser)->count();
 
 
         $suratDpm = DB::table('daftar_permintaan_material')
@@ -248,6 +248,13 @@ class VendorController extends Controller
         ->where('daftar_permintaan_material.id_dpb', '=', $id)
         ->get();
 
+        $nmrDPB = DB::table('daftar_permintaan_material')
+        ->select('nomor_dpb')
+        ->where('daftar_permintaan_material.id_dpb', '=', $id)
+        ->pluck('nomor_dpb');
+
+        $nmrDPB = trim(str_replace(['[', ']', '_'], '', $nmrDPB));
+
         $iddpbsrtjln = DB::table('daftar_permintaan_material')
         ->select('id_dpb_suratjalan')
         ->where('id_dpb', '=', $id);
@@ -293,7 +300,7 @@ class VendorController extends Controller
         $pdf = Pdf::loadView('print', compact('dpm', 'material', 'jumlah', 'list'));
 
         // Mengirimkan file PDF untuk didownload
-        return $pdf->download('DaftarPermintaanMaterial_' . $id . '.pdf');
+        return $pdf->download('DaftarPermintaanMaterial' . $nmrDPB . '.pdf');
 
         // return view('print', compact('dpm', 'material', 'jumlah', 'list'));
     }

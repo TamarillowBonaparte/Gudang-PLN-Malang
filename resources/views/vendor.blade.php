@@ -201,9 +201,45 @@
               </div>
             </div>
           </div>
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Riwayat Terakhir Daftar Pengembalian Material (K3) </h5>
+                <!-- Tabel kedua -->
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>Nomor DPB</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @forelse ($suratk7 as $k7)
+                    <tr>
+                      <td>{{$k7->tgl_diminta}}</td>
+                      <td>{{$k7->nmr_k7}}</td>
+                      <td>
+                        <a href="{{ route('showK7', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                        <a href="{{ route('printk7', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                      </td>
+                    </tr>
+                    @empty
+                    <tr>
+                      <td colspan="3">Data tidak ditemukan</td>
+                    </tr>
+                    @endforelse
+                  </tbody>
+                </table>
+                <!-- End Tabel kedua -->
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </section>
-
   </main>  <!-- End #main -->
 
   <!--Hover Listernernya-->
@@ -230,20 +266,20 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-  const cards = document.querySelectorAll('.surat');
+      const cards = document.querySelectorAll('.surat');
 
-  cards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-      this.style.transition = 'transform 0.3s ease-in-out';
-      this.style.transform = 'scale(1.05)';
-    });
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transition = 'transform 0.3s ease-in-out';
+          this.style.transform = 'scale(1.05)';
+        });
 
-    card.addEventListener('mouseleave', function() {
-      this.style.transition = 'transform 0.3s ease-in-out';
-      this.style.transform = 'scale(1)';
+        card.addEventListener('mouseleave', function() {
+          this.style.transition = 'transform 0.3s ease-in-out';
+          this.style.transform = 'scale(1)';
+        });
+      });
     });
-  });
-});
   </script>
 
   <!-- Vendor JS Files -->
@@ -258,5 +294,4 @@
   <!-- Template Main JS File -->
   <script src="{{asset ('admin/assets/js/main.js')}}"></script>btn btn-outline-success
 </body>
-
 </html>

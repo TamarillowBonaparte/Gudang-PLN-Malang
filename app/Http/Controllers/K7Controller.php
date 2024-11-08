@@ -29,7 +29,20 @@ class K7Controller extends Controller
         $pemeriksa = Pemeriksa::where('id_user', $user->id_user)->get();
         $penerima = PengambilPenerima::where('id_user', $user->id_user)->get();
 
-        return view('k7', compact('ulps', 'kepalaGdng', 'setuju', 'pemeriksa', 'penerima'));
+        $suratk7 = DB::table('k7')
+        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id')
+        ->join('surat_jalan', 'k7_srtjln.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
+        ->select(
+            'k7.*',
+            'k7.id as idk7',
+            'k7_srtjln.*',
+            'surat_jalan.id_surat_jalan'
+            )
+        ->orderByDesc('k7.nmr_k7')
+        ->where('k7_srtjln.id_user', '=', $user->id_user)
+        ->get();
+
+        return view('k7', compact('ulps', 'kepalaGdng', 'setuju', 'pemeriksa', 'penerima', 'suratk7'));
     }
 
     public function search(Request $request) {
@@ -182,7 +195,7 @@ class K7Controller extends Controller
         $this->createIfNotExists(Setuju::class, 'nama', $setuju);
         $this->createIfNotExists(Pemeriksa::class, 'nama', $pemeriksa);
 
-        return redirect()->route('printk7', ['id' => Crypt::encryptString($id)]);
+        return redirect()->route('printk7', ['id' => Crypt::encryptString($id), 'srtJlnId' => Crypt::encryptString($lastSurJalId)]);
     }
 
     public function cetak(String $encryptedId, String $srtJlnEncryptdId) {

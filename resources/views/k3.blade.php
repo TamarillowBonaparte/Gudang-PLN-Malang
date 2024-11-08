@@ -28,6 +28,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+
 
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
@@ -35,9 +38,9 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-        margin: 0;
-        padding: 0;
-    }
+            margin: 0;
+            padding: 0;
+        }
 
         .a4 {
             width: 297mm;
@@ -65,7 +68,6 @@
 
 </head>
 <body>
-
     <!-- ======= Header ======= -->
     @include('header')
     <!-- End Header -->
@@ -77,10 +79,9 @@
             <h1>Bon Pengembalian Material</h1>
         </div><!-- End Page Title -->
 
-
         <div class="card">
-            <div class="card-body">                
-                <form action="{{ route('cetaksurat') }}" method="POST">
+            <div class="card-body">
+                <form action="{{ route('cetaksuratk3') }}" method="POST">
                     @csrf
                     <div class="row mt-3">
                         <p style="font-size: 12px"><span style="color: red;">*</span> Wajib diisi</p>
@@ -249,6 +250,38 @@
                 </form>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Riwayat Surat K3</h5>
+                <table class="table datatable">
+                    <thead>
+                        <tr>
+                            <th>Tanggal Diminta</th>
+                            <th>Nomor Bon</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($k3 as $item)
+                            <tr>
+                                <td>{{ \Carbon\Carbon::parse($item->tgl_diminta)->format('d M Y') }}</td>
+                                <td>{{ $item->nmr_k3 }}</td>
+                                <td>{{ $item->nm_pelanggan }}</td>
+                                <td>
+                                    <a href="{{ route('showk3', ['id' => Crypt::encryptString($item->idk3)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                                </td>
+                            </tr>
+                        @empty
+                        <tr>
+                            <td>Kosong</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
     <script type="text/javascript">
 
@@ -261,11 +294,12 @@
 
             $.ajax({
                 type: "GET",
-                url: `/searchk3`,
+                url: `/search`,
                 data: {
                     'search': $value
                 },
                 success: function (response) {
+                    console.log(response);
                     let options = '';
                     productsId = {}
                     productsData = {}; // Clear previous data
@@ -279,6 +313,10 @@
                     });
 
                     $('#materialdl').html(options);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error("AJAX error: ", textStatus, errorThrown); // Log error jika terjadi
+                    console.log(jqXHR.responseText); // Lihat detail error dari respons server
                 }
             });
         });
@@ -347,15 +385,15 @@
             }
         });
 
-    // Event listener untuk menghapus baris
-    $(document).on('click', '.delete-row', function() {
-        $(this).closest('tr').remove();
+        // Event listener untuk menghapus baris
+        $(document).on('click', '.delete-row', function() {
+            $(this).closest('tr').remove();
 
-        // Update nomor urut setelah penghapusan
-        $("table tbody tr").each(function(index) {
-            $(this).find('td:first').text(index + 1);
+            // Update nomor urut setelah penghapusan
+            $("table tbody tr").each(function(index) {
+                $(this).find('td:first').text(index + 1);
+            });
         });
-    });
     </script>
 
     <script type="text/javascript">
@@ -368,8 +406,8 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="{{asset ('admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset ('admin/assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
