@@ -14,7 +14,8 @@ class DaftarMaterial extends Model
     protected $fillable = [
         "id_dpb_suratjalan",
         "id_material",
-        "jumlah"
+        "jumlah",
+        "tgl_keluar"
     ];
     protected $primaryKey = "id_daftar_material";
     

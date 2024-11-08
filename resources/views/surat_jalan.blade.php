@@ -73,26 +73,11 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>12 Agustus 2024</td>
-                    <td>3000/LOG.00.02/GD.ARIES/VI/2024</td>
-                    <td>TUG 5 NS.MLG23-0077</td>
-                    <td>Wisnu</td>
-                    <td>E31222890</td>
-                    <td>
-                      <a href="#" class="btn btn-sm btn-outline-secondary me-1">
-                        <i class="bi bi-download"></i> Download
-                      </a>
-                      <a href="#" class="btn btn-sm btn-outline-secondary">
-                        <i class="bi bi-printer"></i> Print
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>14 Agustus 2024</td>
-                    <td>3001/LOG.00.02/GD.ARIES/VI/2024</td>
-                    <td>TUG 5 NS.MLG23-0077</td>
-                    <td>Wisnu</td>
-                    <td>E31222890</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-outline-secondary me-1">
                         <i class="bi bi-download"></i> Download

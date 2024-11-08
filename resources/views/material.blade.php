@@ -34,8 +34,8 @@
           type: 'GET',
           success: function(data) {
 
-            console.log(data);
             // Isi data material ke dalam form modal
+            $('#modalId').val(data[0].id_material)
             $('#modalNama').val(data[0].nama);
             $('#modalDeskripsi').val(data[0].deskripsi);
             $('#modalNormalisasi').val(data[0].normalisasi);
@@ -121,6 +121,7 @@
       </div>
     </section>
 
+    {{-- material masuk keluar --}}
     <div class="row">
       <div class="col">
         <section class="section">
@@ -133,16 +134,22 @@
                   <table class="table datatable">
                     <thead>
                       <tr>
-                        <th>
-                          <b>Nama Material</b>
-                        </th>
+                        <th>Nama Material</th>
+                        <th>Jumlah</th>
                         <th>Tanggal</th>
                       </tr>
                     </thead>
                     <tbody>
+                      @forelse ($materialKeluar as $item)
+                      <tr>
+                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->jumlah }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->tgl_keluar)->format('d M Y') }}</td>
+                      </tr>
+                      @empty                          
+                      @endforelse                      
                     </tbody>
-                  </table>
-                  <!-- End Table with stripped rows -->
+                  </table>                  
                 </div>
               </div>
             </div>
@@ -162,9 +169,8 @@
                   <table class="table datatable">
                     <thead>
                       <tr>
-                        <th>
-                          <b>Nama Material</b>
-                        </th>
+                        <th>Nama Material</th>
+                        <th>Jumlah</th>
                         <th>Tanggal</th>
                       </tr>
                     </thead>
@@ -172,6 +178,7 @@
                         @forelse ($MaterialMasuk as $matsuk)
                         <tr>
                             <td>{{$matsuk->nammat}}</td>
+                            <td>{{$matsuk->jumlah}}</td>
                             <td>{{\Carbon\Carbon::parse($matsuk->tgl)->format('d M Y')}}</td>
                         </tr>
                         @empty
@@ -246,7 +253,7 @@
                 <div class="form-group row mb-2" id="perinput">
                   <label class="col-sm-3 col-form-label">Deskripsi:</label>
                   <div class="col-sm-9">
-                      <input type="text" id="deskripsi" name="deskripsi" class="form-control" autocomplete="off">
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="2" autocomplete="off"></textarea>
                   </div>
                 </div>
 
@@ -296,9 +303,12 @@
             <h1 class="modal-title fs-5" id="exampleModalLabel">Edit/Tambah</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form action="">
+          <form action="{{ route('tambahmaterial') }}" method="POST">
             @csrf
-            <div class="modal-body">                           
+            <div class="modal-body">
+
+              <input type="text" id="modalId" name="idmaterial" style="visibility: hidden;">
+
                 <div class="form-group row mb-2">
                   <label for="tambahmaterial" class="col col-form-label">Tambah Material :</label>
                   <div class="col-sm-7">
@@ -311,48 +321,48 @@
                 <div class="form-group row mb-2">
                   <label for="modalNama" class="col col-form-label">Nama Material :</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="modalNama">
+                    <input type="text" class="form-control" id="modalNama" name="modalNama">
                   </div>
                 </div>
 
                 <div class="form-group row mb-2">
                   <label for="modalNormalisasi" class="col col-form-label">Normalisasi :</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="modalNormalisasi" disabled>
+                    <input type="text" class="form-control" id="modalNormalisasi" name="modalNormalisasi">
                   </div>
                 </div>                              
 
                 <div class="form-group row mb-2">
                   <label for="modalDeskripsi" class="col col-form-label">Deskripsi Material :</label>
                   <div class="col-sm-7">
-                    <textarea class="form-control" id="modalDeskripsi" rows="2"></textarea>
+                    <textarea class="form-control" id="modalDeskripsi" name="modalDeskripsi" rows="2"></textarea>
                   </div>
                 </div>
 
                 <div class="form-group row mb-2">
                   <label for="" class="col col-form-label">Satuan :</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="modalSatuan">
+                    <input type="text" class="form-control" id="modalSatuan" name="modalSatuan">
                   </div>
                 </div>
 
                 <div class="form-group row mb-2">
                   <label for="" class="col col-form-label">Bagian :</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="modalBagian">
+                    <input type="text" class="form-control" id="modalBagian" name="modalBagian">
                   </div>
                 </div>
 
                 <div class="form-group row mb-2">
                   <label for="" class="col col-form-label">Jumlah SAP :</label>
                   <div class="col-sm-7">
-                    <input type="text" class="form-control" id="modalJumlah">
+                    <input type="text" class="form-control" id="modalJumlah" name="modalJumlah">
                   </div>
                 </div>
             </div>          
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-              <button type="button" class="btn btn-primary">Simpan</button>
+              <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
           </form>
         </div>

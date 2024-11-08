@@ -149,10 +149,10 @@ class K7Controller extends Controller
             $material->decrement('jumlah_sap', $banyakDiminta);
 
             DaftarMaterialK7::create([
-                'id_mtrl_k7'       => $idMaterial,
-                'jumlah'            => $banyakDiminta,
-                'id_k7srtjln' => $lastInsertedId,
-                'tgl_keluar' => null,
+                'id_mtrl_k7'    => $idMaterial,
+                'jumlah'        => $banyakDiminta,
+                'id_k7srtjln'   => $lastInsertedId,
+                'tgl_keluar'    => date('Y-m-d')
 
             ]);
         }

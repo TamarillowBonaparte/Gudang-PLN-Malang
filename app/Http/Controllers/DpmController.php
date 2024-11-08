@@ -152,7 +152,8 @@ class DpmController extends Controller {
             DaftarMaterial::create([
                 'id_dpb_suratjalan' => $lastInsertedId,
                 'id_material'       => $idMaterial,
-                'jumlah'            => $banyakDiminta
+                'jumlah'            => $banyakDiminta,
+                'tgl_keluar'        => date('Y-m-d')
             ]);
         }
 

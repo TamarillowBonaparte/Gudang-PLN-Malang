@@ -13,6 +13,7 @@ class MaterialMasuk extends Model
 
     protected $fillable = [
         "tgl",
+        "jumlah",
         "id_material"
     ];
     

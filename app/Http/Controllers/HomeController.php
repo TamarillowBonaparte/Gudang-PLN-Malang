@@ -10,6 +10,8 @@ class HomeController extends Controller
     {
 
         $dpbjumlah = DB::table('daftar_permintaan_material')->count('nomor_dpb');
+        $k7jumlah = DB::table('k7')->count('nmr_k7');
+        $k3jumlah = DB::table('k3')->count('nmr_k3');
         $suratJln = DB::table('surat_jalan')
         ->join('dpb_suratjalan', 'dpb_suratjalan.id_suratjalan', '=', 'surat_jalan.id_surat_jalan')
         ->join('daftar_permintaan_material as dpm', 'dpm.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
@@ -24,6 +26,16 @@ class HomeController extends Controller
         // ->where('tgl', '')
         ->get();
 
-        return view('home', compact('dpbjumlah', 'suratJln'));
+        $materialKeluar = DB::table('daftar_material')
+        ->join('material', 'daftar_material.id_material', '=', 'material.id_material')
+        ->select(
+            'daftar_material.jumlah',
+            'daftar_material.tgl_keluar',
+            'material.nama'
+        )
+        ->orderByDesc('tgl_keluar')
+        ->get();
+
+        return view('home', compact('dpbjumlah', 'suratJln', 'materialKeluar', 'k7jumlah', 'k3jumlah'));
     }
 }

@@ -97,24 +97,6 @@
                     </div>
                     <!-- End Sales Card -->
 
-                    <!-- Revenue Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card revenue-card">
-                            <div class="card-body">
-                            <h5 class="card-title">BON PENGEMBALIAN MATERIAL </span></h5>
-                            <div class="d-flex align-items-center">
-                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                <i class="bi bi-dropbox"></i>
-                                </div>
-                                <div class="ps-3">
-                                <h6>0</h6>
-                                <span>Jumlah</span>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div><!-- End Revenue Card -->
-
                     <!-- Customers Card -->
                     <div class="col-xxl-4 col-xl-12">
                         <div class="card info-card customers-card">
@@ -125,13 +107,32 @@
                                         <i class="bi bi-box-seam-fill"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>0</h6>
+                                        <h6>{{ $k7jumlah }}</h6>
                                         <span>Jumlah</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div><!-- End Customers Card -->
+
+                    <!-- Revenue Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card revenue-card">
+                            <div class="card-body">
+                            <h5 class="card-title">BON PENGEMBALIAN MATERIAL </span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="bi bi-dropbox"></i>
+                                </div>
+                                <div class="ps-3">
+                                <h6>{{ $k3jumlah }}</h6>
+                                <span>Jumlah</span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div><!-- End Revenue Card -->
+
                     <!-- Reports -->
                     <!-- Recent Sales -->
                     <div class="col-12">
@@ -172,18 +173,16 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">Nama Barang</th>
-                                        <th scope="col">Normalisasi</th>
-                                        <th scope="col">Satuan</th>
                                         <th scope="col">Jumlah</th>
+                                        <th>Tanggal Keluar</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($suratJln as $sj)
+                                        @forelse ($materialKeluar as $item)
                                         <tr>
-                                            <th scope="row" style="{{ $sj->ndpb == null ? "text-align: center" : "" }}">{{ $sj->ndpb != null ? $sj->ndpb : "-" }}</a></th>
-                                            <td style="{{ $sj->tgl == null ? "text-align: center" : "" }}">{{ $sj->tgl != null ? \Carbon\Carbon::parse($sj->tgl)->format('d M Y') : "-" }}</td>
-                                            <td>{{ $sj->nmuser }}</td>
-                                            <td><span class="{{ $sj->nsurat != null ? "badge bg-success" : "badge bg-warning" }}">{{ $sj->nsurat != null ? "Sudah dicetak" : "Belum dicetak" }}</span></td>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->jumlah }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($item->tgl_keluar)->format('d M Y') }}</td>
                                         </tr>
                                         @empty
                                         @endforelse
