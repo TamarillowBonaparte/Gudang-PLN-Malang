@@ -112,7 +112,7 @@
 
                             <label for="jenispkrjn" class="form-label">Jenis Pekerjaan<span style="color: red;">*</span></label>
                             <select class="form-select mb-2 nospk" id="jenispekerjaan" name="jenispekerjaan" aria-label="Default select example">
-                                <option selected></option>
+                                <option selected disabled>Pilih</option>
                                 <option value="1">SUTR</option>
                                 <option value="2">GKS</option>
                                 <option value="3">GKU</option>
@@ -135,7 +135,7 @@
 
                             <label for="ulp" class="form-label">Pelanggan ULP<span style="color: red;">*</span></label>
                             <select name="ulp" id="ulp" class="form-select mb-2 nospk" aria-label="Default select example">
-                                    <option selected></option>
+                                <option selected disabled>Pilih</option>
                                 @forelse ($ulps as $ulp)
                                     <option value="{{ $ulp->id_ulp }}">{{ $ulp->nama }}</option>
                                 @empty
@@ -147,7 +147,7 @@
                                 <div class="col-3">
                                     <label for="pbpd" class="form-label">PB/PD<span style="color: red;">*</span></label>
                                     <select class="form-select mb-2 nospk" id="pbpd" name="pbpd" aria-label="Default select example">
-                                        <<option selected></option>
+                                        <option selected disabled>Pilih</option>
                                         <option value="1">PB</option>
                                         <option value="2">PD</option>
                                     </select>
@@ -220,25 +220,23 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Riwayat Surat DPM/DPB</h5>
+                <h5 class="card-title">Daftar Material Yang Tersedia</h5>
                 <table class="table datatable">
                     <thead>
                         <tr>
-                            <th>Tanggal Diminta</th>
-                            <th>Nomor Bon</th>
-                            <th>Nama Pelanggan</th>
-                            <th>Aksi</th>
+                            <th>No</th>
+                            <th>Nama Material</th>
+                            <th>Normalisasi</th>
+                            <th>Jumlah Yang Tersedia</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($suratDpm as $item)
+                        @forelse ($material as $item)
                             <tr>
-                                <td>{{ \Carbon\Carbon::parse($item->tgl_diminta)->format('d M Y') }}</td>
-                                <td>{{ $item->nomor_dpb }}</td>
-                                <td>{{ $item->nama_pelanggan }}</td>
-                                <td>
-                                    <a href="{{ route('show', ['id' => Crypt::encryptString($item->id_dpb_suratjalan), 'srtJlnId' => Crypt::encryptString($item->idsrtjln)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                                </td>
+                                <td>{{$item->id }}</td>
+                                <td>{{$item->nm_material}}</td>
+                                <td>{{$item->normalisasi}}</td>
+                                <td>{{$item->jumlah_sap}}</td>
                             </tr>
                         @empty
                         <tr>

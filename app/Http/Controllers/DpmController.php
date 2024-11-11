@@ -28,6 +28,17 @@ class DpmController extends Controller {
         $pemeriksa = Pemeriksa::where('id_user', $user->id_user)->get();
         $penerima = PengambilPenerima::where('id_user', $user->id_user)->get();
 
+        $material = DB::table('material')
+        ->select(
+            'id_material AS id',
+            'nama AS nm_material',
+            'normalisasi',
+            'jumlah_sap',
+        )
+        ->get();
+
+
+
         $suratDpm = DB::table('daftar_permintaan_material')
         ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
         ->join('ulp', 'dpb_suratjalan.id_ulp', '=', 'ulp.id_ulp')
@@ -44,7 +55,7 @@ class DpmController extends Controller {
         ->where('dpb_suratjalan.id_user', '=', $user->id_user)
         ->get();
 
-        return view('dpm', compact('ulps', 'kepalaGdng', 'setuju', 'pemeriksa', 'penerima', 'suratDpm'));
+        return view('dpm', compact('ulps', 'kepalaGdng', 'setuju', 'pemeriksa', 'penerima', 'suratDpm','material'));
     }
 
     public function search(Request $request) {
@@ -158,7 +169,7 @@ class DpmController extends Controller {
         $lastInsertedId = $dpmSuratJalan->id_dpb_suratjalan;
 
         // Looping untuk insert daftar material dan update stok
-        foreach ($request->input('idmaterial') as $index => $idMaterial) {        
+        foreach ($request->input('idmaterial') as $index => $idMaterial) {
             $banyakDiminta = $request->input('banyakdiminta')[$index];
             $material = Material::find($idMaterial);
             $material->decrement('jumlah_sap', $banyakDiminta);

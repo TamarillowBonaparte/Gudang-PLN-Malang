@@ -104,3 +104,15 @@ Route::get('/suratjalan', [GudangController::class, 'index'])->name('suratjalan'
 Route::post('/material-baru', [MaterialController::class, 'materialBaru'])->name('materialBaru');
 
 Route::get('/testpdf', [testpdf::class, 'index'])->name('testpdf');
+
+use App\Http\Controllers\HistoryDPMController;
+use App\Http\Controllers\HistoryK3Controller;
+use App\Http\Controllers\HistoryK7Controller;
+
+Route::get('/historydpm', [HistoryDPMController::class, 'index'])->name('historydpm');
+
+
+Route::get('/historyk7', [HistoryK7Controller::class, 'index'])->name('historyk7');
+
+Route::get('/historyk3', [HistoryK3Controller::class, 'index'])->name('historyk3');
+

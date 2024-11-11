@@ -84,7 +84,7 @@
                                         @forelse ($pemeriksa as $pmrksa)
                                             <option value="{{ $pmrksa->nama }}">
                                         @empty
-    
+
                                         @endforelse
                                     </datalist>
                                 </div>
@@ -95,7 +95,7 @@
                                         @forelse ($penerima as $pnrm)
                                             <option value="{{ $pnrm->nama }}">
                                         @empty
-    
+
                                         @endforelse
                                         </datalist>
                                 </div>
@@ -228,7 +228,7 @@
             </div>
         </div>
 
-        <div class="card">
+        {{-- <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Riwayat Surat K7</h5>
                 <table class="table datatable">
@@ -258,7 +258,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
     </main>
     <script type="text/javascript">
 
