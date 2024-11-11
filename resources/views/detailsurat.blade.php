@@ -33,6 +33,10 @@
     <!-- Template Main CSS File -->
     <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
 
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <style>
         html, body {
             height: 100%; /* Pastikan body dan html memiliki tinggi 100% */
@@ -569,5 +573,23 @@
             </table>
         </div>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ambil ID pengguna dari variabel PHP
+            const userId = @json(Auth::user()->id_user);
+
+            // Tambahkan event listener untuk mendeteksi penekanan tombol
+            document.addEventListener('keydown', function(event) {
+                // Cek jika tombol Ctrl dan P ditekan
+                // if (event.ctrlKey && event.key === 'p') {
+                //     // Jika ID pengguna bukan 1, disable tindakan cetak
+                //     if (userId !== 7) {
+                //         event.preventDefault(); // Mencegah aksi default (print)
+                //         alert('Anda tidak memiliki izin untuk mencetak.'); // Opsional: tampilkan pesan
+                //     }
+                // }
+            });
+        });
+    </script>
 </body>
 </html>

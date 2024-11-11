@@ -28,15 +28,29 @@ class DpmController extends Controller {
         $pemeriksa = Pemeriksa::where('id_user', $user->id_user)->get();
         $penerima = PengambilPenerima::where('id_user', $user->id_user)->get();
 
+        $suratDpm = DB::table('daftar_permintaan_material')
+        ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
+        ->join('ulp', 'dpb_suratjalan.id_ulp', '=', 'ulp.id_ulp')
+        ->join('jenis_pekerjaan', 'dpb_suratjalan.id_jenis_pekerjaan', '=', 'jenis_pekerjaan.id_jenis_pekerjaan')
+        ->join('surat_jalan', 'dpb_suratjalan.id_suratjalan', '=', 'surat_jalan.id_surat_jalan')
+        ->select(
+            'daftar_permintaan_material.*',
+            'dpb_suratjalan.*',
+            'jenis_pekerjaan.pekerjaan as jnspkrjaan',
+            'ulp.nama as ulpnama',
+            'surat_jalan.id_surat_jalan as idsrtjln'
+            )
+        ->orderByDesc('daftar_permintaan_material.nomor_dpb')
+        ->where('dpb_suratjalan.id_user', '=', $user->id_user)
+        ->get();
 
-        return view('dpm', compact('ulps', 'kepalaGdng', 'setuju', 'pemeriksa', 'penerima'));
+        return view('dpm', compact('ulps', 'kepalaGdng', 'setuju', 'pemeriksa', 'penerima', 'suratDpm'));
     }
 
     public function search(Request $request) {
         if($request->ajax()) {
 
             $materials = DB::table('material')
-                ->where('jumlah_sap', '>', 0)
                 ->where('nama','LIKE','%'.$request->search."%")
                 ->get();
 
@@ -152,7 +166,8 @@ class DpmController extends Controller {
             DaftarMaterial::create([
                 'id_dpb_suratjalan' => $lastInsertedId,
                 'id_material'       => $idMaterial,
-                'jumlah'            => $banyakDiminta
+                'jumlah'            => $banyakDiminta,
+                'tgl_keluar'        => date('Y-m-d')
             ]);
         }
 

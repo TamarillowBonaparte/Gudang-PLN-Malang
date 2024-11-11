@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -26,15 +25,34 @@
   <link href="{{asset ('admin/assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{asset ('admin/assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    $(document).on('click', '.edit-btn', function() {
+      var materialId = $(this).data('id');
+      $.ajax({
+          url: '/detailmaterial/' + materialId,  // Buat route untuk menangani request ini
+          type: 'GET',
+          success: function(data) {
+
+            // Isi data material ke dalam form modal
+            $('#modalId').val(data[0].id_material)
+            $('#modalNama').val(data[0].nama);
+            $('#modalDeskripsi').val(data[0].deskripsi);
+            $('#modalNormalisasi').val(data[0].normalisasi);
+            $('#modalSatuan').val(data[0].satuan);
+            $('#modalBagian').val(data[0].bagian);
+            $('#modalJumlah').val(data[0].jumlah_sap);
+          }
+      });
+    });
+  </script>
+
   <!-- Template Main CSS File -->
   <link href="{{asset ('admin/assets/css/style.css')}}" rel="stylesheet">
 </head>
-
 <body>
-
   <!-- ======= Header =======--->
   @include('header')
-
   <!-- ======= Siderbar =======--->
   @include('sidebar')
 
@@ -86,7 +104,9 @@
                     <td>{{ $material->bagian }}</td>
                     <td>{{ $material->jumlah_sap }}</td>
                     <td>
-                      <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#edittmbh"><i class="bi bi-pencil"></i> Edit/Tambah</button>
+                      <button type="button" class="btn btn-outline-secondary btn-sm edit-btn" data-bs-toggle="modal" data-bs-target="#edittmbh" data-id="{{ $material->id_material }}">
+                        <i class="bi bi-pencil"></i> Edit/Tambah
+                      </button>
                     </td>
                   </tr>
                   @empty
@@ -101,6 +121,7 @@
       </div>
     </section>
 
+    {{-- material masuk keluar --}}
     <div class="row">
       <div class="col">
         <section class="section">
@@ -113,16 +134,22 @@
                   <table class="table datatable">
                     <thead>
                       <tr>
-                        <th>
-                          <b>Nama Material</b>
-                        </th>
+                        <th>Nama Material</th>
+                        <th>Jumlah</th>
                         <th>Tanggal</th>
                       </tr>
                     </thead>
                     <tbody>
+                      @forelse ($materialKeluar as $item)
+                      <tr>
+                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->jumlah }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->tgl_keluar)->format('d M Y') }}</td>
+                      </tr>
+                      @empty                          
+                      @endforelse                      
                     </tbody>
-                  </table>
-                  <!-- End Table with stripped rows -->
+                  </table>                  
                 </div>
               </div>
             </div>
@@ -142,9 +169,8 @@
                   <table class="table datatable">
                     <thead>
                       <tr>
-                        <th>
-                          <b>Nama Material</b>
-                        </th>
+                        <th>Nama Material</th>
+                        <th>Jumlah</th>
                         <th>Tanggal</th>
                       </tr>
                     </thead>
@@ -152,6 +178,7 @@
                         @forelse ($MaterialMasuk as $matsuk)
                         <tr>
                             <td>{{$matsuk->nammat}}</td>
+                            <td>{{$matsuk->jumlah}}</td>
                             <td>{{\Carbon\Carbon::parse($matsuk->tgl)->format('d M Y')}}</td>
                         </tr>
                         @empty
@@ -217,7 +244,7 @@
                 </div>
 
                 <div class="form-group row mb-2" id="perinput">
-                  <label class="col-sm-3 col-form-label">normalisasi:<span style="color: red;">*</span></label>
+                  <label class="col-sm-3 col-form-label">Normalisasi:<span style="color: red;">*</span></label>
                   <div class="col-sm-9">
                       <input type="number" id="normalisasi" name="normalisasi" class="form-control" autocomplete="off">
                   </div>
@@ -226,7 +253,7 @@
                 <div class="form-group row mb-2" id="perinput">
                   <label class="col-sm-3 col-form-label">Deskripsi:</label>
                   <div class="col-sm-9">
-                      <input type="text" id="deskripsi" name="deskripsi" class="form-control" autocomplete="off">
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="2" autocomplete="off"></textarea>
                   </div>
                 </div>
 
@@ -267,6 +294,7 @@
         </div>
       </div>
     </div>
+
     {{-- modal edit/tambah material --}}
     <div class="modal fade" id="edittmbh" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
@@ -275,39 +303,91 @@
             <h1 class="modal-title fs-5" id="exampleModalLabel">Edit/Tambah</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <form action="{{ route('tambahmaterial') }}" method="POST">
+            @csrf
+            <div class="modal-body">
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-            <button type="button" class="btn btn-primary">Simpan</button>
-          </div>
+              <input type="text" id="modalId" name="idmaterial" style="visibility: hidden;">
+
+                <div class="form-group row mb-2">
+                  <label for="tambahmaterial" class="col col-form-label">Tambah Material :</label>
+                  <div class="col-sm-7">
+                    <input type="text" name="tambahmaterial" id="tambahmaterial" class="form-control">
+                  </div>
+                </div>
+
+                <hr>
+
+                <div class="form-group row mb-2">
+                  <label for="modalNama" class="col col-form-label">Nama Material :</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="modalNama" name="modalNama">
+                  </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                  <label for="modalNormalisasi" class="col col-form-label">Normalisasi :</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="modalNormalisasi" name="modalNormalisasi">
+                  </div>
+                </div>                              
+
+                <div class="form-group row mb-2">
+                  <label for="modalDeskripsi" class="col col-form-label">Deskripsi Material :</label>
+                  <div class="col-sm-7">
+                    <textarea class="form-control" id="modalDeskripsi" name="modalDeskripsi" rows="2"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                  <label for="" class="col col-form-label">Satuan :</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="modalSatuan" name="modalSatuan">
+                  </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                  <label for="" class="col col-form-label">Bagian :</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="modalBagian" name="modalBagian">
+                  </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                  <label for="" class="col col-form-label">Jumlah SAP :</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" id="modalJumlah" name="modalJumlah">
+                  </div>
+                </div>
+            </div>          
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+              <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </main>
 
   <!-- Sweet alertnya tambah material baru -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
-    @if(session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: '{{ session('success') }}',
-            confirmButtonText: 'OK'
-        });
-    @endif
-</script>
-
+  <script>
+      @if(session('success'))
+          Swal.fire({
+              icon: 'success',
+              title: 'Berhasil!',
+              text: '{{ session('success') }}',
+              confirmButtonText: 'OK'
+          });
+      @endif
+  </script>
 
   <!-- ======= Footer ======= -->
   @include('footer')
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-
 
   <!-- Vendor JS Files -->
   <script src="{{asset ('admin/assets/vendor/apexcharts/apexcharts.min.js')}}"></script>

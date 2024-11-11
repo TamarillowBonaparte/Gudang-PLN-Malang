@@ -227,6 +227,38 @@
                 </form>
             </div>
         </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Riwayat Surat K7</h5>
+                <table class="table datatable">
+                    <thead>
+                        <tr>
+                            <th>Tanggal Diminta</th>
+                            <th>Nomor Bon</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($suratk7 as $item)
+                            <tr>
+                                <td>{{ \Carbon\Carbon::parse($item->tgl_diminta)->format('d M Y') }}</td>
+                                <td>{{ $item->nmr_k7 }}</td>
+                                <td>{{ $item->nm_pelanggan }}</td>
+                                <td>
+                                    <a href="{{ route('showK7', ['id' => Crypt::encryptString($item->idk7), 'srtJlnId' => Crypt::encryptString($item->id_surat_jalan)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                                </td>
+                            </tr>
+                        @empty
+                        <tr>
+                            <td>Kosong</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
     <script type="text/javascript">
 

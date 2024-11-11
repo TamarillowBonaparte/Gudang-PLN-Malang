@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\DaftarAkun;
 use App\Http\Controllers\DaftarAkunController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -9,7 +8,7 @@ use App\Http\Controllers\DaftarPermintaanMaterialController;
 use App\Http\Controllers\DetailSuratController;
 use App\Http\Controllers\EditAkun;
 use App\Http\Controllers\DpmController;
-use App\Http\Controllers\DpmPreviewController;
+use App\Http\Controllers\GudangBawahHistoryController;
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\GudangDPMController;
 use App\Http\Controllers\K3Controller;
@@ -20,6 +19,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShowForm;
+use App\Models\Material;
+use App\Http\Controllers\testpdf;
 
 // Route ke halaman Login
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -39,12 +40,14 @@ Route::post('register', [DaftarAkunController::class, 'store'])->name('register'
 Route::get('/search_k7', [K7Controller::class, 'search'])->name('search_k7');
 //Route cetak surat K7
 Route::post('/cetaksuratk7', [K7Controller::class, 'store'])->name('cetaksuratk7');
-Route::get('/printk7/{id}', [K7Controller::class, 'cetak'])->name('printk7');
+Route::get('/printk7/{id}/{srtJlnId}', [K7Controller::class, 'cetak'])->name('printk7');
 Route::get('/suratk7', [ShowForm::class, 'index'])->name('suratk7');
 
 Route::get('/searchk3', [K3Controller::class, 'searchK3']);
 // route input K3
 Route::post('/cetaksuratk3', [K3Controller::class, 'store'])->name('cetaksuratk3');
+Route::get('/printk3/{id}', [K3Controller::class, 'cetak'])->name('printk3');
+Route::get('/showk3/{id}', [K3Controller::class, 'show'])->name('showk3');
 
 Route::get('/print/{id}/{srtJlnId}', [VendorController::class, 'cetak'])->name('print');
 Route::get('/show/{id}/{srtJlnId}', [VendorController::class, 'show'])->name('show');
@@ -58,6 +61,9 @@ Route::get('/suratongoing', [GudangBawahController::class, 'showSurat'])->name('
 
 //route ke halaman setting
 Route::get('/setting', [SettingController::class, 'index'])->name('setting');
+
+Route::get('/detailmaterial/{id}', [MaterialController::class, 'detailMaterial'])->name('detailmaterial');
+Route::post('/tambahmaterial', [MaterialController::class, 'tambahMaterial'])->name('tambahmaterial');
 
 // Route ke edit akun
 Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');
@@ -86,6 +92,9 @@ Route::group(['middleware' => ['auth']], function() {
 
 // Route ke gudang
 Route::get('/gudang', [GudangController::class, 'index'])->name('gudang');
+// Route ke gudang history
+Route::get('/gudangbawahhistory', [GudangBawahHistoryController::class, 'index'])->name('gudangbawahhistory');
+
 
 // Route ke gudang DPM
 Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dpm');
@@ -93,3 +102,5 @@ Route::get('/gudangdpm', [GudangDPMController::class, 'index'])->name('gudang.dp
 Route::get('/suratjalan', [GudangController::class, 'index'])->name('suratjalan');
 
 Route::post('/material-baru', [MaterialController::class, 'materialBaru'])->name('materialBaru');
+
+Route::get('/testpdf', [testpdf::class, 'index'])->name('testpdf');

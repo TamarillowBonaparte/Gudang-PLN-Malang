@@ -12,6 +12,7 @@ use App\Models\PengambilPenerima;
 use App\Models\Setuju;
 use App\Models\SuratJalan;
 use App\Models\Ulp;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -28,7 +29,20 @@ class K7Controller extends Controller
         $pemeriksa = Pemeriksa::where('id_user', $user->id_user)->get();
         $penerima = PengambilPenerima::where('id_user', $user->id_user)->get();
 
-        return view('k7', compact('ulps', 'kepalaGdng', 'setuju', 'pemeriksa', 'penerima'));
+        $suratk7 = DB::table('k7')
+        ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id')
+        ->join('surat_jalan', 'k7_srtjln.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
+        ->select(
+            'k7.*',
+            'k7.id as idk7',
+            'k7_srtjln.*',
+            'surat_jalan.id_surat_jalan'
+            )
+        ->orderByDesc('k7.nmr_k7')
+        ->where('k7_srtjln.id_user', '=', $user->id_user)
+        ->get();
+
+        return view('k7', compact('ulps', 'kepalaGdng', 'setuju', 'pemeriksa', 'penerima', 'suratk7'));
     }
 
     public function search(Request $request) {
@@ -64,7 +78,7 @@ class K7Controller extends Controller
         $noK7 = DB::table('k7')
         ->orderBy('nmr_k7', 'desc')
         ->first();
-        $nomorK7String = $noK7? ($noDpm->nomor_dpb ?? 0) : 0;
+        $nomorK7String = $noK7? ($noK7->nmr_k7 ?? 0) : 0;
         $parts = explode('-', $nomorK7String);
         $lastPart = end($parts); // Mengambil bagian terakhir
 
@@ -148,10 +162,10 @@ class K7Controller extends Controller
             $material->decrement('jumlah_sap', $banyakDiminta);
 
             DaftarMaterialK7::create([
-                'id_mtrl_k7'       => $idMaterial,
-                'jumlah'            => $banyakDiminta,
-                'id_k7srtjln' => $lastInsertedId,
-                'tgl_keluar' => null,
+                'id_mtrl_k7'    => $idMaterial,
+                'jumlah'        => $banyakDiminta,
+                'id_k7srtjln'   => $lastInsertedId,
+                'tgl_keluar'    => date('Y-m-d')
 
             ]);
         }
@@ -181,12 +195,13 @@ class K7Controller extends Controller
         $this->createIfNotExists(Setuju::class, 'nama', $setuju);
         $this->createIfNotExists(Pemeriksa::class, 'nama', $pemeriksa);
 
-        return redirect()->route('printk7', ['id' => Crypt::encryptString($id)]);
+        return redirect()->route('printk7', ['id' => Crypt::encryptString($id), 'srtJlnId' => Crypt::encryptString($lastSurJalId)]);
     }
 
-    public function cetak(String $encryptedId) {
+    public function cetak(String $encryptedId, String $srtJlnEncryptdId) {
 
         $id = Crypt::decryptString($encryptedId);
+        $srtJlnId = Crypt::decryptString($srtJlnEncryptdId);
 
         $dpm = DB::table('k7')
         ->join('k7_srtjln', 'k7.id_k7srtjln', '=', 'k7_srtjln.id')
@@ -238,7 +253,7 @@ class K7Controller extends Controller
 
         $dpbsrt = DB::table('k7_srtjln')
         ->select('id')
-        ->where('id_srtjln', '=', $id)
+        ->where('id_srtjln', '=', $srtJlnId)
         ->pluck('id');
 
         $jumlah = DB::table('dftrmaterial_k7')
@@ -263,7 +278,9 @@ class K7Controller extends Controller
             ];
         }
 
-        return view('printk7', compact('dpm', 'material', 'jumlah', 'list'));
+        $pdf = Pdf::loadView('printk7', compact('dpm', 'material', 'jumlah', 'list'));
+
+        return $pdf->download('BonPemakaian_' . $id . '.pdf');
     }
 
     private function createIfNotExists($model, $field, $value) {
