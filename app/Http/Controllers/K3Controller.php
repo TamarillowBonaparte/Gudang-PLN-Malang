@@ -105,11 +105,11 @@ class K3Controller extends Controller
                 "id_k3" => $lastInsertedId
             ]);
 
-            MaterialBekas::where('id', $idMaterial) 
+            MaterialBekas::where('id', $idMaterial)
             ->increment('jumlah_sap', $banyakDikembalikan);
-            
+
         }
-        
+
         return redirect()->route('printk3', ['id' => Crypt::encryptString($idUser)]);
     }
 
@@ -202,7 +202,7 @@ class K3Controller extends Controller
             ->count();
 
         $list = $jumlah+1;
-        
+
         $jmlhMaterial = DB::table('dftrmaterial_k3')
             ->where('id_k3', '=', $id)
             ->pluck('jumlah');

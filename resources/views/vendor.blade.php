@@ -46,6 +46,12 @@
       background-color: #ffc000; /* Warna kuning saat hover */
       color: #000; /* Warna teks saat hover */
     }
+
+    /* Sembunyikan dropdown untuk opsi jumlah item */
+.dataTable-dropdown {
+    display: none !important;
+}
+
   </style>
 
 
@@ -126,8 +132,6 @@
         </div>
       </section>
 
-
-
     <section class="section mt-5">
         <div class="row">
           <!-- Kolom untuk tabel pertama -->
@@ -147,7 +151,7 @@
                   <tbody>
                     @forelse ($suratDpm as $surat)
                     <tr>
-                      <td>{{$surat->tgl_diminta}}</td>
+                      <td>{{ \Carbon\Carbon::parse($surat->tgl_diminta)->format('d M Y') }}</td>
                       <td>{{$surat->nomor_dpb}}</td>
                       <td>
                         <a href="{{ route('show', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
@@ -183,7 +187,7 @@
                   <tbody>
                     @forelse ($suratk7 as $k7)
                     <tr>
-                      <td>{{$k7->tgl_diminta}}</td>
+                      <td>{{ \Carbon\Carbon::parse($k7->tgl_diminta)->format('d M Y') }}</td>
                       <td>{{$k7->nmr_k7}}</td>
                       <td>
                         <a href="{{ route('showK7', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
@@ -211,18 +215,18 @@
                   <thead>
                     <tr>
                       <th>Tanggal</th>
-                      <th>Nomor DPB</th>
+                      <th>Nomor K3</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @forelse ($suratk7 as $k7)
+                    @forelse ($suratk3 as $k3)
                     <tr>
-                      <td>{{$k7->tgl_diminta}}</td>
-                      <td>{{$k7->nmr_k7}}</td>
+                      <td>{{ \Carbon\Carbon::parse($k3->tgl_diminta)->format('d M Y') }}</td>
+                      <td>{{$k3->nmr_k3}}</td>
                       <td>
-                        <a href="{{ route('showK7', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                        <a href="{{ route('printk7', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                        <a href="{{ route('showk3', ['id' => Crypt::encryptString($k3->idk3)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                        <a href="{{ route('printk7', ['id' => Crypt::encryptString($k3->idk3), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
                       </td>
                     </tr>
                     @empty
@@ -236,8 +240,6 @@
               </div>
             </div>
           </div>
-
-
         </div>
       </section>
   </main>  <!-- End #main -->
@@ -256,7 +258,6 @@
       });
     });
   </script>
-
 
   <!-- ======= Footer ======= -->
  @include('footer')

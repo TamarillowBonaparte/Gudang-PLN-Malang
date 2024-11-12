@@ -151,11 +151,11 @@
                             <label for="gudang" class="form-label">Gudang Pengembali<span style="color: red;">*</span></label>
                             <select class="form-select mb-2 nospk" id="gudang" name="gudang" aria-label="Default select example">
                                 <option selected value="3">Gudang PLN Aries Munandar</option>
-                                @forelse ($gudang as $g)                                    
+                                @forelse ($gudang as $g)
                                     <option value="{{ $g->id }}">{{ $g->nama }}</option>
                                 @empty
-                                    
-                                @endforelse                                
+
+                                @endforelse
                             </select>
 
                             <label for="nospk" class="form-label">No. SPK<span style="color: red;">*</span></label>
@@ -183,17 +183,17 @@
                             <input type="text" name="nama_pel" id="nama_pel" class="form-control input-focus mb-2" autocomplete="off">
 
                             <label for="alamat_pel" class="form-label">Alamat Pelanggan<span style="color: red;">*</span></label>
-                            <input type="text" name="alamat_pel" id="alamat_pel" class="form-control input-focus mb-2" autocomplete="off">    
+                            <input type="text" name="alamat_pel" id="alamat_pel" class="form-control input-focus mb-2" autocomplete="off">
 
                             <label for="noseri" class="form-label">Nomor Seri</label>
                             <input type="text" name="noseri" id="noseri" class="form-control input-focus mb-2" autocomplete="off">
 
                             <label for="dpbbukti" class="form-label">NO. DPB / BUKTI (Khusus Material Baru)</label>
-                            <input type="text" name="dpbbukti" id="dpbbukti" class="form-control input-focus mb-2" autocomplete="off">                        
+                            <input type="text" name="dpbbukti" id="dpbbukti" class="form-control input-focus mb-2" autocomplete="off">
 
                             <label for="lokpenem" class="form-label">Lokasi Penempatan Material/Dipakai Kembali Berkas K7/DPB No.</label>
                             <input type="text" name="lokpenem" id="lokpenem" class="form-control input-focus mb-2" autocomplete="off">
-                            
+
                             <label for="ket" class="form-label">Keterangan</label>
                             <input type="text" name="ket" id="ket" class="form-control input-focus mb-2" autocomplete="off">
 
@@ -238,7 +238,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -251,7 +251,7 @@
             </div>
         </div>
 
-        <div class="card">
+        {{-- <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Riwayat Surat K3</h5>
                 <table class="table datatable">
@@ -281,7 +281,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
     </main>
     <script type="text/javascript">
 
