@@ -25,6 +25,7 @@ class GudangBawahController extends Controller
             'user.nama as vendor',
             'dpb_suratjalan.nama_pelanggan as pelanggan'
         )
+        ->orderByDesc('tgl')
         ->get();
 
         $dpm = DB::table('daftar_permintaan_material')
@@ -51,12 +52,13 @@ class GudangBawahController extends Controller
     function inputNopolDriver(Request $request) {
 
         $lastSJ = DB::table('surat_jalan')
-        ->selectRaw("nomor_suratjln, CAST(SUBSTRING_INDEX(nomor_suratjln, '/', 1) AS UNSIGNED) AS nosrtjln")
-        ->orderBy('nosrtjln', 'DESC')
-        ->limit(1)
-        ->pluck('nosrtjln')
-        ->first();
-        preg_match('/^\d+/', $lastSJ, $matches);
+            ->selectRaw("nomor_suratjln, CAST(SUBSTRING_INDEX(nomor_suratjln, '/', 1) AS UNSIGNED) AS nosrtjln")
+            ->orderBy('nosrtjln', 'DESC')
+            ->limit(1)
+            ->pluck('nosrtjln')
+            ->first();
+        $getNull = ($lastSJ == null) ? 0 : $lastSJ;
+        preg_match('/^\d+/', $getNull, $matches);
         $lastAngka = $matches[0] + 1;
         $nomorSuratJalan = $lastAngka."/LOG.00.02/GD. ARIES/VI/".date("Y");
 
