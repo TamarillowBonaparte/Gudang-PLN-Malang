@@ -68,7 +68,7 @@
 
         th, td {
             font-size: 10px;
-            border: 1.5px solid black;
+            border: 1px solid black;
             text-align: center;
         }
 
