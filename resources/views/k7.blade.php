@@ -84,7 +84,7 @@
                                         @forelse ($pemeriksa as $pmrksa)
                                             <option value="{{ $pmrksa->nama }}">
                                         @empty
-    
+
                                         @endforelse
                                     </datalist>
                                 </div>
@@ -95,7 +95,7 @@
                                         @forelse ($penerima as $pnrm)
                                             <option value="{{ $pnrm->nama }}">
                                         @empty
-    
+
                                         @endforelse
                                         </datalist>
                                 </div>
@@ -228,7 +228,7 @@
             </div>
         </div>
 
-        <div class="card">
+        {{-- <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Riwayat Surat K7</h5>
                 <table class="table datatable">
@@ -258,7 +258,40 @@
                     </tbody>
                 </table>
             </div>
+        </div> --}}
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Daftar Material Yang Tersedia</h5>
+                <table class="table datatable">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Material</th>
+                            <th>Normalisasi</th>
+                            <th>Jumlah Yang Tersedia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($materialk7 as $item)
+                            <tr>
+                                <td>{{$item->id }}</td>
+                                <td>{{$item->nm_material}}</td>
+                                <td>{{$item->normalisasi}}</td>
+                                <td>{{$item->jumlah_sap}}</td>
+                            </tr>
+                        @empty
+                        <tr>
+                            <td>Kosong</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+
+
     </main>
     <script type="text/javascript">
 

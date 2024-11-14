@@ -85,6 +85,7 @@
                       <td>{{ \Carbon\Carbon::parse($ongoing->tgl)->format('d M Y') }}</td>
                       <td>{{ $ongoing->nomor }}</td>
                       <td>{{ $ongoing->vendor }}</td>
+                      <td>{{ $ongoing->pelanggan }}</td>
                       <td>
                         <input type="text" name="nopol" class="form-control" placeholder="Contoh: N 1234 CG" maxlength="11" required oninput="this.value = this.value.toUpperCase();">
                       </td>

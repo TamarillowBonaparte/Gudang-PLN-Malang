@@ -42,7 +42,17 @@ class K7Controller extends Controller
         ->where('k7_srtjln.id_user', '=', $user->id_user)
         ->get();
 
-        return view('k7', compact('ulps', 'kepalaGdng', 'setuju', 'pemeriksa', 'penerima', 'suratk7'));
+        $materialk7 = DB::table('material_bekas')
+        ->select(
+            'id',
+            'nama AS nm_material',
+            'normalisasi',
+            'jumlah_sap',
+        )
+        ->get();
+
+
+        return view('k7', compact('ulps', 'kepalaGdng', 'setuju', 'pemeriksa', 'penerima', 'suratk7','materialk7'));
     }
 
     public function search(Request $request) {
