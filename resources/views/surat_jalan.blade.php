@@ -41,10 +41,17 @@
     <div class="pagetitle">
       <h1>Surat Jalan</h1>
       <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ url('home') }}">Dashboard</a></li>
-          <li class="breadcrumb-item">Surat Jalan</li>
-        </ol>
+        <div class="row">
+          <div class="col">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ url('home') }}">Dashboard</a></li>
+              <li class="breadcrumb-item">Surat Jalan</li>
+            </ol>
+          </div>
+          <div class="col d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tmbhMat"><i class="bi bi-plus"></i>Tambah Surat Jalan Baru</button>
+          </div>
+        </div>
       </nav>
     </div><!-- End Page Title -->
 
@@ -72,12 +79,13 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @forelse ($suratjalan as $item)
                   <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
+                    <td>{{ \Carbon\Carbon::parse($item->tgldicetak)->format('d M Y') }}</td>
+                    <td>{{ $item->nosj }}</td>
+                    <td>{{ $item->nomor_dpb }}</td>
+                    <td>{{ $item->pengemudi }}</td>
+                    <td>{{ $item->nomor_polisi }}</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-outline-secondary me-1">
                         <i class="bi bi-download"></i> Download
@@ -87,6 +95,9 @@
                       </a>
                     </td>
                   </tr>
+                  @empty
+                      
+                  @endforelse                  
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
@@ -96,6 +107,76 @@
       </div>
     </section>
   </main><!-- End #main -->
+
+  {{-- modal tambah material baru --}}
+  <div class="modal fade" id="tmbhMat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Material Baru</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ route('materialBaru') }}" method="POST">
+              @csrf
+              <div class="form-group row mb-2" id="perinput">
+                <label class="col-sm-3 col-form-label">Nama:<span style="color: red;">*</span></label>
+                <div class="col-sm-9">
+                    <input type="text" id="namaMat" name="namaMat" class="form-control" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="form-group row mb-2" id="perinput">
+                <label class="col-sm-3 col-form-label">Normalisasi:<span style="color: red;">*</span></label>
+                <div class="col-sm-9">
+                    <input type="number" id="normalisasi" name="normalisasi" class="form-control" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="form-group row mb-2" id="perinput">
+                <label class="col-sm-3 col-form-label">Deskripsi:</label>
+                <div class="col-sm-9">
+                  <textarea class="form-control" id="deskripsi" name="deskripsi" rows="2" autocomplete="off"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group row mb-2" id="perinput">
+                  <label class="col-sm-3 col-form-label">Satuan:<span style="color: red;">*</span></label>
+                  <div class="col-sm-9">
+                      <select id="satuan" name="satuan" class="form-select" required>
+                          <option value="" disabled selected>Pilih</option>
+                          <option value="BH">BH</option>
+                          <option value="U">U</option>
+                          <option value="M">M</option>
+                          <option value="SET">SET</option>
+                          <option value="BGT">BGT</option>
+                      </select>
+                  </div>
+              </div>
+
+              <div class="form-group row mb-2" id="perinput">
+                <label class="col-sm-3 col-form-label">Bagian:</label>
+                <div class="col-sm-9">
+                    <input type="text" id="bagian" name="bagian" class="form-control" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="form-group row" id="perinput">
+                <label class="col-sm-3 col-form-label">Jumlah SAP:<span style="color: red;">*</span></label>
+                <div class="col-sm-9">
+                    <input type="number" id="jlmh" name="jumlah_sap" class="form-control" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <!-- ======= Footer ======= -->
   @include('footer')
