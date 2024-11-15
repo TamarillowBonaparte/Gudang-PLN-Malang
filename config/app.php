@@ -158,6 +158,7 @@ return [
     'providers' => ServiceProvider::defaultProviders()->merge([
 
         Barryvdh\DomPDF\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -186,6 +187,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
        
         // 'Example' => App\Facades\Example::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

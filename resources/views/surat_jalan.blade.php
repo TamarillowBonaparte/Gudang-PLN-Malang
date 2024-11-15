@@ -41,10 +41,17 @@
     <div class="pagetitle">
       <h1>Surat Jalan</h1>
       <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ url('home') }}">Dashboard</a></li>
-          <li class="breadcrumb-item">Surat Jalan</li>
-        </ol>
+        <div class="row">
+          <div class="col">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ url('home') }}">Dashboard</a></li>
+              <li class="breadcrumb-item">Surat Jalan</li>
+            </ol>
+          </div>
+          <div class="col d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#suratjlnbaru"><i class="bi bi-plus"></i>Tambah Surat Jalan Baru</button>
+          </div>
+        </div>
       </nav>
     </div><!-- End Page Title -->
 
@@ -72,12 +79,13 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @forelse ($suratjalan as $item)
                   <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
+                    <td>{{ \Carbon\Carbon::parse($item->tgldicetak)->format('d M Y') }}</td>
+                    <td>{{ $item->nosj }}</td>
+                    <td>{{ $item->nomor_dpb }}</td>
+                    <td>{{ $item->pengemudi }}</td>
+                    <td>{{ $item->nomor_polisi }}</td>
                     <td>
                       <a href="#" class="btn btn-sm btn-outline-secondary me-1">
                         <i class="bi bi-download"></i> Download
@@ -87,6 +95,9 @@
                       </a>
                     </td>
                   </tr>
+                  @empty
+                      
+                  @endforelse                  
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
@@ -96,6 +107,70 @@
       </div>
     </section>
   </main><!-- End #main -->
+
+  {{-- modal tambah surat jalan baru --}}
+  <div class="modal fade" id="suratjlnbaru" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Surat Jalan Baru</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ route('materialBaru') }}" method="POST">
+              @csrf
+              <div class="row p-3">
+                <div class="col">
+                  <div class="form-group row mb-2" id="perinput">
+                    <label class="col-sm col-form-label mb-1">tanggal:<span style="color: red;">*</span></label>
+                    <input type="text" id="tgl" name="tgl" class="form-control mb-1" autocomplete="off" readonly>
+                  </div>
+
+                  <div class="form-group row mb-2" id="perinput">
+                    <label class="col-sm col-form-label">No. Kendaraan:<span style="color: red;">*</span></label>
+                      <input type="number" id="nopol" name="nopol" class="form-control" autocomplete="off">                    
+                  </div>
+
+                  <div class="form-group row mb-2" id="perinput">
+                    <label class="col-sm col-form-label">Nama Pengemudi:</label>
+                      <input class="form-control" id="pengemudi" name="pengemudi" autocomplete="off"></input>
+                  </div>
+
+                  <div class="form-group row mb-2" id="perinput">
+                      <label class="col-sm col-form-label">Penerima:<span style="color: red;">*</span></label>
+                      <input class="form-control" id="penerima" name="penerima" autocomplete="off"></input>
+                  </div>                  
+                </div>
+                
+                <div class="col">
+                  <div class="form-group row mb-1" id="perinput">
+                    <label class="col-sm col-form-label mb-1">Nama Material:<span style="color: red;">*</span></label>
+                    <input type="text" id="namaMat" name="namaMat" class="form-control mb-1" autocomplete="off">
+                  </div>
+                  <div class="col">
+                    <div class="form-group row mb-1" id="perinput">
+                      <label class="col-sm col-form-label mb-1">Nama Material:<span style="color: red;">*</span></label>
+                      <input type="text" id="namaMat" name="namaMat" class="form-control mb-1" autocomplete="off">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group row mb-1" id="perinput">
+                      <label class="col-sm col-form-label mb-1">Nama Material:<span style="color: red;">*</span></label>
+                      <input type="text" id="namaMat" name="namaMat" class="form-control mb-1" autocomplete="off">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <!-- ======= Footer ======= -->
   @include('footer')
