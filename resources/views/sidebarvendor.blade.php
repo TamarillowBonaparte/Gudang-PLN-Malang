@@ -33,30 +33,30 @@
             </a>
         </li>
 
-       <!-- Daftar Permintaan Material Nav dengan Submenu History -->
-       <li class="nav-item">
-        <a class="nav-link {{ Request::is('dpm') || Request::is('dpm/history') ? '' : 'collapsed' }}" href="#dpmSubmenu" data-bs-toggle="collapse">
-            <i class="bi bi-box-seam"></i>
-            <span>DPM/DPB</span>
-            <i class="bi bi-chevron-down ms-auto"></i>
-        </a>
+        <!-- Daftar Permintaan Material Nav dengan Submenu History -->
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('dpm') || Request::is('dpm/history') ? '' : 'collapsed' }}" href="#dpmSubmenu" data-bs-toggle="collapse">
+                <i class="bi bi-box-seam"></i>
+                    <span>DPM/DPB</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
 
-        <!-- Submenu untuk DPM dan History -->
-        <ul id="dpmSubmenu" class="nav flex-column collapse {{ Request::is('dpm') || Request::is('dpm/history') ? 'show' : '' }}">
-            <li>
-                <a class="nav-link {{ Request::is('dpm') ? 'active' : '' }}" href="{{ url('dpm') }}">
-                    <i class="bi bi-file-earmark"></i>
-                    <span>DPM</span>
-                </a>
-            </li>
-            <li>
-                <a class="nav-link {{ Request::is('dpm/history') ? 'active' : '' }}" href="{{ url('historydpm') }}">
-                    <i class="bi bi-clock-history"></i>
-                    <span>History</span>
-                </a>
-            </li>
-        </ul>
-    </li>
+            <!-- Submenu untuk DPM dan History -->
+            <ul id="dpmSubmenu" class="nav flex-column collapse {{ Request::is('dpm') || Request::is('dpm/history') ? 'show' : '' }}">
+                <li>
+                    <a class="nav-link {{ Request::is('dpm') ? 'active' : '' }}" href="{{ url('dpm') }}">
+                        <i class="bi bi-file-earmark"></i>
+                        <span>DPM</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link {{ Request::is('dpm/history') ? 'active' : '' }}" href="{{ url('historydpm') }}">
+                        <i class="bi bi-clock-history"></i>
+                        <span>History</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
        <!-- K7 Nav dengan Submenu -->
        <li class="nav-item">

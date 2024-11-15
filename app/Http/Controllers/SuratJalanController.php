@@ -31,4 +31,8 @@ class SuratJalanController extends Controller
 
         return view('surat_jalan', compact('suratjalan'));
     }
+
+    public function store() {
+        
+    }
 }

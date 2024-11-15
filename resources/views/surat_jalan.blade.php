@@ -49,7 +49,7 @@
             </ol>
           </div>
           <div class="col d-flex justify-content-end">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tmbhMat"><i class="bi bi-plus"></i>Tambah Surat Jalan Baru</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#suratjlnbaru"><i class="bi bi-plus"></i>Tambah Surat Jalan Baru</button>
           </div>
         </div>
       </nav>
@@ -108,63 +108,57 @@
     </section>
   </main><!-- End #main -->
 
-  {{-- modal tambah material baru --}}
-  <div class="modal fade" id="tmbhMat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+  {{-- modal tambah surat jalan baru --}}
+  <div class="modal fade" id="suratjlnbaru" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Material Baru</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Surat Jalan Baru</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form action="{{ route('materialBaru') }}" method="POST">
               @csrf
-              <div class="form-group row mb-2" id="perinput">
-                <label class="col-sm-3 col-form-label">Nama:<span style="color: red;">*</span></label>
-                <div class="col-sm-9">
-                    <input type="text" id="namaMat" name="namaMat" class="form-control" autocomplete="off">
-                </div>
-              </div>
-
-              <div class="form-group row mb-2" id="perinput">
-                <label class="col-sm-3 col-form-label">Normalisasi:<span style="color: red;">*</span></label>
-                <div class="col-sm-9">
-                    <input type="number" id="normalisasi" name="normalisasi" class="form-control" autocomplete="off">
-                </div>
-              </div>
-
-              <div class="form-group row mb-2" id="perinput">
-                <label class="col-sm-3 col-form-label">Deskripsi:</label>
-                <div class="col-sm-9">
-                  <textarea class="form-control" id="deskripsi" name="deskripsi" rows="2" autocomplete="off"></textarea>
-                </div>
-              </div>
-
-              <div class="form-group row mb-2" id="perinput">
-                  <label class="col-sm-3 col-form-label">Satuan:<span style="color: red;">*</span></label>
-                  <div class="col-sm-9">
-                      <select id="satuan" name="satuan" class="form-select" required>
-                          <option value="" disabled selected>Pilih</option>
-                          <option value="BH">BH</option>
-                          <option value="U">U</option>
-                          <option value="M">M</option>
-                          <option value="SET">SET</option>
-                          <option value="BGT">BGT</option>
-                      </select>
+              <div class="row p-3">
+                <div class="col">
+                  <div class="form-group row mb-2" id="perinput">
+                    <label class="col-sm col-form-label mb-1">tanggal:<span style="color: red;">*</span></label>
+                    <input type="text" id="tgl" name="tgl" class="form-control mb-1" autocomplete="off" readonly>
                   </div>
-              </div>
 
-              <div class="form-group row mb-2" id="perinput">
-                <label class="col-sm-3 col-form-label">Bagian:</label>
-                <div class="col-sm-9">
-                    <input type="text" id="bagian" name="bagian" class="form-control" autocomplete="off">
+                  <div class="form-group row mb-2" id="perinput">
+                    <label class="col-sm col-form-label">No. Kendaraan:<span style="color: red;">*</span></label>
+                      <input type="number" id="nopol" name="nopol" class="form-control" autocomplete="off">                    
+                  </div>
+
+                  <div class="form-group row mb-2" id="perinput">
+                    <label class="col-sm col-form-label">Nama Pengemudi:</label>
+                      <input class="form-control" id="pengemudi" name="pengemudi" autocomplete="off"></input>
+                  </div>
+
+                  <div class="form-group row mb-2" id="perinput">
+                      <label class="col-sm col-form-label">Penerima:<span style="color: red;">*</span></label>
+                      <input class="form-control" id="penerima" name="penerima" autocomplete="off"></input>
+                  </div>                  
                 </div>
-              </div>
-
-              <div class="form-group row" id="perinput">
-                <label class="col-sm-3 col-form-label">Jumlah SAP:<span style="color: red;">*</span></label>
-                <div class="col-sm-9">
-                    <input type="number" id="jlmh" name="jumlah_sap" class="form-control" autocomplete="off">
+                
+                <div class="col">
+                  <div class="form-group row mb-1" id="perinput">
+                    <label class="col-sm col-form-label mb-1">Nama Material:<span style="color: red;">*</span></label>
+                    <input type="text" id="namaMat" name="namaMat" class="form-control mb-1" autocomplete="off">
+                  </div>
+                  <div class="col">
+                    <div class="form-group row mb-1" id="perinput">
+                      <label class="col-sm col-form-label mb-1">Nama Material:<span style="color: red;">*</span></label>
+                      <input type="text" id="namaMat" name="namaMat" class="form-control mb-1" autocomplete="off">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group row mb-1" id="perinput">
+                      <label class="col-sm col-form-label mb-1">Nama Material:<span style="color: red;">*</span></label>
+                      <input type="text" id="namaMat" name="namaMat" class="form-control mb-1" autocomplete="off">
+                    </div>
+                  </div>
                 </div>
               </div>
 
