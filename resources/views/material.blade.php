@@ -68,7 +68,8 @@
           </ol>
         </div>
           <div class="col d-flex justify-content-end">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tmbhMat"><i class="bi bi-plus"></i>Tambah Material Baru</button></div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tmbhMat"><i class="bi bi-plus"></i>Tambah Material Baru</button>
+          </div>
         </div>
       </nav>
     </div><!-- End Page Title -->

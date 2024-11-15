@@ -3,9 +3,22 @@
         color: #fff; /* Text color for active item */
         background-color: #0d6efd; /* Background color for active item */
     }
-
     .sidebar .nav-link.active .bi {
         color: #fff; /* Icon color for active item */
+    }
+    .sidebar .nav-item .collapse.show .nav-link {
+        padding-left: 2rem;
+    }
+    .sidebar .nav-link {
+        color: #333;
+        transition: color 0.3s ease, background-color 0.3s ease;
+    }
+    .sidebar .nav-link:hover {
+        color: #fff;
+        background-color: #0d6efd;
+    }
+    .sidebar .nav-link:hover .bi {
+        color: #fff;
     }
 </style>
 
@@ -62,3 +75,22 @@
       <!-- ... (rest of the sidebar content) ... -->
     </ul>
 </aside><!-- End Sidebar-->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      var currentUrl = window.location.href;
+      var navLinks = document.querySelectorAll('.sidebar .nav-link');
+
+      navLinks.forEach(function(link) {
+          if (link.href === currentUrl) {
+              link.classList.add('active');
+              var collapseParent = link.closest('.collapse');
+              if (collapseParent) {
+                  collapseParent.classList.add('show');
+                  var parentLink = collapseParent.previousElementSibling;
+                  if (parentLink) parentLink.classList.remove('collapsed');
+              }
+          }
+      });
+  });
+</script>
