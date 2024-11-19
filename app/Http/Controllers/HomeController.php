@@ -36,6 +36,28 @@ class HomeController extends Controller
         ->orderByDesc('tgl_keluar')
         ->get();
 
-        return view('home', compact('dpbjumlah', 'suratJln', 'materialKeluar', 'k7jumlah', 'k3jumlah'));
+        $materialPerBagian = DB::table('material')
+        ->select('nama', DB::raw('COUNT(*) as jumlah'))
+        ->groupBy('nama')
+        ->get();
+    
+    // Query untuk total material
+    $totalMaterial = DB::table('material')->count();
+
+    // Query untuk mendapatkan statistik material
+    $materialStats = [
+        'total' => $totalMaterial,
+        'perBagian' => $materialPerBagian
+    ];
+
+    return view('home', compact(
+        'dpbjumlah', 
+        'suratJln', 
+        'materialKeluar', 
+        'k7jumlah', 
+        'k3jumlah',
+        'materialStats'
+    ));
+
     }
 }
