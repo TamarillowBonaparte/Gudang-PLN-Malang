@@ -196,7 +196,6 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Grafik Stok Barang Tersedia</h5>
-
                                 <!-- Grafik Batang -->
                                 <canvas id="barChart" style="max-height: 400px;"></canvas>
                                 <div id="chartLegend" style="text-align: center; margin-top: 15px;">
@@ -319,7 +318,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- End Top Selling -->
 
                 </div>
