@@ -29,7 +29,7 @@ class HomeController extends Controller
         $materialKeluar = DB::table('daftar_material')
         ->join('material', 'daftar_material.id_material', '=', 'material.id_material')
         ->select(
-            'daftar_material.jumlah',
+            'daftar_material.jumlah_diminta',
             'daftar_material.tgl_keluar',
             'material.nama'
         )

@@ -343,7 +343,7 @@
                     <td class="bdottb pdtb" colspan="5">{{ $mat['lMaterial']->nammat }}</td>
                     <td class="bdottb pdtb" colspan="2">{{ $mat['lMaterial']->normalisasi }}</td>
                     <td class="bdottb pdtb">{{ $mat['lMaterial']->satuan }}</td>
-                    <td class="bdottb pdtb" colspan="3">{{ $mat['lMaterial']->jumlah }}</td>
+                    <td class="bdottb pdtb" colspan="3">{{ $mat['lMaterial']->jumlah_diminta }}</td>
                     <td class="bdottb pdtb" colspan="3">{{ $mat['jumlah'] }}</td>
                     <td class="bdottb pdtb" colspan="2"></td>
                     <td class="bdottb pdtb" colspan="2"></td>

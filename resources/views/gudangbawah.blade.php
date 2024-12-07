@@ -63,7 +63,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">DPB/DPM Belum Memiliki Surat Jalan</h5>
+              <h5 class="card-title">DPB Belum Memiliki Surat Jalan</h5>
               <table class="table datatable">
                 <thead>
                   <tr>
@@ -79,74 +79,29 @@
                 <tbody id="dpmOngoing">
                   @forelse ($dpmOngoing as $ongoing)
                   <tr>
-                    <form action="{{ route('cetaksrtjln') }}" method="POST">
-                      @csrf
-                      <td style="display:none;"><input type="text" name="idsrtjln" value="{{ $ongoing->id_srtjln }}"></td>
-                      <td>{{ \Carbon\Carbon::parse($ongoing->tgl)->format('d M Y') }}</td>
-                      <td>{{ $ongoing->nomor }}</td>
-                      <td>{{ $ongoing->vendor }}</td>
-                      <td>{{ $ongoing->pelanggan }}</td>
-                      <td>
-                        <input type="text" name="nopol" class="form-control" placeholder="Contoh: N 1234 CG" maxlength="11" required oninput="this.value = this.value.toUpperCase();">
-                      </td>
-                      <td>
-                        <input type="text" name="pengemudi" class="form-control" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();" required>
-                      </td>
-                      <td>
-                        <button type="submit" class="btn btn-outline-success" onclick="return confirmSubmit()">Cetak</button>
-                      </td>
-                    </form>
+                    <td style="display: none;"><input type="text" name="idsrtjln" value="{{ $ongoing->id_srtjln }}"></td>
+                    <td>{{ \Carbon\Carbon::parse($ongoing->tgl)->translatedFormat('d M Y') }}</td>
+                    <td>{{ $ongoing->nomor }}</td>
+                    <td>{{ $ongoing->vendor }}</td>
+                    <td>{{ $ongoing->pelanggan }}</td>
+                    <td style="text-align: center">-</td>
+                    <td style="text-align: center">-</td>
+                    <td>
+                      <a href="{{ route('editdatasurat', ['id' => Crypt::encryptString($ongoing->id_srtjln)]) }}" class="btn btn-sm btn-outline-success" target="_blank"><i class="bi bi-pencil"></i> Edit</a>
+                    </td>                    
                   </tr>
                   @empty
+                  <tr>
+                    <td colspan="7" style="text-align: center">Belum ada permintaan</td>
+                  </tr>
                   @endforelse
                 </tbody>
               </table>
             </div>
-          </div>
+          </div>          
         </div>
       </div>
     </section>
-
-    {{-- <section class="section ms-4 me-4">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Sudah Memiliki Surat Jalan</h5>
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th>Nomer Surat Jalan</th>
-                    <th>Tanggal Cetak</th>
-                    <th>Nomer DPM/DPB</th>
-                    <th>Vendor</th>
-                    <th>No. Polisi</th>
-                    <th>Pengemudi</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody id="table_dpm">
-                  @forelse ($dpm as $dpb)
-                    <tr>
-                      <td>{{ $dpb->nosj }}</td>
-                      <td>{{ \Carbon\Carbon::parse($dpb->tgldicetak)->format('d M Y') }}</td>
-                      <td>{{ $dpb->nomor }}</td>
-                      <td>{{ $dpb->vendor }}</td>
-                      <td>{{ $dpb->nomor_polisi }}</td>
-                      <td>{{ $dpb->pengemudi }}</td>
-                      <td>
-                        <a href="{{ route('gudangbawah.show', Crypt::encrypt($dpb->idsrt)) }}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i> Detail</a>
-                      </td>
-                    </tr>
-                  @empty
-                  @endforelse
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> --}}
 
   </main><!-- End #main -->
 {{--

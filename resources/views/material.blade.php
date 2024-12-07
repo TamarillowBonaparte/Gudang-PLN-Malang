@@ -144,7 +144,7 @@
                       @forelse ($materialKeluar as $item)
                       <tr>
                         <td>{{ $item->nama }}</td>
-                        <td>{{ $item->jumlah }}</td>
+                        <td>{{ $item->jumlah_diminta }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->tgl_keluar)->format('d M Y') }}</td>
                       </tr>
                       @empty                          

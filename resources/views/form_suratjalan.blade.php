@@ -14,14 +14,6 @@
             size: A4;
         }
 
-        /* Set content to fill the entire A4 page */
-        html, body {
-            width: 210mm;
-            height: 297mm;
-            margin: 0;
-            padding: 0;
-        }
-
         /* Style content with shaded background */
         .content {
             width: 100%;
@@ -33,6 +25,21 @@
             font-family: Arial, sans-serif;
             background-color: #ffffff;
             /* Light gray shade */
+        }
+
+        html, body {
+            height: 297mm;
+            width: 210mm;
+        }
+
+        html {
+            display: table;
+            margin: auto;
+        }
+
+        body {
+            display: table-cell;
+            vertical-align: middle;
         }
 
         table {
@@ -84,7 +91,7 @@
         .fntb {
             font-family: 'Roboto Mono', monospace;
             font-weight: bold
-        }\
+        }
         .fntarial {
             font-family: Arial, sans-serif;
             font-weight: bold
@@ -131,7 +138,7 @@
     </style>
 </head>
 <body>
-    <div class=" fnt">
+    <div class="fnt">
         <table>
             {{-- row 0, 15 column --}}
             <tr>
@@ -231,8 +238,8 @@
                 <td class="fntb pdtb hideb fontbott" colspan="5">Nama Barang</td>
                 <td class="fntb pdtb hideb fontbott" colspan="2">No.</td>
                 <td class="fntb pdtb hideb fontbott">Sa-</td>
-                <td class="fntb pdtb" colspan="3">Banyak yang diberikan</td>
-                <td class="fntb pdtb" colspan="2">Banyak yang diminta</td>
+                <td class="fntb pdtb" colspan="3">Banyak yang diminta</td>
+                <td class="fntb pdtb" colspan="2">Banyak yang diberikan</td>
             </tr>
             {{-- row 17 --}}
             <tr>
@@ -261,8 +268,8 @@
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="5">{{ $mat->nammat }}</td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ $mat->normalisasi }}</td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $mat->satuan }}</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ $mat->jumlah }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="3">{{ $mat->jumlah_diminta }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ ($mat->jumlah_diberi == null) ? "TA" : $mat->jumlah_diberi }}</td>
             </tr>
             @empty
             @endforelse
@@ -361,7 +368,7 @@
             {{-- row 39 --}}
             <tr>
                 <td class="fntb hide fontl" colspan="2">Diterima tgl</td>
-                <td class="fntb hide fontl" colspan="4">{{ $sj->tgldicetak }}</td>
+                <td class="fntb hide fontl" colspan="4">{{ \Carbon\Carbon::parse($sj->tgldicetak)->format('d M Y') }}</td>
                 <td class="hide" colspan="2"></td>
                 <td class="fntb hide" colspan="1">Malang,</td>
                 <td class="fntb hide fontl" colspan="5">.......................</td>
