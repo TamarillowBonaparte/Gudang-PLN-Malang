@@ -197,7 +197,6 @@
                                 <table class="table table-sm table-bordered">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No</th>
                                             <th scope="col">Nama Material</th>
                                             <th scope="col">Satuan</th>
                                             <th scope="col">Banyak Diminta</th>
@@ -248,6 +247,7 @@
             </div>
         </div>
     </main>
+    
     <script type="text/javascript">
 
         let productsData = {};  // Object to hold product data
@@ -317,14 +317,11 @@
             let banyakDiminta = $('#item').val();
 
             // Pastikan semua field diisi sebelum menambahkan baris ke tabel
-            if (namaMaterial && normalisasi && satuan && banyakDiminta) {
-                // Dapatkan jumlah baris yang sudah ada di tabel
-                let rowCount = $("table tbody tr").length + 1;
+            if (namaMaterial && normalisasi && satuan && banyakDiminta) {                
 
                 // Buat baris baru
                 let newRow = `<tr>
-                                <td style="display:none;"><input type="text" value="${idMaterial}" name="idmaterial[]" class="form-control input-focus mb-2" id="idmaterial" aria-label="Disabled input example"></td>
-                                <td>${rowCount}</td>
+                                <td style="display:none;"><input type="text" value="${idMaterial}" name="idmaterial[]" class="form-control input-focus mb-2" id="idmaterial" aria-label="Disabled input example"></td>                                
                                 <td>${namaMaterial}</td>
                                 <td>${satuan}</td>
                                 <td><input type="text" value="${banyakDiminta}" name="banyakdiminta[]" class="form-control input-focus mb-2" id="banyakdiminta" aria-label="Disabled input example" style="display:none;">${banyakDiminta}</td>
@@ -344,15 +341,15 @@
             }
         });
 
-    // Event listener untuk menghapus baris
-    $(document).on('click', '.delete-row', function() {
-        $(this).closest('tr').remove();
+        // Event listener untuk menghapus baris
+        $(document).on('click', '.delete-row', function() {
+            $(this).closest('tr').remove();
 
-        // Update nomor urut setelah penghapusan
-        $("table tbody tr").each(function(index) {
-            $(this).find('td:first').text(index + 1);
+            // Update nomor urut setelah penghapusan
+            $("table tbody tr").each(function(index) {
+                $(this).find('td:first').text(index + 1);
+            });
         });
-    });
     </script>
 
     <script>

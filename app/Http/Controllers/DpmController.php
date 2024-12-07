@@ -171,13 +171,12 @@ class DpmController extends Controller {
         // Looping untuk insert daftar material dan update stok
         foreach ($request->input('idmaterial') as $index => $idMaterial) {
             $banyakDiminta = $request->input('banyakdiminta')[$index];
-            $material = Material::find($idMaterial);
-            $material->decrement('jumlah_sap', $banyakDiminta);
 
             DaftarMaterial::create([
                 'id_dpb_suratjalan' => $lastInsertedId,
                 'id_material'       => $idMaterial,
-                'jumlah'            => $banyakDiminta,
+                'jumlah_diminta'    => $banyakDiminta,
+                'jumlah_diberi'     => null,
                 'tgl_keluar'        => date('Y-m-d')
             ]);
         }
@@ -244,7 +243,7 @@ class DpmController extends Controller {
 
         $lMaterial = DB::table('daftar_material')
         ->select(
-            'daftar_material.jumlah',
+            'daftar_material.jumlah_diminta',
             'daftar_material.id_dpb_suratjalan',
             'material.nama as nammat',
             'material.normalisasi',
@@ -268,7 +267,7 @@ class DpmController extends Controller {
 
         $jmlhMaterial = DB::table('daftar_material')
         ->where('id_dpb_suratjalan', '=', $iddpbsrtjln)
-        ->pluck('jumlah');
+        ->pluck('jumlah_diminta');
 
         $angkaKeHuruf = $this->angkaKeHuruf($jmlhMaterial);
 

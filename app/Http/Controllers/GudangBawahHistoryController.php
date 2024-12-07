@@ -44,7 +44,20 @@ class GudangBawahHistoryController extends Controller
         ->orderByDesc('nomor_suratjln')
         ->get();
 
-        return view('gudangbawahhistory', compact('dpmOngoing', 'dpm'));
+        $sjAdmin = DB::table('surat_jalan_admin AS sja')
+        ->join('surat_jalan AS sj', 'sj.id_surat_jalan', '=', 'sja.id_suratjalan')
+        ->join('daftar_material_sja AS dmsja', 'dmsja.id_sja', '=', 'sja.id')
+        ->select(
+            'sj.id_surat_jalan AS idsj',
+            'sja.id',
+            'sja.no_permintaan',
+            'sja.kepada',
+            'sja.alamat',
+        )
+        // ->whereNull('sj.pengemudi')
+        ->get();
+
+        return view('gudangbawahhistory', compact('dpmOngoing', 'dpm', 'sjAdmin'));
         // return view('gudangbawah', compact('dpm'));
     }
 
@@ -113,7 +126,7 @@ class GudangBawahHistoryController extends Controller
 
         $material = DB::table('daftar_material')
         ->select(
-            'daftar_material.jumlah',
+            'daftar_material.jumlah_diminta',
             'daftar_material.id_dpb_suratjalan',
             'material.nama as nammat',
             'material.normalisasi',
@@ -175,7 +188,7 @@ class GudangBawahHistoryController extends Controller
 
         $material = DB::table('daftar_material')
         ->select(
-            'daftar_material.jumlah',
+            'daftar_material.jumlah_diminta',
             'daftar_material.id_dpb_suratjalan',
             'material.nama as nammat',
             'material.normalisasi',

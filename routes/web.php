@@ -21,6 +21,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShowForm;
 use App\Models\Material;
 use App\Http\Controllers\testpdf;
+use App\Http\Controllers\testview;
 use App\Models\SuratJalan;
 
 // Route ke halaman Login
@@ -55,10 +56,13 @@ Route::get('/show/{id}/{srtJlnId}', [VendorController::class, 'show'])->name('sh
 Route::get('/showK7/{id}/{srtJlnId}', [VendorController::class, 'showK7'])->name('showK7');
 
 // route input nopol dan pengemudi surat jalan
-Route::post('/cetaksrtjln', [GudangBawahController::class, 'inputNopolDriver'])->name('cetaksrtjln');
-Route::get('/formsrt', [GudangBawahController::class, 'show'])->name('formsrt');
+Route::get('/editdatasurat/{id}', [GudangBawahController::class, 'editDataSurat'])->name('editdatasurat');
+Route::get('/editdatasuratadmin/{id}', [GudangBawahController::class, 'editDataSuratAdmin'])->name('editdatasuratadmin');
+Route::get('/formsrt/{id}', [GudangBawahController::class, 'show'])->name('formsrt');
 // route ajax show surat jalan
 Route::get('/suratongoing', [GudangBawahController::class, 'showSurat'])->name('suratongoing');
+Route::post('/storedatasurat', [GudangBawahController::class, 'storeDataSurat'])->name('storedatasurat');
+Route::post('/storedatasuratadmin', [GudangBawahController::class, 'storeDataSuratAdmin'])->name('storedatasuratadmin');
 
 //route ke halaman setting
 Route::get('/setting', [SettingController::class, 'index'])->name('setting');
@@ -66,7 +70,7 @@ Route::get('/setting', [SettingController::class, 'index'])->name('setting');
 Route::get('/detailmaterial/{id}', [MaterialController::class, 'detailMaterial'])->name('detailmaterial');
 Route::post('/tambahmaterial', [MaterialController::class, 'tambahMaterial'])->name('tambahmaterial');
 
-Route::post('/suratjalanadmin', [SuratJalan::class, 'store'])->name('suratjalanadmin');
+Route::post('/suratjalanadmin', [SuratJalanController::class, 'store'])->name('suratjalanadmin');
 
 // Route ke edit akun
 Route::get('/edit-akun', [EditAkun::class, 'index'])->name('edit.akun');
@@ -106,7 +110,7 @@ Route::get('/suratjalan', [GudangController::class, 'index'])->name('suratjalan'
 
 Route::post('/material-baru', [MaterialController::class, 'materialBaru'])->name('materialBaru');
 
-Route::get('/testpdf', [testpdf::class, 'index'])->name('testpdf');
+Route::get('/testview', [testview::class, 'index'])->name('testview');
 
 use App\Http\Controllers\HistoryDPMController;
 use App\Http\Controllers\HistoryK3Controller;

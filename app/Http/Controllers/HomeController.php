@@ -29,13 +29,19 @@ class HomeController extends Controller
         $materialKeluar = DB::table('daftar_material')
         ->join('material', 'daftar_material.id_material', '=', 'material.id_material')
         ->select(
-            'daftar_material.jumlah',
+            'daftar_material.jumlah_diminta',
             'daftar_material.tgl_keluar',
             'material.nama'
         )
         ->orderByDesc('tgl_keluar')
         ->get();
 
-        return view('home', compact('dpbjumlah', 'suratJln', 'materialKeluar', 'k7jumlah', 'k3jumlah'));
+        $materialStok = DB::table('material')
+        ->join('daftar_material', 'material.id_material', '=', 'daftar_material.id_material')
+        ->select('material.nama', DB::raw('SUM(daftar_material.jumlah) as total_stok'))
+        ->groupBy('material.nama')
+        ->get();
+
+        return view('home', compact('dpbjumlah', 'suratJln', 'materialKeluar', 'k7jumlah', 'k3jumlah','materialStok'));
     }
 }

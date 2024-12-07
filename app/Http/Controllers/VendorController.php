@@ -111,7 +111,7 @@ class VendorController extends Controller
 
         $lMaterial = DB::table('daftar_material')
         ->select(
-            'daftar_material.jumlah',
+            'daftar_material.jumlah_diminta',
             'daftar_material.id_dpb_suratjalan',
             'material.nama as nammat',
             'material.normalisasi',
@@ -135,7 +135,7 @@ class VendorController extends Controller
 
         $jmlhMaterial = DB::table('daftar_material')
         ->where('id_dpb_suratjalan', '=', $iddpbsrtjln)
-        ->pluck('jumlah');
+        ->pluck('jumlah_diminta');
 
         $angkaKeHuruf = $this->angkaKeHuruf($jmlhMaterial);
 
@@ -282,7 +282,7 @@ class VendorController extends Controller
 
         $lMaterial = DB::table('daftar_material')
         ->select(
-            'daftar_material.jumlah',
+            'daftar_material.jumlah_diminta',
             'daftar_material.id_dpb_suratjalan',
             'material.nama as nammat',
             'material.normalisasi',
@@ -306,7 +306,7 @@ class VendorController extends Controller
 
         $jmlhMaterial = DB::table('daftar_material')
         ->where('id_dpb_suratjalan', '=', $iddpbsrtjln)
-        ->pluck('jumlah');
+        ->pluck('jumlah_diminta');
 
         $angkaKeHuruf = $this->angkaKeHuruf($jmlhMaterial);
 
@@ -316,7 +316,7 @@ class VendorController extends Controller
             $material[] = [
                 'lMaterial' => $lMaterial[$i],
                 'jumlah' => $angkaKeHuruf[$i]
-            ];
+            ];  
         }
         $pdf = Pdf::loadView('print', compact('dpm', 'material', 'jumlah', 'list'));
 

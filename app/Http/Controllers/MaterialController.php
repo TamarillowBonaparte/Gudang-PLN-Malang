@@ -34,7 +34,7 @@ class MaterialController extends Controller
         $materialKeluar = DB::table('daftar_material')
         ->join('material', 'daftar_material.id_material', '=', 'material.id_material')
         ->select(
-            'daftar_material.jumlah',
+            'daftar_material.jumlah_diminta',
             'daftar_material.tgl_keluar',
             'material.nama'
         )
@@ -83,6 +83,8 @@ class MaterialController extends Controller
 
         date_default_timezone_set('Asia/Jakarta');
 
+        $tambahMat = $request->input('tambahmaterial');
+
         $idMat = $request->input('idmaterial');
 
         // Data yang akan di-update
@@ -92,7 +94,7 @@ class MaterialController extends Controller
             'deskripsi' => $request->input('modalDeskripsi'),
             'satuan' => $request->input('modalSatuan'),
             'bagian' => $request->input('modalBagian'),
-            'jumlah_sap' => $retVal = ($request->input('modalJumlah') == null) ? 0 : $request->input('modalJumlah')
+            'jumlah_sap' => ($request->input('modalJumlah') == null) ? 0 : $request->input('modalJumlah')
         ];
 
         // Hapus nilai null untuk hanya memperbarui kolom yang berubah
@@ -106,13 +108,13 @@ class MaterialController extends Controller
         if ($request->input('tambahmaterial') != null) {
 
             MaterialMasuk::create([
-                'tgl'           => date('Y-m-d'),
+                'tgl'           => date('Y-m-d H:i:s'),
                 'jumlah'        => $request->input('tambahmaterial'),
                 'id_material'   => $idMat
             ]);
 
             $addMaterial = Material::find($idMat);
-            $addMaterial->jumlah_sap = $request->input('tambahmaterial');
+            $addMaterial->jumlah_sap = $addMaterial->jumlah_sap + $tambahMat;
             $addMaterial->save();
         }
 
