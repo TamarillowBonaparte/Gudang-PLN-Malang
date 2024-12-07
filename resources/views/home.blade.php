@@ -192,45 +192,125 @@
                         </div>
                     </div><!-- End Recent Sales -->
 
-                    <!--Grafik Batang-->
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Grafik Permintaan Material Bulan Ini</h5>
-
+                                <h5 class="card-title">Grafik Stok Barang Tersedia</h5>
                                 <!-- Grafik Batang -->
                                 <canvas id="barChart" style="max-height: 400px;"></canvas>
+                                <div id="chartLegend" style="text-align: center; margin-top: 15px;">
+                                    <strong>Material:</strong>
+                                    <!-- Legend akan di-render di sini -->
+                                </div>
                                 <script>
                                     document.addEventListener("DOMContentLoaded", () => {
-                                        new Chart(document.querySelector('#barChart'), {
+                                        // Data barang dan stok yang dikirim dari controller
+                                        const materialData = @json($materialStok);
+
+                                        // Membuat salinan data untuk mengelola status hide/unhide
+                                        const activeMaterials = materialData.map(item => ({
+                                            nama: item.nama,
+                                            total_stok: item.total_stok,
+                                            hidden: false
+                                        }));
+
+                                        // Inisialisasi chart.js
+                                        const ctx = document.querySelector('#barChart');
+                                        const barChart = new Chart(ctx, {
                                             type: 'bar',
                                             data: {
-                                                labels: ['DPM', 'K7', 'K3'],
-                                                datasets: [
-                                                    {
-                                                        barThickness: 75,                                        
-                                                        data: [4, 0, 1],
-                                                        backgroundColor: [
-                                                        'rgba(255, 99, 132, 0.2)',
-                                                        'rgba(255, 159, 64, 0.2)',
-                                                        'rgba(255, 205, 86, 0.2)'
-                                                        ],
-                                                        borderColor: [
-                                                        'rgb(255, 99, 132)',
-                                                        'rgb(255, 159, 64)',
-                                                        'rgb(255, 205, 86)'
-                                                        ],
-                                                        borderWidth: 1
-                                                    }
-                                                ]
+                                                labels: activeMaterials.map(item => item.nama),
+                                                datasets: [{
+                                                    label: 'Jumlah Stok',
+                                                    data: activeMaterials.map(item => item.total_stok),
+                                                    backgroundColor: activeMaterials.map((_, index) =>
+                                                        `rgba(${(index * 50) % 255}, ${(index * 80) % 255}, ${(index * 100) % 255}, 0.2)`
+                                                    ),
+                                                    borderColor: activeMaterials.map((_, index) =>
+                                                        `rgba(${(index * 50) % 255}, ${(index * 80) % 255}, ${(index * 100) % 255}, 1)`
+                                                    ),
+                                                    borderWidth: 1
+                                                }]
                                             },
                                             options: {
+                                                responsive: true,
+                                                plugins: {
+                                                    legend: {
+                                                        display: false // Disable default legend
+                                                    },
+                                                    tooltip: {
+                                                        enabled: true
+                                                    }
+                                                },
                                                 scales: {
+                                                    x: {
+                                                        title: {
+                                                            display: true,
+                                                            text: 'Material',
+                                                            font: {
+                                                                size: 16
+                                                            }
+                                                        },
+                                                        ticks: {
+                                                            autoSkip: false
+                                                        }
+                                                    },
                                                     y: {
-                                                    beginAtZero: true
+                                                        beginAtZero: true,
+                                                        ticks: {
+                                                            stepSize: 1, // Menampilkan angka bulat
+                                                            callback: function (value) {
+                                                                return Number.isInteger(value) ? value : ''; // Hanya angka bulat
+                                                            }
+                                                        },
+                                                        title: {
+                                                            display: true,
+                                                            text: 'Jumlah Stok',
+                                                            font: {
+                                                                size: 16
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
+                                        });
+
+                                        // Custom Legend Rendering
+                                        const legendContainer = document.getElementById('chartLegend');
+                                        activeMaterials.forEach((material, index) => {
+                                            const legendItem = document.createElement('span');
+                                            legendItem.style.display = 'inline-block';
+                                            legendItem.style.margin = '0 10px';
+                                            legendItem.style.cursor = 'pointer';
+                                            legendItem.style.color = 'black';
+                                            legendItem.style.fontSize = '14px';
+
+                                            // Warna untuk legenda
+                                            legendItem.innerHTML = `
+                                                <span style="
+                                                    display: inline-block;
+                                                    width: 12px;
+                                                    height: 12px;
+                                                    background-color: rgba(${(index * 50) % 255}, ${(index * 80) % 255}, ${(index * 100) % 255}, 1);
+                                                    margin-right: 5px;
+                                                "></span>${material.nama}`;
+
+                                            // Toggle fungsi klik untuk meng-hide grafik
+                                            legendItem.addEventListener('click', () => {
+                                                // Toggle status hidden
+                                                material.hidden = !material.hidden;
+
+                                                // Update data dan label aktif
+                                                const filteredData = activeMaterials.filter(item => !item.hidden);
+
+                                                // Update chart
+                                                barChart.data.labels = filteredData.map(item => item.nama);
+                                                barChart.data.datasets[0].data = filteredData.map(item => item.total_stok);
+
+                                                barChart.update();
+                                            });
+
+                                            legendContainer.appendChild(legendItem);
                                         });
                                     });
                                 </script>
@@ -238,7 +318,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Top Selling -->
                     <!-- End Top Selling -->
 
                 </div>
