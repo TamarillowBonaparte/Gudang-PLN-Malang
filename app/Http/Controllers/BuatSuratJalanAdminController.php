@@ -6,8 +6,13 @@ use Illuminate\Http\Request;
 
 class BuatSuratJalanAdminController extends Controller
 {
-    function index() {
+    public function index() {
 
-        view('buatsuratjalanadmin');
+        return view('buatsuratjalanadmin');
+    }
+
+    public function store(Request $id) {
+
+        return redirect();
     }
 }

@@ -209,7 +209,7 @@
                                 </table>
                             </div>
                             <div class="col text-end">
-                                <button class="btn btn-success mb-2" target="_blank" type="submit" id="cetaksurat">Cetak</button>
+                                <button class="btn btn-success mb-2" target="_blank" type="submit" id="cetaksurat" onclick="location.reload()">Cetak</button>
                             </div>
                         </div>
                     </div>

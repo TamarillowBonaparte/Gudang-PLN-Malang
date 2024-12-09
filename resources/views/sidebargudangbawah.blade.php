@@ -64,7 +64,7 @@
 
         <!-- Buat Surat Jalan Nav -->
         <li class="nav-item">
-            <a class="nav-link {{ Request::is('gudangbawahhistory') ? 'active' : '' }}" href="{{ url('buatsuratjalanadmin') }}">
+            <a class="nav-link {{ Request::is('buatsuratjalanadmin') ? 'active' : '' }}" href="{{ url('buatsuratjalanadmin') }}">
                 <i class="bi bi-file-text"></i>
                 <span>Buat Surat Jalan</span>
             </a>
