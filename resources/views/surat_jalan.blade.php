@@ -141,11 +141,11 @@
                 <label class="col-sm col-form-label">Nomor Daftar Permintaan:<span style="color: red;">*</span></label>
                 <input class="form-control" id="nopermintaan" name="nopermintaan" placeholder="1234567890" autocomplete="off" required>
 
-                <label class="col-sm col-form-label">Dikirim ke:<span style="color: red;">*</span></label>
-                <input class="form-control" id="kepada" name="kepada" placeholder="Gudang Aris Munandar" autocomplete="off" required>
+                <label class="col-sm col-form-label">Dikirim ke:</label>
+                <input class="form-control" id="kepada" name="kepada" placeholder="Gudang Aris Munandar" autocomplete="off">
 
                 <label class="col-sm col-form-label">Alamat</label>
-                <input class="form-control" id="alamat" name="alamat" placeholder="Jl XXXXX XXX" autocomplete="off" required>
+                <input class="form-control" id="alamat" name="alamat" placeholder="Jl XXXXX XXX" autocomplete="off">
 
                 <label class="col-sm col-form-label">No. Kendaraan:</label>
                 <input type="text" id="nopol" name="nopol" class="form-control" autocomplete="off" placeholder="N 1234 ABC" maxlength="11" oninput="this.value = this.value.toUpperCase();">

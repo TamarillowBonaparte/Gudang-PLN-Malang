@@ -207,7 +207,9 @@
                 <tr>
                     <td class="hide" colspan="15" style="height: 14px"></td>
                 </tr>
-                {{-- row 10 --}}                
+                {{-- row 10 --}}
+
+                {{-- id surat jalan $ sj admin --}}
                 <td style="display: none;"><input type="text" name="idsj" value="{{ $item->idsj }}"></td>
                 <td style="display: none;"><input type="text" name="idsja" value="{{ $item->id }}"></td>
                 <tr>
@@ -304,6 +306,7 @@
                     <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $item->normalisasi }}</td>
                     <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $item->satuan }}</td>
                     <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $item->jumlah_diminta }}</td>
+                    <td style="display: none"><input type="text" name="jumlahDiminta" value="{{ $item->jumlah_diminta }}"></td>
                     <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">
                         @if ($item->jumlah_diberi == null)
                         <input name="jumlahdiberi[]" type="text" style="width: 70px; text-align: center" class="fnt" required oninput="this.value = this.value.toUpperCase();">
