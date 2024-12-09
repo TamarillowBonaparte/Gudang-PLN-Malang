@@ -103,11 +103,12 @@
               <table class="table datatable">
                 <thead>
                   <tr>
+                    <th>Nomer Surat Jalan</th>
                     <th>Nomer Surat</th>
                     <th>Kepada</th>
                     <th>Pelanggan</th>
-                    <th>No. Polisi</th>
-                    <th>Pengemudi</th>
+                    <th>Kepada</th>
+                    <th>Alamat</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -115,13 +116,14 @@
                   @forelse ($sjAdmin as $item)
                   <tr>
                     <td style="display:none;"><input type="text" name="idsrtjln" value="{{ $item->id }}"></td>
+                    <td>{{ $item->nsj }}</td>
                     <td>{{ $item->no_permintaan }}</td>
                     <td>{{ ($item->kepada == null) ? "-" : $item->kepada }}</td>
                     <td>{{ ($item->alamat == null) ? "-" : $item->alamat}}</td>                    
                     <td>-</td>
                     <td>-</td>
                     <td>
-                      <a href="#" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-eye"></i> Detail</a>
+                      <a href="{{ route('showsjadmin',['id' => Crypt::encryptString($item->idsj)]) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-eye"></i> Detail</a>
                       <a href="{{ route('editdatasuratadmin', ['id' => Crypt::encryptString($item->idsj)]) }}" class="btn btn-sm btn-outline-success" target="_blank"><i class="bi bi-pencil"></i> Edit</a>
                     </td>
                   </tr>
