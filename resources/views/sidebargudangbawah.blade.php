@@ -54,13 +54,21 @@
             </a>
         </li><!-- End Dashboard Nav -->
 
-        <!-- Daftar Permintaan Material Nav -->
+        <!-- Riwayat Surat Nav -->
         <li class="nav-item">
             <a class="nav-link {{ Request::is('gudangbawahhistory') ? 'active' : '' }}" href="{{ url('gudangbawahhistory') }}">
                 <i class="bi bi-layout-text-sidebar"></i>
                 <span>Riwayat Surat</span>
             </a>
-        </li><!-- End Daftar Permintaan Material Nav -->
+        </li><!-- End Riwayat Surat Nav -->
+
+        <!-- Buat Surat Jalan Nav -->
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('gudangbawahhistory') ? 'active' : '' }}" href="{{ url('buatsuratjalanadmin') }}">
+                <i class="bi bi-file-text"></i>
+                <span>Buat Surat Jalan</span>
+            </a>
+        </li><!-- End Buat Surat Jalan Nav -->
 
         <!-- ... (rest of the sidebar content) ... -->
     </ul>
