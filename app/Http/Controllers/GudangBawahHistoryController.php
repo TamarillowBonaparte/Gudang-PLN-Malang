@@ -48,13 +48,14 @@ class GudangBawahHistoryController extends Controller
         ->join('surat_jalan AS sj', 'sj.id_surat_jalan', '=', 'sja.id_suratjalan')
         ->join('daftar_material_sja AS dmsja', 'dmsja.id_sja', '=', 'sja.id')
         ->select(
+            'sj.nomor_suratjln AS nsj',
             'sj.id_surat_jalan AS idsj',
             'sja.id',
             'sja.no_permintaan',
             'sja.kepada',
             'sja.alamat',
         )
-        // ->whereNull('sj.pengemudi')
+        ->orderByDesc('sj.tgl_diterima')
         ->get();
 
         return view('gudangbawahhistory', compact('dpmOngoing', 'dpm', 'sjAdmin'));

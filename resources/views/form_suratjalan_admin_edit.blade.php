@@ -218,14 +218,13 @@
                             <input type="text" 
                                    name="nopol" 
                                    style="width: 80px; height: 14px; font-size: 11px" 
-                                   class="fnt" 
-                                   required 
+                                   class="fnt"                                  
                                    oninput="this.value = this.value.toUpperCase();">
                         @else
                             {{ $item->nopol }}
                         @endif
                     </td>
-                    <td class="fntb pdtb fontl hide" colspan="6">KEPADA :</td>                
+                    <td class="fntb pdtb fontl hide" colspan="6">{{ ($item->kepada == null ) ? 'KEPADA : ' : "KEPADA : ".$item->kepada }}</td>                
                 </tr>
                 {{-- row 11 --}}
                 <tr>
@@ -236,8 +235,7 @@
                             <input type="text" 
                                    name="pengemudi" 
                                    style="width: 80px; height: 14px; font-size: 11px" 
-                                   class="fnt" 
-                                   required 
+                                   class="fnt"                                    
                                    oninput="this.value = this.value.toUpperCase();">
                         @else
                             {{ $item->pengemudi }}
@@ -249,7 +247,7 @@
                     <td class="fntb pdtb fontl hide chnpp" colspan="2">Dari Logistik</td>
                     <td class="fntb pdtb hide">:</td>
                     <td class="fntb pdtb fontl hide" colspan="4">UP3 MALANG</td>
-                    <td class="fntb pdtb fontl hide" colspan="6">{{ ($item->pengemudi == null ) ? 'ALAMAT : ' : "ALAMAT : ".$item->pengemudi }}</td>
+                    <td class="fntb pdtb fontl hide" colspan="6">{{ ($item->alamat == null ) ? 'ALAMAT : ' : "ALAMAT : ".$item->alamat }}</td>
                 </tr>
                 @empty
                     
@@ -400,9 +398,9 @@
                 <tr>
                     <td class="fntb hide" colspan="3">
                         @if ($item->penerima == null)
-                        <input name="penerima" type="text" style="width: 70px; text-align: center" class="fnt" required oninput="this.value = this.value.toUpperCase();">
+                        <input name="penerima" type="text" style="width: 70px; text-align: center" class="fnt" oninput="this.value = this.value.toUpperCase();">
                         @else
-                        <input name="penerima" type="text" value="{{ $item->penerima }}" style="width: 70px; text-align: center" class="fnt" required oninput="this.value = this.value.toUpperCase();">
+                        <input name="penerima" type="text" value="{{ $item->penerima }}" style="width: 70px; text-align: center" class="fnt" oninput="this.value = this.value.toUpperCase();">
                         @endif                        
                     </td>
                     <td class="hide" colspan="1"></td>

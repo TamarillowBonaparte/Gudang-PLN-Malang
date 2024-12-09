@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BuatSuratJalanAdmin;
+use App\Http\Controllers\BuatSuratJalanAdminController;
 use App\Http\Controllers\DaftarAkunController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -59,6 +61,7 @@ Route::get('/showK7/{id}/{srtJlnId}', [VendorController::class, 'showK7'])->name
 Route::get('/editdatasurat/{id}', [GudangBawahController::class, 'editDataSurat'])->name('editdatasurat');
 Route::get('/editdatasuratadmin/{id}', [GudangBawahController::class, 'editDataSuratAdmin'])->name('editdatasuratadmin');
 Route::get('/formsrt/{id}', [GudangBawahController::class, 'show'])->name('formsrt');
+Route::get('/showsjadmin/{id}', [GudangBawahController::class, 'showsjadmin'])->name('showsjadmin');
 // route ajax show surat jalan
 Route::get('/suratongoing', [GudangBawahController::class, 'showSurat'])->name('suratongoing');
 Route::post('/storedatasurat', [GudangBawahController::class, 'storeDataSurat'])->name('storedatasurat');
@@ -101,6 +104,7 @@ Route::group(['middleware' => ['auth']], function() {
 Route::get('/gudang', [GudangController::class, 'index'])->name('gudang');
 // Route ke gudang history
 Route::get('/gudangbawahhistory', [GudangBawahHistoryController::class, 'index'])->name('gudangbawahhistory');
+Route::get('/buatsuratjalanadmin', [BuatSuratJalanAdminController::class, 'index'])->name('buatsuratjalanadmin');
 
 
 // Route ke gudang DPM

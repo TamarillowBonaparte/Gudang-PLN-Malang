@@ -296,7 +296,7 @@ class GudangBawahController extends Controller
             'nomor_polisi' => ( $request->input('nopol') == null ) ? null : $request->input('nopol'),
         ]);
 
-        return redirect('/gudangbawahhistory');
+        return redirect()->route('showsjadmin', ['id' => Crypt::encryptString($idsj)]);
     }
 
     public function show(String $encryptedId): View {
@@ -362,9 +362,11 @@ class GudangBawahController extends Controller
         return view('form_suratjalan', compact('suratjln', 'material', 'list'));
     }
 
-    public function showSJAdmin(String $encryptedId): View {
+    public function showsjadmin(String $encryptedId): View {
 
         $id = Crypt::decryptString($encryptedId);
+
+        // dd($id);
 
         $sja = DB::table('surat_jalan AS sj')
         ->join('surat_jalan_admin AS sja', 'sja.id_suratjalan', '=', 'sj.id_surat_jalan')        
@@ -374,7 +376,7 @@ class GudangBawahController extends Controller
             'sj.pengemudi',
             'sj.tgl_diterima',
             'sj.nomor_suratjln AS nsj',
-            'sja.id',
+            'sja.id',   
             'sja.kepada',
             'sja.alamat',
             'sja.no_permintaan AS noperm',
