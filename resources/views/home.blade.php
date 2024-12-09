@@ -12,6 +12,12 @@
     <link href="{{ asset('admin/assets/img/logo pln.png') }}" rel="icon">
     <link href="{{ asset('admin/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	{{-- <link rel="stylesheet" href="{{asset('calender/css/style.css')}}"> --}}
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .filter-label span {
@@ -206,7 +212,6 @@
                                             <span class="filter-box"></span>
                                             Urutkan Stok Terbesar ke Kecil
                                         </label>
-                                        <strong class="ms-auto">Material:</strong>
                                     </div>
 
                                     <!-- Grafik Batang -->
