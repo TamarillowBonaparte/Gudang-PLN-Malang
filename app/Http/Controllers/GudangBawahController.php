@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\DaftarMaterial;
+use App\Models\DaftarMaterialSJA;
 use App\Models\DpmSuratJalan;
+use App\Models\RiwayatEdit;
 use App\Models\SuratJalan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -150,6 +152,7 @@ class GudangBawahController extends Controller
         ->join('material', 'daftar_material.id_material', '=', 'material.id_material')
         ->select(
             'daftar_material.jumlah_diminta',
+            'daftar_material.jumlah_diberi',
             'daftar_material.id_material',
             'daftar_material.id_dpb_suratjalan',
             'material.nama as nammat',
@@ -211,6 +214,16 @@ class GudangBawahController extends Controller
             'pengemudi'         => trim ($request->input('pengemudi')),
             'tgl_diterima'      => date('Y-m-d H:i:s')
             ]);
+
+        foreach ($request->input('jumlahdiberi') as $key => $value) {
+            RiwayatEdit::create([
+                'id_suratjalan' => $request->input('idsrtjl'),
+                'id_material' => $request->input('idmat')[$key],
+                'jumlah_sebelumnya' => $request->input('jumlahDiminta'),
+                'jumlah_ditambah' => $value,
+                'tgl_diubah' => date('Y-m-d H:i:s'),
+            ]);
+        }
 
         return redirect()->route('formsrt', ['id' => Crypt::encrypt($idsrtjl)]);
     }
@@ -286,7 +299,7 @@ class GudangBawahController extends Controller
         DB::table('surat_jalan_admin')
         ->where('id', $idsja)
         ->update([
-            'penerima' => ($request->input('pengemudi') == null) ? null : $request->input('pengemudi')
+            'penerima' => ($request->input('penerima') == null) ? null : $request->input('penerima')
         ]);
 
         DB::table('surat_jalan AS sj')
@@ -295,6 +308,16 @@ class GudangBawahController extends Controller
             'pengemudi' => ( $request->input('pengemudi') == null ) ? null : $request->input('pengemudi'),
             'nomor_polisi' => ( $request->input('nopol') == null ) ? null : $request->input('nopol'),
         ]);
+
+        foreach ($request->input('jumlahdiberi') as $key => $value) {
+            RiwayatEdit::create([
+                'id_suratjalan' => $request->input('idsj'),
+                'id_material' => $request->input('idmat')[$key],
+                'jumlah_sebelumnya' => $request->input('jumlahDiminta'),
+                'jumlah_ditambah' => $value,
+                'tgl_diubah' => date('Y-m-d H:i:s'),
+            ]);
+        }
 
         return redirect()->route('showsjadmin', ['id' => Crypt::encryptString($idsj)]);
     }

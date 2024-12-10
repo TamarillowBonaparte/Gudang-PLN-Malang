@@ -114,6 +114,7 @@
                 </thead>
                 <tbody id="sja">
                   @forelse ($sjAdmin as $item)
+                  {{-- @dd($sjAdmin) --}}
                   <tr>
                     <td style="display:none;"><input type="text" name="idsrtjln" value="{{ $item->id }}"></td>
                     <td>{{ $item->nsj }}</td>

@@ -37,8 +37,6 @@ class DpmController extends Controller {
         )
         ->get();
 
-
-
         $suratDpm = DB::table('daftar_permintaan_material')
         ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
         ->join('ulp', 'dpb_suratjalan.id_ulp', '=', 'ulp.id_ulp')

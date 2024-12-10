@@ -55,8 +55,11 @@ class GudangBawahHistoryController extends Controller
             'sja.kepada',
             'sja.alamat',
         )
+        ->groupBy('sj.nomor_suratjln', 'sj.id_surat_jalan', 'sja.id', 'sja.no_permintaan', 'sja.kepada', 'sja.alamat')
         ->orderByDesc('sj.tgl_diterima')
         ->get();
+
+        // dd($sjAdmin);
 
         return view('gudangbawahhistory', compact('dpmOngoing', 'dpm', 'sjAdmin'));
         // return view('gudangbawah', compact('dpm'));

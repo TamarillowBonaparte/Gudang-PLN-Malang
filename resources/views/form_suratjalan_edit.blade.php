@@ -277,13 +277,14 @@
                         <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ $mat->normalisasi }}</td>
                         <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $mat->satuan }}</td>
                         <td class="fntb bdottb pdtb fnt12 itmth" colspan="3">{{ $mat->jumlah_diminta }}</td>
+                        <td style="display: none"><input type="text" name="jumlahDiminta" value="{{ $mat->jumlah_diminta }}"></td>
                         <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">
-                            @if ()
-                                
+                            @if ($mat->jumlah_diberi == null)
+                                <input name="jumlahdiberi[]" type="text" style="width: 70px; text-align: center" class="fnt" required oninput="this.value = this.value.toUpperCase();"></td>
                             @else
-                                
+                                <input name="jumlahdiberi[]" type="text" value="{{ $mat->jumlah_diberi }}" style="width: 70px; text-align: center" class="fnt" required oninput="this.value = this.value.toUpperCase();"></td>
                             @endif
-                            <input name="jumlahdiberi[]" type="text" style="width: 70px; text-align: center" class="fnt" required oninput="this.value = this.value.toUpperCase();"></td>
+                            
                     </tr>
                     @empty
                     <tr>
