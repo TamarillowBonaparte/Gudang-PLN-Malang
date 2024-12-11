@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BonMaterialController;
+use App\Http\Controllers\BonPemakaianMaterialController;
 use App\Http\Controllers\BuatSuratJalanAdmin;
 use App\Http\Controllers\BuatSuratJalanAdminController;
 use App\Http\Controllers\DaftarAkunController;
@@ -126,4 +128,10 @@ Route::get('/historydpm', [HistoryDPMController::class, 'index'])->name('history
 Route::get('/historyk7', [HistoryK7Controller::class, 'index'])->name('historyk7');
 
 Route::get('/historyk3', [HistoryK3Controller::class, 'index'])->name('historyk3');
+
+Route::get('/bonmaterial', [BonMaterialController::class, 'index'])->name('bonmaterial');
+
+Route::get('/bonpemakaianmaterial', [BonPemakaianMaterialController::class, 'index'])->name('bonpemakaianmaterial');
+
+
 

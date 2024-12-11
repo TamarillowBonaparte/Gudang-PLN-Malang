@@ -33,21 +33,33 @@
         </a>
       </li><!-- End Dashboard Nav -->
 
-      <!-- Daftar Permintaan Material Nav -->
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('daftar-permintaan-material') ? 'active' : '' }}" href="{{ url('daftar-permintaan-material') }}">
-          <i class="bi bi-layout-text-sidebar"></i>
-          <span>Daftar Permintaan Material</span>
+     <!-- Daftar Surat Nav (with Dropdown) -->
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('surat-jalan') ? 'active' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#submenuSurat" aria-expanded="false" aria-controls="submenuSurat">
+            <i class="bi bi-newspaper"></i>
+          <span>Daftar Surat</span>
         </a>
-      </li><!-- End Daftar Permintaan Material Nav -->
-
-      <!-- Surat Jalan Nav -->
-      <li class="nav-item">
-        <a class="nav-link {{ Request::is('surat-jalan') ? 'active' : '' }}" href="{{ url('surat-jalan') }}">
-          <i class="bi bi-truck"></i>
-          <span>Surat Jalan</span>
-        </a>
-      </li><!-- End Surat Jalan Nav -->
+        <ul id="submenuSurat" class="collapse list-unstyled">
+          <li>
+            <a class="nav-link {{ Request::is('daftar-permintaan-material') ? 'active' : '' }}" href="{{ url('daftar-permintaan-material') }}">
+              <i class="bi bi-layout-text-sidebar"></i>
+              <span>Daftar Permintaan Material</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-link {{ Request::is('bonmaterial') ? 'active' : '' }}" href="{{ route('bonmaterial') }}">
+                <i class="bi bi-arrow-left-right"></i>
+                <span>Bon Pengembalian Material</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav-link {{ Request::is('bonpemakaianmaterial') ? 'active' : '' }}" href="{{ route('bonpemakaianmaterial') }}">
+                <i class="bi bi-clipboard"></i>
+                <span>Bon Pemakaian Material</span>
+              </a>
+          </li>
+        </ul>
+      </li><!-- End Daftar Surat Nav -->
 
       <!-- Material Nav -->
       <li class="nav-item">
