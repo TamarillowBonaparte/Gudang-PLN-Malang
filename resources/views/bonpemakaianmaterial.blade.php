@@ -57,15 +57,13 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
+    <section class="section mt-5">
+        <div class="row">
+          <!-- Kolom untuk tabel pertama -->
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Tabel Riwayat Pemakaian Bon Pengembalian Material (K7)</h5>
-
-              <!-- Table with stripped rows -->
-             <table class="table datatable">
+                <h5 class="card-title">Riwayat Surat K7</h5>
+                <table class="table datatable">
                     <thead>
                         <tr>
                             <th>Tanggal Diminta</th>
@@ -91,12 +89,10 @@
                         @endforelse
                     </tbody>
                 </table>
-              <!-- End Table with stripped rows -->
             </div>
-          </div>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
   </main>  <!-- End #main -->
 
   <!-- ======= Footer ======= -->

@@ -237,30 +237,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <script>
-                            $(document).ready(function() {
-                                $('#suratJalanTable').DataTable({
-                                    searching: true,
-                                    ordering: true,
-                                    paging: true,
-                                    language: {
-                                        search: "Pencarian:",
-                                        lengthMenu: "Tampilkan _MENU_ data per halaman",
-                                        zeroRecords: "Data tidak ditemukan",
-                                        info: "Menampilkan halaman _PAGE_ dari _PAGES_",
-                                        infoEmpty: "Tidak ada data yang tersedia",
-                                        infoFiltered: "(difilter dari _MAX_ total data)",
-                                        paginate: {
-                                            first: "Pertama",
-                                            last: "Terakhir",
-                                            next: "Selanjutnya",
-                                            previous: "Sebelumnya"
-                                        }
-                                    }
-                                });
-                            });
-                        </script>
                         <!-- End Recent Sales -->
 
                         <!-- Grafik Stok Barang -->
@@ -382,8 +358,8 @@
                 </div>
                 <!-- End Left side columns -->
 
-                <!-- Right side columns -->
                 <div class="col-lg-4">
+                    <!-- Calendar Card remains the same -->
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Kalender</h5>
@@ -414,8 +390,74 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Notes Card (Replacing Weather Card) -->
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Catatan</h5>
+                            <div id="notes-container">
+                                <div class="mb-3">
+                                    <textarea class="form-control" id="noteInput" rows="3" placeholder="Tulis catatan baru..."></textarea>
+                                </div>
+                                <button class="btn btn-primary mb-3" onclick="addNote()">Tambah Catatan</button>
+
+                                <div id="notes-list">
+                                    <!-- Notes will be dynamically added here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- End Right side columns -->
+
+                <script>
+                    // Load notes from localStorage when page loads
+                    document.addEventListener('DOMContentLoaded', function() {
+                        loadNotes();
+                    });
+
+                    function addNote() {
+                        const noteInput = document.getElementById('noteInput');
+                        const noteText = noteInput.value.trim();
+
+                        if (noteText) {
+                            const notes = getNotes();
+                            notes.push({
+                                text: noteText,
+                                date: new Date().toLocaleString('id-ID')
+                            });
+                            localStorage.setItem('notes', JSON.stringify(notes));
+
+                            noteInput.value = '';
+                            loadNotes();
+                        }
+                    }
+
+                    function deleteNote(index) {
+                        const notes = getNotes();
+                        notes.splice(index, 1);
+                        localStorage.setItem('notes', JSON.stringify(notes));
+                        loadNotes();
+                    }
+
+                    function getNotes() {
+                        return JSON.parse(localStorage.getItem('notes') || '[]');
+                    }
+
+                    function loadNotes() {
+                        const notesList = document.getElementById('notes-list');
+                        const notes = getNotes();
+
+                        notesList.innerHTML = notes.map((note, index) => `
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <p class="mb-1">${note.text}</p>
+                                    <small class="text-muted d-block">${note.date}</small>
+                                    <button class="btn btn-sm btn-danger mt-2" onclick="deleteNote(${index})">Hapus</button>
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                </script>
             </div>
         </section>
     </main><!-- End #main -->
@@ -493,40 +535,98 @@
                         cell.classList.add("calendar-day");
 
                         if (i === 0 && j < firstDay) {
-                            // Previous month's days
                             cell.textContent = prevMonthDate++;
                             cell.classList.add("text-muted");
                         } else if (date > daysInMonth) {
-                            // Next month's days
                             cell.textContent = date - daysInMonth;
                             date++;
                             cell.classList.add("text-muted");
                         } else {
-                            // Current month's days
                             cell.textContent = date;
 
-                            // Highlight today
+                            // Store the full date as a data attribute
+                            const fullDate = new Date(year, month, date);
+                            cell.dataset.fullDate = fullDate.toISOString().split('T')[0];
+
                             if (date === today.getDate() && year === today.getFullYear() && month === today
                                 .getMonth()) {
                                 cell.classList.add("today");
                             }
 
+                            // Modify the click handler to filter the DataTable
                             cell.addEventListener("click", () => {
+                                // Remove selected class from all cells
                                 document.querySelectorAll(".calendar-day.selected").forEach((el) => {
                                     el.classList.remove("selected");
                                 });
                                 cell.classList.add("selected");
+
+                                // Get the DataTable instance
+                                const suratJalanTable = $('#suratJalanTable').DataTable();
+
+                                // Format the selected date to match the table format
+                                const selectedDate = formatDate(fullDate);
+
+                                // Clear existing search and apply new filter
+                                suratJalanTable
+                                    .columns(1) // Index of the Tanggal Diminta column
+                                    .search(selectedDate)
+                                    .draw();
                             });
 
                             date++;
                         }
                         row.appendChild(cell);
                     }
-
                     calendarBody.appendChild(row);
                 }
             }
 
+            // Function to format date to match the table format (e.g., "12 Dec 2024")
+            function formatDate(date) {
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const day = date.getDate();
+                const month = months[date.getMonth()];
+                const year = date.getFullYear();
+                return `${day} ${month} ${year}`;
+            }
+
+            // Modify the DataTable initialization
+            $('#suratJalanTable').DataTable({
+                searching: true,
+                ordering: true,
+                paging: true,
+                language: {
+                    search: "Pencarian:",
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    zeroRecords: "Data tidak ditemukan",
+                    info: "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    infoEmpty: "Tidak ada data yang tersedia",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
+                    paginate: {
+                        first: "Pertama",
+                        last: "Terakhir",
+                        next: "Selanjutnya",
+                        previous: "Sebelumnya"
+                    }
+                },
+                // Add custom search functionality
+                // initComplete: function() {
+                //     // Add a clear filter button
+                //     const clearButton = $('<button>')
+                //         .text('Tampilkan Semua')
+                //         .addClass('btn btn-secondary btn-sm ms-2')
+                //         .on('click', function() {
+                //             const table = $('#suratJalanTable').DataTable();
+                //             table.search('').columns().search('').draw();
+                //             document.querySelectorAll(".calendar-day.selected").forEach((el) => {
+                //                 el.classList.remove("selected");
+                //             });
+                //         });
+
+                //     $('#suratJalanTable_filter').append(clearButton);
+                // }
+            });
             prevMonth.addEventListener("click", () => {
                 currentMonth--;
                 if (currentMonth < 0) {
@@ -633,6 +733,56 @@
         });
     </script>
     <!--Buat Grafiknya-->
+
+    <script>
+        // Load notes from localStorage when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNotes();
+        });
+
+        function addNote() {
+            const noteInput = document.getElementById('noteInput');
+            const noteText = noteInput.value.trim();
+
+            if (noteText) {
+                const notes = getNotes();
+                notes.push({
+                    text: noteText,
+                    date: new Date().toLocaleString('id-ID')
+                });
+                localStorage.setItem('notes', JSON.stringify(notes));
+
+                noteInput.value = '';
+                loadNotes();
+            }
+        }
+
+        function deleteNote(index) {
+            const notes = getNotes();
+            notes.splice(index, 1);
+            localStorage.setItem('notes', JSON.stringify(notes));
+            loadNotes();
+        }
+
+        function getNotes() {
+            return JSON.parse(localStorage.getItem('notes') || '[]');
+        }
+
+        function loadNotes() {
+            const notesList = document.getElementById('notes-list');
+            const notes = getNotes();
+
+            notesList.innerHTML = notes.map((note, index) => `
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <p class="mb-1">${note.text}</p>
+                        <small class="text-muted d-block">${note.date}</small>
+                        <button class="btn btn-sm btn-danger mt-2" onclick="deleteNote(${index})">Hapus</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
 </body>
 
 </html>
