@@ -20,6 +20,38 @@
     .sidebar .nav-link:hover .bi {
         color: #fff;
     }
+
+    /* Style untuk parent dropdown */
+    .nav-link[data-bs-toggle="collapse"] {
+        position: relative;
+        color: #333 !important;
+        background-color: transparent !important;
+    }
+
+    /* Style untuk arrow */
+    .nav-link[data-bs-toggle="collapse"]::after {
+        content: "\F282"; /* bi-chevron-down */
+        font-family: "bootstrap-icons";
+        position: absolute;
+        right: 15px;
+        transition: transform 0.3s ease;
+        font-size: 14px;
+    }
+
+    /* Rotasi arrow saat menu dibuka */
+    .nav-link[data-bs-toggle="collapse"]:not(.collapsed)::after {
+        transform: rotate(180deg);
+    }
+
+    /* Hover effect untuk parent dropdown */
+    .nav-link[data-bs-toggle="collapse"]:hover {
+        color: #fff !important;
+        background-color: #0d6efd !important;
+    }
+
+    .nav-link[data-bs-toggle="collapse"]:hover::after {
+        color: #fff;
+    }
 </style>
 
 <!--Side Bar-->
@@ -35,9 +67,12 @@
 
      <!-- Daftar Surat Nav (with Dropdown) -->
     <li class="nav-item">
-        <a class="nav-link {{ Request::is('surat-jalan') ? 'active' : '' }}" href="#" data-bs-toggle="collapse" data-bs-target="#submenuSurat" aria-expanded="false" aria-controls="submenuSurat">
-            <i class="bi bi-newspaper"></i>
-          <span>Daftar Surat</span>
+        <a class="nav-link collapsed"
+           href="#"
+           data-bs-toggle="collapse"
+           data-bs-target="#submenuSurat">
+            <i class="bi bi-file-text" style="color: #0d6efd;"></i>
+            <span>Daftar Surat</span>
         </a>
         <ul id="submenuSurat" class="collapse list-unstyled">
           <li>
@@ -47,7 +82,7 @@
             </a>
           </li>
           <li>
-            <a class="nav-link {{ Request::is('bonmaterial') ? 'active' : '' }}" href="{{ route('bonmaterial') }}">
+            <a class="nav-link {{ Request::is('bonpengembalianmaterial') ? 'active' : '' }}" href="{{ route('bonpengembalianmaterial') }}">
                 <i class="bi bi-arrow-left-right"></i>
                 <span>Bon Pengembalian Material</span>
             </a>
