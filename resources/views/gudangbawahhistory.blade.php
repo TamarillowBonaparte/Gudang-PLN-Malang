@@ -87,7 +87,41 @@
                       <td>{{ $dpb->pengemudi }}</td>
                       <td>
                         <a href="{{ route('gudangbawah.show', Crypt::encrypt($dpb->idsrt)) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-eye"></i> Detail</a>
+                        <a href="{{ route('printsj', Crypt::encrypt($dpb->idsrt)) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-printer"></i> Print</a>
                         <a href="{{ route('editdatasurat', ['id' => Crypt::encryptString($dpb->idsrt)]) }}" class="btn btn-sm btn-outline-success" target="_blank"><i class="bi bi-pencil"></i> Edit</a>
+                      </td>
+                    </tr>
+                  @empty
+                  @endforelse
+                </tbody>
+              </table>
+
+              <br>
+
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th>Nomer Surat Jalan</th>
+                    <th>Tanggal Cetak</th>
+                    <th>Nomer K7</th>
+                    <th>Vendor</th>
+                    <th>No. Polisi</th>
+                    <th>Pengemudi</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="table_dpm">
+                  @forelse ($k7 as $i)
+                    <tr>
+                      <td>{{ $i->nosj }}</td>
+                      <td>{{ \Carbon\Carbon::parse($i->tgldicetak)->translatedFormat('d M Y') }}</td>
+                      <td>{{ $i->nomor }}</td>
+                      <td>{{ $i->vendor }}</td>
+                      <td>{{ $i->nomor_polisi }}</td>
+                      <td>{{ $i->pengemudi }}</td>
+                      <td>
+                        <a href="{{ route('showk7', Crypt::encrypt($i->idsrt)) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-eye"></i> Detail</a>
+                        <a href="{{ route('editdatasuratk7', ['id' => Crypt::encryptString($i->idsrt)]) }}" class="btn btn-sm btn-outline-success" target="_blank"><i class="bi bi-pencil"></i> Edit</a>
                       </td>
                     </tr>
                   @empty

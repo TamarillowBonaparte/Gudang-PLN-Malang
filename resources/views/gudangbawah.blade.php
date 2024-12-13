@@ -100,53 +100,11 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Riwayat Edit Surat Jalan</h5>
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th>Tanggal Diminta</th>
-                    <th>Nomer Surat</th>
-                    <th>Sebelum Diubah</th>
-                    <th>Sesudah Diubah</th>
-                  </tr>
-                </thead>
-                <tbody id="dpmOngoing">
-                  {{-- @forelse ($dpmOngoing as $ongoing) --}}
-                  <tr>
-                    
-                    <td>30 Nov 2024</td>
-                    <td>TUG 5. MLG24-0005</td>
-                    <td>TA</td>
-                    <td>10</td>
-                  </tr>
-                  {{-- @empty --}}
-                  <tr>
-                    {{-- <td colspan="7" style="text-align: center">Belum ada data yang diubah</td> --}}
-                  </tr>
-                  {{-- @endforelse --}}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        
-        
-        {{-- @if ()
-            
-        @else
-            
-        @endif
 
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Surat Jalan Admin</h5>
+              <h5 class="card-title">K7 Belum Memiliki Surat Jalan</h5>
               <table class="table datatable">
                 <thead>
                   <tr>
@@ -160,18 +118,18 @@
                   </tr>
                 </thead>
                 <tbody id="dpmOngoing">
-                  @forelse ($dpmOngoing as $ongoing)
+                  @forelse ($k7Ongoing as $ongoing)
                   <tr>
                     <td style="display: none;"><input type="text" name="idsrtjln" value="{{ $ongoing->id_srtjln }}"></td>
                     <td>{{ \Carbon\Carbon::parse($ongoing->tgl)->translatedFormat('d M Y') }}</td>
-                    <td>{{ $ongoing->nomor }}</td>
+                    <td>{{ $ongoing->nmr_k7 }}</td>
                     <td>{{ $ongoing->vendor }}</td>
                     <td>{{ $ongoing->pelanggan }}</td>
                     <td style="text-align: center">-</td>
                     <td style="text-align: center">-</td>
                     <td>
-                      <a href="{{ route('editdatasurat', ['id' => Crypt::encryptString($ongoing->id_srtjln)]) }}" class="btn btn-sm btn-outline-success" target="_blank"><i class="bi bi-pencil"></i> Edit</a>
-                    </td>                    
+                      <a href="{{ route('editdatasuratk7', ['id' => Crypt::encryptString($ongoing->id_srtjln)]) }}" class="btn btn-sm btn-outline-success" target="_blank"><i class="bi bi-pencil"></i> Edit</a>
+                    </td>
                   </tr>
                   @empty
                   <tr>
@@ -181,9 +139,8 @@
                 </tbody>
               </table>
             </div>
-          </div>          
-        </div> --}}
-
+          </div>
+        </div>
       </div>
     </section>
 

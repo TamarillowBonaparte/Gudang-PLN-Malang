@@ -63,12 +63,16 @@ Route::get('/showK7/{id}/{srtJlnId}', [VendorController::class, 'showK7'])->name
 
 // route input nopol dan pengemudi surat jalan
 Route::get('/editdatasurat/{id}', [GudangBawahController::class, 'editDataSurat'])->name('editdatasurat');
+Route::get('/editdatasuratk7/{id}', [GudangBawahController::class, 'editDataSuratK7'])->name('editdatasuratk7');
 Route::get('/editdatasuratadmin/{id}', [GudangBawahController::class, 'editDataSuratAdmin'])->name('editdatasuratadmin');
 Route::get('/formsrt/{id}', [GudangBawahController::class, 'show'])->name('formsrt');
+Route::get('/printsj/{id}', [GudangBawahController::class, 'print'])->name('printsj');
+Route::get('/showk7/{id}', [GudangBawahController::class, 'showk7'])->name('showk7');
 Route::get('/showsjadmin/{id}', [GudangBawahController::class, 'showsjadmin'])->name('showsjadmin');
 // route ajax show surat jalan
 Route::get('/suratongoing', [GudangBawahController::class, 'showSurat'])->name('suratongoing');
 Route::post('/storedatasurat', [GudangBawahController::class, 'storeDataSurat'])->name('storedatasurat');
+Route::post('/storedatasuratk7', [GudangBawahController::class, 'storeDataSuratK7'])->name('storedatasuratk7');
 Route::post('/storedatasuratadmin', [GudangBawahController::class, 'storeDataSuratAdmin'])->name('storedatasuratadmin');
 
 //route ke halaman setting

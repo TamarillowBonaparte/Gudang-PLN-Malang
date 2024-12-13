@@ -154,8 +154,7 @@
                       <td>{{ \Carbon\Carbon::parse($surat->tgl_diminta)->format('d M Y') }}</td>
                       <td>{{$surat->nomor_dpb}}</td>
                       <td>
-                        <a href="{{ route('show', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                        <a href="{{ route('print', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                        <a href="{{ route('show', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-sm btn-outline-primary mb-1" target="_blank">Detail</a>                        
                       </td>
                     </tr>
                     @empty
@@ -190,8 +189,7 @@
                       <td>{{ \Carbon\Carbon::parse($k7->tgl_diminta)->format('d M Y') }}</td>
                       <td>{{$k7->nmr_k7}}</td>
                       <td>
-                        <a href="{{ route('showK7', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                        <a href="{{ route('printk7', ['id' => Crypt::encryptString($k7->id), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                        <a href="{{ route('showK7', ['id' => Crypt::encryptString($k7->idk7), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-sm btn-outline-primary mb-1" target="_blank">Detail</a>                    
                       </td>
                     </tr>
                     @empty
@@ -225,8 +223,7 @@
                       <td>{{ \Carbon\Carbon::parse($k3->tgl_diminta)->format('d M Y') }}</td>
                       <td>{{$k3->nmr_k3}}</td>
                       <td>
-                        <a href="{{ route('showk3', ['id' => Crypt::encryptString($k3->idk3)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                        <a href="{{ route('printk7', ['id' => Crypt::encryptString($k3->idk3), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-outline-success"><i class="bi bi-download"></i></a>
+                        <a href="{{ route('showk3', ['id' => Crypt::encryptString($k3->idk3)]) }}" class="btn btn-sm btn-outline-primary mb-1" target="_blank">Detail</a>                        
                       </td>
                     </tr>
                     @empty

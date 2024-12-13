@@ -40,6 +40,7 @@ class VendorController extends Controller
             'k7.*',
             'k7.id as idk7',
             'k7_srtjln.*',
+            'k7_srtjln.id AS idk7sj',
             'surat_jalan.id_surat_jalan'
             )
         ->where('k7_srtjln.id_user', '=', $idUser)
@@ -64,8 +65,6 @@ class VendorController extends Controller
             'jumlah_sap',
         )
         ->get();
-
-
 
         return view('vendor', compact('suratDpm','dpbjumlah', 'k7jumlah','k3jumlah','suratk7','suratk3', 'material'));
     }
@@ -188,13 +187,15 @@ class VendorController extends Controller
         ->where('k7.id', '=', $id)
         ->get();
 
-        $iddpbsrtjln = DB::table('k7')
-        ->select('id')
-        ->where('id', '=', $id);
+        $iddpbsrtjln = DB::table('k7')        
+        ->where('id', '=', $id)
+        ->pluck('id');
+
+        // dd($id);
 
         $lMaterial = DB::table('dftrmaterial_k7')
         ->select(
-            'dftrmaterial_k7.jumlah',
+            'dftrmaterial_k7.jumlah_diminta',
             'dftrmaterial_k7.id',
             'material_bekas.nama as nammat',
             'material_bekas.normalisasi',
@@ -218,7 +219,7 @@ class VendorController extends Controller
 
         $jmlhMaterial = DB::table('dftrmaterial_k7')
         ->where('id', '=', $iddpbsrtjln)
-        ->pluck('jumlah');
+        ->pluck('jumlah_diminta');
 
         $angkaKeHuruf = $this->angkaKeHuruf($jmlhMaterial);
 
@@ -306,7 +307,7 @@ class VendorController extends Controller
 
         $jmlhMaterial = DB::table('daftar_material')
         ->where('id_dpb_suratjalan', '=', $iddpbsrtjln)
-        ->pluck('jumlah_diminta');
+        ->pluck('jumlah_diminta');        
 
         $angkaKeHuruf = $this->angkaKeHuruf($jmlhMaterial);
 
@@ -317,13 +318,9 @@ class VendorController extends Controller
                 'lMaterial' => $lMaterial[$i],
                 'jumlah' => $angkaKeHuruf[$i]
             ];  
-        }
-        $pdf = Pdf::loadView('print', compact('dpm', 'material', 'jumlah', 'list'));
+        }        
 
-        // Mengirimkan file PDF untuk didownload
-        return $pdf->download('DaftarPermintaanMaterial' . $nmrDPB . '.pdf');
-
-        // return view('print', compact('dpm', 'material', 'jumlah', 'list'));
+        return view('print', compact('dpm', 'material', 'jumlah', 'list'));
     }
 
     public function showK3(String $encryptedId)
@@ -370,6 +367,8 @@ class VendorController extends Controller
     }
 
     public function angkaKeHuruf($angka) {
+
+        // dd($angka);
         // Array untuk mendefinisikan angka 0-9 dalam bentuk teks
         foreach ($angka as $key) {
 
@@ -400,6 +399,7 @@ class VendorController extends Controller
 
             // Gabungkan hasil menjadi string dengan spasi antar kata
             $hasil[] = implode(' ', $konversi);
+            
         }
 
         return $hasil;

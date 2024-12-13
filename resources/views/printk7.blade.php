@@ -4,7 +4,11 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>PLN ARM MALANG</title>
+    @forelse ($dpm as $item)
+    <title>{{ $item->nmr_k7 }}</title>
+    @empty
+        
+    @endforelse    
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -41,17 +45,37 @@
 
         @media print {
             html, body {
-                height:100vh;
+                height: auto !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                overflow: hidden;
+                overflow: visible !important;
             }
+            #floater {
+                display: none !important;
+            }
+
+            /* Remove or minimize fixed dimensions */
+            body {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            /* Ensure page breaks work correctly */
+            table {
+                page-break-inside: auto;
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }            
         }
         html, body {
             width: 297mm;
             /* height: 210mm; */
             margin: 0px;
             padding: 0px;
+            background-color: white;
         }
         body {
             font-family: 'Roboto', sans-serif;
@@ -140,12 +164,18 @@
         .dpm {
             background-color: #f2dbdb
         }
+        #floater {
+            position: fixed;
+            bottom: 5%;
+            right: 9%;
+            transform: translateY(-50%);
+            width: 22.8%
+        }
     </style>
 
 </head>
 <body>
-
-    <div class="fnt">
+    <div class="fnt" style="width: 100%">
         <table id="dpm" class="display">
             {{-- tr 0 --}}
             <tr>
@@ -337,7 +367,7 @@
                     <td class="bdottb pdtb" colspan="5">{{ $i['lMaterial']->nammat }}</td>
                     <td class="bdottb pdtb" colspan="2">{{ $i['lMaterial']->normalisasi }}</td>
                     <td class="bdottb pdtb">{{ $i['lMaterial']->satuan }}</td>
-                    <td class="bdottb pdtb" colspan="3">{{ $i['lMaterial']->jumlah }}</td>
+                    <td class="bdottb pdtb" colspan="3">{{ $i['lMaterial']->jumlah_diminta }}</td>
                     <td class="bdottb pdtb" colspan="3">{{ $i['jumlah'] }}</td>
                     <td class="bdottb pdtb" colspan="2"></td>
                     <td class="bdottb pdtb" colspan="2"></td>
@@ -555,6 +585,10 @@
 
             @endforelse
         </table>
+    </div>
+
+    <div id="floater">
+        <a href="{{ route('vendor.index') }}" class="btn btn-primary">Kembali</a>
     </div>
 
     <script>
