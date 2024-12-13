@@ -13,7 +13,8 @@ class DaftarMaterialK7 extends Model
 
     protected $fillable = [
         "id_mtrl_k7",
-        "jumlah",
+        "jumlah_diminta",
+        "jumlah_diberi",
         "id_k7srtjln",
         "tgl_keluar",
 

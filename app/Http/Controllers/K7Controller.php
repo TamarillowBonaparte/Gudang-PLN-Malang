@@ -51,7 +51,6 @@ class K7Controller extends Controller
         )
         ->get();
 
-
         return view('k7', compact('ulps', 'kepalaGdng', 'setuju', 'pemeriksa', 'penerima', 'suratk7','materialk7'));
     }
 
@@ -148,18 +147,18 @@ class K7Controller extends Controller
         // Insert DpmSuratJalan
         $k7SuratJalan = K7SrtJln::create([
             'id_srtjln'         => $lastSurJalId,
-            'kpl_gudang'         => $kepalaGudang,
-            'penerima'              => $penerima,
-            'nospk'                => $request->input('nospk'),
-            'id_jns_pekerjaan'    => $request->input('jenispekerjaan'),
-            'idpel'                 => $request->input('idpel'),
-            'nm_pelanggan'        => $request->input('nama_pel'),
-            'almt_pelanggan'      => $request->input('alamat_pel'),
-            'id_ulp'                => $request->input('ulp'),
-            'id_pbpd'              => $request->input('pbpd'),
-            'trfdy_lama'       => $pbpd == 2 ? $request->input('dayalama') : null,
-            'trfdy_baru'       => $request->input('dayabaru'),
-            'id_user'               => $idUser
+            'kpl_gudang'        => $kepalaGudang,
+            'penerima'          => $penerima,
+            'nospk'             => $request->input('nospk'),
+            'id_jns_pekerjaan'  => $request->input('jenispekerjaan'),
+            'idpel'             => $request->input('idpel'),
+            'nm_pelanggan'      => $request->input('nama_pel'),
+            'almt_pelanggan'    => $request->input('alamat_pel'),
+            'id_ulp'            => $request->input('ulp'),
+            'id_pbpd'           => $request->input('pbpd'),
+            'trfdy_lama'        => $pbpd == 2 ? $request->input('dayalama') : null,
+            'trfdy_baru'        => $request->input('dayabaru'),
+            'id_user'           => $idUser
         ]);
 
         $lastInsertedId = $k7SuratJalan->id;
@@ -172,10 +171,11 @@ class K7Controller extends Controller
             $material->decrement('jumlah_sap', $banyakDiminta);
 
             DaftarMaterialK7::create([
-                'id_mtrl_k7'    => $idMaterial,
-                'jumlah'        => $banyakDiminta,
-                'id_k7srtjln'   => $lastInsertedId,
-                'tgl_keluar'    => date('Y-m-d')
+                'id_mtrl_k7'        => $idMaterial,
+                'jumlah_diminta'    => $banyakDiminta,
+                'jumlah_diberi'     => null,
+                'id_k7srtjln'       => $lastInsertedId,
+                'tgl_keluar'        => date('Y-m-d H:i:s')
 
             ]);
         }
@@ -186,16 +186,16 @@ class K7Controller extends Controller
 
         // Insert SurratK&
         $K7 = K7::create([
-            'nmr_k7'         => $nomorDPB,
-            'id_k7srtjln' => $lastInsertedId,
+            'nmr_k7'            => $nomorDPB,
+            'id_k7srtjln'       => $lastInsertedId,
             'tgl_diminta'       => date('Y-m-d'),
             'setuju'            => $setuju,
             'pemeriksa'         => $pemeriksa,
-            'id_gdngpemberi' => 3,
-            'merkmaterial' => $request->input('merkmaterial'),
-            'noseri' => $request->input('noseri'),
-            'keterangan' => $request->input('keterangan'),
-            'id_jnssurat' => 2,
+            'id_gdngpemberi'    => 3,
+            'merkmaterial'      => $request->input('merkmaterial'),
+            'noseri'            => $request->input('noseri'),
+            'keterangan'        => $request->input('keterangan'),
+            'id_jnssurat'       => 2,
 
         ]);
 
@@ -251,7 +251,7 @@ class K7Controller extends Controller
 
         $lMaterial = DB::table('dftrmaterial_k7')
         ->select(
-            'dftrmaterial_k7.jumlah',
+            'dftrmaterial_k7.jumlah_diminta',
             'dftrmaterial_k7.id',
             'material_bekas.nama as nammat',
             'material_bekas.normalisasi',
@@ -275,7 +275,7 @@ class K7Controller extends Controller
 
         $jmlhMaterial = DB::table('dftrmaterial_k7')
         ->where('id', '=', $iddpbsrtjln)
-        ->pluck('jumlah');
+        ->pluck('jumlah_diminta');
 
         $angkaKeHuruf = $this->angkaKeHuruf($jmlhMaterial);
 
@@ -288,9 +288,7 @@ class K7Controller extends Controller
             ];
         }
 
-        $pdf = Pdf::loadView('printk7', compact('dpm', 'material', 'jumlah', 'list'));
-
-        return $pdf->download('BonPemakaian_' . $id . '.pdf');
+        return view('printk7', compact('dpm', 'material', 'jumlah', 'list'));
     }
 
     private function createIfNotExists($model, $field, $value) {

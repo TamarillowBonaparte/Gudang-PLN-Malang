@@ -574,21 +574,15 @@
         </div>
     </main>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ambil ID pengguna dari variabel PHP
-            const userId = @json(Auth::user()->id_user);
-
-            // Tambahkan event listener untuk mendeteksi penekanan tombol
-            document.addEventListener('keydown', function(event) {
-                // Cek jika tombol Ctrl dan P ditekan
-                // if (event.ctrlKey && event.key === 'p') {
-                //     // Jika ID pengguna bukan 1, disable tindakan cetak
-                //     if (userId !== 7) {
-                //         event.preventDefault(); // Mencegah aksi default (print)
-                //         alert('Anda tidak memiliki izin untuk mencetak.'); // Opsional: tampilkan pesan
-                //     }
-                // }
-            });
+        document.addEventListener('keydown', function(event) {
+            if ((event.ctrlKey || event.metaKey) && event.key === 'p') {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Peringatan',
+                    text: 'Fungsi print dinonaktifkan pada halaman ini.'
+                });
+            }
         });
     </script>
 </body>

@@ -13,20 +13,6 @@ class GudangBawahHistoryController extends Controller
 {
     function index() {
 
-        $dpmOngoing = DB::table('daftar_permintaan_material')
-        ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
-        ->join('surat_jalan', 'dpb_suratjalan.id_suratjalan', '=', 'surat_jalan.id_surat_jalan')
-        ->join('user', 'dpb_suratjalan.id_user', '=', 'user.id_user')
-        ->whereNull('surat_jalan.pengemudi')
-        ->select(
-            'surat_jalan.id_surat_jalan as id_srtjln',
-            'daftar_permintaan_material.tgl_diminta as tgl',
-            'daftar_permintaan_material.nomor_dpb as nomor',
-            'user.nama as vendor',
-            'dpb_suratjalan.nama_pelanggan as pelanggan'
-        )
-        ->get();
-
         $dpm = DB::table('daftar_permintaan_material')
         ->join('dpb_suratjalan', 'daftar_permintaan_material.id_dpb_suratjalan', '=', 'dpb_suratjalan.id_dpb_suratjalan')
         ->join('surat_jalan', 'dpb_suratjalan.id_suratjalan', '=', 'surat_jalan.id_surat_jalan')
@@ -40,6 +26,23 @@ class GudangBawahHistoryController extends Controller
             'user.nama as vendor',
             'surat_jalan.nomor_polisi',
             'surat_jalan.pengemudi',
+        )
+        ->orderByDesc('nomor_suratjln')
+        ->get();
+
+        $k7 = DB::table('k7')
+        ->join('k7_srtjln AS k7sj', 'k7.id_k7srtjln', '=', 'k7sj.id')
+        ->join('surat_jalan AS sj', 'k7sj.id_srtjln', '=', 'sj.id_surat_jalan')
+        ->join('user', 'k7sj.id_user', '=', 'user.id_user')
+        ->whereNotNull('nomor_polisi')
+        ->select(
+            'sj.id_surat_jalan as idsrt',
+            'sj.nomor_suratjln as nosj',
+            'sj.tgl_diterima as tgldicetak',
+            'sj.nomor_polisi',
+            'sj.pengemudi',
+            'k7.nmr_k7 as nomor',
+            'user.nama as vendor',
         )
         ->orderByDesc('nomor_suratjln')
         ->get();
@@ -59,38 +62,9 @@ class GudangBawahHistoryController extends Controller
         ->orderByDesc('sj.tgl_diterima')
         ->get();
 
-        // dd($sjAdmin);
 
-        return view('gudangbawahhistory', compact('dpmOngoing', 'dpm', 'sjAdmin'));
+        return view('gudangbawahhistory', compact('dpm', 'k7', 'sjAdmin'));
         // return view('gudangbawah', compact('dpm'));
-    }
-
-    function inputNopolDriver(Request $request) {
-
-        $lastSJ = DB::table('surat_jalan')
-        ->selectRaw("nomor_suratjln, CAST(SUBSTRING_INDEX(nomor_suratjln, '/', 1) AS UNSIGNED) AS nosrtjln")
-        ->orderBy('nosrtjln', 'DESC')
-        ->limit(1)
-        ->pluck('nosrtjln')
-        ->first();
-        preg_match('/^\d+/', $lastSJ, $matches);
-        $lastAngka = $matches[0] + 1;
-        $nomorSuratJalan = $lastAngka."/LOG.00.02/GD. ARIES/VI/".date("Y");
-
-        $request->validate([
-            "nopol" => 'required',
-            "pengemudi" => 'required',
-        ]);
-
-        SuratJalan::where('id_surat_jalan', $request->input('idsrtjln'))
-        ->update([
-            'nomor_suratjln' => $nomorSuratJalan,
-            'nomor_polisi'  => trim ($request->input('nopol')),
-            'pengemudi'     => trim ($request->input('pengemudi')),
-            'tgl_diterima'  => date('Y-m-d H:i:s')
-            ]);
-
-        return redirect('gudangbawah');
     }
 
     public function show(String $encryptedId): View {

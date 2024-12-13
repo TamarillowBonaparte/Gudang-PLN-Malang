@@ -346,7 +346,7 @@
                         <td class="bdottb pdtb" colspan="5">{{ $i['lMaterial']->nammat }}</td>
                         <td class="bdottb pdtb" colspan="2">{{ $i['lMaterial']->normalisasi }}</td>
                         <td class="bdottb pdtb">{{ $i['lMaterial']->satuan }}</td>
-                        <td class="bdottb pdtb" colspan="3">{{ $i['lMaterial']->jumlah }}</td>
+                        <td class="bdottb pdtb" colspan="3">{{ $i['lMaterial']->jumlah_diminta }}</td>
                         <td class="bdottb pdtb" colspan="3">{{ $i['jumlah'] }}</td>
                         <td class="bdottb pdtb" colspan="2"></td>
                         <td class="bdottb pdtb" colspan="2"></td>
@@ -566,7 +566,7 @@
             </table>
         </div>
     </main>
-    {{-- <script>
+    <script>
         document.addEventListener('keydown', function(event) {
             if ((event.ctrlKey || event.metaKey) && event.key === 'p') {
                 event.preventDefault();
@@ -577,6 +577,6 @@
                 });
             }
         });
-    </script> --}}
+    </script>
 </body>
 </html>

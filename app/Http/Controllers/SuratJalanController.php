@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DaftarMaterialSJA;
 use App\Models\Material;
+use App\Models\RiwayatEdit;
 use App\Models\SuratJalan;
 use App\Models\SuratJalanAdmin;
 use Illuminate\Http\Request;
@@ -98,12 +99,12 @@ class SuratJalanController extends Controller
             DaftarMaterialSJA::create([
                 'id_material'       => $idMaterial,
                 'jumlah_diminta'    => $banyakDiminta,
-                'jumlah_diberi'    => null,
+                'jumlah_diberi'     => null,
                 'tgl_keluar'        => date('Y-m-d'),
                 'id_sja'            => $sjaId
             ]);
         }
-    
+
         return redirect()->back();
     }
 }

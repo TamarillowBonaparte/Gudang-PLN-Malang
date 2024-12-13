@@ -7,9 +7,10 @@
     <title>Surat Jalan</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     <style>
-
-
         @page {
             size: A4;
         }
@@ -135,9 +136,45 @@
         .dpm {
             background-color: #d9ead3
         }
+        #floater {
+            position: fixed;
+            top: 50%;
+            left: 0.5%;
+            transform: translateY(-50%);
+            width: 23%
+        }
     </style>
 </head>
 <body>
+    <div class="card text-center" id="floater">
+        <div class="card-body">
+            <h6 class="card-title">Riwayat Edit Surat Jalan</h5>
+            <table class="table datatable">
+            <thead>
+                <tr>
+                <th>Tanggal Diedit</th>
+                <th>Material</th>
+                <th style="width: 3px">Jumlah Sebelumnya</th>
+                <th style="width: 3px">Jumlah Ditambah</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($riwayat as $item)
+                        <tr>
+                            <td>{{ \Carbon\Carbon::parse($item->tgl_diubah)->translatedFormat('d M Y') }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ ($item->jumlah_sebelumnya == null) ? 0 : $item->jumlah_sebelumnya }}</td>
+                            <td>{{ ($item->jumlah_ditambah == null) ? 0 : $item->jumlah_ditambah }}</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="4" style="text-align: center">Belum ada perubahan</td>
+                        </tr>
+                        @endforelse
+            </tbody>
+            </table>
+        </div>
+    </div>
     <div class="fnt">
         <table>
             {{-- row 0, 15 column --}}
