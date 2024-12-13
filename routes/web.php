@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\BonMaterialController;
 use App\Http\Controllers\BonPemakaianMaterialController;
+use App\Http\Controllers\BonPengembalianMaterialController;
 use App\Http\Controllers\BuatSuratJalanAdmin;
 use App\Http\Controllers\BuatSuratJalanAdminController;
+use App\Http\Controllers\CatatanController;
 use App\Http\Controllers\DaftarAkunController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -133,9 +135,15 @@ Route::get('/historyk7', [HistoryK7Controller::class, 'index'])->name('historyk7
 
 Route::get('/historyk3', [HistoryK3Controller::class, 'index'])->name('historyk3');
 
-Route::get('/bonmaterial', [BonMaterialController::class, 'index'])->name('bonmaterial');
+Route::get('/bonpengembalianmaterial', [BonPengembalianMaterialController::class, 'index'])->name('bonpengembalianmaterial');
 
 Route::get('/bonpemakaianmaterial', [BonPemakaianMaterialController::class, 'index'])->name('bonpemakaianmaterial');
+
+// routes/web.php
+Route::get('/catatan', [CatatanController::class, 'index']);
+Route::post('/catatan', [CatatanController::class, 'store']);
+Route::put('/catatan/{id}', [CatatanController::class, 'update']);
+Route::delete('/catatan/{id}', [CatatanController::class, 'destroy']);
 
 
 
