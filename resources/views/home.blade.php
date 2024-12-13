@@ -14,9 +14,23 @@
 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-	{{-- <link rel="stylesheet" href="{{asset('calender/css/style.css')}}"> --}}
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <!-- Memuat jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Memuat DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <!-- Memuat DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -46,6 +60,21 @@
 
     {{-- Style Buat Calender --}}
     <style>
+        /* Tambahkan Flexbox untuk menata kalender */
+        .calendar-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 20px;
+        }
+
+        .calendar {
+            flex: 1;
+            min-width: 300px;
+            /* Pastikan kalender tidak terlalu kecil */
+            max-width: 500px;
+        }
+
         .calendar-day {
             cursor: pointer;
             transition: background-color 0.3s;
@@ -71,6 +100,13 @@
 
         .calendar-day.text-muted:hover {
             background-color: transparent;
+        }
+
+        /* Tambahkan styling untuk elemen lainnya jika ada di samping */
+        .other-content {
+            flex: 1;
+            min-width: 300px;
+            /* Jika ada konten lain, beri ruang */
         }
     </style>
     {{-- End Style Buat Calender --}}
@@ -102,7 +138,6 @@
                 <!-- Left side columns -->
                 <div class="col-lg-8">
                     <div class="row">
-
                         <!-- Sales Card -->
                         <div class="col-xxl-4 col-md-6">
                             <a href="{{ url('daftar-permintaan-material') }}"
@@ -128,7 +163,7 @@
                         <div class="col-xxl-4 col-xl-12">
                             <div class="card info-card customers-card">
                                 <div class="card-body">
-                                    <h5 class="card-title">BON PEMAKAIAN MATERIAL</h5>
+                                    <h5 class="card-title">BON PEMAKAIAN MATERIAL (K7)</h5>
                                     <div class="d-flex align-items-center">
                                         <div
                                             class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -141,13 +176,14 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- End Customers Card -->
+                        </div>
+                        <!-- End Customers Card -->
 
                         <!-- Revenue Card -->
                         <div class="col-xxl-4 col-md-6">
                             <div class="card info-card revenue-card">
                                 <div class="card-body">
-                                    <h5 class="card-title">BON PENGEMBALIAN MATERIAL </span></h5>
+                                    <h5 class="card-title">BON PENGEMBALIAN MATERIAL (K3)</h5>
                                     <div class="d-flex align-items-center">
                                         <div
                                             class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -160,15 +196,15 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- End Revenue Card -->
+                        </div>
+                        <!-- End Revenue Card -->
 
-                        <!-- Reports -->
                         <!-- Recent Sales -->
                         <div class="col-12">
                             <div class="card recent-sales overflow-auto">
                                 <div class="card-body">
                                     <h5 class="card-title">Status Surat Jalan</h5>
-                                    <table class="table table-borderless datatable" id="suratJalanTable">
+                                    <table class="table table-borderless" id="suratJalanTable">
                                         <thead>
                                             <tr>
                                                 <th scope="col">No DPB</th>
@@ -182,13 +218,16 @@
                                                 <tr>
                                                     <th scope="row"
                                                         style="{{ $sj->ndpb == null ? 'text-align: center' : '' }}">
-                                                        {{ $sj->ndpb != null ? $sj->ndpb : '-' }}</a></th>
+                                                        {{ $sj->ndpb != null ? $sj->ndpb : '-' }}</th>
                                                     <td style="{{ $sj->tgl == null ? 'text-align: center' : '' }}">
                                                         {{ $sj->tgl != null ? \Carbon\Carbon::parse($sj->tgl)->format('d M Y') : '-' }}
                                                     </td>
                                                     <td>{{ $sj->nmuser }}</td>
-                                                    <td><span
-                                                            class="{{ $sj->nsurat != null ? 'badge bg-success' : 'badge bg-warning' }}">{{ $sj->nsurat != null ? 'Sudah dicetak' : 'Belum dicetak' }}</span>
+                                                    <td>
+                                                        <span
+                                                            class="{{ $sj->nsurat != null ? 'badge bg-success' : 'badge bg-warning' }}">
+                                                            {{ $sj->nsurat != null ? 'Sudah dicetak' : 'Belum dicetak' }}
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             @empty
@@ -197,41 +236,26 @@
                                     </table>
                                 </div>
                             </div>
-                        </div><!-- End Recent Sales -->
+                        </div>
+                        <!-- End Recent Sales -->
 
-
-                        <div class="col-lg-12">
+                        <!-- Grafik Stok Barang -->
+                        <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Grafik Stok Barang Tersedia</h5>
-
-                                    <!-- Tombol Filter dan Label Material -->
-                                    <div class="d-flex align-items-center mb-3">
-                                        <label for="sortToggle" class="filter-label me-4">
-                                            <input type="checkbox" id="sortToggle" class="d-none">
-                                            <span class="filter-box"></span>
-                                            Urutkan Stok Terbesar ke Kecil
-                                        </label>
-                                    </div>
-
-                                    <!-- Grafik Batang -->
                                     <canvas id="barChart" style="max-height: 400px;"></canvas>
-                                    <div id="chartLegend" style="text-align: center; margin-top: 15px;">
-                                        <!-- Legend akan di-render di sini -->
-                                    </div>
+                                    <div id="chartLegend" style="text-align: center; margin-top: 15px;"></div>
                                     <script>
                                         document.addEventListener("DOMContentLoaded", () => {
-                                            // Data barang dan stok yang dikirim dari controller
                                             const materialData = @json($materialStok);
 
-                                            // Membuat salinan data untuk mengelola status hide/unhide
                                             const activeMaterials = materialData.map(item => ({
                                                 nama: item.nama,
                                                 total_stok: item.total_stok,
                                                 hidden: false
                                             }));
 
-                                            // Inisialisasi chart.js
                                             const ctx = document.querySelector('#barChart');
                                             const barChart = new Chart(ctx, {
                                                 type: 'bar',
@@ -253,7 +277,7 @@
                                                     responsive: true,
                                                     plugins: {
                                                         legend: {
-                                                            display: false // Disable default legend
+                                                            display: false
                                                         },
                                                         tooltip: {
                                                             enabled: true
@@ -277,7 +301,7 @@
                                                             ticks: {
                                                                 stepSize: 1,
                                                                 callback: function(value) {
-                                                                    return Number.isInteger(value) ? value : ''; // Hanya angka bulat
+                                                                    return Number.isInteger(value) ? value : '';
                                                                 }
                                                             },
                                                             title: {
@@ -292,7 +316,6 @@
                                                 }
                                             });
 
-                                            // Custom Legend Rendering
                                             const legendContainer = document.getElementById('chartLegend');
                                             activeMaterials.forEach((material, index) => {
                                                 const legendItem = document.createElement('span');
@@ -302,7 +325,6 @@
                                                 legendItem.style.fontSize = '14px';
                                                 legendItem.style.textDecoration = material.hidden ? 'line-through' : 'none';
 
-                                                // Warna untuk legenda
                                                 legendItem.innerHTML = `
                                                 <span style="
                                                     display: inline-block;
@@ -312,188 +334,130 @@
                                                     margin-right: 5px;
                                                 "></span>${material.nama}`;
 
-                                                // Toggle fungsi klik untuk meng-hide grafik
                                                 legendItem.addEventListener('click', () => {
-                                                    // Toggle status hidden
                                                     material.hidden = !material.hidden;
 
-                                                    // Update data dan label aktif
                                                     const filteredData = activeMaterials.filter(item => !item.hidden);
 
-                                                    // Update chart
                                                     barChart.data.labels = filteredData.map(item => item.nama);
                                                     barChart.data.datasets[0].data = filteredData.map(item => item.total_stok);
-
                                                     barChart.update();
 
-                                                    // Update coretan pada legend
                                                     legendItem.style.textDecoration = material.hidden ? 'line-through' : 'none';
                                                 });
 
                                                 legendContainer.appendChild(legendItem);
                                             });
-
-                                            // Tombol untuk mengurutkan stok
-                                            const sortToggle = document.getElementById('sortToggle');
-                                            sortToggle.addEventListener('change', () => {
-                                                if (sortToggle.checked) {
-                                                    activeMaterials.sort((a, b) => b.total_stok - a.total_stok);
-                                                } else {
-                                                    activeMaterials.sort((a, b) => materialData.findIndex(item => item.nama === a.nama) -
-                                                        materialData.findIndex(item => item.nama === b.nama));
-                                                }
-
-                                                // Update chart data
-                                                barChart.data.labels = activeMaterials.map(item => item.nama);
-                                                barChart.data.datasets[0].data = activeMaterials.map(item => item.total_stok);
-                                                barChart.update();
-                                            });
                                         });
                                     </script>
-                                    <!-- End Bar Chart -->
                                 </div>
                             </div>
                         </div>
-
-                        <style>
-                            .filter-label {
-                                display: flex;
-                                align-items: center;
-                                cursor: pointer;
-                                font-size: 16px;
-                            }
-
-                            .filter-box {
-                                width: 20px;
-                                height: 20px;
-                                border: 2px solid #007bff;
-                                border-radius: 4px;
-                                margin-right: 10px;
-                                transition: background-color 0.3s;
-                            }
-
-                            input#sortToggle:checked+.filter-box {
-                                background-color: #007bff;
-                            }
-
-                            input#sortToggle+.filter-box {
-                                background-color: transparent;
-                            }
-                        </style>
-
-                        <!-- End Bar Chart -->
+                        <!-- End Grafik Stok Barang -->
                     </div>
                 </div>
-            </div>
+                <!-- End Left side columns -->
 
-            <!-- End Top Selling -->
-
-            </div>
-            </div><!-- End Left side columns -->
-
-            <div class="col-lg-4">
-
-                <!-- Recent Activity -->
-                <div class="card">
-                    <div class="card-body ">
-                        <div id="calendar-container">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <button class="btn btn-outline-secondary" id="prevMonth">&lt;</button>
-                                <div>
-                                    <select id="monthSelect" class="form-select d-inline-block w-auto me-2"></select>
-                                    <select id="yearSelect" class="form-select d-inline-block w-auto"></select>
+                <div class="col-lg-4">
+                    <!-- Calendar Card remains the same -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Kalender</h5>
+                            <div id="calendar-container">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <button class="btn btn-outline-secondary" id="prevMonth">&lt;</button>
+                                    <div>
+                                        <select id="monthSelect"
+                                            class="form-select d-inline-block w-auto me-2"></select>
+                                        <select id="yearSelect" class="form-select d-inline-block w-auto"></select>
+                                    </div>
+                                    <button class="btn btn-outline-secondary" id="nextMonth">&gt;</button>
                                 </div>
-                                <button class="btn btn-outline-secondary" id="nextMonth">&gt;</button>
+                                <table class="table table-bordered text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Sun</th>
+                                            <th>Mon</th>
+                                            <th>Tue</th>
+                                            <th>Wed</th>
+                                            <th>Thu</th>
+                                            <th>Fri</th>
+                                            <th>Sat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="calendar-body"></tbody>
+                                </table>
                             </div>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Sun</th>
-                                        <th>Mon</th>
-                                        <th>Tue</th>
-                                        <th>Wed</th>
-                                        <th>Thu</th>
-                                        <th>Fri</th>
-                                        <th>Sat</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="calendar-body"></tbody>
-                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Notes Card (Replacing Weather Card) -->
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Catatan</h5>
+                            <div id="notes-container">
+                                <div class="mb-3">
+                                    <textarea class="form-control" id="noteInput" rows="3" placeholder="Tulis catatan baru..."></textarea>
+                                </div>
+                                <button class="btn btn-primary mb-3" onclick="addNote()">Tambah Catatan</button>
+
+                                <div id="notes-list">
+                                    <!-- Notes will be dynamically added here -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <script>
+                    // Load notes from localStorage when page loads
                     document.addEventListener('DOMContentLoaded', function() {
-                        const legendContainer = document.getElementById('legendContainer');
-                        const barChart = new Chart(document.getElementById('barChart'), {
-                            type: 'bar',
-                            data: {
-                                labels: filteredData.map(item => item.nama),
-                                datasets: [{
-                                    label: 'Total Stok',
-                                    data: filteredData.map(item => item.total_stok),
-                                    backgroundColor: '#007bff'
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                plugins: {
-                                    legend: {
-                                        display: false // Supaya custom legend bisa digunakan
-                                    }
-                                }
-                            }
-                        });
-
-                        // Generate custom legend
-                        legendContainer.innerHTML = ''; // Clear existing legends if any
-                        filteredData.forEach((material, index) => {
-                        const legendItem = document.createElement('div');
-                        legendItem.className = 'filter-label';
-                        legendItem.innerHTML = `
-                        <div class="filter-box"></div>
-                             <span>${material.nama}</span>
-                            `;
-
-                            // Set initial style for legend text
-                            const legendText = legendItem.querySelector('span');
-                            legendText.style.textDecoration = material.hidden ? 'line-through' : 'none';
-
-                            // Event listener to toggle visibility
-                            legendItem.addEventListener('click', () => {
-                                const meta = barChart.getDatasetMeta(0);
-                                meta.data[index].hidden = !meta.data[index].hidden;
-                                material.hidden = meta.data[index].hidden;
-
-                                // Update text style based on visibility
-                                legendText.style.textDecoration = material.hidden ? 'line-through' : 'none';
-
-                                barChart.update();
-                            });
-
-                            legendContainer.appendChild(legendItem);
-                        });
-
-                        // Tombol untuk mengurutkan stok
-                        const sortToggle = document.getElementById('sortToggle');
-                        sortToggle.addEventListener('change', () => {
-                            if (sortToggle.checked) {
-                                activeMaterials.sort((a, b) => b.total_stok - a.total_stok);
-                            } else {
-                                activeMaterials.sort((a, b) => materialData.findIndex(item => item.nama === a.nama) -
-                                    materialData.findIndex(item => item.nama === b.nama));
-                            }
-
-                            // Update chart data
-                            barChart.data.labels = activeMaterials.map(item => item.nama);
-                            barChart.data.datasets[0].data = activeMaterials.map(item => item.total_stok);
-                            barChart.update();
-                        });
+                        loadNotes();
                     });
-                </script>
 
-            </div><!-- End Right side columns -->
+                    function addNote() {
+                        const noteInput = document.getElementById('noteInput');
+                        const noteText = noteInput.value.trim();
+
+                        if (noteText) {
+                            const notes = getNotes();
+                            notes.push({
+                                text: noteText,
+                                date: new Date().toLocaleString('id-ID')
+                            });
+                            localStorage.setItem('notes', JSON.stringify(notes));
+
+                            noteInput.value = '';
+                            loadNotes();
+                        }
+                    }
+
+                    function deleteNote(index) {
+                        const notes = getNotes();
+                        notes.splice(index, 1);
+                        localStorage.setItem('notes', JSON.stringify(notes));
+                        loadNotes();
+                    }
+
+                    function getNotes() {
+                        return JSON.parse(localStorage.getItem('notes') || '[]');
+                    }
+
+                    function loadNotes() {
+                        const notesList = document.getElementById('notes-list');
+                        const notes = getNotes();
+
+                        notesList.innerHTML = notes.map((note, index) => `
+                            <div class="card mb-2">
+                                <div class="card-body">
+                                    <p class="mb-1">${note.text}</p>
+                                    <small class="text-muted d-block">${note.date}</small>
+                                    <button class="btn btn-sm btn-danger mt-2" onclick="deleteNote(${index})">Hapus</button>
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                </script>
             </div>
         </section>
     </main><!-- End #main -->
@@ -515,5 +479,310 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('admin/assets/js/main.js') }}"></script>
+
+    <!--Calendernya-->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const calendarBody = document.getElementById("calendar-body");
+            const monthSelect = document.getElementById("monthSelect");
+            const yearSelect = document.getElementById("yearSelect");
+            const prevMonth = document.getElementById("prevMonth");
+            const nextMonth = document.getElementById("nextMonth");
+
+            const today = new Date();
+            let currentMonth = today.getMonth();
+            let currentYear = today.getFullYear();
+
+            const monthNames = [
+                "January", "February", "March", "April", "May",
+                "June", "July", "August", "September", "October", "November", "December"
+            ];
+
+            function populateSelectors() {
+                monthSelect.innerHTML = "";
+                monthNames.forEach((month, index) => {
+                    const option = document.createElement("option");
+                    option.value = index;
+                    option.textContent = month;
+                    if (index === currentMonth) option.selected = true;
+                    monthSelect.appendChild(option);
+                });
+
+                yearSelect.innerHTML = "";
+                for (let i = currentYear - 10; i <= currentYear + 10; i++) {
+                    const option = document.createElement("option");
+                    option.value = i;
+                    option.textContent = i;
+                    if (i === currentYear) option.selected = true;
+                    yearSelect.appendChild(option);
+                }
+            }
+
+            function generateCalendar(month, year) {
+                calendarBody.innerHTML = "";
+                const firstDay = new Date(year, month, 1).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const prevMonthDays = new Date(year, month, 0).getDate();
+
+                let date = 1;
+                let prevMonthDate = prevMonthDays - firstDay + 1;
+
+                for (let i = 0; i < 6; i++) {
+                    const row = document.createElement("tr");
+
+                    for (let j = 0; j < 7; j++) {
+                        const cell = document.createElement("td");
+                        cell.classList.add("calendar-day");
+
+                        if (i === 0 && j < firstDay) {
+                            cell.textContent = prevMonthDate++;
+                            cell.classList.add("text-muted");
+                        } else if (date > daysInMonth) {
+                            cell.textContent = date - daysInMonth;
+                            date++;
+                            cell.classList.add("text-muted");
+                        } else {
+                            cell.textContent = date;
+
+                            // Store the full date as a data attribute
+                            const fullDate = new Date(year, month, date);
+                            cell.dataset.fullDate = fullDate.toISOString().split('T')[0];
+
+                            if (date === today.getDate() && year === today.getFullYear() && month === today
+                                .getMonth()) {
+                                cell.classList.add("today");
+                            }
+
+                            // Modify the click handler to filter the DataTable
+                            cell.addEventListener("click", () => {
+                                // Remove selected class from all cells
+                                document.querySelectorAll(".calendar-day.selected").forEach((el) => {
+                                    el.classList.remove("selected");
+                                });
+                                cell.classList.add("selected");
+
+                                // Get the DataTable instance
+                                const suratJalanTable = $('#suratJalanTable').DataTable();
+
+                                // Format the selected date to match the table format
+                                const selectedDate = formatDate(fullDate);
+
+                                // Clear existing search and apply new filter
+                                suratJalanTable
+                                    .columns(1) // Index of the Tanggal Diminta column
+                                    .search(selectedDate)
+                                    .draw();
+                            });
+
+                            date++;
+                        }
+                        row.appendChild(cell);
+                    }
+                    calendarBody.appendChild(row);
+                }
+            }
+
+            // Function to format date to match the table format (e.g., "12 Dec 2024")
+            function formatDate(date) {
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const day = date.getDate();
+                const month = months[date.getMonth()];
+                const year = date.getFullYear();
+                return `${day} ${month} ${year}`;
+            }
+
+            // Modify the DataTable initialization
+            $('#suratJalanTable').DataTable({
+                searching: true,
+                ordering: true,
+                paging: true,
+                language: {
+                    search: "Pencarian:",
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    zeroRecords: "Data tidak ditemukan",
+                    info: "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    infoEmpty: "Tidak ada data yang tersedia",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
+                    paginate: {
+                        first: "Pertama",
+                        last: "Terakhir",
+                        next: "Selanjutnya",
+                        previous: "Sebelumnya"
+                    }
+                },
+                // Add custom search functionality
+                // initComplete: function() {
+                //     // Add a clear filter button
+                //     const clearButton = $('<button>')
+                //         .text('Tampilkan Semua')
+                //         .addClass('btn btn-secondary btn-sm ms-2')
+                //         .on('click', function() {
+                //             const table = $('#suratJalanTable').DataTable();
+                //             table.search('').columns().search('').draw();
+                //             document.querySelectorAll(".calendar-day.selected").forEach((el) => {
+                //                 el.classList.remove("selected");
+                //             });
+                //         });
+
+                //     $('#suratJalanTable_filter').append(clearButton);
+                // }
+            });
+            prevMonth.addEventListener("click", () => {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                generateCalendar(currentMonth, currentYear);
+            });
+
+            nextMonth.addEventListener("click", () => {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                generateCalendar(currentMonth, currentYear);
+            });
+
+            monthSelect.addEventListener("change", (e) => {
+                currentMonth = parseInt(e.target.value);
+                generateCalendar(currentMonth, currentYear);
+            });
+
+            yearSelect.addEventListener("change", (e) => {
+                currentYear = parseInt(e.target.value);
+                generateCalendar(currentMonth, currentYear);
+            });
+
+            populateSelectors();
+            generateCalendar(currentMonth, currentYear);
+        });
+    </script>
+    <!--End calender-->
+
+
+    <!--Buat Grafiknya-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const legendContainer = document.getElementById('legendContainer');
+            const barChart = new Chart(document.getElementById('barChart'), {
+                type: 'bar',
+                data: {
+                    labels: filteredData.map(item => item.nama),
+                    datasets: [{
+                        label: 'Total Stok',
+                        data: filteredData.map(item => item.total_stok),
+                        backgroundColor: '#007bff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false // Supaya custom legend bisa digunakan
+                        }
+                    }
+                }
+            });
+
+            // Generate custom legend
+            legendContainer.innerHTML = ''; // Clear existing legends if any
+            filteredData.forEach((material, index) => {
+                const legendItem = document.createElement('div');
+                legendItem.className = 'filter-label';
+                legendItem.innerHTML = `
+                <div class="filter-box"></div>
+                     <span>${material.nama}</span>
+                    `;
+
+                // Set initial style for legend text
+                const legendText = legendItem.querySelector('span');
+                legendText.style.textDecoration = material.hidden ? 'line-through' : 'none';
+
+                // Event listener to toggle visibility
+                legendItem.addEventListener('click', () => {
+                    const meta = barChart.getDatasetMeta(0);
+                    meta.data[index].hidden = !meta.data[index].hidden;
+                    material.hidden = meta.data[index].hidden;
+
+                    // Update text style based on visibility
+                    legendText.style.textDecoration = material.hidden ? 'line-through' : 'none';
+
+                    barChart.update();
+                });
+
+                legendContainer.appendChild(legendItem);
+            });
+
+            // Tombol untuk mengurutkan stok
+            const sortToggle = document.getElementById('sortToggle');
+            sortToggle.addEventListener('change', () => {
+                if (sortToggle.checked) {
+                    activeMaterials.sort((a, b) => b.total_stok - a.total_stok);
+                } else {
+                    activeMaterials.sort((a, b) => materialData.findIndex(item => item.nama === a.nama) -
+                        materialData.findIndex(item => item.nama === b.nama));
+                }
+
+                // Update chart data
+                barChart.data.labels = activeMaterials.map(item => item.nama);
+                barChart.data.datasets[0].data = activeMaterials.map(item => item.total_stok);
+                barChart.update();
+            });
+        });
+    </script>
+    <!--Buat Grafiknya-->
+
+    <script>
+        // Load notes from localStorage when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNotes();
+        });
+
+        function addNote() {
+            const noteInput = document.getElementById('noteInput');
+            const noteText = noteInput.value.trim();
+
+            if (noteText) {
+                const notes = getNotes();
+                notes.push({
+                    text: noteText,
+                    date: new Date().toLocaleString('id-ID')
+                });
+                localStorage.setItem('notes', JSON.stringify(notes));
+
+                noteInput.value = '';
+                loadNotes();
+            }
+        }
+
+        function deleteNote(index) {
+            const notes = getNotes();
+            notes.splice(index, 1);
+            localStorage.setItem('notes', JSON.stringify(notes));
+            loadNotes();
+        }
+
+        function getNotes() {
+            return JSON.parse(localStorage.getItem('notes') || '[]');
+        }
+
+        function loadNotes() {
+            const notesList = document.getElementById('notes-list');
+            const notes = getNotes();
+
+            notesList.innerHTML = notes.map((note, index) => `
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <p class="mb-1">${note.text}</p>
+                        <small class="text-muted d-block">${note.date}</small>
+                        <button class="btn btn-sm btn-danger mt-2" onclick="deleteNote(${index})">Hapus</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
 </body>
+
 </html>
