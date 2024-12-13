@@ -579,7 +579,7 @@
     </div>
 
     <div id="floater">
-        <a href="{{ route('vendor.index') }}" class="btn btn-primary">Kembali</a>
+        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
     </div>
 
     <script>

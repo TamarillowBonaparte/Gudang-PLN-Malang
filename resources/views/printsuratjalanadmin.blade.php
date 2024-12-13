@@ -146,38 +146,7 @@
     </style>
 </head>
 <body>
-    <div class="card text-center" id="floater">
-        <div class="card-body">
-            <h6 class="card-title">Riwayat Edit Surat Jalan</h5>
-            <table class="table datatable">
-            <thead>
-                <tr>
-                <th>Tanggal Diedit</th>
-                <th>Material</th>
-                <th style="width: 3px">Jumlah Sebelumnya</th>
-                <th style="width: 3px">Jumlah Setelahnya</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($riwayat as $item)
-                    @if ($item->jumlah_sebelumnya != $item->jumlah_ditambah)
-                        <tr>
-                            <td>{{ \Carbon\Carbon::parse($item->tgl_diubah)->translatedFormat('d M Y') }}</td>
-                            <td>{{ $item->nama }}</td>
-                            <td>{{ ($item->jumlah_sebelumnya == null) ? 0 : $item->jumlah_sebelumnya }}</td>
-                            <td>{{ ($item->jumlah_ditambah == null) ? 0 : $item->jumlah_ditambah }}</td>
-                        </tr>
-                    @endif
-                @empty
-                    <tr>
-                        <td colspan="4" style="text-align: center">Belum ada perubahan</td>
-                    </tr>
-                @endforelse
-            </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="fnt">
+    <div class="fnt mt-3 md-3">
         <table>
             {{-- row 0, 15 column --}}
             <tr>
@@ -189,9 +158,9 @@
                 <td class="altbntu" style="width: 100px"></td>
                 <td class="altbntu" style="width: 45px"></td>
                 <td class="altbntu" style="width: 90px"></td>
-                <td class="altbntu" style="width: 70px"></td>
-                <td class="altbntu" style="width: 30px"></td>
-                <td class="altbntu" style="width: 30px"></td>
+                <td class="altbntu" style="width: 40px"></td>
+                <td class="altbntu" style="width: 20px"></td>
+                <td class="altbntu" style="width: 20px"></td>
                 <td class="altbntu" style="width: 30px"></td>
                 <td class="altbntu" style="width: 50px"></td>
                 <td class="altbntu" style="width: 50px"></td>
@@ -223,49 +192,65 @@
             <tr>
                 <td class="hide" colspan="15" style="height: 14px"></td>
             </tr>
-            {{-- row 7 --}}
+            {{-- row 7 --}}                
             <tr>
                 <td class="fntarial pdtb hide" colspan="15" style="font-size: 18px;"><u>SURAT ANGKUTAN</u></td>
             </tr>
             {{-- row 8 --}}
-            @forelse ($suratjln as $sj)
+            @forelse ($sja as $item)
             <tr>
-                <td class="fntb pdtb hide" colspan="15">{{ $sj->nosj }}</td>
+                <td class="fntb pdtb hide" colspan="15">{{ $item->nsj }}</td>
             </tr>
             {{-- row 9 --}}
             <tr>
                 <td class="hide" colspan="15" style="height: 14px"></td>
             </tr>
-            {{-- row 10 --}}
+            {{-- row 10 --}}                
+            <td style="display: none;"><input type="text" name="idsj" value="{{ $item->idsj }}"></td>
+            <td style="display: none;"><input type="text" name="idsja" value="{{ $item->id }}"></td>
             <tr>
-                <td class="fntb pdtb fontl hide" colspan="2">Kendaraan No.</td>
+                <td class="fntb pdtb fontl hide chnpp" colspan="2">Kendaraan No.</td>
                 <td class="fntb pdtb hide">:</td>
-                <td class="fntb pdtb fontl hide" colspan="5">{{ $sj->nomor_polisi }}</td>
-                <td class="fntb pdtb fontl hide" colspan="5">{{ $sj->vendor }}</td>
+                <td class="{{ $item->nopol === null ? 'fntb pdtb fontl hide fontbott' : 'fntb pdtb fontl hide' }}" colspan="4">
+                    @if($item->nopol === null)
+                        ..............
+                    @else
+                        {{ $item->nopol }}
+                    @endif
+                </td>
+                <td class="fntb pdtb fontl hide" colspan="6">{{ ($item->kepada == null ) ? 'KEPADA : ' : "KEPADA : ".$item->kepada }}</td>                
             </tr>
             {{-- row 11 --}}
             <tr>
-                <td class="fntb pdtb fontl hide" colspan="2">Nama Pengemudi</td>
+                <td class="fntb pdtb fontl hide chnpp" colspan="2">Nama Pengemudi</td>
                 <td class="fntb pdtb hide">:</td>
-                <td class="fntb pdtb fontl hide" colspan="11">{{ $sj->pengemudi }}</td>
+                <td class="{{($item->pengemudi == null ) ? "fntb pdtb fontl hide fontbott" : "fntb pdtb fontl hide" }}" colspan="11">
+                    @if($item->pengemudi === null)
+                    ..............
+                    @else
+                        {{ $item->pengemudi }}
+                    @endif
+                </td>
             </tr>
             {{-- row 12 --}}
             <tr>
-                <td class="fntb pdtb fontl hide" colspan="2">Dari Logistik</td>
+                <td class="fntb pdtb fontl hide chnpp" colspan="2">Dari Logistik</td>
                 <td class="fntb pdtb hide">:</td>
-                <td class="fntb pdtb fontl hide" colspan="3">UP3 MALANG</td>
-                <td class="fntb pdtb fontl hide" colspan="2">SPK NO. :</td>
-                <td class="fntb pdtb fontl hide" colspan="3">{{ $sj->ulp }}</td>
+                <td class="fntb pdtb fontl hide" colspan="4">UP3 MALANG</td>
+                <td class="fntb pdtb fontl hide" colspan="6">{{ ($item->alamat == null ) ? 'ALAMAT : ' : "ALAMAT : ".$item->alamat }}</td>
             </tr>
+            @empty
+                
+            @endforelse
             {{-- row 13 --}}
             <tr>
                 <td class="hide" colspan="8"></td>
-                <td class="fntb pdtb fontl hide" colspan="6">{{ $sj->nospk }}</td>
+                <td class="fntb pdtb fontl hide" colspan="6"></td>
             </tr>
             {{-- row 14 --}}
             <tr>
                 <td class="hide" colspan="8"></td>
-                <td class="fntb pdtb fontl hide" colspan="6">{{ $sj->nampel}}</td>
+                <td class="fntb pdtb fontl hide" colspan="6"></td>
             </tr>
             {{-- row 15 --}}
             <tr>
@@ -274,131 +259,79 @@
             {{-- row 16 --}}
             <tr>
                 <td class="fntb pdtb hideb fontbott" style="height: 25px">No.</td>
-                <td class="fntb pdtb hideb fontbott" colspan="5">Nama Barang</td>
-                <td class="fntb pdtb hideb fontbott" colspan="2">No.</td>
+                <td class="fntb pdtb hideb fontbott" colspan="4">Nama Barang</td>
+                <td class="fntb pdtb hideb fontbott" colspan="1">No.</td>
                 <td class="fntb pdtb hideb fontbott">Sa-</td>
-                <td class="fntb pdtb" colspan="3">Banyak yang diminta</td>
+                <td class="fntb pdtb" colspan="1">Banyak yang diminta</td>
                 <td class="fntb pdtb" colspan="2">Banyak yang diberikan</td>
+                <td class="fntb pdtb"colspan="4" rowspan="2">Keterangan</td>
             </tr>
             {{-- row 17 --}}
             <tr>
                 <td class="fntb pdtb hidet fonttop" style="height: 25px">Urut</td>
-                <td class="fntb pdtb hidet fonttop" colspan="5">(ditulis selengkap - lengkapnya)</td>
-                <td class="fntb pdtb hidet fonttop" colspan="2">Normalisasi</td>
+                <td class="fntb pdtb hidet fonttop" colspan="4">(ditulis selengkap - lengkapnya)</td>
+                <td class="fntb pdtb hidet fonttop" colspan="1">Normalisasi</td>
                 <td class="fntb pdtb hidet fonttop">tuan</td>
-                <td class="fntb pdtb hidet" colspan="3">dengan angka</td>
+                <td class="fntb pdtb hidet" colspan="1">dengan angka</td>
                 <td class="fntb pdtb hidet" colspan="2">dengan angka</td>
             </tr>
-            @empty
-            @endforelse
             {{-- row 18 --}}
             <tr>
                 <td class="bdottb" colspan="" style="height: 10px"></td>
-                <td class="bdottb" colspan="5" style="height: 10px"></td>
-                <td class="bdottb" colspan="2" style="height: 10px"></td>
+                <td class="bdottb" colspan="4" style="height: 10px"></td>
+                <td class="bdottb" colspan="1" style="height: 10px"></td>
                 <td class="bdottb" colspan="" style="height: 10px"></td>
-                <td class="bdottb" colspan="3" style="height: 10px"></td>
+                <td class="bdottb" colspan="1" style="height: 10px"></td>
                 <td class="bdottb" colspan="2" style="height: 10px"></td>
+                <td class="bdottb" colspan="4"></td>
             </tr>
             {{-- row 19 --}}
-            @forelse ($material as $mat)
+            @forelse ($dmsja as $item)
             <tr>
                 <td class="fntb bdottb pdtb fnt12 itmth">{{ $loop->iteration }}</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5">{{ $mat->nammat }}</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ $mat->normalisasi }}</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $mat->satuan }}</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="3">{{ $mat->jumlah_diminta }}</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ ($mat->jumlah_diberi == null) ? "TA" : $mat->jumlah_diberi }}</td>
+                <td style="display: none"><input type="text" name="idmat[]" id="" value="{{ $item->id_material }}"></td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="4" style="padding-left: 5px; padding-right: 5px">{{ $item->nama }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $item->normalisasi }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $item->satuan }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $item->jumlah_diminta }}</td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">
+                    @if ($item->jumlah_diberi == null)
+                    TA
+                    @else
+                    {{ $item->jumlah_diberi }}
+                    @endif                        
+                </td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="4"></td>
             </tr>
             @empty
+                
             @endforelse
-            {{-- row 20 --}}
-            @for ($i = $list; $i <= 10; $i++)
+            
+            @for ($i = $list; $i <= 22; $i++)
             <tr>
-                <td class="fntb bdottb pdtb fnt12 itmth">{{$i}}</td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="5"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
+                <td class="fntb bdottb pdtb fnt12 itmth"></td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="4"></td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="1"></td>
-                <td class="fntb bdottb pdtb fnt12 itmth" colspan="3"></td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1"></td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="1"></td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="2"></td>
+                <td class="fntb bdottb pdtb fnt12 itmth" colspan="4"></td>
             </tr>
             @endfor
             {{-- row 29 --}}
             <tr>
                 <td class="bdottb" colspan="" style="height: 10px"></td>
-                <td class="bdottb" colspan="5" style="height: 10px"></td>
+                <td class="bdottb" colspan="4" style="height: 10px"></td>
+                <td class="bdottb" colspan="1" style="height: 10px"></td>
+                <td class="bdottb" colspan="1" style="height: 10px"></td>
+                <td class="bdottb" colspan="1" style="height: 10px"></td>
                 <td class="bdottb" colspan="2" style="height: 10px"></td>
-                <td class="bdottb" colspan="" style="height: 10px"></td>
-                <td class="bdottb" colspan="3" style="height: 10px"></td>
-                <td class="bdottb" colspan="2" style="height: 10px"></td>
+                <td class="bdottb" colspan="4"></td>
             </tr>
-            {{-- row 30 --}}
-            @forelse ($suratjln as $sj)
+            @forelse ($sja as $item)                            
             <tr>
-                <td class="hidetb"></td>
-                <td class="fntb hide fontl" colspan="3">VENDOR</td>
-                <td class="fntb hide">:</td>
-                <td class="fntb hide fontl" colspan="7">{{ $sj->vendor }}</td>
-                <td class="bdottb fntb" colspan="2">DPB NO.</td>
-            </tr>
-            {{-- row 31 --}}
-            <tr>
-                <td class="hidetb"></td>
-                <td class="fntb hide fontl" colspan="3">NO. SPK</td>
-                <td class="fntb hide">:</td>
-                <td class="fntb hide fontl" colspan="7">{{ $sj->nospk }}</td>
-                <td class="hidetb" colspan="2"></td>
-            </tr>
-            {{-- row 32 --}}
-            <tr>
-                <td class="hidetb"></td>
-                <td class="fntb hide fontl fontbott" colspan="3" style="height: 90px;">JENIS PEKERJAAN</td>
-                <td class="fntb hide fontbott">:</td>
-                <td class="fntb hide fontl fontbott" colspan="7">{{ $sj->nmpkrjn }}</td>
-                <td class="fntb dpm" colspan="2" style="font-size: 24px; color: #ff0000">{{ $sj->nodpb }}</td>
-            </tr>
-            {{-- row 33 --}}
-            <tr>
-                <td class="hidetb"></td>
-                <td class="fntb hide fontl" colspan="3">IDPEL</td>
-                <td class="fntb hide">:</td>
-                <td class="fntb hide fontl" colspan="7">{{ $sj->idpel }}</td>
-                <td class="hidetb" colspan="2"></td>
-            </tr>
-            {{-- row 34 --}}
-            <tr>
-                <td class="hidetb"></td>
-                <td class="fntb hide fontl" colspan="3">NAMA PELANGGAN</td>
-                <td class="fntb hide">:</td>
-                <td class="fntb hide fontl" colspan="7">{{ $sj->nampel }}</td>
-                <td class="hidetb" colspan="2"></td>
-            </tr>
-            {{-- row 35 --}}
-            <tr>
-                <td class="hidetb"></td>
-                <td class="fntb hide fontl" colspan="3">ALAMAT PELANGGAN</td>
-                <td class="fntb hide">:</td>
-                <td class="fntb hide fontl" colspan="7">{{ $sj->almtpel }}</td>
-                <td class="hidetb" colspan="2"></td>
-            </tr>
-            {{-- row 36 --}}
-            <tr>
-                <td class="hidetb"></td>
-                <td class="fntb hide fontl" colspan="3">DAYA</td>
-                <td class="fntb hide">:</td>
-                <td class="fntb hide fontl" colspan="1">PB</td>
-                <td class="fntb hide" colspan="2">{{ $sj->daylam }}</td>
-                <td class="fntb hide" colspan="1">ke</td>
-                <td class="fntb hide" colspan="3">{{ $sj->daybar }}</td>
-                <td class="hidetb" colspan="2"></td>
-            </tr>
-            {{-- row 37 --}}
-            <tr>
-                <td class="hidet"></td>
-                <td class="fntb hidet hiderl fontl" colspan="3">ULP</td>
-                <td class="fntb hidet hiderl">:</td>
-                <td class="fntb hidet hiderl fontl" colspan="7">ULP KEPANJEN</td>
-                <td class="hidet" colspan="2"></td>
+                <td colspan="10"></td>
+                <td class=" fntb" colspan="4" style="font-size: 24px; height: 50px; background-color: rgb(211, 211, 211)">{{ $item->noperm }}</td>
             </tr>
             {{-- row 38 --}}
             <tr>
@@ -406,26 +339,26 @@
             </tr>
             {{-- row 39 --}}
             <tr>
-                <td class="fntb hide fontl" colspan="2">Diterima tgl</td>
-                <td class="fntb hide fontl" colspan="4">{{ \Carbon\Carbon::parse($sj->tgldicetak)->format('d M Y') }}</td>
-                <td class="hide" colspan="2"></td>
+                <td class="fntb hide fontl" colspan="3">Diterima di: Malang</td>
+                <td class="fntb hide fontl" colspan="3"></td>
+                <td class="hide" colspan="3"></td>
                 <td class="fntb hide" colspan="1">Malang,</td>
-                <td class="fntb hide fontl" colspan="5">.......................</td>
+                <td class="fntb hide fontl" colspan="5">{{ \Carbon\Carbon::parse($item->tgl_diterima)->translatedFormat('d F Y') }}</td>
             </tr>
 
             {{-- row 40 --}}
             <tr>
-                <td class="hide" colspan="5"></td>
+                <td class="hide" colspan="4"></td>
                 <td class="fntb hide" colspan="3">Mengetahui,</td>
                 <td class="hide" colspan="6"></td>
             </tr>
             {{-- row 41 --}}
             <tr>
                 <td class="fntb hide" colspan="3">Penerima,</td>
-                <td class="hide" colspan="2"></td>
+                <td class="hide" colspan="1"></td>
                 <td class="fntb hide" colspan="3">Security,</td>
                 <td class="hide"></td>
-                <td class="fntb hide" colspan="5">Yang menyerahkan,</td>
+                <td class="fntb hide" colspan="6">Yang menyerahkan,</td>
             </tr>
             {{-- row 42 --}}
             <tr>
@@ -453,15 +386,26 @@
             </tr>
             {{-- row 48 --}}
             <tr>
-                <td class="fntb hide" colspan="3">{{ $sj->penerima }}</td>
-                <td class="hide" colspan="2"></td>
+                <td class="fntb hide" colspan="3">
+                    @if ($item->penerima == null)
+                    .................
+                    @else
+                    {{ $item->penerima }}
+                    @endif                        
+                </td>
+                <td class="hide" colspan="1"></td>
                 <td class="fntb hide" colspan="3">.................</td>
                 <td class="hide"></td>
-                <td class="fntb hide" colspan="5">{{ $sj->kepala_gudang }}</td>
+                <td class="fntb hide" colspan="6">{{ ($item->ygMenyerhkn == null) ? "................." : $item->ygMenyerhkn }}</td>
             </tr>
             @empty
+                
             @endforelse
         </table>
     </div>
+
+    <script>
+        window.print()
+    </script>
 </body>
 </html>

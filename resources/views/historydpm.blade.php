@@ -85,6 +85,7 @@
                             <th>Tanggal Diminta</th>
                             <th>Nomor Bon</th>
                             <th>Nama Pelanggan</th>
+                            <th>ULP</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -94,9 +95,13 @@
                                 <td>{{ \Carbon\Carbon::parse($item->tgl_diminta)->format('d M Y') }}</td>
                                 <td>{{ $item->nomor_dpb }}</td>
                                 <td>{{ $item->nama_pelanggan }}</td>
+                                <td>{{ $item->ulpnama }}</td>
                                 <td>
-                                    <a href="{{ route('show', ['id' => Crypt::encryptString($item->id_dpb_suratjalan), 'srtJlnId' => Crypt::encryptString($item->idsrtjln)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                                </td>
+                                    <a href="{{ route('show', ['id' => Crypt::encryptString($item->id_dpb_suratjalan), 'srtJlnId' => Crypt::encryptString($item->idsrtjln)]) }}" class="btn btn-sm btn-outline-primary mb-1">Detail</a>
+                                    <a href="{{ route('print', ['id' => Crypt::encryptString($item->id_dpb_suratjalan), 'srtJlnId' => Crypt::encryptString($item->idsrtjln)]) }}" class="btn btn-sm btn-outline-secondary">
+                                      <i class="bi bi-printer"></i> Print
+                                    </a>
+                                </td>                                
                             </tr>
                         @empty
                         <tr>

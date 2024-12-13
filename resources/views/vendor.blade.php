@@ -155,6 +155,9 @@
                       <td>{{$surat->nomor_dpb}}</td>
                       <td>
                         <a href="{{ route('show', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-sm btn-outline-primary mb-1" target="_blank">Detail</a>                        
+                        <a href="{{ route('print', ['id' => Crypt::encryptString($surat->id_dpb), 'srtJlnId' => Crypt::encryptString($surat->idsrtjln)]) }}" class="btn btn-sm btn-outline-secondary">
+                          <i class="bi bi-printer"></i> Print
+                        </a>
                       </td>
                     </tr>
                     @empty
@@ -190,6 +193,9 @@
                       <td>{{$k7->nmr_k7}}</td>
                       <td>
                         <a href="{{ route('showK7', ['id' => Crypt::encryptString($k7->idk7), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-sm btn-outline-primary mb-1" target="_blank">Detail</a>                    
+                        <a href="{{ route('printk7', ['id' => Crypt::encryptString($k7->idk7), 'srtJlnId' => Crypt::encryptString($k7->id_surat_jalan)]) }}" class="btn btn-sm btn-outline-secondary">
+                          <i class="bi bi-printer"></i> Print
+                        </a>
                       </td>
                     </tr>
                     @empty
@@ -224,7 +230,10 @@
                       <td>{{$k3->nmr_k3}}</td>
                       <td>
                         <a href="{{ route('showk3', ['id' => Crypt::encryptString($k3->idk3)]) }}" class="btn btn-sm btn-outline-primary mb-1" target="_blank">Detail</a>                        
-                      </td>
+                        <a href="{{ route('printk3', ['id' => Crypt::encryptString($k3->idk3)]) }}" class="btn btn-sm btn-outline-secondary">
+                          <i class="bi bi-printer"></i> Print
+                        </a>
+                      </td>                      
                     </tr>
                     @empty
                     <tr>

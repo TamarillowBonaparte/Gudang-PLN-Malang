@@ -30,6 +30,7 @@ class VendorController extends Controller
             'surat_jalan.id_surat_jalan as idsrtjln'
             )
         ->where('dpb_suratjalan.id_user', '=', $idUser)
+        ->orderByDesc('daftar_permintaan_material.id_dpb')
         ->get();
 
 
@@ -44,6 +45,7 @@ class VendorController extends Controller
             'surat_jalan.id_surat_jalan'
             )
         ->where('k7_srtjln.id_user', '=', $idUser)
+        ->orderByDesc('idk7')
         ->get();
 
         $user = Auth::user();
@@ -55,6 +57,7 @@ class VendorController extends Controller
             'nm_pelanggan',
         )
         ->where('id_user', '=', $user->id_user)
+        ->orderByDesc('idk3')
         ->get();
 
         $material = DB::table('material')

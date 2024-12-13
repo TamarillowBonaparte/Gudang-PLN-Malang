@@ -21,9 +21,9 @@ class BonPemakaianMaterialController extends Controller
             'k7_srtjln.*',
             'surat_jalan.id_surat_jalan'
             )
-        ->where('k7_srtjln.id_user', '=', $idUser)
         ->get();
-        return view('bonpemakaianmaterial',compact('suratk7'));
+
+        return view('bonpemakaianmaterial', compact('suratk7'));
     }
 
     public function showK7(String $encryptedId, String $srtJlnEncryptdId) {

@@ -161,7 +161,13 @@
         .dpm {
             background-color: #ffc000
         }
-
+        #floater {
+            position: fixed;
+            bottom: 5%;
+            right: 9%;
+            transform: translateY(-50%);
+            width: 22.8%
+        }
     </style>
 
 </head>
@@ -624,7 +630,7 @@
     </div>
 
     <div id="floater">
-        <a href="{{ route('vendor.index') }}" class="btn btn-primary">Kembali</a>
+        <a href="{{ url()->previous() }}" class="btn btn-primary">Kembali</a>
     </div>
 
     <script>

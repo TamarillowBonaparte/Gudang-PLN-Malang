@@ -27,7 +27,7 @@ class GudangBawahHistoryController extends Controller
             'surat_jalan.nomor_polisi',
             'surat_jalan.pengemudi',
         )
-        ->orderByDesc('nomor_suratjln')
+        ->orderByDesc('id_dpb')
         ->get();
 
         $k7 = DB::table('k7')
@@ -44,7 +44,7 @@ class GudangBawahHistoryController extends Controller
             'k7.nmr_k7 as nomor',
             'user.nama as vendor',
         )
-        ->orderByDesc('nomor_suratjln')
+        ->orderByDesc('k7.id')
         ->get();
 
         $sjAdmin = DB::table('surat_jalan_admin AS sja')

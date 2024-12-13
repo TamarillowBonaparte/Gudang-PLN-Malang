@@ -86,8 +86,8 @@
                       <td>{{ $dpb->nomor_polisi }}</td>
                       <td>{{ $dpb->pengemudi }}</td>
                       <td>
-                        <a href="{{ route('gudangbawah.show', Crypt::encrypt($dpb->idsrt)) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-eye"></i> Detail</a>
-                        <a href="{{ route('printsj', Crypt::encrypt($dpb->idsrt)) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-printer"></i> Print</a>
+                        <a href="{{ route('gudangbawah.show', Crypt::encryptString($dpb->idsrt)) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-eye"></i> Detail</a>
+                        <a href="{{ route('printsj', Crypt::encryptString($dpb->idsrt)) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-printer"></i> Print</a>
                         <a href="{{ route('editdatasurat', ['id' => Crypt::encryptString($dpb->idsrt)]) }}" class="btn btn-sm btn-outline-success" target="_blank"><i class="bi bi-pencil"></i> Edit</a>
                       </td>
                     </tr>
@@ -120,7 +120,8 @@
                       <td>{{ $i->nomor_polisi }}</td>
                       <td>{{ $i->pengemudi }}</td>
                       <td>
-                        <a href="{{ route('showk7', Crypt::encrypt($i->idsrt)) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-eye"></i> Detail</a>
+                        <a href="{{ route('showk7', Crypt::encryptString($i->idsrt)) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-eye"></i> Detail</a>
+                        <a href="{{ route('printsjk7', Crypt::encryptString($i->idsrt)) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-printer"></i> Print</a>
                         <a href="{{ route('editdatasuratk7', ['id' => Crypt::encryptString($i->idsrt)]) }}" class="btn btn-sm btn-outline-success" target="_blank"><i class="bi bi-pencil"></i> Edit</a>
                       </td>
                     </tr>
@@ -159,6 +160,7 @@
                     <td>-</td>
                     <td>
                       <a href="{{ route('showsjadmin',['id' => Crypt::encryptString($item->idsj)]) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-eye"></i> Detail</a>
+                      <a href="{{ route('printsjadmin', Crypt::encryptString($item->idsj)) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-printer"></i> Print</a>
                       <a href="{{ route('editdatasuratadmin', ['id' => Crypt::encryptString($item->idsj)]) }}" class="btn btn-sm btn-outline-success" target="_blank"><i class="bi bi-pencil"></i> Edit</a>
                     </td>
                   </tr>

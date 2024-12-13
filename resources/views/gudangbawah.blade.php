@@ -58,7 +58,7 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section mt-5 ms-4 me-4">
+    <section class="section ms-4 me-4">
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
