@@ -242,38 +242,23 @@
                         </div>
                         <!-- End Recent Sales -->
 
-                        <div class="col-lg-12">
+                        <!-- Grafik Stok Barang -->
+                        <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Grafik Stok Barang Tersedia</h5>
-
-                                    <!-- Tombol Filter dan Label Material -->
-                                    <div class="d-flex align-items-center mb-3">
-                                        <label for="sortToggle" class="filter-label me-4">
-                                            <input type="checkbox" id="sortToggle" class="d-none">
-                                            <span class="filter-box"></span>
-                                            Urutkan Stok Terbesar ke Kecil
-                                        </label>
-                                    </div>
-
-                                    <!-- Grafik Batang -->
                                     <canvas id="barChart" style="max-height: 400px;"></canvas>
-                                    <div id="chartLegend" style="text-align: center; margin-top: 15px;">
-                                        <!-- Legend akan di-render di sini -->
-                                    </div>
+                                    <div id="chartLegend" style="text-align: center; margin-top: 15px;"></div>
                                     <script>
                                         document.addEventListener("DOMContentLoaded", () => {
-                                            // Data barang dan stok yang dikirim dari controller
                                             const materialData = @json($materialStok);
 
-                                            // Membuat salinan data untuk mengelola status hide/unhide
                                             const activeMaterials = materialData.map(item => ({
                                                 nama: item.nama,
                                                 total_stok: item.total_stok,
                                                 hidden: false
                                             }));
 
-                                            // Inisialisasi chart.js
                                             const ctx = document.querySelector('#barChart');
                                             const barChart = new Chart(ctx, {
                                                 type: 'bar',
@@ -295,7 +280,7 @@
                                                     responsive: true,
                                                     plugins: {
                                                         legend: {
-                                                            display: false // Disable default legend
+                                                            display: false
                                                         },
                                                         tooltip: {
                                                             enabled: true
@@ -319,7 +304,7 @@
                                                             ticks: {
                                                                 stepSize: 1,
                                                                 callback: function(value) {
-                                                                    return Number.isInteger(value) ? value : ''; // Hanya angka bulat
+                                                                    return Number.isInteger(value) ? value : '';
                                                                 }
                                                             },
                                                             title: {
@@ -334,7 +319,6 @@
                                                 }
                                             });
 
-                                            // Custom Legend Rendering
                                             const legendContainer = document.getElementById('chartLegend');
                                             activeMaterials.forEach((material, index) => {
                                                 const legendItem = document.createElement('span');
@@ -344,7 +328,6 @@
                                                 legendItem.style.fontSize = '14px';
                                                 legendItem.style.textDecoration = material.hidden ? 'line-through' : 'none';
 
-                                                // Warna untuk legenda
                                                 legendItem.innerHTML = `
                                                 <span style="
                                                     display: inline-block;
@@ -354,73 +337,26 @@
                                                     margin-right: 5px;
                                                 "></span>${material.nama}`;
 
-                                                // Toggle fungsi klik untuk meng-hide grafik
                                                 legendItem.addEventListener('click', () => {
-                                                    // Toggle status hidden
                                                     material.hidden = !material.hidden;
 
-                                                    // Update data dan label aktif
                                                     const filteredData = activeMaterials.filter(item => !item.hidden);
 
-                                                    // Update chart
                                                     barChart.data.labels = filteredData.map(item => item.nama);
                                                     barChart.data.datasets[0].data = filteredData.map(item => item.total_stok);
-
                                                     barChart.update();
 
-                                                    // Update coretan pada legend
                                                     legendItem.style.textDecoration = material.hidden ? 'line-through' : 'none';
                                                 });
 
                                                 legendContainer.appendChild(legendItem);
                                             });
-
-                                            // Tombol untuk mengurutkan stok
-                                            const sortToggle = document.getElementById('sortToggle');
-                                            sortToggle.addEventListener('change', () => {
-                                                if (sortToggle.checked) {
-                                                    activeMaterials.sort((a, b) => b.total_stok - a.total_stok);
-                                                } else {
-                                                    activeMaterials.sort((a, b) => materialData.findIndex(item => item.nama === a.nama) - materialData.findIndex(item => item.nama === b.nama));
-                                                }
-
-                                                // Update chart data
-                                                barChart.data.labels = activeMaterials.map(item => item.nama);
-                                                barChart.data.datasets[0].data = activeMaterials.map(item => item.total_stok);
-                                                barChart.update();
-                                            });
                                         });
                                     </script>
-                                    <!-- End Bar Chart -->
                                 </div>
                             </div>
                         </div>
-
-                        <style>
-                            .filter-label {
-                                display: flex;
-                                align-items: center;
-                                cursor: pointer;
-                                font-size: 16px;
-                            }
-
-                            .filter-box {
-                                width: 20px;
-                                height: 20px;
-                                border: 2px solid #007bff;
-                                border-radius: 4px;
-                                margin-right: 10px;
-                                transition: background-color 0.3s;
-                            }
-
-                            input#sortToggle:checked + .filter-box {
-                                background-color: #007bff;
-                            }
-
-                            input#sortToggle + .filter-box {
-                                background-color: transparent;
-                            }
-                        </style>
+                        <!-- End Grafik Stok Barang -->
                     </div>
                 </div>
                 <!-- End Left side columns -->
