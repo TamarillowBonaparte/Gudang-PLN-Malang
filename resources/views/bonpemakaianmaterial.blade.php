@@ -63,6 +63,11 @@
           <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Riwayat Surat K7</h5>
+                @if(isset($suratk7))
+                    <div style="display: none;">
+                        {{ print_r($suratk7->toArray()) }}
+                    </div>
+                @endif
                 <table class="table datatable">
                     <thead>
                         <tr>
