@@ -114,6 +114,9 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet">
 
+    <!-- Tambahkan CDN SweetAlert2 di bagian head -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -391,52 +394,154 @@
                         </div>
                     </div>
 
-                    <!-- Notes Card (Replacing Weather Card) -->
+                    <!-- Notes Card -->
                     <div class="card mt-3">
                         <div class="card-body">
                             <h5 class="card-title">Catatan</h5>
                             <div id="notes-container">
                                 <div class="mb-3">
-                                    <textarea class="form-control" id="noteInput" rows="3" placeholder="Tulis catatan baru..."></textarea>
+                                    <input type="text" class="form-control mb-2" id="noteTitle" placeholder="Judul catatan...">
+                                    <textarea class="form-control" id="noteInput" rows="3" placeholder="Isi catatan..."></textarea>
                                 </div>
                                 <button class="btn btn-primary mb-3" onclick="addNote()">Tambah Catatan</button>
 
-                                <div id="notes-list">
-                                    <!-- Notes will be dynamically added here -->
+                                <!-- Container dengan fixed height -->
+                                <div class="notes-wrapper">
+                                    <div id="notes-list" class="notes-scroll">
+                                        <!-- Notes will be dynamically added here -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <style>
+                    .card-header i {
+                        transition: transform 0.3s ease;
+                    }
+                    .card-header:hover {
+                        background-color: #f8f9fa;
+                    }
+                    .card-body {
+                        transition: all 0.3s ease;
+                    }
+
+                    /* Style untuk container notes */
+                    .notes-wrapper {
+                        position: relative;
+                        height: 400px; /* Tinggi tetap untuk container */
+                    }
+
+                    .notes-scroll {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        overflow-y: auto;
+                        padding-right: 5px;
+                    }
+
+                    /* Custom scrollbar */
+                    .notes-scroll::-webkit-scrollbar {
+                        width: 6px;
+                    }
+
+                    .notes-scroll::-webkit-scrollbar-track {
+                        background: #f1f1f1;
+                        border-radius: 10px;
+                    }
+
+                    .notes-scroll::-webkit-scrollbar-thumb {
+                        background: #888;
+                        border-radius: 10px;
+                    }
+
+                    .notes-scroll::-webkit-scrollbar-thumb:hover {
+                        background: #555;
+                    }
+
+                    /* Style untuk card notes */
+                    .notes-scroll .card {
+                        margin-right: 5px;
+                    }
+                </style>
+
                 <script>
-                    // Load notes from localStorage when page loads
                     document.addEventListener('DOMContentLoaded', function() {
                         loadNotes();
                     });
 
                     function addNote() {
+                        const titleInput = document.getElementById('noteTitle');
                         const noteInput = document.getElementById('noteInput');
-                        const noteText = noteInput.value.trim();
+                        
+                        const title = titleInput.value.trim();
+                        const text = noteInput.value.trim();
 
-                        if (noteText) {
+                        if (title && text) {
                             const notes = getNotes();
                             notes.push({
-                                text: noteText,
+                                title: title,
+                                text: text,
                                 date: new Date().toLocaleString('id-ID')
                             });
+
                             localStorage.setItem('notes', JSON.stringify(notes));
 
+                            titleInput.value = '';
                             noteInput.value = '';
                             loadNotes();
+
+                            // Scroll ke note terbaru
+                            const notesList = document.getElementById('notes-list');
+                            notesList.scrollTop = notesList.scrollHeight;
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil!',
+                                text: 'Catatan berhasil ditambahkan',
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Judul dan isi catatan harus diisi!'
+                            });
                         }
                     }
 
                     function deleteNote(index) {
-                        const notes = getNotes();
-                        notes.splice(index, 1);
-                        localStorage.setItem('notes', JSON.stringify(notes));
-                        loadNotes();
+                        // Sweet Alert untuk konfirmasi hapus
+                        Swal.fire({
+                            title: 'Apakah Anda yakin?',
+                            text: "Catatan akan dihapus permanen!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Ya, hapus!',
+                            cancelButtonText: 'Batal'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                const notes = getNotes();
+                                notes.splice(index, 1);
+                                localStorage.setItem('notes', JSON.stringify(notes));
+                                loadNotes();
+
+                                // Sweet Alert untuk sukses hapus
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Terhapus!',
+                                    text: 'Catatan berhasil dihapus',
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                });
+                            }
+                        });
                     }
 
                     function getNotes() {
@@ -449,13 +554,31 @@
 
                         notesList.innerHTML = notes.map((note, index) => `
                             <div class="card mb-2">
-                                <div class="card-body">
-                                    <p class="mb-1">${note.text}</p>
-                                    <small class="text-muted d-block">${note.date}</small>
-                                    <button class="btn btn-sm btn-danger mt-2" onclick="deleteNote(${index})">Hapus</button>
+                                <div class="card-header d-flex justify-content-between align-items-center"
+                                     style="cursor: pointer;"
+                                     onclick="toggleNote(${index})">
+                                    <div>
+                                        <strong>${note.title}</strong>
+                                        <small class="text-muted d-block">${note.date}</small>
+                                    </div>
+                                    <i class="bi bi-chevron-down" id="arrow-${index}"></i>
+                                </div>
+                                <div class="card-body collapse" id="note-content-${index}">
+                                    <p class="mb-2">${note.text}</p>
+                                    <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); deleteNote(${index})">
+                                        Hapus
+                                    </button>
                                 </div>
                             </div>
                         `).join('');
+                    }
+
+                    function toggleNote(index) {
+                        const content = document.getElementById(`note-content-${index}`);
+                        const arrow = document.getElementById(`arrow-${index}`);
+
+                        content.classList.toggle('show');
+                        arrow.style.transform = content.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0)';
                     }
                 </script>
             </div>
@@ -734,55 +857,6 @@
     </script>
     <!--Buat Grafiknya-->
 
-    <script>
-        // Load notes from localStorage when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            loadNotes();
-        });
-
-        function addNote() {
-            const noteInput = document.getElementById('noteInput');
-            const noteText = noteInput.value.trim();
-
-            if (noteText) {
-                const notes = getNotes();
-                notes.push({
-                    text: noteText,
-                    date: new Date().toLocaleString('id-ID')
-                });
-                localStorage.setItem('notes', JSON.stringify(notes));
-
-                noteInput.value = '';
-                loadNotes();
-            }
-        }
-
-        function deleteNote(index) {
-            const notes = getNotes();
-            notes.splice(index, 1);
-            localStorage.setItem('notes', JSON.stringify(notes));
-            loadNotes();
-        }
-
-        function getNotes() {
-            return JSON.parse(localStorage.getItem('notes') || '[]');
-        }
-
-        function loadNotes() {
-            const notesList = document.getElementById('notes-list');
-            const notes = getNotes();
-
-            notesList.innerHTML = notes.map((note, index) => `
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <p class="mb-1">${note.text}</p>
-                        <small class="text-muted d-block">${note.date}</small>
-                        <button class="btn btn-sm btn-danger mt-2" onclick="deleteNote(${index})">Hapus</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-    </script>
 </body>
 
 </html>

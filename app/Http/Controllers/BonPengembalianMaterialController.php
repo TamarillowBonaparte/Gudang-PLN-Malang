@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
-class BonMaterialController extends Controller
+class BonPengembalianMaterialController extends Controller
 {
     public function index(){
         $user = Auth::user();
@@ -19,7 +19,7 @@ class BonMaterialController extends Controller
         )
         ->where('id_user', '=', $user->id_user)
         ->get();
-        return view('bonmaterial',compact('suratk3'));
+        return view('bonpengembalianmaterial',compact('suratk3'));
     }
 
     public function showK3(String $encryptedId)
