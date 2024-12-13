@@ -17,8 +17,8 @@ class BonMaterialController extends Controller
             'tgl_diminta',
             'nm_pelanggan',
         )
-        ->where('id_user', '=', $user->id_user)
         ->get();
+        
         return view('bonmaterial',compact('suratk3'));
     }
 

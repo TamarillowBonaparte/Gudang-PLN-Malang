@@ -270,7 +270,7 @@
                 <td class="bdottb" colspan="2" style="height: 10px"></td>
             </tr>
             {{-- row 19 --}}
-            @forelse ($material as $mat)
+            @forelse ($material as $mat)            
             <tr>
                 <td class="fntb bdottb pdtb fnt12 itmth">{{ $loop->iteration }}</td>
                 <td class="fntb bdottb pdtb fnt12 itmth" colspan="5">{{ $mat->nammat }}</td>

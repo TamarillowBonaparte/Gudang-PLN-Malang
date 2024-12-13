@@ -118,7 +118,7 @@
                                             <td>{{ $material->bagian }}</td>
                                             <td>{{ $material->jumlah_sap }}</td>
                                             <td>
-                                                <button type="button" class="btn btn-outline-secondary btn-sm edit-btn"
+                                                <button type="button" class="btn btn-sm btn-outline-secondary edit-btn"
                                                     data-bs-toggle="modal" data-bs-target="#edittmbh"
                                                     data-id="{{ $material->id_material }}">
                                                     <i class="bi bi-pencil"></i> Edit/Tambah

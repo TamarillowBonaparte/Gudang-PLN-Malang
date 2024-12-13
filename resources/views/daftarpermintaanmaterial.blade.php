@@ -88,14 +88,11 @@
                         <td class="tblefrmt">{{ $i->nmu}}</td>
                         <td class="tblefrmt">{{ $i->ulpnm}}</td>
                         <td class="tblefrmt">{{ $i->nmpel}}</td>
-                        <td>
-                            <a href="{{ route('daftar-permintaan-material.show', Crypt::encryptString($i->id)) }}" class="btn btn-sm btn-outline-secondary me-1">
+                        <td style="text-align: center">
+                            <a href="{{ route('daftar-permintaan-material.show', Crypt::encryptString($i->id)) }}" target="_blank" class="btn btn-sm btn-outline-primary me-1">
                                 Detail
                             </a>
-                            <a href="#" class="btn btn-sm btn-outline-secondary me-1">
-                                <i class="bi bi-download"></i> Download
-                            </a>
-                            <a href="#" class="btn btn-sm btn-outline-secondary">
+                            <a href="{{ route('print', ['id' => Crypt::encryptString($i->id), 'srtJlnId' => Crypt::encryptString($i->idsj)]) }}" class="btn btn-sm btn-outline-secondary">
                                 <i class="bi bi-printer"></i> Print
                             </a>
                         </td>

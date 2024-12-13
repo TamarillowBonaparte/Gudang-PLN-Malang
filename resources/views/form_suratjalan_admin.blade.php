@@ -162,22 +162,24 @@
                 <th>Tanggal Diedit</th>
                 <th>Material</th>
                 <th style="width: 3px">Jumlah Sebelumnya</th>
-                <th style="width: 3px">Jumlah Ditambah</th>
+                <th style="width: 3px">Jumlah Setelahnya</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($riwayat as $item)
+                    @if ($item->jumlah_sebelumnya != $item->jumlah_ditambah)
                         <tr>                        
                             <td>{{ \Carbon\Carbon::parse($item->tgl_diubah)->translatedFormat('d M Y') }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ ($item->jumlah_sebelumnya == null) ? 0 : $item->jumlah_sebelumnya }}</td>
                             <td>{{ ($item->jumlah_ditambah == null) ? 0 : $item->jumlah_ditambah }}</td>
                         </tr>
-                        @empty
-                        <tr>
-                            <td colspan="4" style="text-align: center">Belum ada perubahan</td>
-                        </tr>
-                        @endforelse
+                    @endif             
+                @empty
+                    <tr>
+                        <td colspan="4" style="text-align: center">Belum ada perubahan</td>
+                    </tr>
+                @endforelse
             </tbody>
             </table>
         </div>

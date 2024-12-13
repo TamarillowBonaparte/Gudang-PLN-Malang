@@ -134,7 +134,7 @@
             height: 25px;
         }
         .dpm {
-            background-color: #d9ead3
+            background-color: #f2dbdb
         }
         #floater {
             position: fixed;
@@ -146,37 +146,6 @@
     </style>
 </head>
 <body>
-    <div class="card text-center" id="floater">
-        <div class="card-body">
-            <h6 class="card-title">Riwayat Edit Surat Jalan</h5>
-            <table class="table datatable">
-            <thead>
-                <tr>
-                <th>Tanggal Diedit</th>
-                <th>Material</th>
-                <th style="width: 3px">Jumlah Sebelumnya</th>
-                <th style="width: 3px">Jumlah Setelahnya</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($riwayat as $item)
-                    @if ($item->jumlah_sebelumnya != $item->jumlah_ditambah)
-                        <tr>
-                            <td>{{ \Carbon\Carbon::parse($item->tgl_diubah)->translatedFormat('d M Y') }}</td>
-                            <td>{{ $item->nama }}</td>
-                            <td>{{ ($item->jumlah_sebelumnya == null) ? 0 : $item->jumlah_sebelumnya }}</td>
-                            <td>{{ ($item->jumlah_ditambah == null) ? 0 : $item->jumlah_ditambah }}</td>
-                        </tr>
-                    @endif
-                @empty
-                    <tr>
-                        <td colspan="4" style="text-align: center">Belum ada perubahan</td>
-                    </tr>
-                @endforelse
-            </tbody>
-            </table>
-        </div>
-    </div>
     <div class="fnt">
         <table>
             {{-- row 0, 15 column --}}
@@ -355,7 +324,7 @@
                 <td class="fntb hide fontl fontbott" colspan="3" style="height: 90px;">JENIS PEKERJAAN</td>
                 <td class="fntb hide fontbott">:</td>
                 <td class="fntb hide fontl fontbott" colspan="7">{{ $sj->nmpkrjn }}</td>
-                <td class="fntb dpm" colspan="2" style="font-size: 24px; color: #ff0000">{{ $sj->nodpb }}</td>
+                <td class="fntb dpm" colspan="2" style="font-size: 24px; color: #ff0000">{{ $sj->nomor }}</td>
             </tr>
             {{-- row 33 --}}
             <tr>
@@ -457,11 +426,15 @@
                 <td class="hide" colspan="2"></td>
                 <td class="fntb hide" colspan="3">.................</td>
                 <td class="hide"></td>
-                <td class="fntb hide" colspan="5">{{ $sj->kepala_gudang }}</td>
+                <td class="fntb hide" colspan="5">{{ $sj->kplg }}</td>
             </tr>
             @empty
             @endforelse
         </table>
     </div>
+
+    <script>
+        window.print()
+    </script>
 </body>
 </html>

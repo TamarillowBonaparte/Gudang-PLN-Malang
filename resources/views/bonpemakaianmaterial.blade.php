@@ -78,8 +78,11 @@
                                 <td>{{ \Carbon\Carbon::parse($item->tgl_diminta)->format('d M Y') }}</td>
                                 <td>{{ $item->nmr_k7 }}</td>
                                 <td>{{ $item->nm_pelanggan }}</td>
-                                <td>
-                                    <a href="{{ route('showK7', ['id' => Crypt::encryptString($item->idk7), 'srtJlnId' => Crypt::encryptString($item->id_surat_jalan)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                                <td style="text-align: center">
+                                    <a href="{{ route('showK7', ['id' => Crypt::encryptString($item->idk7), 'srtJlnId' => Crypt::encryptString($item->id_surat_jalan)]) }}" target="_blank" class="btn btn-sm btn-outline-primary mb-1">Detail</a>
+                                    <a href="{{ route('printk7', ['id' => Crypt::encryptString($item->idk7), 'srtJlnId' => Crypt::encryptString($item->id_surat_jalan)]) }}" class="btn btn-sm btn-outline-secondary">
+                                      <i class="bi bi-printer"></i> Print
+                                    </a>
                                 </td>
                             </tr>
                         @empty

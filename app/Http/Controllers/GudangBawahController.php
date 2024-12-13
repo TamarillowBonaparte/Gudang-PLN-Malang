@@ -330,16 +330,22 @@ class GudangBawahController extends Controller
             ->pluck('jumlah_ditambah')
             ->first();
 
-            RiwayatEdit::create([
-                'id_suratjalan' => $request->input('idsrtjl'),
-                'id_material' => $request->input('idmat')[$key],
-                'jumlah_sebelumnya' => ($idre == null) ? null : $idre,
-                'jumlah_ditambah' => ($value == "TA") ? null : $value,
-                'tgl_diubah' => date('Y-m-d H:i:s'),
-            ]);
+            $jumlahsebelumnya = DB::table('riwayat_edit')
+            ->where('id_suratjalan', $request->input('idsrtjl'))
+            ->pluck('jumlah_ditambah');
+
+            if ($jumlahsebelumnya != $value) {
+                RiwayatEdit::create([
+                    'id_suratjalan' => $request->input('idsrtjl'),
+                    'id_material' => $request->input('idmat')[$key],
+                    'jumlah_sebelumnya' => ($idre == null) ? null : $idre,
+                    'jumlah_ditambah' => ($value == "TA") ? null : $value,
+                    'tgl_diubah' => date('Y-m-d H:i:s'),
+                ]);
+            }                        
         }
 
-        return redirect()->route('showk7', ['id' => Crypt::encrypt($idsrtjl)]);
+        return redirect()->route('printsjk7', ['id' => Crypt::encrypt($idsrtjl)]);
     }
 
     public function editDataSuratAdmin(String $encryptedId) {        
@@ -431,13 +437,27 @@ class GudangBawahController extends Controller
             ->pluck('jumlah_ditambah')
             ->first();
 
-            RiwayatEdit::create([
-                'id_suratjalan' => $request->input('idsj'),
-                'id_material' => $request->input('idmat')[$key],
-                'jumlah_sebelumnya' => ($idre == null ) ? null : $idre,
-                'jumlah_ditambah' => ($value == "TA") ? null : $value,
-                'tgl_diubah' => date('Y-m-d H:i:s'),
-            ]);
+            // dd($request->input('idmat')[$key]);
+
+            $jumlahsebelumnya = DB::table('riwayat_edit')
+            ->where('id_suratjalan', $request->input('idsrtjl'))
+            ->where('id_material', $request->input('idmat')[$key])
+            ->orderByDesc('id')
+            ->pluck('jumlah_ditambah')
+            ->first();
+            
+            // $log = $value ." ". $idre ." ". $jumlahsebelumnya;
+            // dd($log);
+
+            if ($jumlahsebelumnya != $value) {
+                RiwayatEdit::create([
+                    'id_suratjalan' => $request->input('idsj'),
+                    'id_material' => $request->input('idmat')[$key],
+                    'jumlah_sebelumnya' => ($idre == null) ? null : $idre,
+                    'jumlah_ditambah' => ($value == "TA") ? null : $value,
+                    'tgl_diubah' => date('Y-m-d H:i:s'),
+                ]);
+            }      
         }
 
         return redirect()->route('showsjadmin', ['id' => Crypt::encryptString($idsj)]);
@@ -445,7 +465,7 @@ class GudangBawahController extends Controller
 
     public function show(String $encryptedId): View {
 
-        $id = Crypt::decrypt($encryptedId);
+        $id = Crypt::decryptString($encryptedId);
 
         $suratjln = DB::table('dpb_suratjalan')
         ->select(
@@ -520,7 +540,7 @@ class GudangBawahController extends Controller
 
     public function showk7(String $encryptedId): View {
 
-        $id = Crypt::decrypt($encryptedId);
+        $id = Crypt::decryptString($encryptedId);
 
         $suratjln = DB::table('k7_srtjln AS k7sj')
         ->select(
@@ -665,7 +685,7 @@ class GudangBawahController extends Controller
 
     public function print(String $encryptedId): View {
 
-        $id = Crypt::decrypt($encryptedId);
+        $id = Crypt::decryptString($encryptedId);
 
         $suratjln = DB::table('dpb_suratjalan')
         ->select(
@@ -694,9 +714,9 @@ class GudangBawahController extends Controller
         ->where('id_surat_jalan', '=', $id)
         ->get();
 
-        $iddpbsrtjln = DB::table('daftar_permintaan_material')
-        ->select('id_dpb_suratjalan')
-        ->where('id_dpb', '=', $id);
+        $iddpbsrtjln = DB::table('dpb_suratjalan')        
+        ->where('id_suratjalan', '=', $id)
+        ->pluck('id_dpb_suratjalan');
 
         $material = DB::table('daftar_material')
         ->select(
@@ -724,6 +744,151 @@ class GudangBawahController extends Controller
         $list = $jumlah+1;
 
         return view('printsuratjalan', compact('suratjln', 'material', 'list'));
+    }
+
+    public function printk7(String $encryptedId): View {
+
+        $id = Crypt::decryptString($encryptedId);
+
+        $suratjln = DB::table('k7_srtjln AS k7sj')
+        ->select(
+            'surat_jalan.nomor_suratjln AS nosj',
+            'surat_jalan.id_surat_jalan AS idsrtjl',
+            'surat_jalan.nomor_polisi',
+            'surat_jalan.pengemudi',
+            'surat_jalan.tgl_diterima AS tgldicetak',
+            'k7sj.id',
+            'k7sj.nospk',
+            'k7sj.nm_pelanggan AS nampel',
+            'k7sj.idpel',
+            'k7sj.almt_pelanggan AS almtpel',
+            'k7sj.trfdy_lama AS daylam',
+            'k7sj.trfdy_baru AS daybar',
+            'k7sj.penerima',
+            'k7sj.kpl_gudang AS kplg',
+            'k7.nmr_k7 AS nomor',
+            'user.nama AS vendor',
+            'ulp.nama AS ulp',
+            'jenis_pekerjaan.pekerjaan AS nmpkrjn'
+        )
+        ->join('surat_jalan', 'k7sj.id_srtjln', '=', 'surat_jalan.id_surat_jalan')
+        ->join('k7', 'k7.id_k7srtjln', '=', 'k7sj.id')
+        ->join('user', 'k7sj.id_user', '=', 'user.id_user')
+        ->join('ulp', 'k7sj.id_ulp', '=', 'ulp.id_ulp')
+        ->join('jenis_pekerjaan', 'k7sj.id_jns_pekerjaan', '=', 'jenis_pekerjaan.id_jenis_pekerjaan')
+        ->where('surat_jalan.id_surat_jalan', $id)
+        ->get();
+
+        $idk7sj = DB::table('k7_srtjln')
+        ->select(
+            'id'
+        )
+        ->where('id_srtjln', '=', $id);
+
+        $material = DB::table('dftrmaterial_k7 AS dmk7')
+        ->join('material_bekas AS mb', 'dmk7.id_mtrl_k7', '=', 'mb.id')
+        ->select(
+            'dmk7.jumlah_diminta',
+            'dmk7.jumlah_diberi',
+            'dmk7.id_mtrl_k7',
+            'dmk7.id_k7srtjln',
+            'mb.nama as nammat',
+            'mb.normalisasi',
+            'mb.satuan',
+        )
+        ->where('dmk7.id_k7srtjln', '=', $idk7sj)
+        ->get();
+
+        $dpbsrt = DB::table('k7_srtjln AS k7sj')
+        ->select('id')
+        ->where('id_srtjln', '=', $id)
+        ->pluck('id');
+
+        $jumlah = DB::table('dftrmaterial_k7')
+        ->select('id_k7srtjln')
+        ->where('id_k7srtjln', '=', $dpbsrt)
+        ->count();
+
+        $list = $jumlah+1;
+
+        $riwayat = DB::table('riwayat_edit AS rd')
+        ->join('material', 'material.id_material', '=', 'rd.id_material')
+        ->select(
+            'rd.tgl_diubah',
+            'rd.jumlah_sebelumnya',
+            'rd.jumlah_ditambah',
+            'material.nama',
+        )
+        ->where('rd.id_suratjalan', $id)
+        ->orderByDesc('rd.tgl_diubah')
+        ->get();
+
+        return view('printsuratjalank7', compact('suratjln', 'material', 'list', 'riwayat'));
+    }
+
+    public function printsjadmin(String $encryptedId): View {
+
+        $id = Crypt::decryptString($encryptedId);
+
+        // dd($id);
+
+        $sja = DB::table('surat_jalan AS sj')
+        ->join('surat_jalan_admin AS sja', 'sja.id_suratjalan', '=', 'sj.id_surat_jalan')        
+        ->select(
+            'sj.id_surat_jalan AS idsj',
+            'sj.nomor_polisi AS nopol',
+            'sj.pengemudi',
+            'sj.tgl_diterima',
+            'sj.nomor_suratjln AS nsj',
+            'sja.id',   
+            'sja.kepada',
+            'sja.alamat',
+            'sja.no_permintaan AS noperm',
+            'sja.penerima',
+            'sja.yang_menyerahkan AS ygMenyerhkn',
+            'sja.keterangan',
+        )
+        ->where('sj.id_surat_jalan', $id)
+        ->get();
+
+        $idsjadmin = DB::table('surat_jalan_admin')
+        ->select('id')
+        ->where('id_suratjalan', '=', $id);
+
+        $dmsja = DB::table('daftar_material_sja AS dmsja')
+        ->join('material', 'dmsja.id_material', '=', 'material.id_material')
+        ->select(
+            'material.id_material',
+            'material.nama',
+            'material.normalisasi',
+            'material.satuan',
+            'dmsja.jumlah_diminta',
+            'dmsja.jumlah_diberi',
+        )
+        ->where('id_sja', '=', $idsjadmin)
+        ->get();
+
+        $jumlah = DB::table('daftar_material_sja AS dmsja')
+        ->select('id_sja')
+        ->where('id_sja', $idsjadmin)
+        ->count();
+
+        $list = $jumlah;
+
+
+        $riwayat = DB::table('riwayat_edit AS rd')
+        ->join('material', 'material.id_material', '=', 'rd.id_material')
+        ->select(
+            'rd.tgl_diubah',
+            'rd.jumlah_sebelumnya',
+            'rd.jumlah_ditambah',
+            'material.nama',
+        )
+        ->where('rd.id_suratjalan', $id)
+        ->orderByDesc('rd.tgl_diubah')
+        ->get();
+
+        return view('printsuratjalanadmin', compact('sja', 'dmsja', 'list', 'riwayat'));
     }
 
     public function showSurat(Request $request) {

@@ -96,6 +96,9 @@
                                 <td>{{ $item->nm_pelanggan }}</td>
                                 <td>
                                     <a href="{{ route('showk3', ['id' => Crypt::encryptString($item->idk3)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
+                                    <a href="{{ route('printk3', ['id' => Crypt::encryptString($item->idk3)]) }}" class="btn btn-sm btn-outline-secondary">
+                                      <i class="bi bi-printer"></i> Print
+                                    </a>
                                 </td>
                             </tr>
                         @empty

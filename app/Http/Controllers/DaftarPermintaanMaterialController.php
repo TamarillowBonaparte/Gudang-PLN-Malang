@@ -12,9 +12,11 @@ class DaftarPermintaanMaterialController extends Controller
     {
         $dpb = DB::table('daftar_permintaan_material as dpm')
         ->join('dpb_suratjalan as dsj', 'dpm.id_dpb_suratjalan', '=', 'dsj.id_dpb_suratjalan')
+        ->join('surat_jalan as sj', 'sj.id_surat_jalan', '=', 'dsj.id_suratjalan')
         ->join('ulp', 'dsj.id_ulp', '=', 'ulp.id_ulp')
         ->join('user', 'dsj.id_user', '=', 'user.id_user')
         ->select(
+            'sj.id_surat_jalan as idsj',
             'dpm.id_dpb as id',
             'dpm.tgl_diminta as tgl',
             'dpm.nomor_dpb as ndpb',
@@ -24,6 +26,7 @@ class DaftarPermintaanMaterialController extends Controller
             )
         ->orderByDesc('ndpb')
         ->get();
+        
         return view('daftarpermintaanmaterial', compact('dpb'));
     }
 
@@ -61,9 +64,9 @@ class DaftarPermintaanMaterialController extends Controller
         ->where('daftar_permintaan_material.id_dpb', '=', $id)
         ->get();
 
-        $iddpbsrtjln = DB::table('daftar_permintaan_material')
-        ->select('id_dpb_suratjalan')
-        ->where('id_dpb', '=', $id);
+        $iddpbsrtjln = DB::table('daftar_permintaan_material')    
+        ->where('id_dpb', '=', $id)
+        ->pluck('id_dpb_suratjalan');
 
         $lMaterial = DB::table('daftar_material')
         ->select(
@@ -77,14 +80,13 @@ class DaftarPermintaanMaterialController extends Controller
         ->where('id_dpb_suratjalan', '=', $iddpbsrtjln)
         ->get();
 
-        $dpbsrt = DB::table('dpb_suratjalan')
-        ->select('id_dpb_suratjalan')
-        ->where('id_suratjalan', '=', $id)
-        ->pluck('id_dpb_suratjalan');
-
+        $idsj = DB::table('dpb_suratjalan')
+        ->where('id_dpb_suratjalan', $iddpbsrtjln)
+        ->pluck('id_suratjalan');
+    
         $jumlah = DB::table('daftar_material')
         ->select('id_dpb_suratjalan')
-        ->where('id_dpb_suratjalan', '=', $dpbsrt)
+        ->where('id_dpb_suratjalan', '=', $iddpbsrtjln)
         ->count();
 
         $list = $jumlah+1;

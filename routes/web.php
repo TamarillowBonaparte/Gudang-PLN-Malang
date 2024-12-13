@@ -64,7 +64,6 @@ Route::get('/editdatasurat/{id}', [GudangBawahController::class, 'editDataSurat'
 Route::get('/editdatasuratk7/{id}', [GudangBawahController::class, 'editDataSuratK7'])->name('editdatasuratk7');
 Route::get('/editdatasuratadmin/{id}', [GudangBawahController::class, 'editDataSuratAdmin'])->name('editdatasuratadmin');
 Route::get('/formsrt/{id}', [GudangBawahController::class, 'show'])->name('formsrt');
-Route::get('/printsj/{id}', [GudangBawahController::class, 'print'])->name('printsj');
 Route::get('/showk7/{id}', [GudangBawahController::class, 'showk7'])->name('showk7');
 Route::get('/showsjadmin/{id}', [GudangBawahController::class, 'showsjadmin'])->name('showsjadmin');
 // route ajax show surat jalan
@@ -72,6 +71,10 @@ Route::get('/suratongoing', [GudangBawahController::class, 'showSurat'])->name('
 Route::post('/storedatasurat', [GudangBawahController::class, 'storeDataSurat'])->name('storedatasurat');
 Route::post('/storedatasuratk7', [GudangBawahController::class, 'storeDataSuratK7'])->name('storedatasuratk7');
 Route::post('/storedatasuratadmin', [GudangBawahController::class, 'storeDataSuratAdmin'])->name('storedatasuratadmin');
+// route print sj
+Route::get('/printsj/{id}', [GudangBawahController::class, 'print'])->name('printsj');
+Route::get('/printsjk7/{id}', [GudangBawahController::class, 'printk7'])->name('printsjk7');
+Route::get('/printsjadmin/{id}', [GudangBawahController::class, 'printsjadmin'])->name('printsjadmin');
 
 //route ke halaman setting
 Route::get('/setting', [SettingController::class, 'index'])->name('setting');
