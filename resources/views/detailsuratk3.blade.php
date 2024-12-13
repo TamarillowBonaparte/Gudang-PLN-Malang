@@ -597,5 +597,18 @@
             @endforelse            
         </table>
     </div>
+
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if ((event.ctrlKey || event.metaKey) && event.key === 'p') {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Peringatan',
+                    text: 'Fungsi print dinonaktifkan pada halaman ini.'
+                });
+            }
+        });
+    </script>
 </body>
 </html>

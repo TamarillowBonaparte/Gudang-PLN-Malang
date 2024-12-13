@@ -10,27 +10,19 @@ class testview extends Controller
 {
     public function index () {
 
-        $lastSJ = DB::table('surat_jalan')
-            ->selectRaw("nomor_suratjln, CAST(SUBSTRING_INDEX(nomor_suratjln, '/', 1) AS UNSIGNED) AS nosrtjln")
-            ->orderBy('nosrtjln', 'DESC')
-            ->limit(1)
-            ->pluck('nosrtjln')
-            ->first();
-        $getNull = ($lastSJ == null) ? 0 : $lastSJ;
-        preg_match('/^\d+/', $getNull, $matches);
-        $lastAngka = $matches[0] + 1;
-        $nomorSuratJalan = $lastAngka."/LOG.00.02/GD. ARIES/VI/".date("Y");        
-
-        $id = 9;
+        $id = 6;
 
         $sja = DB::table('surat_jalan AS sj')
         ->join('surat_jalan_admin AS sja', 'sja.id_suratjalan', '=', 'sj.id_surat_jalan')        
         ->select(
+            'sj.id_surat_jalan AS idsj',
             'sj.nomor_polisi AS nopol',
             'sj.pengemudi',
             'sj.tgl_diterima',
+            'sj.nomor_suratjln AS nsj',
+            'sja.id',   
             'sja.kepada',
-            'sja.alamat',            
+            'sja.alamat',
             'sja.no_permintaan AS noperm',
             'sja.penerima',
             'sja.yang_menyerahkan AS ygMenyerhkn',
@@ -46,10 +38,12 @@ class testview extends Controller
         $dmsja = DB::table('daftar_material_sja AS dmsja')
         ->join('material', 'dmsja.id_material', '=', 'material.id_material')
         ->select(
+            'material.id_material',
             'material.nama',
             'material.normalisasi',
             'material.satuan',
-            'dmsja.jumlah',
+            'dmsja.jumlah_diminta',
+            'dmsja.jumlah_diberi',
         )
         ->where('id_sja', '=', $idsjadmin)
         ->get();
@@ -61,8 +55,19 @@ class testview extends Controller
 
         $list = $jumlah;
 
-        // dd($list);
+        // Riwayat edit
 
-        return view('form_suratjalan_admin', compact('nomorSuratJalan', 'sja', 'dmsja', 'list'));
+        $riwayat = DB::table('riwayat_edit AS rd')
+        ->join('material', 'material.id_material', '=', 'rd.id_material')
+        ->select(
+            'rd.tgl_diubah',
+            'rd.jumlah_sebelumnya',
+            'rd.jumlah_ditambah',
+            'material.nama',
+        )
+        ->where('rd.id_suratjalan', $id)
+        ->get();
+
+        return view('testview', compact('sja', 'dmsja', 'list', 'riwayat'));
     }
 }

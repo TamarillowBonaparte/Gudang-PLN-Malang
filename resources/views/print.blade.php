@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TUG (Tata Usaha Gudang ) 5</title>
+
+    @forelse ($dpm as $item)
+    <title>{{ $item->nomor_dpb}}</title>
+    @empty        
+    @endforelse    
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -48,12 +52,16 @@
                 padding: 0 !important;
                 overflow: hidden;
             }
+            #floater {
+                display: none !important;
+            }
         }
         html, body {
             width: 297mm;
             /* height: 210mm; */
             margin: 0px;
             padding: 0px;
+            background-color: white;
         }
         body {
             font-family: 'Roboto', sans-serif;
@@ -137,10 +145,17 @@
         .dpm {
             background-color: #d9ead3
         }
+        #floater {
+            position: fixed;
+            bottom: 5%;
+            right: 9%;
+            transform: translateY(-50%);
+            width: 22.8%
+        }
     </style>
 </head>
 <body>
-    <div class="fnt centered-div" style="width: 100%">
+    <div class="fnt" style="width: 100%">
         <table id="dpm" class="display">
             {{-- tr 0 --}}
             <tr>
@@ -561,6 +576,10 @@
             @empty
             @endforelse
         </table>
+    </div>
+
+    <div id="floater">
+        <a href="{{ route('vendor.index') }}" class="btn btn-primary">Kembali</a>
     </div>
 
     <script>

@@ -134,12 +134,12 @@
             height: 25px;
         }
         .dpm {
-            background-color: #d9ead3
+            background-color: #f2dbdb
         }
     </style>
 </head>
 <body>
-    <form action="{{ route('storedatasurat') }}" method="post">
+    <form action="{{ route('storedatasuratk7') }}" method="post">
         @csrf
         <div class="fnt">
             <table>
@@ -195,7 +195,7 @@
                     {{-- row 8 --}}
                     @forelse ($suratjln as $sj)
 
-                    <td style="display: none"><input type="text" name="iddpbsrtjln" id="" value="{{ $sj->id_dpb_suratjalan }}"></td>
+                    <td style="display: none"><input type="text" name="idk7sj" id="" value="{{ $sj->id }}"></td>
                     <td style="display: none"><input type="text" name="idsrtjl" id="" value="{{ $sj->idsrtjl }}"></td>
                     <tr>
                         <td class="fntb pdtb hide" colspan="15">{{ ($sj->nosj != null ) ? $sj->nosj : $nomorSuratJalan }}</td>
@@ -282,7 +282,7 @@
                     @forelse ($material as $mat)
                     <tr>
                         <td class="fntb bdottb pdtb fnt12 itmth">{{ $loop->iteration }}</td>
-                        <td style="display: none"><input type="text" name="idmat[]" id="" value="{{ $mat->id_material }}"></td>
+                        <td style="display: none"><input type="text" name="idmat[]" id="" value="{{ $mat->id_mtrl_k7 }}"></td>
                         <td class="fntb bdottb pdtb fnt12 itmth" colspan="5">{{ $mat->nammat }}</td>
                         <td class="fntb bdottb pdtb fnt12 itmth" colspan="2">{{ $mat->normalisasi }}</td>
                         <td class="fntb bdottb pdtb fnt12 itmth" colspan="1">{{ $mat->satuan }}</td>
@@ -343,7 +343,7 @@
                         <td class="fntb hide fontl fontbott" colspan="3" style="height: 90px;">JENIS PEKERJAAN</td>
                         <td class="fntb hide fontbott">:</td>
                         <td class="fntb hide fontl fontbott" colspan="7">{{ $sj->nmpkrjn }}</td>
-                        <td class="fntb dpm" colspan="2" style="font-size: 24px; color: #ff0000">{{ $sj->nodpb }}</td>
+                        <td class="fntb dpm" colspan="2" style="font-size: 24px; color: #ff0000">{{ $sj->nomor }}</td>
                     </tr>
                     {{-- row 33 --}}
                     <tr>
@@ -445,7 +445,7 @@
                         <td class="hide" colspan="2"></td>
                         <td class="fntb hide" colspan="3">.................</td>
                         <td class="hide"></td>
-                        <td class="fntb hide" colspan="5">{{ $sj->kepala_gudang }}</td>
+                        <td class="fntb hide" colspan="5">{{ $sj->kplg }}</td>
                     </tr>
                     @empty
                     @endforelse

@@ -110,7 +110,7 @@ class K3Controller extends Controller
 
         }
 
-        return redirect()->route('printk3', ['id' => Crypt::encryptString($idUser)]);
+        return redirect()->route('printk3', ['id' => Crypt::encryptString($lastInsertedId)]);
     }
 
     public function cetak(String $encryptedId) {
@@ -124,6 +124,21 @@ class K3Controller extends Controller
             ->select(
                 'k3.nmr_k3 as nmrk3',
                 'k3.tgl_diminta',
+                'k3.nmr_seri',
+                'k3.nospk',
+                'k3.jnspekerjaan',
+                'k3.keterangan',
+                'k3.idpel',
+                'k3.nodpb_buktipotong AS npbp',
+                'k3.nm_pelanggan',
+                'k3.almt_pelanggan',
+                'k3.lokasi_pengembalian',
+                'k3.setuju',
+                'k3.pemeriksa',
+                'k3.kpl_gdng',
+                'k3.pengembali',
+                'kondisi_material.id AS idk',
+                'kondisi_material.nama AS nmkondisi',
                 'gudang.nama AS nmGudang',
                 'gudang.alamat AS almtGudang',
                 'user.nama AS nmUser',
@@ -133,22 +148,40 @@ class K3Controller extends Controller
             ->get();
 
         $dafMat = DB::table('dftrmaterial_k3')
-            ->join('k3', 'k3.id', '=', 'dftrmaterial_k3.id_k3')
-            ->select(
-                'dftrmaterial_k3.nama AS nmMatK3',
-                'dftrmaterial_k3.normalisasi',
-                'dftrmaterial_k3.jumlah',
-                'dftrmaterial_k3.satuan'
-            )
-            ->where('k3.id', '=', $id)
-            ->get();
+        ->join('k3', 'k3.id', '=', 'dftrmaterial_k3.id_k3')
+        ->select(
+            'dftrmaterial_k3.nama',
+            'dftrmaterial_k3.normalisasi',
+            'dftrmaterial_k3.jumlah',
+            'dftrmaterial_k3.satuan'
+        )
+        ->where('k3.id', '=', $id)
+        ->get();
 
-        // $jumlah = DB::table('');
+        $jumlah = DB::table('dftrmaterial_k3')
+        ->select('id')
+        ->where('id_k3', '=', $id)
+        ->count();
 
-        $pdf = Pdf::loadView('printk3', compact('k3', 'dafMat'));
+        $list = $jumlah+1;
+        
+        $jmlhMaterial = DB::table('dftrmaterial_k3')
+        ->where('id_k3', '=', $id)
+        ->pluck('jumlah');
+
+        $angkaKeHuruf = $this->angkaKeHuruf($jmlhMaterial);
+
+        $material = [];
+
+        for ($i=0; $i < count($jmlhMaterial); $i++) {
+            $material[] = [
+                'lMaterial' => $dafMat[$i],
+                'jumlah' => $angkaKeHuruf[$i]
+            ];
+        }
 
         // return $pdf->download('BonPemakaian_' . '.pdf');
-        return view('printk3', compact('k3', 'dafMat'));
+        return view('printk3', compact('k3', 'material', 'list'));
     }
 
     public function show(String $encryptedId) {

@@ -4,7 +4,10 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>PLN ARM MALANG</title>
+    @forelse ($k3 as $item)
+        <title>{{ $item->nmrk3 }}</title>
+    @empty        
+    @endforelse    
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -45,12 +48,32 @@
                 padding: 0 !important;
                 overflow: hidden;
             }
+            #floater {
+                display: none !important;
+            }
+
+            /* Remove or minimize fixed dimensions */
+            body {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            /* Ensure page breaks work correctly */
+            table {
+                page-break-inside: auto;
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }          
         }
         html, body {
             width: 297mm;
             /* height: 210mm; */
             margin: 0px;
             padding: 0px;
+            background-color: white;
         }
         body {
             font-family: 'Roboto', sans-serif;
@@ -326,92 +349,25 @@
                 <td class="bdottb" colspan="3"></td>
             </tr>
             {{-- row 12 --}}
+            @forelse ($material as $item)
             <tr>
-                <td class="bdottb pdtb">1</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
+                <td class="bdottb pdtb">{{ $loop->iteration }}</td>
+                <td class="bdottb pdtb" colspan="5">{{ $item['lMaterial']->nama }}</td>
+                <td class="bdottb pdtb" colspan="2">{{ $item['lMaterial']->normalisasi }}</td>
+                <td class="bdottb pdtb">{{ $item['lMaterial']->satuan }}</td>
+                <td class="bdottb pdtb" colspan="3">{{ $item['lMaterial']->jumlah }}</td>
+                <td class="bdottb pdtb" colspan="3">{{ $item['jumlah'] }}</td>
                 <td class="bdottb pdtb" colspan="2"></td>
                 <td class="bdottb pdtb" colspan="2"></td>
                 <td class="bdottb" colspan="3"></td>
             </tr>
-            {{-- row 13 --}}
-            <tr>
-                <td class="bdottb pdtb">2</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 14 --}}
-            <tr>
-                <td class="bdottb pdtb">3</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 15 --}}
-            <tr>
-                <td class="bdottb pdtb">4</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 16 --}}
-            <tr>
-                <td class="bdottb pdtb">5</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 17 --}}
-            <tr>
-                <td class="bdottb pdtb">6</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
-            {{-- row 18 --}}
-            <tr>
-                <td class="bdottb pdtb">7</td>
-                <td class="bdottb pdtb" colspan="5"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="3"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb pdtb" colspan="2"></td>
-                <td class="bdottb" colspan="3"></td>
-            </tr>
+            @empty
+                
+            @endforelse
             {{-- row 19 --}}
+            @for ($i = $list; $i <= 8; $i++)
             <tr>
-                <td class="bdottb pdtb">8</td>
+                <td class="bdottb pdtb">{{ $i }}</td>
                 <td class="bdottb pdtb" colspan="5"></td>
                 <td class="bdottb pdtb" colspan="2"></td>
                 <td class="bdottb pdtb"></td>
@@ -421,6 +377,7 @@
                 <td class="bdottb pdtb" colspan="2"></td>
                 <td class="bdottb" colspan="3"></td>
             </tr>
+            @endfor
             {{-- row 22 --}}
             <tr>
                 <td class="hidetb pdtb" style="height: 15px"></td>
@@ -434,16 +391,17 @@
                 <td class="hidetb hidel" colspan="3"></td>
             </tr>
             {{-- row 23 --}}
+            @forelse ($k3 as $item)                        
             <tr>
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">VENDOR</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hide pdtb txtalgl" colspan="7">PT XXXXXXXX</td>
+                <td class="fntb hide pdtb txtalgl" colspan="7">{{ $item->nmUser }}</td>
 
                 <td class="fntb hide pdtb txtalgl" colspan="3">NOMOR SERI</td>
 
                 <td class="fntb hide pdtb" colspan="1">:</td>
-                <td class="fntb hide pdtb txtalgl" colspan="3">MAXIMA NO.190300017-P</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">{{ $item->nmr_seri }}</td>
                 <td class="fntb hidel hidetb pdtb txtalgl" colspan="3"></td>
             </tr>
             {{-- row 24 --}}
@@ -451,12 +409,12 @@
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">N0. SPK</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hide pdtb txtalgl" colspan="7">000.KR/DAN.00.00/A00000000/0000 - 000/PK/REN.UP3-MLG/0000</td>
+                <td class="fntb hide pdtb txtalgl" colspan="7">{{ $item->nospk }}</td>
 
                 <td class="fntb hide pdtb txtalgl" colspan="3">KONDISI MATERIAL</td>
 
                 <td class="fntb hide pdtb" colspan="1">:</td>
-                <td class="fntb hide pdtb txtalgl" colspan="3">Masih dapat dipergunakan</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">{{{ $item->nmkondisi }}}</td>
                 <td class="fntb hidel hidetb pdtb txtalgl" colspan="3"></td>
             </tr>
             {{-- row 25 --}}
@@ -464,12 +422,12 @@
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">JENIS PEKERJAAN</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hide hidetb pdtb txtalgl" colspan="7">GKS</td>
+                <td class="fntb hide hidetb pdtb txtalgl" colspan="7">{{ $item->jnspekerjaan }}</td>
 
                 <td class="fntb hide pdtb txtalgl" colspan="3">KETERANGAN DETILE</td>
 
                 <td class="fntb hide pdtb" colspan="1">:</td>
-                <td class="fntb hide pdtb txtalgl" colspan="3">Ex. Uprating Trafo D.0027 - ULP Batu</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">{{ $item->keterangan }}</td>
                 <td class="fntb hidel hidetb pdtb txtalgl" colspan="3"></td>
             </tr>
             {{-- row 26 --}}
@@ -477,12 +435,12 @@
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">IDPEL</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hide hidetb pdtb txtalgl" colspan="7">0000000000000</td>
+                <td class="fntb hide hidetb pdtb txtalgl" colspan="7">{{ $item->idpel }}</td>
 
                 <td class="fntb hide pdtb txtalgl" colspan="3">NO. DPB / BUKTI</td>
 
                 <td class="fntb hide pdtb" colspan="1">:</td>
-                <td class="fntb hide pdtb txtalgl" colspan="3"></td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">{{ $item->npbp }}</td>
                 <td class="fntb hidel hidetb pdtb txtalgl" colspan="3"></td>
             </tr>
             {{-- row 27 --}}
@@ -490,12 +448,12 @@
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">NAMA PELANGGAN</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hide hidetb pdtb txtalgl" colspan="7">XXXXX XXXXXXXX</td>
+                <td class="fntb hide hidetb pdtb txtalgl" colspan="7">{{ $item->nm_pelanggan }}</td>
 
                 <td class="fntb hide pdtb txtalgl" colspan="3">LOKASI PENEMPATAN MATERIAL/DIPAKAI</td>
 
                 <td class="fntb hide pdtb" colspan="1">:</td>
-                <td class="fntb hide pdtb txtalgl" colspan="3">Gudang PLN ULP Blimbing</td>
+                <td class="fntb hide pdtb txtalgl" colspan="3">{{ $item->lokasi_pengembalian }}</td>
                 <td class="fntb hidel hidetb pdtb txtalgl" colspan="3"></td>
             </tr>
             {{-- row 28 --}}
@@ -503,7 +461,7 @@
                 <td class="hidetb pdtb"></td>
                 <td class="fntb hide pdtb txtalgl" colspan="3">ALAMAT PELANGGGAN</td>
                 <td class="fntb hide pdtb">:</td>
-                <td class="fntb hiderl hidetb pdtb txtalgl" colspan="7">JL XXXXXX XX</td>
+                <td class="fntb hiderl hidetb pdtb txtalgl" colspan="7">{{ $item->almt_pelanggan }}</td>
 
                 <td class="fntb hide pdtb txtalgl" colspan="3"></td>
 
@@ -568,7 +526,7 @@
 
                 <td class="fntb hide hiderl pdtb txtalgl" colspan="3">Barang kembali dalam keadaan</td>
 
-                <td class="fntb hidetb hidel pdtb txtalgl" colspan="4">Rusak</td>
+                <td class="fntb hidetb hidel pdtb txtalgl" colspan="4" style="{{ ($item->idk == 1) ? "background-color: #ff0000" : "" }}" >Rusak</td>
 
                 <td class="fntb hide pdtb" colspan="2">No. PK</td>
                 <td class="hidetb hidel pdtb" colspan="10"></td>
@@ -583,7 +541,7 @@
                 <td class="fntb hide hiderl pdtb">"</td>
                 <td class="fntb hide hiderl pdtb">"</td>
 
-                <td class="fntb hidetb hidel pdtb txtalgl" colspan="4" style="background-color: #ffff00">Masih dapat dipergunakan</td>
+                <td class="fntb hidetb hidel pdtb txtalgl" colspan="4" style="{{ ($item->idk == 2) ? "background-color: #ffff00" : "" }}">Masih dapat dipergunakan</td>
 
                 <td class="fntb hide pdtb" colspan="2"></td>
                 <td class="hidetb hidel pdtb" colspan="10"></td>
@@ -598,7 +556,7 @@
                 <td class="fntb hide hiderl pdtb">"</td>
                 <td class="fntb hide hiderl pdtb">"</td>
 
-                <td class="fntb hidetb hidel pdtb txtalgl" colspan="4">Baru</td>
+                <td class="fntb hidetb hidel pdtb txtalgl" colspan="4" style="{{ ($item->idk == 3) ? "background-color: #00ff00" : "" }}">Baru</td>
 
                 <td class="fntb hide pdtb" colspan="2">No. PDL</td>
                 <td class="hidetb hidel pdtb txtalgl" colspan="10">: .................</td>
@@ -613,7 +571,7 @@
                 <td class="fntb hidet hiderl pdtb">"</td>
                 <td class="fntb hidet hiderl pdtb">"</td>
 
-                <td class="fntb hidet hidel pdtb txtalgl" colspan="4">Garansi</td>
+                <td class="fntb hidet hidel pdtb txtalgl" colspan="4" style="{{ ($item->idk == 4) ? "background-color: #d9d9d9" : "" }}">Garansi</td>
 
                 <td class="fntb hidet hiderl pdtb" colspan="2"></td>
                 <td class="hidet hidel pdtb txtalgl" colspan="10"></td>
@@ -654,12 +612,23 @@
             </tr>
             {{-- row 39 --}}
             <tr>
-                <td class="fntb hidet pdtb" colspan="5">NAMA</td>
-                <td class="fntb hidet pdtb" colspan="5">NAMA</td>
-                <td class="fntb hidet pdtb" colspan="7">NAMA</td>
-                <td class="fntb hidet pdtb" colspan="5">NAMA</td>
+                <td class="fntb hidet pdtb" colspan="5">{{ $item->setuju }}</td>
+                <td class="fntb hidet pdtb" colspan="5">{{ $item->kpl_gdng }}</td>
+                <td class="fntb hidet pdtb" colspan="7">{{ $item->pemeriksa }}</td>
+                <td class="fntb hidet pdtb" colspan="5">{{ $item->pengembali }}</td>
             </tr>
+            @empty
+                
+            @endforelse
         </table>
     </div>
+
+    <div id="floater">
+        <a href="{{ route('vendor.index') }}" class="btn btn-primary">Kembali</a>
+    </div>
+
+    <script>
+        window.print()
+    </script>
 </body>
 </html>

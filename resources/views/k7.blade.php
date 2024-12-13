@@ -48,7 +48,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('cetaksuratk7') }}" method="POST">
+                <form action="{{ route('cetaksuratk7') }}" method="POST" id="printForm">
                     @csrf
                     <div class="row mt-3">
                         <div class="col-5">
@@ -220,45 +220,13 @@
                                 </table>
                             </div>
                             <div class="col text-end">
-                                <button class="btn btn-success mb-2" type="submit" target="_blank" id="cetaksurat">Cetak</button>
+                                <button class="btn btn-success mb-2" type="submit" id="cetaksurat" onclick="location.reload()">Cetak</button>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
-        {{-- <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Riwayat Surat K7</h5>
-                <table class="table datatable">
-                    <thead>
-                        <tr>
-                            <th>Tanggal Diminta</th>
-                            <th>Nomor Bon</th>
-                            <th>Nama Pelanggan</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($suratk7 as $item)
-                            <tr>
-                                <td>{{ \Carbon\Carbon::parse($item->tgl_diminta)->format('d M Y') }}</td>
-                                <td>{{ $item->nmr_k7 }}</td>
-                                <td>{{ $item->nm_pelanggan }}</td>
-                                <td>
-                                    <a href="{{ route('showK7', ['id' => Crypt::encryptString($item->idk7), 'srtJlnId' => Crypt::encryptString($item->id_surat_jalan)]) }}" class="btn btn-outline-primary mb-1">Detail</a>
-                                </td>
-                            </tr>
-                        @empty
-                        <tr>
-                            <td>Kosong</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div> --}}
 
         <div class="card">
             <div class="card-body">
@@ -293,6 +261,7 @@
 
 
     </main>
+
     <script type="text/javascript">
 
         let productsData = {};  // Object to hold product data
