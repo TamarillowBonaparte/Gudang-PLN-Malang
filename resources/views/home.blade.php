@@ -421,8 +421,6 @@
                                 background-color: transparent;
                             }
                         </style>
-
-                        <!-- End Grafik Stok Barang -->
                     </div>
                 </div>
                 <!-- End Left side columns -->
