@@ -142,11 +142,6 @@ Route::get('/bonpengembalianmaterial', [BonPengembalianMaterialController::class
 
 Route::get('/bonpemakaianmaterial', [BonPemakaianMaterialController::class, 'index'])->name('bonpemakaianmaterial');
 
-// routes/web.php
-Route::get('/catatan', [CatatanController::class, 'index']);
-Route::post('/catatan', [CatatanController::class, 'store']);
-Route::put('/catatan/{id}', [CatatanController::class, 'update']);
-Route::delete('/catatan/{id}', [CatatanController::class, 'destroy']);
 
 
 
