@@ -141,3 +141,12 @@ Route::get('/historyk3', [HistoryK3Controller::class, 'index'])->name('historyk3
 Route::get('/bonpengembalianmaterial', [BonPengembalianMaterialController::class, 'index'])->name('bonpengembalianmaterial');
 
 Route::get('/bonpemakaianmaterial', [BonPemakaianMaterialController::class, 'index'])->name('bonpemakaianmaterial');
+
+// routes/web.php
+Route::get('/catatan', [CatatanController::class, 'index']);
+Route::post('/catatan', [CatatanController::class, 'store']);
+Route::put('/catatan/{id}', [CatatanController::class, 'update']);
+Route::delete('/catatan/{id}', [CatatanController::class, 'destroy']);
+
+
+
